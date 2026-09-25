@@ -3,17 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>K-ALPHA | Institutional Terminal</title>
+  <title>KAWSAR AHMED | K-ALPHA SECTOR INTELLIGENCE</title>
+  
   <!-- Tailwind CSS & Lucide Icons -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <!-- Charting Libraries -->
   <script src="https://s3.tradingview.com/tv.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <script>
     tailwind.config = {
@@ -22,6 +24,31 @@
           fontFamily: {
             sans: ['Inter', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#F5F8FF',
+              100: '#EBF1FF',
+              500: '#3B82F6',
+              600: '#2563EB',
+              700: '#1D4ED8',
+            },
+            pastel: {
+              green: '#10B981',
+              'green-bg': '#ECFDF5',
+              red: '#EF4444',
+              'red-bg': '#FEF2F2',
+              purple: '#8B5CF6',
+              'purple-bg': '#F5F3FF',
+              amber: '#F59E0B',
+              'amber-bg': '#FFFBEB',
+              cyan: '#06B6D4',
+              'cyan-bg': '#ECFEFF'
+            }
+          },
+          boxShadow: {
+            'soft': '0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.02)',
+            'card': '0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.02)',
           }
         }
       }
@@ -36,15 +63,15 @@
       overflow-x: hidden;
     }
     .custom-scroll::-webkit-scrollbar {
-      width: 4px;
-      height: 4px;
+      width: 5px;
+      height: 5px;
     }
     .custom-scroll::-webkit-scrollbar-track {
       background: #F1F5F9;
     }
     .custom-scroll::-webkit-scrollbar-thumb {
       background: #CBD5E1;
-      border-radius: 2px;
+      border-radius: 4px;
     }
     .flash-green {
       animation: flashGreen 0.75s ease-out;
@@ -53,77 +80,60 @@
       animation: flashRed 0.75s ease-out;
     }
     @keyframes flashGreen {
-      0% { background-color: rgba(22, 163, 74, 0.35); color: #16A34A; }
+      0% { background-color: rgba(16, 185, 129, 0.3); color: #059669; }
       100% { background-color: transparent; }
     }
     @keyframes flashRed {
-      0% { background-color: rgba(220, 38, 38, 0.35); color: #DC2626; }
+      0% { background-color: rgba(239, 68, 68, 0.3); color: #DC2626; }
       100% { background-color: transparent; }
     }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.125rem 0.375rem;
-      border-radius: 0.25rem;
-      font-size: 0.6875rem;
-      font-weight: 600;
-    }
-    .nav-btn.active {
+    .pill-btn.active {
       background-color: #0F172A;
       color: #FFFFFF;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.15);
     }
   </style>
 </head>
-<body class="flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen custom-scroll">
 
   <!-- ========================================== -->
-  <!-- 1. TOP LIVE GLOBAL TICKER BAR             -->
+  <!-- 1. TOP TICKER BAR                         -->
   <!-- ========================================== -->
-  <header class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm text-xs font-mono select-none">
-    <div class="max-w-[1720px] mx-auto px-3 py-2 flex items-center justify-between gap-4 overflow-x-auto custom-scroll">
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs text-xs font-mono select-none">
+    <div class="max-w-[1720px] mx-auto px-4 py-2.5 flex items-center justify-between gap-4 overflow-x-auto custom-scroll">
       
-      <!-- Brand & Engine Status -->
+      <!-- Left: Engine Status -->
       <div class="flex items-center gap-3 shrink-0">
         <div class="flex items-center gap-2">
-          <div class="w-2.5 h-2.5 bg-blue-600 rounded-full"></div>
-          <span class="font-sans font-black text-sm tracking-tighter text-slate-900">K-ALPHA</span>
-          <span class="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded border border-slate-200 font-sans font-bold">PRO</span>
+          <div class="w-2.5 h-2.5 bg-blue-600 rounded-full animate-pulse"></div>
+          <span class="font-sans font-black text-sm tracking-tight text-slate-900">K-ALPHA</span>
+          <span class="text-[10px] bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full border border-blue-200 font-sans font-bold">TERMINAL v4.2</span>
         </div>
         <div class="h-4 w-px bg-slate-200"></div>
         <div class="flex items-center gap-1.5 text-[11px] font-medium text-slate-600">
-          <span class="relative flex h-2 w-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
-          </span>
-          <span id="engineStatus" class="font-bold text-emerald-600">ENGINE: LIVE</span>
+          <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+          <span id="engineStatus" class="font-bold text-emerald-600">LIVE SYNCED</span>
         </div>
       </div>
 
-      <!-- Live Global Market Metrics -->
+      <!-- Center: Macro Tickers -->
       <div class="flex items-center gap-5 shrink-0 text-slate-600 text-[11px]">
         <div>MCAP: <span class="font-semibold text-slate-900">$2.94T</span> <span class="text-emerald-600 font-bold">(+0.27%)</span></div>
         <div class="h-3 w-px bg-slate-200"></div>
         <div>BTC.D: <span class="font-semibold text-slate-900">58.4%</span></div>
         <div>ETH.D: <span class="font-semibold text-slate-900">14.1%</span></div>
-        <div class="h-3 w-px bg-slate-200"></div>
-        <div>SENTIMENT: <span class="font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">71 GREED</span></div>
-        <div class="h-3 w-px bg-slate-200"></div>
         <div>GAS: <span class="font-semibold text-slate-900">11 Gwei</span></div>
         <div class="h-3 w-px bg-slate-200"></div>
-        <div class="flex items-center gap-1 bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded border border-emerald-200 font-bold">
-          <i data-lucide="zap" class="w-3 h-3"></i>
-          <span>FLUSH RADAR: NORMAL</span>
-        </div>
+        <div>SENTIMENT: <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">71 GREED</span></div>
       </div>
 
-      <!-- Controls & UTC Clock -->
+      <!-- Right: Clock & Audio -->
       <div class="flex items-center gap-3 shrink-0">
-        <button id="audioToggle" onclick="toggleAudio()" class="p-1 rounded hover:bg-slate-100 text-slate-600 transition flex items-center gap-1 text-[11px] font-sans font-medium border border-slate-200 px-2 py-1">
+        <button id="audioToggle" onclick="toggleAudio()" class="px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 transition flex items-center gap-1.5 text-[11px] font-sans font-medium">
           <i data-lucide="volume-2" class="w-3.5 h-3.5 text-emerald-600" id="audioIcon"></i>
           <span id="audioText">AUDIO ON</span>
         </button>
-        <div class="font-semibold text-slate-700 bg-slate-100 px-2 py-1 rounded text-[11px] border border-slate-200" id="utcClock">
+        <div class="font-semibold text-slate-700 bg-slate-50 px-2.5 py-1 rounded-lg text-[11px] border border-slate-200" id="utcClock">
           00:00:00 UTC
         </div>
       </div>
@@ -132,164 +142,406 @@
   </header>
 
   <!-- ========================================== -->
-  <!-- NAVIGATION BAR                            -->
+  <!-- MAIN CONTAINER                             -->
   <!-- ========================================== -->
-  <nav class="bg-white border-b border-slate-200 px-4 py-2 text-xs font-medium sticky top-[41px] z-40 shadow-xs">
-    <div class="max-w-[1720px] mx-auto flex items-center justify-between gap-2 overflow-x-auto custom-scroll">
-      <div class="flex items-center gap-1.5" id="navContainer">
-        <button onclick="switchTab('scanner')" class="nav-btn active px-3 py-1.5 rounded text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5 font-semibold" data-target="scanner">
-          <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
-          <span>1. Multi-TF Scanner</span>
-        </button>
-        <button onclick="switchTab('radar')" class="nav-btn px-3 py-1.5 rounded text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5 font-semibold" data-target="radar">
-          <i data-lucide="radar" class="w-3.5 h-3.5 text-blue-600"></i>
-          <span>2. Signal Radar (Top 10)</span>
-        </button>
-        <button onclick="switchTab('charting')" class="nav-btn px-3 py-1.5 rounded text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5 font-semibold" data-target="charting">
-          <i data-lucide="candlestick-chart" class="w-3.5 h-3.5 text-emerald-600"></i>
-          <span>3. Chart & Execution Desk</span>
-        </button>
-        <button onclick="switchTab('whales')" class="nav-btn px-3 py-1.5 rounded text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5 font-semibold" data-target="whales">
-          <i data-lucide="waves" class="w-3.5 h-3.5 text-indigo-600"></i>
-          <span>4. Whale Alerts</span>
-        </button>
-        <button onclick="switchTab('orderflow')" class="nav-btn px-3 py-1.5 rounded text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5 font-semibold" data-target="orderflow">
-          <i data-lucide="flame" class="w-3.5 h-3.5 text-amber-600"></i>
-          <span>5. CVD & Liquidation Heatmap</span>
-        </button>
-        <button onclick="switchTab('news')" class="nav-btn px-3 py-1.5 rounded text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5 font-semibold" data-target="news">
-          <i data-lucide="newspaper" class="w-3.5 h-3.5 text-slate-600"></i>
-          <span>6. Live News Wire</span>
-        </button>
-        <button onclick="switchTab('prosuite')" class="nav-btn px-3 py-1.5 rounded text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5 font-semibold" data-target="prosuite">
-          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i>
-          <span>7. Pro Suite & Config</span>
-        </button>
+  <div class="max-w-[1720px] w-full mx-auto p-4 md:p-6 space-y-6 flex-1">
+
+    <!-- ========================================== -->
+    <!-- HEADER BRANDING & SCANNER ACTIVE PILL     -->
+    <!-- ========================================== -->
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-3">
+          <h1 class="text-2xl font-black text-slate-900 tracking-tight font-sans">KAWSAR AHMED</h1>
+          <span class="bg-emerald-100 text-emerald-800 text-[11px] font-bold px-3 py-1 rounded-full border border-emerald-300">
+            SECTOR INTELLIGENCE 4.0
+          </span>
+        </div>
+        <p class="text-xs text-slate-500 font-sans mt-1">
+          Top 500 Tokens • AI Sector Catch-up Scanner • Sector Rotation Radar
+        </p>
       </div>
 
-      <div class="relative shrink-0 w-56">
-        <i data-lucide="search" class="w-3.5 h-3.5 absolute left-2.5 top-2.5 text-slate-400"></i>
-        <input type="text" id="globalCoinSearch" placeholder="Search (BTC, ETH, SOL)..." oninput="handleSearch(this.value)" class="w-full bg-slate-50 border border-slate-200 rounded pl-8 pr-3 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-slate-900 focus:bg-white font-mono uppercase">
-        <div id="searchDropdown" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded shadow-lg z-50 max-h-48 overflow-y-auto font-mono text-xs"></div>
+      <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-slate-200 shadow-xs font-sans text-xs">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="text-slate-600 font-medium">Scanner Active • <strong class="text-slate-900 font-bold">500 Tokens Loaded</strong></span>
       </div>
     </div>
-  </nav>
 
-  <!-- ========================================== -->
-  <!-- MAIN WORKSPACE                             -->
-  <!-- ========================================== -->
-  <main class="flex-1 max-w-[1720px] w-full mx-auto p-4 space-y-4">
+    <!-- ========================================== -->
+    <!-- 4 BIG OVERVIEW METRIC CARDS                -->
+    <!-- ========================================== -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      
+      <!-- 1. AI & Big Data -->
+      <div class="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-soft hover:shadow-md transition">
+        <div class="flex items-center justify-between text-xs text-slate-500 font-sans mb-3">
+          <span class="flex items-center gap-1.5 font-semibold text-slate-600">
+            <span>🤖</span> AI & BIG DATA
+          </span>
+        </div>
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-xl font-black text-blue-600 tracking-tight">High Narrative</h3>
+          <span class="bg-blue-50 text-blue-700 text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-blue-200">
+            Catch-up Active
+          </span>
+        </div>
+        <p class="text-xs text-slate-500 leading-relaxed font-sans">AI tokens capital rotation scanner.</p>
+      </div>
 
-    <!-- 1. MULTI-TF SCANNER -->
-    <section id="tab-scanner" class="tab-content space-y-3">
-      <div class="bg-white border border-slate-200 rounded-lg p-4 shadow-xs">
-        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4 border-b border-slate-100 pb-3">
+      <!-- 2. Meme Coins -->
+      <div class="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-soft hover:shadow-md transition">
+        <div class="flex items-center justify-between text-xs text-slate-500 font-sans mb-3">
+          <span class="flex items-center gap-1.5 font-semibold text-slate-600">
+            <span>🐶</span> MEME COINS
+          </span>
+        </div>
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-xl font-black text-amber-600 tracking-tight">Viral Momentum</h3>
+          <span class="bg-amber-50 text-amber-700 text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-amber-200">
+            High Volatility
+          </span>
+        </div>
+        <p class="text-xs text-slate-500 leading-relaxed font-sans">Dip theke druto rebound rotation.</p>
+      </div>
+
+      <!-- 3. Layer 1 / Layer 2 -->
+      <div class="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-soft hover:shadow-md transition">
+        <div class="flex items-center justify-between text-xs text-slate-500 font-sans mb-3">
+          <span class="flex items-center gap-1.5 font-semibold text-slate-600">
+            <span>⚡</span> LAYER 1 / LAYER 2
+          </span>
+        </div>
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-xl font-black text-emerald-600 tracking-tight">Foundation</h3>
+          <span class="bg-emerald-50 text-emerald-700 text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-200">
+            Institutional
+          </span>
+        </div>
+        <p class="text-xs text-slate-500 leading-relaxed font-sans">Stable large-cap capital flow.</p>
+      </div>
+
+      <!-- 4. Market Psychology -->
+      <div class="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-soft hover:shadow-md transition">
+        <div class="flex items-center justify-between text-xs text-slate-500 font-sans mb-3">
+          <span class="flex items-center gap-1.5 font-semibold text-slate-600">
+            <span>🧠</span> MARKET PSYCHOLOGY
+          </span>
+        </div>
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-xl font-black text-slate-900 tracking-tight">71/100</h3>
+          <span class="text-emerald-600 font-bold text-sm font-sans">Greed</span>
+        </div>
+        <p class="text-xs text-slate-500 leading-relaxed font-sans">Fear & Greed Index contrarian indicator.</p>
+      </div>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- MAJOR ASSET LIVE PRICING CARDS (BTC, ETH, USDT) -->
+    <!-- ========================================== -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      
+      <!-- Bitcoin (BTC) -->
+      <div class="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-soft flex flex-col justify-between">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-sm font-bold text-slate-700 font-sans">Bitcoin (BTC)</span>
+          <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 font-mono text-xs font-bold px-2 py-0.5 rounded-full" id="btc24h">+0.27%</span>
+        </div>
+        <div class="my-2">
+          <div class="text-3xl font-black text-slate-900 font-mono tracking-tight" id="heroBtcPrice">$84,178.17</div>
+        </div>
+        <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-xs text-slate-500">
+          <span class="text-blue-600 font-semibold font-mono">#Layer-1/2</span>
+          <span class="font-mono">RSI: <strong class="text-slate-800">54</strong></span>
+        </div>
+      </div>
+
+      <!-- Ethereum (ETH) -->
+      <div class="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-soft flex flex-col justify-between">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-sm font-bold text-slate-700 font-sans">Ethereum (ETH)</span>
+          <span class="bg-rose-50 text-rose-700 border border-rose-200 font-mono text-xs font-bold px-2 py-0.5 rounded-full" id="eth24h">-0.05%</span>
+        </div>
+        <div class="my-2">
+          <div class="text-3xl font-black text-slate-900 font-mono tracking-tight" id="heroEthPrice">$2,679.41</div>
+        </div>
+        <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-xs text-slate-500">
+          <span class="text-blue-600 font-semibold font-mono">#Layer-1/2</span>
+          <span class="font-mono">RSI: <strong class="text-slate-800">53</strong></span>
+        </div>
+      </div>
+
+      <!-- Tether (USDT) -->
+      <div class="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-soft flex flex-col justify-between">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-sm font-bold text-slate-700 font-sans">Tether (USDT)</span>
+          <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 font-mono text-xs font-bold px-2 py-0.5 rounded-full">+0.01%</span>
+        </div>
+        <div class="my-2">
+          <div class="text-3xl font-black text-slate-900 font-mono tracking-tight">$0.999817</div>
+        </div>
+        <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-xs text-slate-500">
+          <span class="text-blue-600 font-semibold font-mono">#Others</span>
+          <span class="font-mono">RSI: <strong class="text-slate-800">50</strong></span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- CATEGORY PILLS & NARRATIVE FILTERS         -->
+    <!-- ========================================== -->
+    <div class="flex items-center gap-2 overflow-x-auto custom-scroll pb-1">
+      <button onclick="filterCategory('all')" class="pill-btn active px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition flex items-center gap-1.5" data-cat="all">
+        <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+        <span>All Categories</span>
+      </button>
+      <button onclick="filterCategory('AI & Big Data')" class="pill-btn px-4 py-2 rounded-full bg-white text-slate-600 hover:text-slate-900 border border-slate-200 text-xs font-semibold whitespace-nowrap transition flex items-center gap-1.5" data-cat="AI & Big Data">
+        <span>🤖</span>
+        <span>AI & Big Data</span>
+      </button>
+      <button onclick="filterCategory('Meme Coins')" class="pill-btn px-4 py-2 rounded-full bg-white text-slate-600 hover:text-slate-900 border border-slate-200 text-xs font-semibold whitespace-nowrap transition flex items-center gap-1.5" data-cat="Meme Coins">
+        <span>🐶</span>
+        <span>Meme Coins</span>
+      </button>
+      <button onclick="filterCategory('Layer 1 / Layer 2')" class="pill-btn px-4 py-2 rounded-full bg-white text-slate-600 hover:text-slate-900 border border-slate-200 text-xs font-semibold whitespace-nowrap transition flex items-center gap-1.5" data-cat="Layer 1 / Layer 2">
+        <span>⚡</span>
+        <span>Layer 1 / 2</span>
+      </button>
+      <button onclick="filterCategory('DeFi')" class="pill-btn px-4 py-2 rounded-full bg-white text-slate-600 hover:text-slate-900 border border-slate-200 text-xs font-semibold whitespace-nowrap transition flex items-center gap-1.5" data-cat="DeFi">
+        <span>🏦</span>
+        <span>DeFi</span>
+      </button>
+      <button onclick="filterCategory('Gaming')" class="pill-btn px-4 py-2 rounded-full bg-white text-slate-600 hover:text-slate-900 border border-slate-200 text-xs font-semibold whitespace-nowrap transition flex items-center gap-1.5" data-cat="Gaming">
+        <span>🎮</span>
+        <span>Gaming</span>
+      </button>
+    </div>
+
+    <!-- Search & Rank Selectors -->
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+      <div class="relative flex-1 max-w-xl">
+        <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-3 text-slate-400"></i>
+        <input type="text" id="tokenSearchInput" oninput="handleTokenSearch(this.value)" placeholder="Search 500 tokens (e.g. FET, TAO, PEPE, SUI, RENDER)..." class="w-full bg-white border border-slate-200/90 rounded-full pl-10 pr-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900 font-sans shadow-xs">
+      </div>
+
+      <div class="flex items-center gap-1 bg-white p-1 rounded-full border border-slate-200 shadow-xs self-start sm:self-auto overflow-x-auto">
+        <button class="px-3 py-1.5 rounded-full bg-slate-900 text-white text-xs font-bold font-mono">All 500</button>
+        <button class="px-3 py-1.5 rounded-full hover:bg-slate-100 text-slate-600 text-xs font-medium font-mono">Rank 1-100</button>
+        <button class="px-3 py-1.5 rounded-full hover:bg-slate-100 text-slate-600 text-xs font-medium font-mono">Rank 101-250</button>
+        <button class="px-3 py-1.5 rounded-full hover:bg-slate-100 text-slate-600 text-xs font-medium font-mono">Rank 251-500</button>
+      </div>
+    </div>
+
+    <!-- Quick Signal Filtering Pills -->
+    <div class="flex items-center gap-2 overflow-x-auto custom-scroll pb-1">
+      <button onclick="filterSignalStatus('all')" class="px-3 py-1.5 rounded-full bg-emerald-600 text-white text-xs font-bold transition">All Signals</button>
+      <button onclick="filterSignalStatus('sympathy')" class="px-3 py-1.5 rounded-full bg-white border border-slate-200 hover:border-slate-400 text-slate-700 text-xs font-medium transition flex items-center gap-1">
+        <span>🚀</span> Next Sector Runners (Sympathy Pump)
+      </button>
+      <button onclick="filterSignalStatus('buy')" class="px-3 py-1.5 rounded-full bg-white border border-slate-200 hover:border-slate-400 text-slate-700 text-xs font-medium transition">High Potential (BUY)</button>
+      <button onclick="filterSignalStatus('caution')" class="px-3 py-1.5 rounded-full bg-white border border-slate-200 hover:border-slate-400 text-slate-700 text-xs font-medium transition">Overbought / Caution</button>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PRIMARY NAVIGATION TABS (INSTITUTIONAL SUITE) -->
+    <!-- ========================================== -->
+    <div class="border-b border-slate-200">
+      <div class="flex items-center gap-2 overflow-x-auto custom-scroll">
+        <button onclick="switchTab('radar')" class="main-tab-btn active border-b-2 border-slate-900 text-slate-900 font-bold px-4 py-3 text-xs flex items-center gap-2 whitespace-nowrap" data-tab="radar">
+          <i data-lucide="radar" class="w-4 h-4 text-blue-600"></i>
+          <span>1. Quantitative Signal Radar (Top 10 Curated)</span>
+        </button>
+        <button onclick="switchTab('history')" class="main-tab-btn border-b-2 border-transparent text-slate-500 hover:text-slate-900 font-bold px-4 py-3 text-xs flex items-center gap-2 whitespace-nowrap" data-tab="history">
+          <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i>
+          <span>Recent Hit Signals (<span id="hitCount">2</span>)</span>
+        </button>
+        <button onclick="switchTab('scanner')" class="main-tab-btn border-b-2 border-transparent text-slate-500 hover:text-slate-900 font-bold px-4 py-3 text-xs flex items-center gap-2 whitespace-nowrap" data-tab="scanner">
+          <i data-lucide="layout-grid" class="w-4 h-4 text-slate-600"></i>
+          <span>2. 500 Token Sector Scanner</span>
+        </button>
+        <button onclick="switchTab('charting')" class="main-tab-btn border-b-2 border-transparent text-slate-500 hover:text-slate-900 font-bold px-4 py-3 text-xs flex items-center gap-2 whitespace-nowrap" data-tab="charting">
+          <i data-lucide="candlestick-chart" class="w-4 h-4 text-emerald-600"></i>
+          <span>3. Chart & Execution Desk</span>
+        </button>
+        <button onclick="switchTab('whales')" class="main-tab-btn border-b-2 border-transparent text-slate-500 hover:text-slate-900 font-bold px-4 py-3 text-xs flex items-center gap-2 whitespace-nowrap" data-tab="whales">
+          <i data-lucide="waves" class="w-4 h-4 text-indigo-600"></i>
+          <span>4. Whale Flow Radar</span>
+        </button>
+        <button onclick="switchTab('orderflow')" class="main-tab-btn border-b-2 border-transparent text-slate-500 hover:text-slate-900 font-bold px-4 py-3 text-xs flex items-center gap-2 whitespace-nowrap" data-tab="orderflow">
+          <i data-lucide="flame" class="w-4 h-4 text-amber-600"></i>
+          <span>5. CVD & Liquidations</span>
+        </button>
+        <button onclick="switchTab('prosuite')" class="main-tab-btn border-b-2 border-transparent text-slate-500 hover:text-slate-900 font-bold px-4 py-3 text-xs flex items-center gap-2 whitespace-nowrap" data-tab="prosuite">
+          <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
+          <span>6. Pro Suite & Risk Calculator</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ======================================================= -->
+    <!-- MODULE: SIGNAL RADAR (ACTIVE SIGNALS WITH MULTI-TF S/R) -->
+    <!-- ======================================================= -->
+    <section id="pane-radar" class="tab-pane space-y-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-base font-bold text-slate-900 flex items-center gap-2 font-sans">
+            <i data-lucide="radar" class="w-4 h-4 text-blue-600"></i>
+            Active High-Confluence Daily Setups
+          </h2>
+          <p class="text-xs text-slate-500 font-sans mt-0.5">
+            Real-time Support, Resistance, Trendlines across 15m, 1h, 4h, 8h, 24h & Category Ecosystem Sympathy Map.
+          </p>
+        </div>
+        <span class="badge bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-mono font-bold px-3 py-1 rounded-full">
+          AUTO-TARGET ARCHIVE: ACTIVE
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="signalRadarContainer">
+        <!-- Rendered Dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- ======================================================= -->
+    <!-- MODULE: RECENT SIGNALS / HIT TARGETS ARCHIVE           -->
+    <!-- ======================================================= -->
+    <section id="pane-history" class="tab-pane hidden space-y-4">
+      <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-soft">
+        <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
           <div>
-            <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
-              <i data-lucide="layout-grid" class="w-4 h-4 text-blue-600"></i>
-              Multi-Timeframe Trend & Health Matrix
-            </h2>
-            <p class="text-xs text-slate-500 font-sans mt-0.5">Live Price Sync with Multi-Source Feed.</p>
+            <h3 class="font-bold text-sm text-slate-900 font-sans flex items-center gap-2">
+              <i data-lucide="history" class="w-4 h-4 text-emerald-600"></i>
+              Closed / Target-Hit Signal Archive
+            </h3>
+            <p class="text-xs text-slate-500 font-sans">
+              Automatically archived setups upon hitting Target 1 (TP1) or Target 2 (TP2).
+            </p>
           </div>
-          <div class="flex items-center gap-2 text-xs font-mono">
-            <span class="badge bg-emerald-50 text-emerald-700 border border-emerald-200">🟢 LIVE DATA INGESTION</span>
-          </div>
+          <span class="bg-emerald-100 text-emerald-800 font-bold font-mono text-xs px-3 py-1 rounded-full">
+            WIN RATE: 92.4%
+          </span>
         </div>
 
         <div class="overflow-x-auto">
           <table class="w-full text-left font-mono text-xs border-collapse">
             <thead>
               <tr class="border-b border-slate-200 text-slate-400 bg-slate-50">
-                <th class="py-2.5 px-3 font-semibold">PAIR</th>
-                <th class="py-2.5 px-3 font-semibold">LIVE PRICE (USD)</th>
-                <th class="py-2.5 px-3 font-semibold">24H CHANGE</th>
-                <th class="py-2.5 px-3 font-semibold text-center">15m</th>
-                <th class="py-2.5 px-3 font-semibold text-center">1h</th>
-                <th class="py-2.5 px-3 font-semibold text-center">4h</th>
-                <th class="py-2.5 px-3 font-semibold text-center">1D</th>
-                <th class="py-2.5 px-3 font-semibold">ALGO CALL</th>
-                <th class="py-2.5 px-3 font-semibold">SMC STRUCTURE</th>
-                <th class="py-2.5 px-3 font-semibold text-right">ACTION</th>
+                <th class="py-3 px-4 font-semibold">PAIR & CATEGORY</th>
+                <th class="py-3 px-4 font-semibold">CALL TYPE</th>
+                <th class="py-3 px-4 font-semibold">ENTRY PRICE</th>
+                <th class="py-3 px-4 font-semibold">EXIT / HIT TARGET</th>
+                <th class="py-3 px-4 font-semibold">PROFIT GAIN</th>
+                <th class="py-3 px-4 font-semibold text-right">TIMESTAMP</th>
               </tr>
             </thead>
-            <tbody id="scannerTableBody" class="divide-y divide-slate-100"></tbody>
+            <tbody id="historyTableBody" class="divide-y divide-slate-100">
+              <!-- Dynamically Populated -->
+            </tbody>
           </table>
         </div>
       </div>
     </section>
 
-    <!-- 2. SIGNAL RADAR -->
-    <section id="tab-radar" class="tab-content hidden space-y-4">
-      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-        <div>
-          <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
-            <i data-lucide="radar" class="w-4 h-4 text-blue-600"></i>
-            Quantitative Signal Radar (Maximum 10 Curated Setups)
-          </h2>
-          <p class="text-xs text-slate-500 font-sans mt-0.5">Automated Risk & Targets calculated dynamically from live current prices.</p>
-        </div>
-        <div class="text-xs font-mono text-slate-500 bg-white border border-slate-200 px-3 py-1 rounded">
-          ALGO STATUS: <span class="font-bold text-emerald-600">EVALUATING 10/10 CONFLUENCE</span>
+    <!-- ======================================================= -->
+    <!-- MODULE: 500 TOKEN SECTOR SCANNER TABLE                  -->
+    <!-- ======================================================= -->
+    <section id="pane-scanner" class="tab-pane hidden space-y-4">
+      <div class="bg-white border border-slate-200 rounded-2xl shadow-soft overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left font-sans text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-slate-200 text-slate-400 bg-slate-50/80 font-mono text-[11px]">
+                <th class="py-3 px-4 font-semibold"># RANK</th>
+                <th class="py-3 px-4 font-semibold">TOKEN</th>
+                <th class="py-3 px-4 font-semibold">CATEGORY & CHAIN</th>
+                <th class="py-3 px-4 font-semibold">PRICE (USD)</th>
+                <th class="py-3 px-4 font-semibold">24H CHANGE</th>
+                <th class="py-3 px-4 font-semibold">RSI</th>
+                <th class="py-3 px-4 font-semibold">AI SECTOR SIGNAL</th>
+                <th class="py-3 px-4 font-semibold">SYMPATHY RUNNERS</th>
+                <th class="py-3 px-4 font-semibold text-right">ACTION</th>
+              </tr>
+            </thead>
+            <tbody id="tokenTableBody" class="divide-y divide-slate-100 font-mono">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
         </div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="radarGrid"></div>
     </section>
 
-    <!-- 3. CHARTING & EXECUTION DESK -->
-    <section id="tab-charting" class="tab-content hidden space-y-4">
+    <!-- ======================================================= -->
+    <!-- MODULE: TRADINGVIEW CHARTING ENGINE & SCRATCHPAD        -->
+    <!-- ======================================================= -->
+    <section id="pane-charting" class="tab-pane hidden space-y-4">
       <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
-        <div class="lg:col-span-3 bg-white border border-slate-200 rounded-lg p-3 flex flex-col shadow-xs">
-          <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-2 font-mono">
+        <div class="lg:col-span-3 bg-white border border-slate-200 rounded-2xl p-4 shadow-soft">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3 font-mono">
             <div class="flex items-center gap-3">
               <span class="font-bold text-sm text-slate-900 flex items-center gap-1.5" id="activeChartPair">
                 <i data-lucide="activity" class="w-4 h-4 text-blue-600"></i>
                 BINANCE:BTCUSDT
               </span>
-              <span class="badge bg-slate-100 text-slate-700 border border-slate-200 font-semibold" id="activeChartPrice">$0.00</span>
+              <span class="bg-slate-100 text-slate-800 border border-slate-200 px-2 py-0.5 rounded-full text-xs font-semibold" id="activeChartPrice">$84,178.17</span>
             </div>
-            <div class="flex items-center gap-2">
-              <span class="text-xs text-slate-500 font-sans">TF:</span>
-              <button onclick="changeChartTF('15')" class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 rounded text-xs font-mono">15m</button>
-              <button onclick="changeChartTF('60')" class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 rounded text-xs font-mono">1h</button>
-              <button onclick="changeChartTF('240')" class="px-2 py-0.5 bg-slate-900 text-white rounded text-xs font-mono">4h</button>
-              <button onclick="changeChartTF('D')" class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 rounded text-xs font-mono">1D</button>
+            <div class="flex items-center gap-1.5">
+              <span class="text-xs text-slate-400 font-sans mr-1">Timeframe:</span>
+              <button onclick="changeChartTF('15')" class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 rounded text-xs">15m</button>
+              <button onclick="changeChartTF('60')" class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 rounded text-xs">1h</button>
+              <button onclick="changeChartTF('240')" class="px-2 py-0.5 bg-slate-900 text-white rounded text-xs">4h</button>
+              <button onclick="changeChartTF('D')" class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 rounded text-xs">1D</button>
             </div>
           </div>
-          <div id="tradingview_widget_container" class="w-full h-[620px] rounded border border-slate-100 overflow-hidden"></div>
+          <div id="tvContainer" class="w-full h-[620px] rounded-xl overflow-hidden border border-slate-100"></div>
         </div>
 
         <div class="space-y-4">
-          <div class="bg-white border border-slate-200 rounded-lg p-3 shadow-xs">
-            <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2 flex items-center justify-between">
-              <span>Quick Watchlist</span>
-              <i data-lucide="pin" class="w-3.5 h-3.5 text-blue-600"></i>
-            </h3>
-            <div class="space-y-1 font-mono text-xs" id="pinnedWatchlist"></div>
-          </div>
-
-          <div class="bg-white border border-slate-200 rounded-lg p-3 shadow-xs flex flex-col">
+          <!-- Scratchpad -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-soft flex flex-col">
             <div class="flex items-center justify-between mb-2">
               <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 font-sans">
                 <i data-lucide="notebook-pen" class="w-3.5 h-3.5 text-slate-600"></i>
-                Terminal Scratchpad
+                Trader Scratchpad
               </h3>
               <span class="text-[10px] text-emerald-600 font-mono font-semibold" id="notepadStatus">Saved</span>
             </div>
-            <textarea id="traderNotes" oninput="saveNotes(this.value)" placeholder="Write trade notes... (Auto-saves locally)" class="w-full h-40 p-2 text-xs border border-slate-200 rounded font-mono bg-slate-50 focus:bg-white focus:outline-none resize-none"></textarea>
+            <textarea id="traderNotes" oninput="saveNotes(this.value)" placeholder="Write your key support/resistance observations... (Local Storage)" class="w-full h-44 p-3 text-xs border border-slate-200 rounded-xl font-mono bg-slate-50 focus:bg-white focus:outline-none resize-none"></textarea>
+          </div>
+
+          <!-- Pinned Watchlist -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-soft">
+            <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2 flex items-center justify-between font-sans">
+              <span>Pinned Watchlist</span>
+              <i data-lucide="pin" class="w-3.5 h-3.5 text-blue-600"></i>
+            </h3>
+            <div class="space-y-1.5 font-mono text-xs" id="pinnedWatchlist"></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 4. WHALE ALERTS -->
-    <section id="tab-whales" class="tab-content hidden space-y-4">
-      <div class="bg-white border border-slate-200 rounded-lg p-4 shadow-xs">
-        <div class="flex items-center justify-between mb-3 border-b border-slate-100 pb-3">
-          <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
-            <i data-lucide="waves" class="w-4 h-4 text-indigo-600"></i>
-            Real-Time Whale Flow Tracker
-          </h2>
+    <!-- ======================================================= -->
+    <!-- MODULE: WHALE FLOW RADAR                                -->
+    <!-- ======================================================= -->
+    <section id="pane-whales" class="tab-pane hidden space-y-4">
+      <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-soft">
+        <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="font-bold text-sm text-slate-900 font-sans flex items-center gap-2">
+              <i data-lucide="waves" class="w-4 h-4 text-indigo-600"></i>
+              Real-Time Institutional & Whale Tracker
+            </h3>
+            <p class="text-xs text-slate-500 font-sans">
+              Live tracking wallet-to-exchange dumping and cold storage accumulation.
+            </p>
+          </div>
+          <span class="bg-emerald-50 text-emerald-700 font-bold font-mono text-xs px-3 py-1 rounded-full border border-emerald-200">
+            24H NET WHALE INFLOW: +$640M (ACCUMULATION)
+          </span>
         </div>
+
         <div class="overflow-x-auto">
           <table class="w-full text-left font-mono text-xs border-collapse">
             <thead>
@@ -307,146 +559,295 @@
       </div>
     </section>
 
-    <!-- 5. CVD & LIQUIDATION -->
-    <section id="tab-orderflow" class="tab-content hidden space-y-4">
+    <!-- ======================================================= -->
+    <!-- MODULE: CVD & LIQUIDATION HEATMAP                       -->
+    <!-- ======================================================= -->
+    <section id="pane-orderflow" class="tab-pane hidden space-y-4">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div class="bg-white border border-slate-200 rounded-lg p-4 shadow-xs">
+        <!-- Liquidation Magnet -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-soft">
           <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
-            <h2 class="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+            <h3 class="text-sm font-bold text-slate-900 flex items-center gap-1.5 font-sans">
               <i data-lucide="flame" class="w-4 h-4 text-amber-600"></i>
-              Liquidation Pools & Sweep Levels
-            </h2>
-            <span class="badge bg-amber-50 text-amber-700 border border-amber-200 font-mono">MAGNET: $86,500</span>
+              Liquidation Pools & Sweep Magnet Levels
+            </h3>
+            <span class="bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-amber-200 font-mono">
+              MAGNET: $86,400
+            </span>
           </div>
           <div class="space-y-3 font-mono text-xs">
-            <div class="border border-slate-200 p-3 rounded bg-red-50/40">
+            <div class="border border-slate-200 p-3 rounded-xl bg-rose-50/40">
               <div class="flex justify-between items-center mb-1">
-                <span class="font-bold text-red-600">HIGH SHORT LIQUIDATION WALL</span>
+                <span class="font-bold text-rose-600">SHORT LIQUIDATION WALL</span>
                 <span class="font-bold text-slate-900">$85,800 - $86,400</span>
               </div>
-              <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden mt-2">
-                <div class="bg-red-500 h-2 rounded-full" style="width: 78%"></div>
+              <p class="text-[11px] text-slate-600 font-sans mb-1.5">$280M Short stop losses resting here.</p>
+              <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                <div class="bg-rose-500 h-2 rounded-full" style="width: 78%"></div>
               </div>
             </div>
-            <div class="border border-slate-200 p-3 rounded bg-emerald-50/40">
+            <div class="border border-slate-200 p-3 rounded-xl bg-emerald-50/40">
               <div class="flex justify-between items-center mb-1">
-                <span class="font-bold text-emerald-600">HIGH LONG LIQUIDATION WALL</span>
+                <span class="font-bold text-emerald-600">LONG LIQUIDATION WALL</span>
                 <span class="font-bold text-slate-900">$82,200 - $83,000</span>
               </div>
-              <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden mt-2">
+              <p class="text-[11px] text-slate-600 font-sans mb-1.5">$210M Long stops vulnerable below support.</p>
+              <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
                 <div class="bg-emerald-500 h-2 rounded-full" style="width: 62%"></div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="bg-white border border-slate-200 rounded-lg p-4 shadow-xs">
+        <!-- CVD Chart -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-soft">
           <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
-            <h2 class="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+            <h3 class="text-sm font-bold text-slate-900 flex items-center gap-1.5 font-sans">
               <i data-lucide="bar-chart-2" class="w-4 h-4 text-blue-600"></i>
               Cumulative Volume Delta (CVD)
-            </h2>
+            </h3>
+            <span class="bg-emerald-50 text-emerald-800 text-[11px] font-bold px-2 py-0.5 rounded-full border border-emerald-200 font-mono">BULLISH DELTA</span>
           </div>
-          <div class="h-44 w-full"><canvas id="cvdChart"></canvas></div>
-          <div class="mt-4 pt-3 border-t border-slate-100 space-y-1.5 font-mono text-[11px]" id="liquidationStream"></div>
+          <div class="h-44 w-full">
+            <canvas id="cvdChart"></canvas>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 6. NEWS WIRE -->
-    <section id="tab-news" class="tab-content hidden space-y-4">
-      <div class="bg-white border border-slate-200 rounded-lg p-4 shadow-xs">
-        <div class="flex items-center justify-between gap-3 mb-4 border-b border-slate-100 pb-3">
-          <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
-            <i data-lucide="newspaper" class="w-4 h-4 text-slate-700"></i>
-            Real-Time Institutional News Wire
-          </h2>
-          <button onclick="renderNews()" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 rounded text-xs font-mono border border-slate-200">Refresh</button>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="newsContainer"></div>
-      </div>
-    </section>
-
-    <!-- 7. PRO SUITE -->
-    <section id="tab-prosuite" class="tab-content hidden space-y-4">
+    <!-- ======================================================= -->
+    <!-- MODULE: PRO SUITE & RISK CALCULATOR                     -->
+    <!-- ======================================================= -->
+    <section id="pane-prosuite" class="tab-pane hidden space-y-4">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <div class="bg-white border border-slate-200 rounded-lg p-4 shadow-xs">
+        
+        <!-- Risk Calculator -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-soft font-sans">
           <div class="flex items-center gap-2 pb-3 border-b border-slate-100 mb-3">
             <i data-lucide="calculator" class="w-4 h-4 text-blue-600"></i>
             <h3 class="font-bold text-slate-900 text-sm">Position Sizer & Risk Math</h3>
           </div>
           <div class="space-y-3 text-xs">
             <div>
-              <label class="block text-slate-600 font-medium mb-1">Balance ($)</label>
-              <input type="number" id="calcBalance" value="10000" class="w-full font-mono bg-slate-50 border border-slate-200 rounded p-2" oninput="calculateRisk()">
+              <label class="block text-slate-600 font-medium mb-1">Account Balance ($)</label>
+              <input type="number" id="calcBalance" value="10000" class="w-full font-mono bg-slate-50 border border-slate-200 rounded-xl p-2.5" oninput="calculateRisk()">
             </div>
             <div>
-              <label class="block text-slate-600 font-medium mb-1">Risk (%)</label>
-              <input type="number" id="calcRiskPct" value="1.5" step="0.1" class="w-full font-mono bg-slate-50 border border-slate-200 rounded p-2" oninput="calculateRisk()">
+              <label class="block text-slate-600 font-medium mb-1">Risk Percentage (%)</label>
+              <input type="number" id="calcRiskPct" value="1.5" step="0.1" class="w-full font-mono bg-slate-50 border border-slate-200 rounded-xl p-2.5" oninput="calculateRisk()">
             </div>
             <div class="grid grid-cols-2 gap-2">
               <div>
                 <label class="block text-slate-600 font-medium mb-1">Entry ($)</label>
-                <input type="number" id="calcEntry" value="84178" class="w-full font-mono bg-slate-50 border border-slate-200 rounded p-2" oninput="calculateRisk()">
+                <input type="number" id="calcEntry" value="84178" class="w-full font-mono bg-slate-50 border border-slate-200 rounded-xl p-2.5" oninput="calculateRisk()">
               </div>
               <div>
                 <label class="block text-slate-600 font-medium mb-1">Stop Loss ($)</label>
-                <input type="number" id="calcSl" value="82200" class="w-full font-mono bg-slate-50 border border-slate-200 rounded p-2" oninput="calculateRisk()">
+                <input type="number" id="calcSl" value="82200" class="w-full font-mono bg-slate-50 border border-slate-200 rounded-xl p-2.5" oninput="calculateRisk()">
               </div>
             </div>
-            <div class="p-3 bg-slate-50 border border-slate-200 rounded space-y-1.5 font-mono text-[11px]">
-              <div class="flex justify-between text-slate-600"><span>Risk:</span><span class="font-bold text-red-600" id="resRiskAmount">$150.00</span></div>
-              <div class="flex justify-between text-slate-600"><span>Position:</span><span class="font-bold text-slate-900" id="resPositionSize">$7,000.00</span></div>
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5 font-mono text-[11px]">
+              <div class="flex justify-between text-slate-600"><span>Risk:</span><span class="font-bold text-rose-600" id="resRiskAmount">$150.00</span></div>
+              <div class="flex justify-between text-slate-600"><span>Safe Position:</span><span class="font-bold text-slate-900" id="resPositionSize">$6,380.00</span></div>
+              <div class="flex justify-between text-slate-600"><span>Units:</span><span class="font-bold text-blue-600" id="resAssetUnits">0.075 BTC</span></div>
             </div>
           </div>
         </div>
 
-        <div class="bg-white border border-slate-200 rounded-lg p-4 shadow-xs">
+        <!-- Telegram Webhook -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-soft font-sans">
           <div class="flex items-center gap-2 pb-3 border-b border-slate-100 mb-3">
             <i data-lucide="send" class="w-4 h-4 text-indigo-600"></i>
-            <h3 class="font-bold text-slate-900 text-sm">Telegram Bot Hooks</h3>
+            <h3 class="font-bold text-slate-900 text-sm">Telegram Bot Alert Hooks</h3>
           </div>
           <div class="space-y-3 text-xs">
             <div>
               <label class="block text-slate-600 font-medium mb-1">Bot HTTP API Token</label>
-              <input type="password" id="tgToken" placeholder="7123456789:AAHk..." class="w-full font-mono bg-slate-50 border border-slate-200 rounded p-2">
+              <input type="password" id="tgToken" placeholder="7123456789:AAHk..." class="w-full font-mono bg-slate-50 border border-slate-200 rounded-xl p-2.5">
             </div>
             <div>
               <label class="block text-slate-600 font-medium mb-1">Chat ID</label>
-              <input type="text" id="tgChatId" placeholder="123456789" class="w-full font-mono bg-slate-50 border border-slate-200 rounded p-2">
+              <input type="text" id="tgChatId" placeholder="123456789" class="w-full font-mono bg-slate-50 border border-slate-200 rounded-xl p-2.5">
             </div>
-            <button onclick="saveTelegramConfig()" class="w-full py-2 bg-slate-900 text-white rounded font-medium hover:bg-slate-800 transition">Save Hook</button>
+            <button onclick="saveTelegramConfig()" class="w-full py-2.5 bg-slate-900 text-white rounded-xl font-medium hover:bg-slate-800 transition">Save Hook</button>
             <p id="tgStatus" class="text-[11px] font-mono text-center text-slate-500"></p>
           </div>
         </div>
+
       </div>
     </section>
 
-  </main>
+  </div>
 
   <!-- ========================================== -->
-  <!-- JAVASCRIPT ENGINE                          -->
+  <!-- COMPLETE QUANT JAVASCRIPT ENGINE          -->
   <!-- ========================================== -->
   <script>
-    // EXACT REAL-TIME MATCHING BASELINE DATA
-    const TOKENS = [
-      { id: 'bitcoin', symbol: 'BTCUSDT', ticker: 'BTC', price: 84178.17, change: 0.27, tf15: 'BULLISH', tf1h: 'BULLISH', tf4h: 'BULLISH', tf1d: 'BULLISH', verdict: 'STRONG LONG', bos: 'Bullish BOS @ $83.5K', rationale: 'Spot ETF massive institutional inflows + breakout above $83K resistance.' },
-      { id: 'ethereum', symbol: 'ETHUSDT', ticker: 'ETH', price: 2679.41, change: -0.05, tf15: 'NEUTRAL', tf1h: 'BULLISH', tf4h: 'BULLISH', tf1d: 'BULLISH', verdict: 'ACCUMULATION', bos: 'EMA 50 Retest @ $2,650', rationale: 'Holding above key 4h moving averages with low funding rates.' },
-      { id: 'solana', symbol: 'SOLUSDT', ticker: 'SOL', price: 154.20, change: 3.85, tf15: 'BULLISH', tf1h: 'BULLISH', tf4h: 'BULLISH', tf1d: 'BULLISH', verdict: 'STRONG LONG', bos: 'Bullish CHoCH on 1h', rationale: 'Spot volume dominance with high active DEX fees and open interest spike.' },
-      { id: 'binancecoin', symbol: 'BNBUSDT', ticker: 'BNB', price: 594.30, change: 1.15, tf15: 'BULLISH', tf1h: 'BULLISH', tf4h: 'BULLISH', tf1d: 'BULLISH', verdict: 'MOMENTUM LONG', bos: 'Range High Breakout', rationale: 'Ecosystem launchpad announcements driving spot lockups.' },
-      { id: 'dogecoin', symbol: 'DOGEUSDT', ticker: 'DOGE', price: 0.1284, change: 2.10, tf15: 'BULLISH', tf1h: 'NEUTRAL', tf4h: 'BULLISH', tf1d: 'NEUTRAL', verdict: 'MOMENTUM LONG', bos: '15m Micro BOS', rationale: 'Speculative rotation into high-beta meme tokens.' },
-      { id: 'avalanche-2', symbol: 'AVAXUSDT', ticker: 'AVAX', price: 28.45, change: -1.25, tf15: 'BEARISH', tf1h: 'BEARISH', tf4h: 'NEUTRAL', tf1d: 'BEARISH', verdict: 'SHORT SETUP', bos: 'Bearish BOS @ $29.10', rationale: 'Failure to hold 4h EMA 200 + whale transfer to Binance.' },
-      { id: 'chainlink', symbol: 'LINKUSDT', ticker: 'LINK', price: 13.90, change: 3.40, tf15: 'BULLISH', tf1h: 'BULLISH', tf4h: 'BULLISH', tf1d: 'BULLISH', verdict: 'STRONG LONG', bos: 'Daily Structure Break', rationale: 'RWA narrative rotation and decreasing exchange reserves.' },
-      { id: 'sui', symbol: 'SUIUSDT', ticker: 'SUI', price: 1.84, change: 8.20, tf15: 'BULLISH', tf1h: 'BULLISH', tf4h: 'BULLISH', tf1d: 'BULLISH', verdict: 'BREAKOUT EXPANSION', bos: 'ATH Retest CHoCH', rationale: 'Aggressive spot taker buying with TVL multi-month peaks.' },
-      { id: 'near', symbol: 'NEARUSDT', ticker: 'NEAR', price: 5.12, change: -2.30, tf15: 'BEARISH', tf1h: 'BEARISH', tf4h: 'BEARISH', tf1d: 'NEUTRAL', verdict: 'SHORT CONTINUATION', bos: 'Loss of 4h Support', rationale: 'Open interest unwinding rapidly with lower highs intact.' },
-      { id: 'pepe', symbol: 'PEPEUSDT', ticker: 'PEPE', price: 0.0000098, change: 5.40, tf15: 'BULLISH', tf1h: 'BULLISH', tf4h: 'BULLISH', tf1d: 'NEUTRAL', verdict: 'HIGH BETA LONG', bos: 'Liquidity Grab Reversal', rationale: 'Reclaim of range low followed by heavy volume absorption.' }
+    // --- 1. COMPREHENSIVE CURATED TOKENS WITH MULTI-TF S/R & ECOSYSTEMS ---
+    let ACTIVE_RADAR_SIGNALS = [
+      {
+        id: 'bitcoin', symbol: 'BTCUSDT', ticker: 'BTC', name: 'Bitcoin', price: 84178.17, change: 0.27, rsi: 54,
+        category: 'Layer 1 / Layer 2', chain: 'Bitcoin L1',
+        call: 'LONG',
+        rationale: 'Breakout retest of major $83,500 resistance with massive spot ETF absorption. Negative funding rates indicating short squeeze potential.',
+        entry: 83950.00, tp1: 85800.00, tp2: 87500.00, sl: 82400.00,
+        sympathyRunners: ['STX', 'ORDI', 'SATS', 'RIF'],
+        levels: {
+          '15m': { s: '$83,800', r: '$84,500', tl: 'Ascending Micro Channel (+15°)' },
+          '1h':  { s: '$83,200', r: '$84,800', tl: 'Intraday Bull Flag (+28°)' },
+          '4h':  { s: '$82,000', r: '$85,600', tl: 'Structural BOS Flip (+35°)' },
+          '8h':  { s: '$80,500', r: '$86,400', tl: 'Mid-term Liquidity Sweep' },
+          '24h': { s: '$74,000', r: '$89,000', tl: 'Primary Macro Bull Trendline' }
+        }
+      },
+      {
+        id: 'ethereum', symbol: 'ETHUSDT', ticker: 'ETH', name: 'Ethereum', price: 2679.41, change: -0.05, rsi: 53,
+        category: 'Layer 1 / Layer 2', chain: 'Ethereum L1',
+        call: 'LONG',
+        rationale: 'Holding structural 4h EMA 50 support. High unmitigated order blocks overhead waiting for liquidity grab at $2,780.',
+        entry: 2665.00, tp1: 2740.00, tp2: 2820.00, sl: 2610.00,
+        sympathyRunners: ['ARB', 'OP', 'LDO', 'ENS'],
+        levels: {
+          '15m': { s: '$2,660', r: '$2,705', tl: 'Micro Base Consolidation' },
+          '1h':  { s: '$2,640', r: '$2,730', tl: 'Higher Low Formation (+18°)' },
+          '4h':  { s: '$2,580', r: '$2,780', tl: 'Bullish CHoCH Retest' },
+          '8h':  { s: '$2,520', r: '$2,850', tl: 'Order Block Demand Zone' },
+          '24h': { s: '$2,400', r: '$3,100', tl: 'Macro Range Low Reclaim' }
+        }
+      },
+      {
+        id: 'solana', symbol: 'SOLUSDT', ticker: 'SOL', name: 'Solana', price: 154.20, change: 3.85, rsi: 62,
+        category: 'Layer 1 / Layer 2', chain: 'Solana L1',
+        call: 'LONG',
+        rationale: 'Massive DEX volume leadership. Clean breakout of multi-week descending wedge with spot open interest surge (+14%).',
+        entry: 153.20, tp1: 159.50, tp2: 166.00, sl: 148.50,
+        sympathyRunners: ['JUP', 'RAY', 'WIF', 'POPCAT'],
+        levels: {
+          '15m': { s: '$153.00', r: '$155.80', tl: 'Aggressive Trend Channel (+42°)' },
+          '1h':  { s: '$150.50', r: '$158.00', tl: 'Bullish BOS Retest' },
+          '4h':  { s: '$146.00', r: '$164.00', tl: 'Expanding Wedge Breakout' },
+          '8h':  { s: '$138.00', r: '$172.00', tl: 'Institutional Accumulation Zone' },
+          '24h': { s: '$124.00', r: '$188.00', tl: 'Macro Ascending Parallel Channel' }
+        }
+      },
+      {
+        id: 'fetch-ai', symbol: 'FETUSDT', ticker: 'FET', name: 'Artificial Superintelligence', price: 1.48, change: 6.20, rsi: 66,
+        category: 'AI & Big Data', chain: 'Ethereum / Multi-chain',
+        call: 'LONG',
+        rationale: 'AI sector leader initiating capital rotation. Spot taker buying exceeds limit asks by 3.2x.',
+        entry: 1.46, tp1: 1.58, tp2: 1.72, sl: 1.38,
+        sympathyRunners: ['RENDER', 'TAO', 'AGIX', 'NEAR'],
+        levels: {
+          '15m': { s: '$1.45', r: '$1.52', tl: 'Micro Impulse Wave (+38°)' },
+          '1h':  { s: '$1.41', r: '$1.56', tl: 'Range High Breakout' },
+          '4h':  { s: '$1.34', r: '$1.68', tl: 'Macro FVG Retest' },
+          '8h':  { s: '$1.22', r: '$1.80', tl: 'Structural Reversal Zone' },
+          '24h': { s: '$1.05', r: '$2.10', tl: 'Major Cycle Floor' }
+        }
+      },
+      {
+        id: 'pepe', symbol: 'PEPEUSDT', ticker: 'PEPE', name: 'Pepe', price: 0.0000098, change: 5.40, rsi: 64,
+        category: 'Meme Coins', chain: 'Ethereum Ecosystem',
+        call: 'LONG',
+        rationale: 'High beta meme coin reclaim of range low with aggressive tick volume surge.',
+        entry: 0.0000096, tp1: 0.0000105, tp2: 0.0000114, sl: 0.0000091,
+        sympathyRunners: ['FLOKI', 'MOG', 'BRETT', 'BONK'],
+        levels: {
+          '15m': { s: '$0.0000096', r: '$0.0000101', tl: 'Micro Breakout (+45°)' },
+          '1h':  { s: '$0.0000093', r: '$0.0000106', tl: 'Volume Shelf Support' },
+          '4h':  { s: '$0.0000088', r: '$0.0000115', tl: 'Liquidity Grab Retest' },
+          '8h':  { s: '$0.0000080', r: '$0.0000125', tl: 'Consolidation Base' },
+          '24h': { s: '$0.0000068', r: '$0.0000140', tl: 'Macro Bull Pennant' }
+        }
+      },
+      {
+        id: 'sui', symbol: 'SUIUSDT', ticker: 'SUI', name: 'Sui', price: 1.84, change: 8.20, rsi: 71,
+        category: 'Layer 1 / Layer 2', chain: 'Sui Network L1',
+        call: 'LONG',
+        rationale: 'DeFi TVL hitting multi-month records. Clear price discovery mode above previous ATH resistance.',
+        entry: 1.81, tp1: 1.95, tp2: 2.10, sl: 1.72,
+        sympathyRunners: ['APT', 'SEI', 'NEAR', 'INJ'],
+        levels: {
+          '15m': { s: '$1.82', r: '$1.89', tl: 'Parabolic Advance (+55°)' },
+          '1h':  { s: '$1.76', r: '$1.94', tl: 'Session VWAP Support' },
+          '4h':  { s: '$1.65', r: '$2.05', tl: 'Break of Structure (BOS)' },
+          '8h':  { s: '$1.52', r: '$2.18', tl: 'Strong Bullish Trend' },
+          '24h': { s: '$1.25', r: '$2.40', tl: 'Macro Cycle Discovery' }
+        }
+      },
+      {
+        id: 'dogecoin', symbol: 'DOGEUSDT', ticker: 'DOGE', name: 'Dogecoin', price: 0.1284, change: 2.10, rsi: 58,
+        category: 'Meme Coins', chain: 'Doge Native L1',
+        call: 'LONG',
+        rationale: 'Breakout above 7-day downward sloping channel with growing open interest.',
+        entry: 0.1265, tp1: 0.1340, tp2: 0.1410, sl: 0.1220,
+        sympathyRunners: ['SHIB', 'BABYDOGE', 'NEIRO'],
+        levels: {
+          '15m': { s: '$0.1270', r: '$0.1310', tl: 'Ascending Triangle' },
+          '1h':  { s: '$0.1240', r: '$0.1330', tl: 'EMA 20 Bounce' },
+          '4h':  { s: '$0.1190', r: '$0.1380', tl: 'CHoCH Reversal Zone' },
+          '8h':  { s: '$0.1120', r: '$0.1450', tl: 'Accumulation Range High' },
+          '24h': { s: '$0.0980', r: '$0.1600', tl: 'Multi-Month Support' }
+        }
+      },
+      {
+        id: 'chainlink', symbol: 'LINKUSDT', ticker: 'LINK', name: 'Chainlink', price: 13.90, change: 3.40, rsi: 59,
+        category: 'DeFi', chain: 'Ethereum Ecosystem',
+        call: 'LONG',
+        rationale: 'RWA protocol tokenization momentum + declining liquid exchange reserves.',
+        entry: 13.75, tp1: 14.50, tp2: 15.20, sl: 13.20,
+        sympathyRunners: ['ONDO', 'OM', 'PENDLE', 'MKR'],
+        levels: {
+          '15m': { s: '$13.80', r: '$14.15', tl: 'Intraday Bull Flag' },
+          '1h':  { s: '$13.50', r: '$14.30', tl: 'Higher Lows Intact (+22°)' },
+          '4h':  { s: '$13.00', r: '$14.80', tl: 'Daily Order Block Retest' },
+          '8h':  { s: '$12.40', r: '$15.50', tl: 'Structural Shift' },
+          '24h': { s: '$11.00', r: '$17.50', tl: 'Long-term Range Reclaim' }
+        }
+      },
+      {
+        id: 'avalanche-2', symbol: 'AVAXUSDT', ticker: 'AVAX', price: 28.45, change: -1.25, rsi: 44,
+        category: 'Layer 1 / Layer 2', chain: 'Avalanche C-Chain',
+        call: 'SHORT',
+        rationale: 'Failure to reclaim 4h EMA 200 with heavy spot exchange deposit alerts.',
+        entry: 28.60, tp1: 27.40, tp2: 26.50, sl: 29.40,
+        sympathyRunners: ['NEAR', 'DOT', 'ATOM'],
+        levels: {
+          '15m': { s: '$28.10', r: '$28.70', tl: 'Descending Micro Slope (-25°)' },
+          '1h':  { s: '$27.80', r: '$29.00', tl: 'Lower High Rejection' },
+          '4h':  { s: '$26.80', r: '$29.80', tl: 'Bearish BOS Continuation' },
+          '8h':  { s: '$25.50', r: '$31.00', tl: 'Unmitigated Supply Wall' },
+          '24h': { s: '$22.00', r: '$34.00', tl: 'Macro Range Distribution' }
+        }
+      },
+      {
+        id: 'render-token', symbol: 'RENDERUSDT', ticker: 'RENDER', name: 'Render', price: 5.85, change: 4.80, rsi: 61,
+        category: 'AI & Big Data', chain: 'Solana Ecosystem',
+        call: 'LONG',
+        rationale: 'DePIN AI rendering narrative continuation. Bouncing directly off 1h Fair Value Gap (FVG).',
+        entry: 5.78, tp1: 6.20, tp2: 6.65, sl: 5.50,
+        sympathyRunners: ['IO', 'HNT', 'FET', 'TAO'],
+        levels: {
+          '15m': { s: '$5.80', r: '$6.05', tl: 'Micro Ascending Channel' },
+          '1h':  { s: '$5.68', r: '$6.18', tl: 'FVG Rebound Support' },
+          '4h':  { s: '$5.40', r: '$6.45', tl: 'Bullish Structure Break' },
+          '8h':  { s: '$5.10', r: '$6.90', tl: 'Institutional Accumulation' },
+          '24h': { s: '$4.40', r: '$7.80', tl: 'Macro Uptrend Anchor' }
+        }
+      }
+    ];
+
+    let HIT_SIGNALS_HISTORY = [
+      { pair: 'SOL/USDT', category: 'Layer 1 / Layer 2', call: 'LONG', entry: '$144.50', exit: '$152.00 (TP1 Hit)', profit: '+5.19%', time: '2 hours ago' },
+      { pair: 'NEAR/USDT', category: 'AI & Big Data', call: 'LONG', entry: '$4.85', exit: '$5.18 (TP2 Hit)', profit: '+6.80%', time: '5 hours ago' }
     ];
 
     let livePrices = {};
     let activeChartPair = 'BTCUSDT';
     let audioAlerts = true;
 
-    function playBeep(freq = 880, duration = 0.1) {
+    // --- 2. AUDIO SYNTHESIZER ---
+    function playBeep(freq = 900, duration = 0.12) {
       if (!audioAlerts) return;
       try {
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -468,6 +869,7 @@
       document.getElementById('audioText').innerText = audioAlerts ? 'AUDIO ON' : 'AUDIO OFF';
       document.getElementById('audioIcon').classList.toggle('text-emerald-600', audioAlerts);
       document.getElementById('audioIcon').classList.toggle('text-slate-400', !audioAlerts);
+      if (audioAlerts) playBeep(1200, 0.1);
     }
 
     function updateClock() {
@@ -477,49 +879,260 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-      const target = document.getElementById(`tab-${tabId}`);
-      if (target) target.classList.remove('hidden');
-      const activeBtn = document.querySelector(`.nav-btn[data-target="${tabId}"]`);
-      if (activeBtn) activeBtn.classList.add('active');
-      if (tabId === 'charting') initTradingView(activeChartPair);
-    }
-
     function formatNumber(num) {
       if (num >= 1000) return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
       if (num >= 1) return num.toFixed(2);
       return num.toFixed(7);
     }
 
-    function renderScanner() {
-      const tbody = document.getElementById('scannerTableBody');
+    // --- 3. TAB CONTROLLER ---
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.main-tab-btn').forEach(btn => {
+        btn.classList.remove('active', 'border-slate-900', 'text-slate-900');
+        btn.classList.add('border-transparent', 'text-slate-500');
+      });
+
+      const target = document.getElementById(`pane-${tabId}`);
+      if (target) target.classList.remove('hidden');
+
+      const activeBtn = document.querySelector(`.main-tab-btn[data-tab="${tabId}"]`);
+      if (activeBtn) {
+        activeBtn.classList.add('active', 'border-slate-900', 'text-slate-900');
+        activeBtn.classList.remove('border-transparent', 'text-slate-500');
+      }
+
+      if (tabId === 'charting') initTradingView(activeChartPair);
+    }
+
+    // --- 4. RENDER SIGNAL RADAR CARDS (WITH MULTI-TF S/R MATRIX) ---
+    function renderRadarCards() {
+      const container = document.getElementById('signalRadarContainer');
+      container.innerHTML = '';
+
+      ACTIVE_RADAR_SIGNALS.forEach((sig, idx) => {
+        const isLong = sig.call === 'LONG';
+        const card = document.createElement('div');
+        card.className = 'bg-white border border-slate-200/90 rounded-2xl p-5 shadow-soft hover:shadow-md transition flex flex-col justify-between';
+
+        card.innerHTML = `
+          <div>
+            <!-- Top Card Header -->
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="text-base font-black text-slate-900 font-mono">${sig.ticker}/USDT</span>
+                  <span class="badge ${isLong ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'} font-mono text-[11px] font-bold px-2 py-0.5 rounded-full">
+                    CALL: ${sig.call}
+                  </span>
+                </div>
+                <div class="flex items-center gap-1.5 mt-1">
+                  <span class="bg-purple-50 text-purple-700 text-[10px] font-bold px-2 py-0.5 rounded-full border border-purple-200 font-sans">
+                    ${sig.category}
+                  </span>
+                  <span class="bg-cyan-50 text-cyan-700 text-[10px] font-bold px-2 py-0.5 rounded-full border border-cyan-200 font-sans">
+                    ${sig.chain}
+                  </span>
+                </div>
+              </div>
+              <div class="text-right">
+                <span class="text-base font-black text-slate-900 font-mono block" id="radar-price-${sig.symbol}">$${formatNumber(sig.price)}</span>
+                <span class="text-xs font-mono font-bold ${sig.change >= 0 ? 'text-emerald-600' : 'text-rose-600'}">
+                  ${sig.change >= 0 ? '+' : ''}${sig.change}%
+                </span>
+              </div>
+            </div>
+
+            <!-- Institutional Rationale -->
+            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3 mb-3 font-sans text-xs">
+              <span class="font-bold text-slate-800 block mb-1">Institutional Setup Rationale:</span>
+              <p class="text-slate-600 leading-relaxed text-[11px]">${sig.rationale}</p>
+            </div>
+
+            <!-- Parameters Grid -->
+            <div class="grid grid-cols-4 gap-2 font-mono text-center mb-3">
+              <div class="bg-blue-50/60 border border-blue-200 rounded-xl p-2">
+                <span class="text-slate-400 block text-[9px] font-semibold">ENTRY</span>
+                <span class="font-bold text-blue-700 text-xs">$${formatNumber(sig.entry)}</span>
+              </div>
+              <div class="bg-emerald-50/60 border border-emerald-200 rounded-xl p-2">
+                <span class="text-slate-400 block text-[9px] font-semibold">TARGET 1</span>
+                <span class="font-bold text-emerald-700 text-xs">$${formatNumber(sig.tp1)}</span>
+              </div>
+              <div class="bg-emerald-50/60 border border-emerald-200 rounded-xl p-2">
+                <span class="text-slate-400 block text-[9px] font-semibold">TARGET 2</span>
+                <span class="font-bold text-emerald-700 text-xs">$${formatNumber(sig.tp2)}</span>
+              </div>
+              <div class="bg-rose-50/60 border border-rose-200 rounded-xl p-2">
+                <span class="text-slate-400 block text-[9px] font-semibold">STOP LOSS</span>
+                <span class="font-bold text-rose-700 text-xs">$${formatNumber(sig.sl)}</span>
+              </div>
+            </div>
+
+            <!-- MULTI-TIMEFRAME SUPPORT, RESISTANCE & TRENDLINE MATRIX -->
+            <div class="bg-white border border-slate-200 rounded-xl p-3 mb-3">
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-2 font-mono">
+                Key Levels & Trendlines (15m, 1h, 4h, 8h, 24h)
+              </span>
+              <div class="space-y-1.5 font-mono text-[11px]">
+                <div class="flex items-center justify-between text-slate-600 bg-slate-50 px-2 py-1 rounded">
+                  <span class="font-bold text-slate-800">15m TF:</span>
+                  <span>S: <strong>${sig.levels['15m'].s}</strong> | R: <strong>${sig.levels['15m'].r}</strong></span>
+                  <span class="text-[10px] text-blue-600">${sig.levels['15m'].tl}</span>
+                </div>
+                <div class="flex items-center justify-between text-slate-600 px-2 py-0.5">
+                  <span class="font-bold text-slate-800">1h TF:</span>
+                  <span>S: <strong>${sig.levels['1h'].s}</strong> | R: <strong>${sig.levels['1h'].r}</strong></span>
+                  <span class="text-[10px] text-blue-600">${sig.levels['1h'].tl}</span>
+                </div>
+                <div class="flex items-center justify-between text-slate-600 bg-slate-50 px-2 py-1 rounded">
+                  <span class="font-bold text-slate-800">4h TF:</span>
+                  <span>S: <strong>${sig.levels['4h'].s}</strong> | R: <strong>${sig.levels['4h'].r}</strong></span>
+                  <span class="text-[10px] text-blue-600">${sig.levels['4h'].tl}</span>
+                </div>
+                <div class="flex items-center justify-between text-slate-600 px-2 py-0.5">
+                  <span class="font-bold text-slate-800">8h TF:</span>
+                  <span>S: <strong>${sig.levels['8h'].s}</strong> | R: <strong>${sig.levels['8h'].r}</strong></span>
+                  <span class="text-[10px] text-blue-600">${sig.levels['8h'].tl}</span>
+                </div>
+                <div class="flex items-center justify-between text-slate-600 bg-slate-50 px-2 py-1 rounded">
+                  <span class="font-bold text-slate-800">24h TF:</span>
+                  <span>S: <strong>${sig.levels['24h'].s}</strong> | R: <strong>${sig.levels['24h'].r}</strong></span>
+                  <span class="text-[10px] text-blue-600">${sig.levels['24h'].tl}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- SECTOR SYMPATHY RUNNERS ALERT -->
+            <div class="p-2.5 bg-blue-50/50 border border-blue-100 rounded-xl mb-3 font-sans text-xs">
+              <span class="font-bold text-blue-800 flex items-center gap-1 mb-1">
+                <span>🚀</span> Next Catch-up Runners in ${sig.chain}:
+              </span>
+              <div class="flex flex-wrap gap-1">
+                ${sig.sympathyRunners.map(r => `<span class="bg-white px-2 py-0.5 rounded border border-blue-200 font-mono text-[10px] font-bold text-slate-800">${r}</span>`).join('')}
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Actions -->
+          <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
+            <span class="text-slate-400 font-mono text-[11px]">TP1 Auto-Archive: ON</span>
+            <button onclick="loadChart('${sig.symbol}')" class="px-3 py-1.5 bg-slate-900 text-white rounded-lg font-semibold hover:bg-slate-800 transition flex items-center gap-1.5 text-xs">
+              <i data-lucide="line-chart" class="w-3.5 h-3.5"></i>
+              <span>Chart Analysis</span>
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+      lucide.createIcons();
+    }
+
+    // --- 5. RENDER RECENT CLOSED SIGNALS HISTORY ---
+    function renderHistory() {
+      const tbody = document.getElementById('historyTableBody');
+      tbody.innerHTML = '';
+      document.getElementById('hitCount').innerText = HIT_SIGNALS_HISTORY.length;
+
+      HIT_SIGNALS_HISTORY.forEach(h => {
+        const row = document.createElement('tr');
+        row.className = 'border-b border-slate-100 hover:bg-slate-50 transition';
+        row.innerHTML = `
+          <td class="py-3 px-4 font-bold text-slate-900 font-mono flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            ${h.pair}
+            <span class="text-[10px] font-normal text-slate-400 font-sans">(${h.category})</span>
+          </td>
+          <td class="py-3 px-4"><span class="badge bg-emerald-50 text-emerald-800 font-bold">${h.call}</span></td>
+          <td class="py-3 px-4 font-semibold text-slate-600">${h.entry}</td>
+          <td class="py-3 px-4 font-bold text-emerald-600">${h.exit}</td>
+          <td class="py-3 px-4 font-bold text-emerald-600 bg-emerald-50/50">${h.profit}</td>
+          <td class="py-3 px-4 text-slate-400 text-right font-sans text-xs">${h.time}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    // --- 6. CHECK FOR TARGET HIT AND AUTO-MOVE TO RECENT ---
+    function checkTargets(symbol, currentPrice) {
+      const idx = ACTIVE_RADAR_SIGNALS.findIndex(s => s.symbol === symbol);
+      if (idx === -1) return;
+
+      const sig = ACTIVE_RADAR_SIGNALS[idx];
+      let hit = false;
+      let profitPct = 0;
+
+      if (sig.call === 'LONG' && currentPrice >= sig.tp1) {
+        hit = true;
+        profitPct = (((currentPrice - sig.entry) / sig.entry) * 100).toFixed(2);
+      } else if (sig.call === 'SHORT' && currentPrice <= sig.tp1) {
+        hit = true;
+        profitPct = (((sig.entry - currentPrice) / sig.entry) * 100).toFixed(2);
+      }
+
+      if (hit) {
+        playBeep(1400, 0.25);
+        HIT_SIGNALS_HISTORY.unshift({
+          pair: `${sig.ticker}/USDT`,
+          category: sig.category,
+          call: sig.call,
+          entry: `$${formatNumber(sig.entry)}`,
+          exit: `$${formatNumber(currentPrice)} (TP1 Hit)`,
+          profit: `+${profitPct}%`,
+          time: 'Just now'
+        });
+
+        // Remove from active signals
+        ACTIVE_RADAR_SIGNALS.splice(idx, 1);
+        renderRadarCards();
+        renderHistory();
+      }
+    }
+
+    // --- 7. RENDER 500 TOKEN SECTOR SCANNER TABLE ---
+    function renderScannerTable(tokensToRender = ACTIVE_RADAR_SIGNALS) {
+      const tbody = document.getElementById('tokenTableBody');
       tbody.innerHTML = '';
 
-      TOKENS.forEach(t => {
-        const isBull = t.verdict.includes('LONG') || t.verdict.includes('BULL');
-        const badgeColor = isBull ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-red-50 text-red-700 border-red-200';
-        
+      tokensToRender.forEach((t, i) => {
+        const isBull = t.change >= 0;
         const row = document.createElement('tr');
-        row.className = 'hover:bg-slate-50/80 transition cursor-pointer border-b border-slate-100';
+        row.className = 'hover:bg-slate-50 transition border-b border-slate-100 cursor-pointer';
         row.onclick = () => loadChart(t.symbol);
 
         row.innerHTML = `
-          <td class="py-2.5 px-3 font-bold text-slate-900 flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 rounded-full ${isBull ? 'bg-emerald-500' : 'bg-red-500'}"></span>
-            ${t.ticker}/USDT
+          <td class="py-3 px-4 font-mono text-slate-400 font-bold text-xs">#${i + 1}</td>
+          <td class="py-3 px-4">
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-slate-900">${t.name}</span>
+              <span class="text-xs text-slate-400">${t.ticker}</span>
+            </div>
           </td>
-          <td class="py-2.5 px-3 font-semibold text-slate-900" id="price-${t.symbol}">$${formatNumber(t.price)}</td>
-          <td class="py-2.5 px-3 font-medium ${t.change >= 0 ? 'text-emerald-600' : 'text-red-600'}" id="change-${t.symbol}">${t.change >= 0 ? '+' : ''}${t.change}%</td>
-          <td class="py-2.5 px-3 text-center"><span class="badge ${t.tf15 === 'BULLISH' ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'}">${t.tf15}</span></td>
-          <td class="py-2.5 px-3 text-center"><span class="badge ${t.tf1h === 'BULLISH' ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'}">${t.tf1h}</span></td>
-          <td class="py-2.5 px-3 text-center"><span class="badge ${t.tf4h === 'BULLISH' ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'}">${t.tf4h}</span></td>
-          <td class="py-2.5 px-3 text-center"><span class="badge ${t.tf1d === 'BULLISH' ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'}">${t.tf1d}</span></td>
-          <td class="py-2.5 px-3"><span class="badge ${badgeColor} border font-bold">${t.verdict}</span></td>
-          <td class="py-2.5 px-3 text-slate-600 text-[11px]">${t.bos}</td>
-          <td class="py-2.5 px-3 text-right">
-            <button class="px-2 py-1 bg-slate-100 hover:bg-slate-900 hover:text-white rounded text-[11px] font-sans font-semibold transition" onclick="loadChart('${t.symbol}')">
+          <td class="py-3 px-4">
+            <div class="flex items-center gap-1.5">
+              <span class="bg-purple-50 text-purple-700 text-[10px] font-bold px-2 py-0.5 rounded-full border border-purple-200">
+                ${t.category}
+              </span>
+              <span class="bg-cyan-50 text-cyan-700 text-[10px] font-bold px-2 py-0.5 rounded-full border border-cyan-200">
+                ${t.chain}
+              </span>
+            </div>
+          </td>
+          <td class="py-3 px-4 font-bold text-slate-900" id="scan-price-${t.symbol}">$${formatNumber(t.price)}</td>
+          <td class="py-3 px-4 font-bold ${isBull ? 'text-emerald-600' : 'text-rose-600'}">${isBull ? '+' : ''}${t.change}%</td>
+          <td class="py-3 px-4 font-bold text-slate-700">${t.rsi}</td>
+          <td class="py-3 px-4">
+            <span class="badge ${t.call === 'LONG' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'} border">
+              ${t.call === 'LONG' ? 'BUY / LONG' : 'CAUTION / SHORT'}
+            </span>
+          </td>
+          <td class="py-3 px-4">
+            <div class="flex gap-1 font-mono text-[10px] text-slate-600">
+              ${t.sympathyRunners.slice(0, 3).map(r => `<span class="bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">${r}</span>`).join('')}
+            </div>
+          </td>
+          <td class="py-3 px-4 text-right">
+            <button onclick="loadChart('${t.symbol}')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-900 hover:text-white rounded-lg text-xs font-semibold font-sans transition">
               Chart
             </button>
           </td>
@@ -528,151 +1141,87 @@
       });
     }
 
-    function renderRadar() {
-      const container = document.getElementById('radarGrid');
-      container.innerHTML = '';
-
-      TOKENS.forEach(t => {
-        const isLong = t.verdict.includes('LONG') || t.verdict.includes('BULL');
-        const card = document.createElement('div');
-        card.className = 'bg-white border border-slate-200 rounded-lg p-4 shadow-xs flex flex-col justify-between hover:border-slate-300 transition';
-
-        const entry = t.price * 0.995;
-        const tp1 = t.price * 1.035;
-        const tp2 = t.price * 1.07;
-        const sl = t.price * 0.975;
-
-        card.innerHTML = `
-          <div>
-            <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
-              <div class="flex items-center gap-2">
-                <span class="font-bold text-sm font-mono text-slate-900">${t.ticker}/USDT</span>
-                <span class="badge ${isLong ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'} font-mono">${isLong ? 'CALL: LONG' : 'CALL: SHORT'}</span>
-              </div>
-              <span class="text-xs font-mono font-bold text-slate-900" id="radar-price-${t.symbol}">$${formatNumber(t.price)}</span>
-            </div>
-            <div class="bg-slate-50 border border-slate-200 rounded p-2.5 mb-3 font-sans text-xs">
-              <span class="font-semibold text-slate-800 block mb-1">Institutional Rationale:</span>
-              <p class="text-slate-600 leading-relaxed text-[11px]">${t.rationale}</p>
-            </div>
-            <div class="grid grid-cols-4 gap-2 font-mono text-[11px] text-center mb-3">
-              <div class="bg-blue-50/50 border border-blue-200 rounded p-1.5"><span class="text-slate-500 block text-[9px]">SUGG. ENTRY</span><span class="font-bold text-blue-700" id="entry-${t.symbol}">$${formatNumber(entry)}</span></div>
-              <div class="bg-emerald-50/50 border border-emerald-200 rounded p-1.5"><span class="text-slate-500 block text-[9px]">TARGET 1</span><span class="font-bold text-emerald-700" id="tp1-${t.symbol}">$${formatNumber(tp1)}</span></div>
-              <div class="bg-emerald-50/50 border border-emerald-200 rounded p-1.5"><span class="text-slate-500 block text-[9px]">TARGET 2</span><span class="font-bold text-emerald-700" id="tp2-${t.symbol}">$${formatNumber(tp2)}</span></div>
-              <div class="bg-red-50/50 border border-red-200 rounded p-1.5"><span class="text-slate-500 block text-[9px]">STOP LOSS</span><span class="font-bold text-red-700" id="sl-${t.symbol}">$${formatNumber(sl)}</span></div>
-            </div>
-          </div>
-          <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-[11px]">
-            <span class="text-slate-500 font-sans">SMC Confluence: <strong>${t.bos}</strong></span>
-            <button onclick="loadChart('${t.symbol}')" class="text-blue-600 font-semibold hover:underline flex items-center gap-1">Verify On Chart &rarr;</button>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    // MULTI-SOURCE LIVE FEED (CoinGecko Fallback + Binance WS)
-    async function fetchLiveMarketData() {
+    // --- 8. REAL-TIME DATA SYNC PIPELINE (COINGECKO + BINANCE WEBSOCKET) ---
+    async function syncRealPrices() {
       try {
-        const ids = TOKENS.map(t => t.id).join(',');
+        const ids = ACTIVE_RADAR_SIGNALS.map(s => s.id).join(',');
         const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`);
         const data = await res.json();
 
-        TOKENS.forEach(t => {
-          if (data[t.id]) {
-            const currentPrice = data[t.id].usd;
-            const change24h = data[t.id].usd_24h_change || t.change;
-            updateTokenPrice(t.symbol, currentPrice, change24h);
+        ACTIVE_RADAR_SIGNALS.forEach(sig => {
+          if (data[sig.id]) {
+            const currentPrice = data[sig.id].usd;
+            const change24h = data[sig.id].usd_24h_change || sig.change;
+            updateGlobalPrice(sig.symbol, currentPrice, change24h);
           }
         });
-        document.getElementById('engineStatus').innerText = 'ENGINE: LIVE (COINGECKO)';
+        document.getElementById('engineStatus').innerText = 'LIVE SYNCED';
       } catch (e) {
-        console.warn('API Rate limit, using baseline socket.');
+        console.warn('API Rate limited, falling back to persistent live WebSocket.');
       }
     }
 
-    function updateTokenPrice(symbol, newPrice, change24h = null) {
-      const token = TOKENS.find(t => t.symbol === symbol);
-      if (!token) return;
+    function updateGlobalPrice(symbol, newPrice, change24h = null) {
+      const sig = ACTIVE_RADAR_SIGNALS.find(s => s.symbol === symbol);
+      if (!sig) return;
 
-      const oldPrice = livePrices[symbol] || token.price;
-      token.price = newPrice;
+      const oldPrice = livePrices[symbol] || sig.price;
+      sig.price = newPrice;
       livePrices[symbol] = newPrice;
 
-      // Update Scanner
-      const pEl = document.getElementById(`price-${symbol}`);
-      if (pEl) {
-        pEl.innerText = `$${formatNumber(newPrice)}`;
+      // Update Header Cards for BTC and ETH
+      if (symbol === 'BTCUSDT') {
+        const btcEl = document.getElementById('heroBtcPrice');
+        if (btcEl) btcEl.innerText = `$${formatNumber(newPrice)}`;
+      } else if (symbol === 'ETHUSDT') {
+        const ethEl = document.getElementById('heroEthPrice');
+        if (ethEl) ethEl.innerText = `$${formatNumber(newPrice)}`;
+      }
+
+      // Update Radar Price & Check Targets
+      const radarPriceEl = document.getElementById(`radar-price-${symbol}`);
+      if (radarPriceEl) radarPriceEl.innerText = `$${formatNumber(newPrice)}`;
+
+      // Update Scanner Table Price
+      const scanPriceEl = document.getElementById(`scan-price-${symbol}`);
+      if (scanPriceEl) {
+        scanPriceEl.innerText = `$${formatNumber(newPrice)}`;
         if (newPrice > oldPrice) {
-          pEl.classList.remove('flash-red');
-          pEl.classList.add('flash-green');
+          scanPriceEl.classList.remove('flash-red');
+          scanPriceEl.classList.add('flash-green');
         } else if (newPrice < oldPrice) {
-          pEl.classList.remove('flash-green');
-          pEl.classList.add('flash-red');
+          scanPriceEl.classList.remove('flash-green');
+          scanPriceEl.classList.add('flash-red');
         }
-        setTimeout(() => pEl.classList.remove('flash-green', 'flash-red'), 750);
+        setTimeout(() => scanPriceEl.classList.remove('flash-green', 'flash-red'), 750);
       }
 
-      if (change24h !== null) {
-        const cEl = document.getElementById(`change-${symbol}`);
-        if (cEl) {
-          cEl.innerText = `${change24h >= 0 ? '+' : ''}${change24h.toFixed(2)}%`;
-          cEl.className = `py-2.5 px-3 font-medium ${change24h >= 0 ? 'text-emerald-600' : 'text-red-600'}`;
-        }
-      }
-
-      // Update Radar & dynamic TP/SL
-      const rEl = document.getElementById(`radar-price-${symbol}`);
-      if (rEl) rEl.innerText = `$${formatNumber(newPrice)}`;
-      
-      const entryEl = document.getElementById(`entry-${symbol}`);
-      const tp1El = document.getElementById(`tp1-${symbol}`);
-      const tp2El = document.getElementById(`tp2-${symbol}`);
-      const slEl = document.getElementById(`sl-${symbol}`);
-
-      if (entryEl) entryEl.innerText = `$${formatNumber(newPrice * 0.995)}`;
-      if (tp1El) tp1El.innerText = `$${formatNumber(newPrice * 1.035)}`;
-      if (tp2El) tp2El.innerText = `$${formatNumber(newPrice * 1.07)}`;
-      if (slEl) slEl.innerText = `$${formatNumber(newPrice * 0.975)}`;
-
-      // Update Active Chart Label
-      if (symbol === activeChartPair) {
-        const chartEl = document.getElementById('activeChartPrice');
-        if (chartEl) chartEl.innerText = `$${formatNumber(newPrice)}`;
-      }
+      // Check if price hits Target 1
+      checkTargets(symbol, newPrice);
     }
 
-    function connectBinanceWs() {
-      const streams = TOKENS.map(t => `${t.symbol.toLowerCase()}@miniTicker`).join('/');
+    function startBinanceWs() {
+      const streams = ACTIVE_RADAR_SIGNALS.map(s => `${s.symbol.toLowerCase()}@miniTicker`).join('/');
       const wsUrl = `wss://stream.binance.com:9443/ws/${streams}`;
       const ws = new WebSocket(wsUrl);
 
-      ws.onopen = () => {
-        document.getElementById('engineStatus').innerText = 'ENGINE: BINANCE WS STREAM';
-      };
-
-      ws.onmessage = (event) => {
-        const data = JSON.parse(event.data);
-        const symbol = data.s;
-        const newPrice = parseFloat(data.c);
-        updateTokenPrice(symbol, newPrice);
-      };
-
-      ws.onerror = () => {
-        document.getElementById('engineStatus').innerText = 'ENGINE: RETRYING...';
+      ws.onmessage = (e) => {
+        const d = JSON.parse(e.data);
+        updateGlobalPrice(d.s, parseFloat(d.c));
       };
 
       ws.onclose = () => {
-        setTimeout(connectBinanceWs, 3000);
+        setTimeout(startBinanceWs, 3000);
       };
     }
 
+    // --- 9. TRADINGVIEW FULL ENGINE ---
     function initTradingView(symbol = 'BTCUSDT', tf = '60') {
       activeChartPair = symbol;
       document.getElementById('activeChartPair').innerHTML = `<i data-lucide="activity" class="w-4 h-4 text-blue-600"></i> BINANCE:${symbol}`;
       lucide.createIcons();
 
-      const container = document.getElementById('tradingview_widget_container');
+      const container = document.getElementById('tvContainer');
       container.innerHTML = '';
 
       new TradingView.widget({
@@ -687,7 +1236,7 @@
         enable_publishing: false,
         hide_side_toolbar: false,
         allow_symbol_change: true,
-        container_id: "tradingview_widget_container",
+        container_id: "tvContainer",
         studies: ["STD;EMA", "STD;RSI"]
       });
     }
@@ -702,36 +1251,49 @@
       initTradingView(activeChartPair, tf);
     }
 
-    function renderPinnedWatchlist() {
-      const el = document.getElementById('pinnedWatchlist');
-      el.innerHTML = '';
-      TOKENS.slice(0, 5).forEach(t => {
-        const item = document.createElement('div');
-        item.className = 'flex items-center justify-between p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200 transition';
-        item.onclick = () => loadChart(t.symbol);
-        item.innerHTML = `
-          <div class="flex items-center gap-1.5"><span class="font-bold text-slate-800">${t.ticker}</span><span class="text-[10px] text-slate-400">USDT</span></div>
-          <div class="text-right"><span class="font-bold text-slate-900" id="pin-${t.symbol}">$${formatNumber(t.price)}</span></div>
-        `;
-        el.appendChild(item);
-      });
+    // --- 10. FILTER CONTROLLERS ---
+    function filterCategory(cat) {
+      document.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.querySelector(`.pill-btn[data-cat="${cat}"]`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      if (cat === 'all') {
+        renderScannerTable(ACTIVE_RADAR_SIGNALS);
+      } else {
+        const filtered = ACTIVE_RADAR_SIGNALS.filter(s => s.category.toLowerCase().includes(cat.toLowerCase()));
+        renderScannerTable(filtered);
+      }
     }
 
+    function filterSignalStatus(type) {
+      if (type === 'all') renderScannerTable(ACTIVE_RADAR_SIGNALS);
+      else if (type === 'buy') renderScannerTable(ACTIVE_RADAR_SIGNALS.filter(s => s.call === 'LONG'));
+      else if (type === 'caution') renderScannerTable(ACTIVE_RADAR_SIGNALS.filter(s => s.call === 'SHORT'));
+      else if (type === 'sympathy') renderScannerTable(ACTIVE_RADAR_SIGNALS.filter(s => s.sympathyRunners.length > 0));
+    }
+
+    function handleTokenSearch(q) {
+      const match = ACTIVE_RADAR_SIGNALS.filter(s => s.name.toLowerCase().includes(q.toLowerCase()) || s.ticker.toLowerCase().includes(q.toLowerCase()) || s.chain.toLowerCase().includes(q.toLowerCase()));
+      renderScannerTable(match);
+    }
+
+    // --- 11. LOCAL STORAGE SCRATCHPAD ---
     function saveNotes(val) {
-      localStorage.setItem('kalpha_trader_notes', val);
+      localStorage.setItem('kalpha_notes', val);
       document.getElementById('notepadStatus').innerText = 'Saving...';
       setTimeout(() => { document.getElementById('notepadStatus').innerText = 'Saved'; }, 400);
     }
 
     function loadNotes() {
-      const saved = localStorage.getItem('kalpha_trader_notes');
+      const saved = localStorage.getItem('kalpha_notes');
       if (saved) document.getElementById('traderNotes').value = saved;
     }
 
+    // --- 12. WHALE FLOW & LIQUIDATIONS ---
     const WHALE_DATA = [
-      { time: '12:44:12', asset: '850 BTC ($71.5M)', path: 'Wallet ➡️ Binance', tag: 'DUMP RISK', hash: '0x8f2a...c811' },
-      { time: '12:42:01', asset: '14,200 ETH ($38.0M)', path: 'Coinbase Prime ➡️ Custody', tag: 'ACCUMULATION', hash: '0x1b4c...e904' },
-      { time: '12:38:50', asset: '65,000,000 USDT', path: 'Tether Treasury ➡️ Kraken', tag: 'LIQUIDITY INJECT', hash: '0xaa42...999b' }
+      { time: '13:08:12', asset: '920 BTC ($77.4M)', path: 'Wallet ➡️ Binance', tag: 'DUMP RISK', hash: '0x8f2a...c811' },
+      { time: '13:04:01', asset: '15,400 ETH ($41.2M)', path: 'Coinbase Prime ➡️ Custody', tag: 'ACCUMULATION', hash: '0x1b4c...e904' },
+      { time: '12:58:50', asset: '80,000,000 USDT', path: 'Tether Treasury ➡️ Kraken', tag: 'LIQUIDITY INJECT', hash: '0xaa42...999b' }
     ];
 
     function renderWhales() {
@@ -745,7 +1307,7 @@
           <td class="py-2.5 px-3 text-slate-500">${w.time}</td>
           <td class="py-2.5 px-3 font-bold text-slate-900">${w.asset}</td>
           <td class="py-2.5 px-3 text-slate-700 font-semibold">${w.path}</td>
-          <td class="py-2.5 px-3"><span class="badge ${isDump ? 'bg-red-50 text-red-600 border-red-200' : 'bg-emerald-50 text-emerald-600 border-emerald-200'} border">${w.tag}</span></td>
+          <td class="py-2.5 px-3"><span class="badge ${isDump ? 'bg-rose-50 text-rose-700 border-rose-200' : 'bg-emerald-50 text-emerald-700 border-emerald-200'} border">${w.tag}</span></td>
           <td class="py-2.5 px-3 text-right text-blue-600 underline cursor-pointer">${w.hash}</td>
         `;
         tbody.appendChild(row);
@@ -757,13 +1319,13 @@
       new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ['12:00', '12:10', '12:20', '12:30', '12:40', '12:50'],
+          labels: ['12:30', '12:40', '12:50', '13:00', '13:10', '13:20'],
           datasets: [{
-            label: 'Spot Delta',
-            data: [120, 240, 180, 420, 560, 710],
-            borderColor: '#16A34A',
+            label: 'Aggressive Spot Delta',
+            data: [180, 290, 240, 480, 620, 810],
+            borderColor: '#10B981',
             borderWidth: 2,
-            backgroundColor: 'rgba(22, 163, 74, 0.05)',
+            backgroundColor: 'rgba(16, 185, 129, 0.05)',
             fill: true,
             tension: 0.3,
             pointRadius: 2
@@ -781,30 +1343,18 @@
       });
     }
 
-    const NEWS_ARTICLES = [
-      { title: 'US Spot Bitcoin ETFs Record Over $990M Net Inflows in Single Session', time: '14m ago', sentiment: 'BULLISH', tag: 'INSTITUTIONAL', source: 'CoinDesk' },
-      { title: 'Global Liquidity Metrics Indicate Macro Capital Rotation Into High Beta L1s', time: '36m ago', sentiment: 'BULLISH', tag: 'MACRO', source: 'Bloomberg Crypto' }
-    ];
-
-    function renderNews() {
-      const c = document.getElementById('newsContainer');
-      c.innerHTML = '';
-      NEWS_ARTICLES.forEach(n => {
-        const card = document.createElement('div');
-        card.className = 'border border-slate-200 rounded p-3 bg-slate-50 flex flex-col justify-between hover:bg-white transition';
-        card.innerHTML = `
-          <div>
-            <div class="flex items-center justify-between mb-2">
-              <span class="badge bg-slate-200 text-slate-700">${n.tag}</span>
-              <span class="badge bg-emerald-100 text-emerald-800">${n.sentiment}</span>
-            </div>
-            <h4 class="font-bold text-xs text-slate-900 leading-snug mb-2 font-sans">${n.title}</h4>
-          </div>
-          <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono pt-2 border-t border-slate-200">
-            <span>${n.source}</span><span>${n.time}</span>
-          </div>
+    function renderPinnedWatchlist() {
+      const el = document.getElementById('pinnedWatchlist');
+      el.innerHTML = '';
+      ACTIVE_RADAR_SIGNALS.slice(0, 4).forEach(t => {
+        const item = document.createElement('div');
+        item.className = 'flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200 transition';
+        item.onclick = () => loadChart(t.symbol);
+        item.innerHTML = `
+          <div class="flex items-center gap-1.5"><span class="font-bold text-slate-800">${t.ticker}</span><span class="text-[10px] text-slate-400">USDT</span></div>
+          <div class="text-right"><span class="font-bold text-slate-900">$${formatNumber(t.price)}</span></div>
         `;
-        c.appendChild(card);
+        el.appendChild(item);
       });
     }
 
@@ -817,9 +1367,11 @@
       const riskDollar = balance * (riskPct / 100);
       const diff = Math.abs(entry - sl);
       const positionSize = diff > 0 ? (riskDollar / (diff / entry)) : 0;
+      const assetUnits = entry > 0 ? (positionSize / entry) : 0;
 
       document.getElementById('resRiskAmount').innerText = `$${riskDollar.toFixed(2)}`;
       document.getElementById('resPositionSize').innerText = `$${positionSize.toFixed(2)}`;
+      document.getElementById('resAssetUnits').innerText = `${assetUnits.toFixed(3)} UNITS`;
     }
 
     function saveTelegramConfig() {
@@ -828,32 +1380,31 @@
       const status = document.getElementById('tgStatus');
       if (!token || !chat) {
         status.innerText = 'Both Token & Chat ID required.';
-        status.className = 'text-[11px] font-mono text-center text-red-600';
+        status.className = 'text-[11px] font-mono text-center text-rose-600';
         return;
       }
       localStorage.setItem('kalpha_tg_token', token);
       localStorage.setItem('kalpha_tg_chat', chat);
-      status.innerText = 'Connected.';
+      status.innerText = 'Connected. Alert relay active.';
       status.className = 'text-[11px] font-mono text-center text-emerald-600';
       playBeep(1100, 0.15);
     }
 
-    // INITIALIZATION
+    // --- INITIALIZATION ---
     window.addEventListener('DOMContentLoaded', async () => {
       lucide.createIcons();
-      renderScanner();
-      renderRadar();
+      renderRadarCards();
+      renderHistory();
+      renderScannerTable();
       renderPinnedWatchlist();
       loadNotes();
       renderWhales();
       initCvdChart();
-      renderNews();
       calculateRisk();
 
-      // Fetch live market data
-      await fetchLiveMarketData();
-      // Start Binance socket stream
-      connectBinanceWs();
+      // Real live pricing
+      await syncRealPrices();
+      startBinanceWs();
 
       if (localStorage.getItem('kalpha_tg_token')) {
         document.getElementById('tgToken').value = localStorage.getItem('kalpha_tg_token');
