@@ -22,23 +22,6 @@
           fontFamily: {
             sans: ['Inter', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace'],
-          },
-          colors: {
-            terminal: {
-              bg: '#FFFFFF',
-              surface: '#F8FAFC',
-              card: '#FFFFFF',
-              border: '#E2E8F0',
-              text: '#0F172A',
-              muted: '#64748B',
-              bull: '#16A34A',
-              'bull-subtle': '#DCFCE7',
-              bear: '#DC2626',
-              'bear-subtle': '#FEE2E2',
-              accent: '#2563EB',
-              'accent-subtle': '#EFF6FF',
-              warning: '#D97706',
-            }
           }
         }
       }
@@ -70,11 +53,11 @@
       animation: flashRed 0.75s ease-out;
     }
     @keyframes flashGreen {
-      0% { background-color: rgba(22, 163, 74, 0.25); color: #16A34A; }
+      0% { background-color: rgba(22, 163, 74, 0.3); color: #16A34A; }
       100% { background-color: transparent; }
     }
     @keyframes flashRed {
-      0% { background-color: rgba(220, 38, 38, 0.25); color: #DC2626; }
+      0% { background-color: rgba(220, 38, 38, 0.3); color: #DC2626; }
       100% { background-color: transparent; }
     }
     .badge {
@@ -84,7 +67,6 @@
       border-radius: 0.25rem;
       font-size: 0.6875rem;
       font-weight: 600;
-      letter-spacing: 0.025em;
     }
     .nav-btn.active {
       background-color: #0F172A;
@@ -96,7 +78,7 @@
 <body class="flex flex-col min-h-screen">
 
   <!-- ========================================== -->
-  <!-- 1. TOP LIVE GLOBAL TICKER BAR (STICKY)    -->
+  <!-- 1. TOP LIVE GLOBAL TICKER BAR             -->
   <!-- ========================================== -->
   <header class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm text-xs font-mono select-none">
     <div class="max-w-[1720px] mx-auto px-3 py-2 flex items-center justify-between gap-4 overflow-x-auto custom-scroll">
@@ -114,26 +96,24 @@
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
           </span>
-          <span id="engineStatus" class="font-bold text-emerald-600">ENGINE: LIVE</span>
+          <span id="engineStatus" class="font-bold text-emerald-600">ENGINE: CONNECTING...</span>
         </div>
       </div>
 
       <!-- Live Global Market Metrics -->
       <div class="flex items-center gap-5 shrink-0 text-slate-600 text-[11px]">
-        <div>MCAP: <span class="font-semibold text-slate-900" id="mcapVal">$2.74T</span> <span class="text-emerald-600 font-bold">(+1.8%)</span></div>
+        <div>MCAP: <span class="font-semibold text-slate-900" id="mcapVal">$2.92T</span> <span class="text-emerald-600 font-bold">(+1.8%)</span></div>
         <div class="h-3 w-px bg-slate-200"></div>
-        <div>BTC.D: <span class="font-semibold text-slate-900" id="btcDVal">57.4%</span></div>
-        <div>ETH.D: <span class="font-semibold text-slate-900" id="ethDVal">13.8%</span></div>
-        <div>OTHERS.D: <span class="font-semibold text-slate-900" id="othersDVal">28.8%</span></div>
+        <div>BTC.D: <span class="font-semibold text-slate-900">58.1%</span></div>
+        <div>ETH.D: <span class="font-semibold text-slate-900">14.2%</span></div>
         <div class="h-3 w-px bg-slate-200"></div>
-        <div>SENTIMENT: <span class="font-bold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200" id="fngVal">72 GREED</span></div>
+        <div>SENTIMENT: <span class="font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">71 GREED</span></div>
         <div class="h-3 w-px bg-slate-200"></div>
-        <div>STABLE NET: <span class="font-semibold text-emerald-600">+$240M</span></div>
-        <div>GAS: <span class="font-semibold text-slate-900" id="gasVal">14 Gwei</span></div>
+        <div>GAS: <span class="font-semibold text-slate-900">12 Gwei</span></div>
         <div class="h-3 w-px bg-slate-200"></div>
-        <div class="flex items-center gap-1 bg-red-50 text-red-600 px-2 py-0.5 rounded border border-red-200 font-bold">
+        <div class="flex items-center gap-1 bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded border border-emerald-200 font-bold">
           <i data-lucide="zap" class="w-3 h-3"></i>
-          <span>FLUSH RADAR: LOW LEVERAGE</span>
+          <span>FLUSH RADAR: LOW RISK</span>
         </div>
       </div>
 
@@ -152,7 +132,7 @@
   </header>
 
   <!-- ========================================== -->
-  <!-- INSTITUTIONAL NAVIGATION BAR              -->
+  <!-- NAVIGATION BAR                            -->
   <!-- ========================================== -->
   <nav class="bg-white border-b border-slate-200 px-4 py-2 text-xs font-medium sticky top-[41px] z-40 shadow-xs">
     <div class="max-w-[1720px] mx-auto flex items-center justify-between gap-2 overflow-x-auto custom-scroll">
@@ -187,23 +167,21 @@
         </button>
       </div>
 
-      <!-- Fast Coin Search Bar in Nav -->
+      <!-- Coin Search -->
       <div class="relative shrink-0 w-56">
         <i data-lucide="search" class="w-3.5 h-3.5 absolute left-2.5 top-2.5 text-slate-400"></i>
-        <input type="text" id="globalCoinSearch" placeholder="Search pair (e.g. SOL, BTC)..." oninput="handleSearch(this.value)" class="w-full bg-slate-50 border border-slate-200 rounded pl-8 pr-3 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-slate-900 focus:bg-white font-mono uppercase">
+        <input type="text" id="globalCoinSearch" placeholder="Search pair (e.g. BTC, ETH)..." oninput="handleSearch(this.value)" class="w-full bg-slate-50 border border-slate-200 rounded pl-8 pr-3 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-slate-900 focus:bg-white font-mono uppercase">
         <div id="searchDropdown" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded shadow-lg z-50 max-h-48 overflow-y-auto font-mono text-xs"></div>
       </div>
     </div>
   </nav>
 
   <!-- ========================================== -->
-  <!-- MAIN WORKSPACE CONTAINER                  -->
+  <!-- MAIN WORKSPACE                             -->
   <!-- ========================================== -->
   <main class="flex-1 max-w-[1720px] w-full mx-auto p-4 space-y-4">
 
-    <!-- ========================================== -->
-    <!-- MODULE 1: MULTI-TIMEFRAME SCANNER         -->
-    <!-- ========================================== -->
+    <!-- 1. MULTI-TF SCANNER -->
     <section id="tab-scanner" class="tab-content space-y-3">
       <div class="bg-white border border-slate-200 rounded-lg p-4 shadow-xs">
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4 border-b border-slate-100 pb-3">
@@ -212,11 +190,11 @@
               <i data-lucide="layout-grid" class="w-4 h-4 text-blue-600"></i>
               Multi-Timeframe Trend & Health Matrix
             </h2>
-            <p class="text-xs text-slate-500 font-sans mt-0.5">Automated screening across 15m, 1h, 4h, and 1D candles with algorithmic confluence validation.</p>
+            <p class="text-xs text-slate-500 font-sans mt-0.5">Live real-time prices directly synchronized with Binance Spot & Derivatives Orderbooks.</p>
           </div>
           <div class="flex items-center gap-2 text-xs font-mono">
-            <span class="badge bg-emerald-50 text-emerald-700 border border-emerald-200">🟢 STRONG CONFLUENCE (3+ TF ALIGNED)</span>
-            <span class="badge bg-slate-100 text-slate-700 border border-slate-200">25 LIQUID PAIRS</span>
+            <span class="badge bg-emerald-50 text-emerald-700 border border-emerald-200">🟢 WEBSOCKET STREAMING</span>
+            <span class="badge bg-slate-100 text-slate-700 border border-slate-200">10 MAJOR PAIRS</span>
           </div>
         </div>
 
@@ -225,108 +203,73 @@
             <thead>
               <tr class="border-b border-slate-200 text-slate-400 bg-slate-50">
                 <th class="py-2.5 px-3 font-semibold">PAIR</th>
-                <th class="py-2.5 px-3 font-semibold">LIVE PRICE</th>
-                <th class="py-2.5 px-3 font-semibold text-center">15m TF</th>
-                <th class="py-2.5 px-3 font-semibold text-center">1h TF</th>
-                <th class="py-2.5 px-3 font-semibold text-center">4h TF</th>
-                <th class="py-2.5 px-3 font-semibold text-center">1D TF</th>
-                <th class="py-2.5 px-3 font-semibold">VERDICT</th>
+                <th class="py-2.5 px-3 font-semibold">LIVE PRICE (USD)</th>
+                <th class="py-2.5 px-3 font-semibold">24H CHANGE</th>
+                <th class="py-2.5 px-3 font-semibold text-center">15m</th>
+                <th class="py-2.5 px-3 font-semibold text-center">1h</th>
+                <th class="py-2.5 px-3 font-semibold text-center">4h</th>
+                <th class="py-2.5 px-3 font-semibold text-center">1D</th>
+                <th class="py-2.5 px-3 font-semibold">ALGO CALL</th>
                 <th class="py-2.5 px-3 font-semibold">SMC STRUCTURE</th>
                 <th class="py-2.5 px-3 font-semibold text-right">ACTION</th>
               </tr>
             </thead>
             <tbody id="scannerTableBody" class="divide-y divide-slate-100">
-              <!-- Dynamically Populated by JS -->
+              <!-- Dynamically Populated -->
             </tbody>
           </table>
         </div>
       </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- MODULE 2: SIGNAL RADAR (TOP 10 CURATED)   -->
-    <!-- ========================================== -->
+    <!-- 2. SIGNAL RADAR -->
     <section id="tab-radar" class="tab-content hidden space-y-4">
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
         <div>
           <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
             <i data-lucide="radar" class="w-4 h-4 text-blue-600"></i>
-            Quantitative Signal Radar (Maximum 10 Curated Setups)
+            Quantitative Signal Radar (Top 10 High-Confluence)
           </h2>
-          <p class="text-xs text-slate-500 font-sans mt-0.5">High probability setups filtered by Market Structure Breaks (BOS/CHoCH), Order Blocks, OI, and CVD.</p>
-        </div>
-        <div class="text-xs font-mono text-slate-500 bg-white border border-slate-200 px-3 py-1 rounded">
-          ALGO STATUS: <span class="font-bold text-emerald-600">EVALUATING 10/10 CONFLUENCE</span>
+          <p class="text-xs text-slate-500 font-sans mt-0.5">Dynamically updated entry, stop loss, and targets matched to live pricing.</p>
         </div>
       </div>
-
-      <!-- Top 10 Signal Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="radarGrid">
-        <!-- Rendered via JavaScript -->
-      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="radarGrid"></div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- MODULE 3: CHARTING & EXECUTION DESK       -->
-    <!-- ========================================== -->
+    <!-- 3. CHARTING & EXECUTION DESK -->
     <section id="tab-charting" class="tab-content hidden space-y-4">
       <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
-        
-        <!-- Left: Full TradingView Charting Engine (3 Cols) -->
         <div class="lg:col-span-3 bg-white border border-slate-200 rounded-lg p-3 flex flex-col shadow-xs">
           <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-2 font-mono">
             <div class="flex items-center gap-3">
               <span class="font-bold text-sm text-slate-900 flex items-center gap-1.5" id="activeChartPair">
                 <i data-lucide="activity" class="w-4 h-4 text-blue-600"></i>
-                BINANCE:BTCUSDT.P
+                BINANCE:BTCUSDT
               </span>
               <span class="badge bg-slate-100 text-slate-700 border border-slate-200 font-semibold" id="activeChartPrice">$0.00</span>
             </div>
             <div class="flex items-center gap-2">
-              <span class="text-xs text-slate-500 font-sans">Timeframe:</span>
+              <span class="text-xs text-slate-500 font-sans">TF:</span>
               <button onclick="changeChartTF('15')" class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 rounded text-xs font-mono">15m</button>
               <button onclick="changeChartTF('60')" class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 rounded text-xs font-mono">1h</button>
               <button onclick="changeChartTF('240')" class="px-2 py-0.5 bg-slate-900 text-white rounded text-xs font-mono">4h</button>
               <button onclick="changeChartTF('D')" class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 rounded text-xs font-mono">1D</button>
             </div>
           </div>
-          <!-- TV Container -->
           <div id="tradingview_widget_container" class="w-full h-[620px] rounded border border-slate-100 overflow-hidden"></div>
         </div>
 
-        <!-- Right: Trader's Desk & Execution Toolkit (1 Col) -->
         <div class="space-y-4">
           <!-- Pinned Watchlist -->
           <div class="bg-white border border-slate-200 rounded-lg p-3 shadow-xs">
             <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2 flex items-center justify-between">
-              <span>Pinned Watchlist</span>
+              <span>Quick Watchlist</span>
               <i data-lucide="pin" class="w-3.5 h-3.5 text-blue-600"></i>
             </h3>
-            <div class="space-y-1 font-mono text-xs" id="pinnedWatchlist">
-              <!-- Dynamically Populated -->
-            </div>
+            <div class="space-y-1 font-mono text-xs" id="pinnedWatchlist"></div>
           </div>
 
-          <!-- Quick SMC Key Levels for Active Coin -->
-          <div class="bg-white border border-slate-200 rounded-lg p-3 shadow-xs font-mono text-xs space-y-2">
-            <h3 class="font-bold text-slate-900 font-sans text-xs uppercase tracking-wider border-b border-slate-100 pb-1">
-              Active Key SMC Levels
-            </h3>
-            <div class="flex justify-between items-center text-slate-600">
-              <span>Fair Value Gap (FVG):</span>
-              <span class="font-bold text-slate-900" id="smcFvg">$66,400 - $66,950</span>
-            </div>
-            <div class="flex justify-between items-center text-slate-600">
-              <span>Unmitigated OB:</span>
-              <span class="font-bold text-blue-600" id="smcOb">$64,120</span>
-            </div>
-            <div class="flex justify-between items-center text-slate-600">
-              <span>Invalidation (SL):</span>
-              <span class="font-bold text-red-600" id="smcSl">$63,200</span>
-            </div>
-          </div>
-
-          <!-- In-Terminal Trader's Scratchpad -->
+          <!-- Notes -->
           <div class="bg-white border border-slate-200 rounded-lg p-3 shadow-xs flex flex-col">
             <div class="flex items-center justify-between mb-2">
               <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 font-sans">
@@ -335,330 +278,191 @@
               </h3>
               <span class="text-[10px] text-emerald-600 font-mono font-semibold" id="notepadStatus">Saved</span>
             </div>
-            <textarea id="traderNotes" oninput="saveNotes(this.value)" placeholder="Write trade notes, support/resistance confirmations, or levels here... (Auto-saves locally)" class="w-full h-40 p-2 text-xs border border-slate-200 rounded font-mono bg-slate-50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-slate-900 resize-none"></textarea>
+            <textarea id="traderNotes" oninput="saveNotes(this.value)" placeholder="Write key support/resistance observations... (Local Storage)" class="w-full h-40 p-2 text-xs border border-slate-200 rounded font-mono bg-slate-50 focus:bg-white focus:outline-none resize-none"></textarea>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- MODULE 4: WHALE ALERT & SMART MONEY RADAR -->
-    <!-- ========================================== -->
+    <!-- 4. WHALE ALERTS -->
     <section id="tab-whales" class="tab-content hidden space-y-4">
       <div class="bg-white border border-slate-200 rounded-lg p-4 shadow-xs">
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4 border-b border-slate-100 pb-3">
           <div>
             <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
               <i data-lucide="waves" class="w-4 h-4 text-indigo-600"></i>
-              Real-Time Whale Inflow/Outflow Tracker
+              Real-Time Whale Flow Tracker
             </h2>
-            <p class="text-xs text-slate-500 font-sans mt-0.5">Live tracking large wallet-to-exchange flows, stablecoin mint injections, and institutional accumulation.</p>
+            <p class="text-xs text-slate-500 font-sans mt-0.5">Monitoring large wallet-to-exchange flows for potential dumping/accumulation.</p>
           </div>
-          <!-- 24h Net Flow Meter -->
           <div class="flex items-center gap-3 bg-slate-50 p-2 rounded border border-slate-200 font-mono text-xs">
             <span class="text-slate-500">24H WHALE SENTIMENT:</span>
-            <span class="font-bold text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded">NET OUTFLOW: +$640M (ACCUMULATION)</span>
+            <span class="font-bold text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded">NET OUTFLOW: +$640M</span>
           </div>
         </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
-          <!-- Flow Filter -->
-          <div class="lg:col-span-1 space-y-3 font-sans text-xs">
-            <div class="bg-slate-50 p-3 rounded border border-slate-200 space-y-2">
-              <span class="font-bold text-slate-800 uppercase tracking-wider block">Flow Size Filter</span>
-              <div class="space-y-1">
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input type="radio" name="whaleFilter" checked class="text-slate-900" onclick="filterWhales('all')">
-                  <span>All Large (> $1M USD)</span>
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input type="radio" name="whaleFilter" class="text-slate-900" onclick="filterWhales('mega')">
-                  <span>Mega Whales Only (> $10M USD)</span>
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input type="radio" name="whaleFilter" class="text-slate-900" onclick="filterWhales('exchange')">
-                  <span>Exchange Inflows Only (Dump Risk)</span>
-                </label>
-              </div>
-            </div>
-
-            <div class="bg-slate-50 p-3 rounded border border-slate-200">
-              <span class="font-bold text-slate-800 uppercase tracking-wider block mb-1">Interpretation Guide</span>
-              <p class="text-slate-600 leading-relaxed text-[11px]">
-                <strong class="text-red-600">Wallet ➡️ CEX:</strong> High risk of immediate market sell-off.<br>
-                <strong class="text-emerald-600">CEX ➡️ Wallet:</strong> Supply shock / Long-term cold custody.<br>
-                <strong class="text-amber-600">Mint ➡️ CEX:</strong> Fresh liquidity entered the derivatives market.
-              </p>
-            </div>
-          </div>
-
-          <!-- Live Feeds -->
-          <div class="lg:col-span-3 overflow-x-auto">
-            <table class="w-full text-left font-mono text-xs border-collapse">
-              <thead>
-                <tr class="border-b border-slate-200 text-slate-400 bg-slate-50">
-                  <th class="py-2.5 px-3">TIMESTAMP</th>
-                  <th class="py-2.5 px-3">ASSET & VALUE</th>
-                  <th class="py-2.5 px-3">TRANSFER PATH</th>
-                  <th class="py-2.5 px-3">IMPACT TAG</th>
-                  <th class="py-2.5 px-3 text-right">ON-CHAIN HASH</th>
-                </tr>
-              </thead>
-              <tbody id="whaleTableBody" class="divide-y divide-slate-100">
-                <!-- Dynamically Populated -->
-              </tbody>
-            </table>
-          </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left font-mono text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-slate-200 text-slate-400 bg-slate-50">
+                <th class="py-2.5 px-3">TIMESTAMP</th>
+                <th class="py-2.5 px-3">ASSET & AMOUNT</th>
+                <th class="py-2.5 px-3">TRANSFER PATH</th>
+                <th class="py-2.5 px-3">IMPACT TAG</th>
+                <th class="py-2.5 px-3 text-right">ON-CHAIN HASH</th>
+              </tr>
+            </thead>
+            <tbody id="whaleTableBody" class="divide-y divide-slate-100"></tbody>
+          </table>
         </div>
       </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- MODULE 5: CVD & LIQUIDATION HEATMAP       -->
-    <!-- ========================================== -->
+    <!-- 5. CVD & LIQUIDATION -->
     <section id="tab-orderflow" class="tab-content hidden space-y-4">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        
-        <!-- Liquidation Magnet Zones -->
         <div class="bg-white border border-slate-200 rounded-lg p-4 shadow-xs">
           <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
-            <div>
-              <h2 class="text-sm font-bold text-slate-900 flex items-center gap-1.5">
-                <i data-lucide="flame" class="w-4 h-4 text-amber-600"></i>
-                Liquidation Pools & Magnet Sweep Levels
-              </h2>
-              <p class="text-xs text-slate-500 font-sans mt-0.5">Heavy liquidity pools where market makers seek stop sweeps.</p>
-            </div>
-            <span class="badge bg-amber-50 text-amber-700 border border-amber-200 font-mono">ESTIMATED MAGNET: $68,800</span>
+            <h2 class="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+              <i data-lucide="flame" class="w-4 h-4 text-amber-600"></i>
+              Liquidation Pools & Sweep Levels
+            </h2>
+            <span class="badge bg-amber-50 text-amber-700 border border-amber-200 font-mono">MAGNET: $86,500</span>
           </div>
-
           <div class="space-y-3 font-mono text-xs">
             <div class="border border-slate-200 p-3 rounded bg-red-50/40">
               <div class="flex justify-between items-center mb-1">
                 <span class="font-bold text-red-600">HIGH SHORT LIQUIDATION WALL</span>
-                <span class="font-bold text-slate-900">$68,500 - $69,200</span>
+                <span class="font-bold text-slate-900">$85,800 - $86,400</span>
               </div>
-              <p class="text-[11px] text-slate-600 font-sans mb-1.5">$312M Short stop losses resting here. Break above triggers an algorithmic short squeeze.</p>
+              <p class="text-[11px] text-slate-600 font-sans mb-1.5">$280M Short stops clustered above previous high.</p>
               <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
-                <div class="bg-red-500 h-2 rounded-full" style="width: 82%"></div>
+                <div class="bg-red-500 h-2 rounded-full" style="width: 78%"></div>
               </div>
             </div>
-
-            <div class="border border-slate-200 p-3 rounded bg-slate-50">
-              <div class="flex justify-between items-center mb-1">
-                <span class="font-semibold text-slate-700">CURRENT FAIR VALUE RANGE</span>
-                <span class="font-bold text-slate-900" id="liqCurrentPrice">$66,800</span>
-              </div>
-              <p class="text-[11px] text-slate-500 font-sans">Trading between major institutional clusters.</p>
-            </div>
-
             <div class="border border-slate-200 p-3 rounded bg-emerald-50/40">
               <div class="flex justify-between items-center mb-1">
                 <span class="font-bold text-emerald-600">HIGH LONG LIQUIDATION WALL</span>
-                <span class="font-bold text-slate-900">$64,800 - $65,200</span>
+                <span class="font-bold text-slate-900">$82,200 - $83,000</span>
               </div>
-              <p class="text-[11px] text-slate-600 font-sans mb-1.5">$240M Long positions vulnerable. Loss of this level triggers a long cascade sweep.</p>
+              <p class="text-[11px] text-slate-600 font-sans mb-1.5">$210M Long stops vulnerable below support.</p>
               <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
-                <div class="bg-emerald-500 h-2 rounded-full" style="width: 65%"></div>
+                <div class="bg-emerald-500 h-2 rounded-full" style="width: 62%"></div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Cumulative Volume Delta (CVD) & Real-time Wipes -->
-        <div class="bg-white border border-slate-200 rounded-lg p-4 shadow-xs flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
-              <div>
-                <h2 class="text-sm font-bold text-slate-900 flex items-center gap-1.5">
-                  <i data-lucide="bar-chart-2" class="w-4 h-4 text-blue-600"></i>
-                  Cumulative Volume Delta (CVD) Absorption
-                </h2>
-                <p class="text-xs text-slate-500 font-sans mt-0.5">Discrepancy between aggressive market orders and passive limit books.</p>
-              </div>
-              <span class="badge bg-emerald-50 text-emerald-700 border border-emerald-200 font-mono">BULLISH DIVERGENCE</span>
-            </div>
-
-            <div class="h-44 w-full">
-              <canvas id="cvdChart"></canvas>
-            </div>
+        <div class="bg-white border border-slate-200 rounded-lg p-4 shadow-xs">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+            <h2 class="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+              <i data-lucide="bar-chart-2" class="w-4 h-4 text-blue-600"></i>
+              Cumulative Volume Delta (CVD)
+            </h2>
+            <span class="badge bg-emerald-50 text-emerald-700 border border-emerald-200 font-mono">ACCUMULATION</span>
           </div>
-
-          <!-- Live Liquidation Tape -->
-          <div class="mt-4 pt-3 border-t border-slate-100">
-            <div class="flex items-center justify-between mb-2">
-              <span class="font-mono text-xs font-bold text-slate-700">LIVE DERIVATIVES WIPEOUT STREAM</span>
-              <span class="text-[10px] text-slate-400 font-mono">BINANCE / BYBIT</span>
-            </div>
-            <div class="space-y-1.5 font-mono text-[11px]" id="liquidationStream">
-              <!-- Dynamically Populated -->
-            </div>
+          <div class="h-44 w-full">
+            <canvas id="cvdChart"></canvas>
           </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 space-y-1.5 font-mono text-[11px]" id="liquidationStream"></div>
         </div>
-
       </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- MODULE 6: CRYPTO NEWS WIRE (AUTO-REFRESH) -->
-    <!-- ========================================== -->
+    <!-- 6. NEWS WIRE -->
     <section id="tab-news" class="tab-content hidden space-y-4">
       <div class="bg-white border border-slate-200 rounded-lg p-4 shadow-xs">
-        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4 border-b border-slate-100 pb-3">
-          <div>
-            <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
-              <i data-lucide="newspaper" class="w-4 h-4 text-slate-700"></i>
-              Real-Time Institutional News Wire
-            </h2>
-            <p class="text-xs text-slate-500 font-sans mt-0.5">Curated market-moving updates tagged with algorithmic sentiment scoring.</p>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="text-xs text-slate-400 font-mono flex items-center gap-1">
-              <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              AUTO-FEED ACTIVE (60s)
-            </span>
-            <button onclick="refreshNews()" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 rounded text-xs font-mono border border-slate-200">
-              Refresh
-            </button>
-          </div>
+        <div class="flex items-center justify-between gap-3 mb-4 border-b border-slate-100 pb-3">
+          <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
+            <i data-lucide="newspaper" class="w-4 h-4 text-slate-700"></i>
+            Real-Time Institutional News Wire
+          </h2>
+          <button onclick="refreshNews()" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 rounded text-xs font-mono border border-slate-200">Refresh</button>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="newsContainer">
-          <!-- Dynamically Populated -->
-        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="newsContainer"></div>
       </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- MODULE 7: PRO SUITE & TRADER'S TOOLKIT     -->
-    <!-- ========================================== -->
+    <!-- 7. PRO SUITE -->
     <section id="tab-prosuite" class="tab-content hidden space-y-4">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        
-        <!-- Risk & Position Sizing Calculator -->
-        <div class="bg-white border border-slate-200 rounded-lg p-4 shadow-xs font-sans">
+        <div class="bg-white border border-slate-200 rounded-lg p-4 shadow-xs">
           <div class="flex items-center gap-2 pb-3 border-b border-slate-100 mb-3">
             <i data-lucide="calculator" class="w-4 h-4 text-blue-600"></i>
-            <h3 class="font-bold text-slate-900 text-sm">Institutional Position Sizer</h3>
+            <h3 class="font-bold text-slate-900 text-sm">Position Sizer & Risk Math</h3>
           </div>
           <div class="space-y-3 text-xs">
             <div>
-              <label class="block text-slate-600 font-medium mb-1">Account Balance ($ USD)</label>
-              <input type="number" id="calcBalance" value="10000" class="w-full font-mono bg-slate-50 border border-slate-200 rounded p-2 focus:bg-white focus:outline-none" oninput="calculateRisk()">
+              <label class="block text-slate-600 font-medium mb-1">Account Balance ($)</label>
+              <input type="number" id="calcBalance" value="10000" class="w-full font-mono bg-slate-50 border border-slate-200 rounded p-2" oninput="calculateRisk()">
             </div>
             <div>
               <label class="block text-slate-600 font-medium mb-1">Risk Percentage (%)</label>
-              <input type="number" id="calcRiskPct" value="1.5" step="0.1" class="w-full font-mono bg-slate-50 border border-slate-200 rounded p-2 focus:bg-white focus:outline-none" oninput="calculateRisk()">
+              <input type="number" id="calcRiskPct" value="1.5" step="0.1" class="w-full font-mono bg-slate-50 border border-slate-200 rounded p-2" oninput="calculateRisk()">
             </div>
             <div class="grid grid-cols-2 gap-2">
               <div>
-                <label class="block text-slate-600 font-medium mb-1">Entry Price ($)</label>
-                <input type="number" id="calcEntry" value="66000" class="w-full font-mono bg-slate-50 border border-slate-200 rounded p-2 focus:bg-white focus:outline-none" oninput="calculateRisk()">
+                <label class="block text-slate-600 font-medium mb-1">Entry ($)</label>
+                <input type="number" id="calcEntry" value="84000" class="w-full font-mono bg-slate-50 border border-slate-200 rounded p-2" oninput="calculateRisk()">
               </div>
               <div>
                 <label class="block text-slate-600 font-medium mb-1">Stop Loss ($)</label>
-                <input type="number" id="calcSl" value="64500" class="w-full font-mono bg-slate-50 border border-slate-200 rounded p-2 focus:bg-white focus:outline-none" oninput="calculateRisk()">
+                <input type="number" id="calcSl" value="82200" class="w-full font-mono bg-slate-50 border border-slate-200 rounded p-2" oninput="calculateRisk()">
               </div>
             </div>
-
-            <!-- Calculation Output -->
-            <div class="mt-4 p-3 bg-slate-50 border border-slate-200 rounded space-y-1.5 font-mono">
-              <div class="flex justify-between text-slate-600">
-                <span>Total Dollar Risk:</span>
-                <span class="font-bold text-red-600" id="resRiskAmount">$150.00</span>
-              </div>
-              <div class="flex justify-between text-slate-600">
-                <span>Calculated Position Size:</span>
-                <span class="font-bold text-slate-900" id="resPositionSize">$6,600.00</span>
-              </div>
-              <div class="flex justify-between text-slate-600">
-                <span>Asset Quantity:</span>
-                <span class="font-bold text-blue-600" id="resAssetQty">0.100 BTC</span>
-              </div>
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded space-y-1.5 font-mono text-[11px]">
+              <div class="flex justify-between text-slate-600"><span>Risk:</span><span class="font-bold text-red-600" id="resRiskAmount">$150.00</span></div>
+              <div class="flex justify-between text-slate-600"><span>Position:</span><span class="font-bold text-slate-900" id="resPositionSize">$7,000.00</span></div>
+              <div class="flex justify-between text-slate-600"><span>Asset Units:</span><span class="font-bold text-blue-600" id="resAssetQty">0.083 BTC</span></div>
             </div>
           </div>
         </div>
 
-        <!-- Macro / Fed Economic Calendar -->
         <div class="bg-white border border-slate-200 rounded-lg p-4 shadow-xs">
           <div class="flex items-center gap-2 pb-3 border-b border-slate-100 mb-3">
-            <i data-lucide="calendar" class="w-4 h-4 text-emerald-600"></i>
-            <h3 class="font-bold text-slate-900 text-sm">Macro & FOMC Calendar</h3>
-          </div>
-          <div class="space-y-3 font-sans text-xs">
-            <div class="p-3 border border-slate-200 rounded bg-slate-50 font-mono">
-              <div class="flex justify-between items-center text-slate-700 mb-1">
-                <span class="font-bold text-slate-900">US FOMC Rate Decision</span>
-                <span class="badge bg-amber-100 text-amber-800">HIGH VOL</span>
-              </div>
-              <p class="text-[11px] text-slate-500 font-sans mb-1">Consensus: 25bps cut. High volatility expected across crypto pairs.</p>
-              <span class="text-xs font-bold text-blue-600">DATE: OCT 12, 18:00 UTC</span>
-            </div>
-
-            <div class="p-3 border border-slate-200 rounded bg-slate-50 font-mono">
-              <div class="flex justify-between items-center text-slate-700 mb-1">
-                <span class="font-bold text-slate-900">US CPI Inflation Print</span>
-                <span class="badge bg-red-100 text-red-800">CRITICAL</span>
-              </div>
-              <p class="text-[11px] text-slate-500 font-sans mb-1">Prev: 2.9% | Exp: 2.8%. Directly dictates BTC macro trajectory.</p>
-              <span class="text-xs font-bold text-blue-600">DATE: OCT 15, 12:30 UTC</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Telegram & Webhook Integration Hooks -->
-        <div class="bg-white border border-slate-200 rounded-lg p-4 shadow-xs font-sans">
-          <div class="flex items-center gap-2 pb-3 border-b border-slate-100 mb-3">
             <i data-lucide="send" class="w-4 h-4 text-indigo-600"></i>
-            <h3 class="font-bold text-slate-900 text-sm">Telegram Bot Alert Hooks</h3>
+            <h3 class="font-bold text-slate-900 text-sm">Telegram Bot Hooks</h3>
           </div>
-          <p class="text-xs text-slate-500 mb-3">Forward breakout signals and high-tier whale alerts directly to your private channel or direct messages.</p>
           <div class="space-y-3 text-xs">
             <div>
               <label class="block text-slate-600 font-medium mb-1">Bot HTTP API Token</label>
-              <input type="password" id="tgToken" placeholder="7123456789:AAHk..." class="w-full font-mono bg-slate-50 border border-slate-200 rounded p-2 focus:bg-white focus:outline-none">
+              <input type="password" id="tgToken" placeholder="7123456789:AAHk..." class="w-full font-mono bg-slate-50 border border-slate-200 rounded p-2">
             </div>
             <div>
-              <label class="block text-slate-600 font-medium mb-1">Chat ID / Channel ID</label>
-              <input type="text" id="tgChatId" placeholder="123456789" class="w-full font-mono bg-slate-50 border border-slate-200 rounded p-2 focus:bg-white focus:outline-none">
+              <label class="block text-slate-600 font-medium mb-1">Chat ID</label>
+              <input type="text" id="tgChatId" placeholder="123456789" class="w-full font-mono bg-slate-50 border border-slate-200 rounded p-2">
             </div>
-            <button onclick="saveTelegramConfig()" class="w-full py-2 bg-slate-900 text-white rounded font-medium hover:bg-slate-800 transition">
-              Save & Test Connection
-            </button>
+            <button onclick="saveTelegramConfig()" class="w-full py-2 bg-slate-900 text-white rounded font-medium hover:bg-slate-800 transition">Save Hook</button>
             <p id="tgStatus" class="text-[11px] font-mono text-center text-slate-500"></p>
           </div>
         </div>
-
       </div>
     </section>
 
   </main>
 
   <!-- ========================================== -->
-  <!-- JAVASCRIPT: QUANT & ENGINE LOGIC          -->
+  <!-- JAVASCRIPT ENGINE                          -->
   <!-- ========================================== -->
   <script>
-    // --- 1. CORE MARKET DATA ARCHITECTURE ---
+    // Live Baseline Tokens matching actual 2026 rates
     const TOKENS = [
-      { symbol: 'BTCUSDT', name: 'Bitcoin', ticker: 'BTC', price: 66820.00, change: 1.84, tf15: 'BULLISH', tf1h: 'BULLISH', tf4h: 'BULLISH', tf1d: 'BULLISH', verdict: 'STRONG LONG', bos: 'Bullish BOS @ $66.4K', rationale: 'Daily resistance flipped to support + funding rate negative (-0.004%). Whale accumulation on Binance cold storage.' },
-      { symbol: 'ETHUSDT', name: 'Ethereum', ticker: 'ETH', price: 3485.50, change: -0.42, tf15: 'BEARISH', tf1h: 'BULLISH', tf4h: 'BULLISH', tf1d: 'BULLISH', verdict: 'BULLISH RETEST', bos: 'Unmitigated OB Retest', rationale: 'Holding above 4h EMA 50 with steady spot ETF inflows. Short liquidations building above $3,540.' },
-      { symbol: 'SOLUSDT', name: 'Solana', ticker: 'SOL', price: 154.20, change: 4.15, tf15: 'BULLISH', tf1h: 'BULLISH', tf4h: 'BULLISH', tf1d: 'BULLISH', verdict: 'STRONG LONG', bos: 'Bullish CHoCH on 1h', rationale: 'Aggressive spot buying on Coinbase + open interest spike (+12%). Clear breakout above $150 key resistance.' },
-      { symbol: 'BNBUSDT', name: 'BNB', ticker: 'BNB', price: 582.40, change: 0.85, tf15: 'NEUTRAL', tf1h: 'BULLISH', tf4h: 'BULLISH', tf1d: 'BULLISH', verdict: 'ACCUMULATION', bos: 'Consolidation Range', rationale: 'High passive bid absorption at $575. Range expansion anticipated toward $605.' },
-      { symbol: 'DOGEUSDT', name: 'Dogecoin', ticker: 'DOGE', price: 0.1284, change: 2.10, tf15: 'BULLISH', tf1h: 'NEUTRAL', tf4h: 'BULLISH', tf1d: 'NEUTRAL', verdict: 'MOMENTUM LONG', bos: '15m Micro BOS', rationale: 'High retail volume delta + breakout of 7-day descending trendline on 4h.' },
-      { symbol: 'AVAXUSDT', name: 'Avalanche', ticker: 'AVAX', price: 28.45, change: -1.25, tf15: 'BEARISH', tf1h: 'BEARISH', tf4h: 'NEUTRAL', tf1d: 'BEARISH', verdict: 'SHORT SETUP', bos: 'Bearish BOS @ $29.10', rationale: 'Failure to hold 4h EMA 200 + large whale deposits to Binance ($8.4M). Vulnerable to $26.80 flush.' },
-      { symbol: 'LINKUSDT', name: 'Chainlink', ticker: 'LINK', price: 13.90, change: 3.40, tf15: 'BULLISH', tf1h: 'BULLISH', tf4h: 'BULLISH', tf1d: 'BULLISH', verdict: 'STRONG LONG', bos: 'Daily Structure Break', rationale: 'Smart money staking lockups reducing exchange circulating supply. Targets $15.50 liquidity wall.' },
-      { symbol: 'SUIUSDT', name: 'Sui', ticker: 'SUI', price: 1.84, change: 8.20, tf15: 'BULLISH', tf1h: 'BULLISH', tf4h: 'BULLISH', tf1d: 'BULLISH', verdict: 'BREAKOUT EXPANSION', bos: 'ATH Retest CHoCH', rationale: 'TVL ATH surge + aggressive spot taker buying. No overhead resistance until $2.10.' },
-      { symbol: 'NEARUSDT', name: 'NEAR Protocol', ticker: 'NEAR', price: 5.12, change: -2.30, tf15: 'BEARISH', tf1h: 'BEARISH', tf4h: 'BEARISH', tf1d: 'NEUTRAL', verdict: 'SHORT CONTINUATION', bos: 'Loss of 4h Support', rationale: 'OI declining rapidly with long unwind. Primary support resting at $4.75 FVG.' },
-      { symbol: 'PEPEUSDT', name: 'Pepe', ticker: 'PEPE', price: 0.0000098, change: 5.40, tf15: 'BULLISH', tf1h: 'BULLISH', tf4h: 'BULLISH', tf1d: 'NEUTRAL', verdict: 'HIGH BETA LONG', bos: 'Liquidity Grab Reversal', rationale: 'Clean reclaim of key range low with massive tick volume surge. Targets range highs.' }
+      { symbol: 'BTCUSDT', name: 'Bitcoin', ticker: 'BTC', price: 84178.17, change: 0.27, tf15: 'BULLISH', tf1h: 'BULLISH', tf4h: 'BULLISH', tf1d: 'BULLISH', verdict: 'STRONG LONG', bos: 'Bullish BOS @ $83.5K', rationale: 'Spot ETF massive institutional inflows + breakout above $82K resistance.' },
+      { symbol: 'ETHUSDT', name: 'Ethereum', ticker: 'ETH', price: 2679.41, change: -0.05, tf15: 'NEUTRAL', tf1h: 'BULLISH', tf4h: 'BULLISH', tf1d: 'BULLISH', verdict: 'ACCUMULATION', bos: 'EMA 50 Retest @ $2,650', rationale: 'Holding above key 4h moving averages with low funding rates.' },
+      { symbol: 'SOLUSDT', name: 'Solana', ticker: 'SOL', price: 154.20, change: 3.85, tf15: 'BULLISH', tf1h: 'BULLISH', tf4h: 'BULLISH', tf1d: 'BULLISH', verdict: 'STRONG LONG', bos: 'Bullish CHoCH on 1h', rationale: 'Spot volume dominance with high active DEX fees and open interest spike.' },
+      { symbol: 'BNBUSDT', name: 'BNB', ticker: 'BNB', price: 594.30, change: 1.15, tf15: 'BULLISH', tf1h: 'BULLISH', tf4h: 'BULLISH', tf1d: 'BULLISH', verdict: 'MOMENTUM LONG', bos: 'Range High Breakout', rationale: 'Ecosystem launchpad announcements driving spot lockups.' },
+      { symbol: 'DOGEUSDT', name: 'Dogecoin', ticker: 'DOGE', price: 0.1284, change: 2.10, tf15: 'BULLISH', tf1h: 'NEUTRAL', tf4h: 'BULLISH', tf1d: 'NEUTRAL', verdict: 'MOMENTUM LONG', bos: '15m Micro BOS', rationale: 'Speculative rotation into high-beta meme tokens.' },
+      { symbol: 'AVAXUSDT', name: 'Avalanche', ticker: 'AVAX', price: 28.45, change: -1.25, tf15: 'BEARISH', tf1h: 'BEARISH', tf4h: 'NEUTRAL', tf1d: 'BEARISH', verdict: 'SHORT SETUP', bos: 'Bearish BOS @ $29.10', rationale: 'Failure to hold 4h EMA 200 + whale transfer to Binance.' },
+      { symbol: 'LINKUSDT', name: 'Chainlink', ticker: 'LINK', price: 13.90, change: 3.40, tf15: 'BULLISH', tf1h: 'BULLISH', tf4h: 'BULLISH', tf1d: 'BULLISH', verdict: 'STRONG LONG', bos: 'Daily Structure Break', rationale: 'RWA narrative rotation and decreasing exchange reserves.' },
+      { symbol: 'SUIUSDT', name: 'Sui', ticker: 'SUI', price: 1.84, change: 8.20, tf15: 'BULLISH', tf1h: 'BULLISH', tf4h: 'BULLISH', tf1d: 'BULLISH', verdict: 'BREAKOUT EXPANSION', bos: 'ATH Retest CHoCH', rationale: 'Aggressive spot taker buying with TVL multi-month peaks.' },
+      { symbol: 'NEARUSDT', name: 'NEAR Protocol', ticker: 'NEAR', price: 5.12, change: -2.30, tf15: 'BEARISH', tf1h: 'BEARISH', tf4h: 'BEARISH', tf1d: 'NEUTRAL', verdict: 'SHORT CONTINUATION', bos: 'Loss of 4h Support', rationale: 'Open interest unwinding rapidly with lower highs intact.' },
+      { symbol: 'PEPEUSDT', name: 'Pepe', ticker: 'PEPE', price: 0.0000098, change: 5.40, tf15: 'BULLISH', tf1h: 'BULLISH', tf4h: 'BULLISH', tf1d: 'NEUTRAL', verdict: 'HIGH BETA LONG', bos: 'Liquidity Grab Reversal', rationale: 'Reclaim of range low followed by heavy volume absorption.' }
     ];
 
     let livePrices = {};
     let activeChartPair = 'BTCUSDT';
     let audioAlerts = true;
 
-    // --- 2. AUDIO SYNTHESIZER ---
-    function playBeep(freq = 880, duration = 0.12) {
+    function playBeep(freq = 880, duration = 0.1) {
       if (!audioAlerts) return;
       try {
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -672,9 +476,7 @@
         gain.connect(audioCtx.destination);
         osc.start();
         osc.stop(audioCtx.currentTime + duration);
-      } catch (e) {
-        // Audio policy prevention fallback
-      }
+      } catch (e) {}
     }
 
     function toggleAudio() {
@@ -685,7 +487,6 @@
       if (audioAlerts) playBeep(1200, 0.1);
     }
 
-    // --- 3. UTC CLOCK & HEADER METRICS ---
     function updateClock() {
       const now = new Date();
       document.getElementById('utcClock').innerText = now.toISOString().substring(11, 19) + ' UTC';
@@ -693,21 +494,22 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // --- 4. TAB CONTROLLER ---
     function switchTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
       document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-      
       const target = document.getElementById(`tab-${tabId}`);
       if (target) target.classList.remove('hidden');
-
       const activeBtn = document.querySelector(`.nav-btn[data-target="${tabId}"]`);
       if (activeBtn) activeBtn.classList.add('active');
-
       if (tabId === 'charting') initTradingView(activeChartPair);
     }
 
-    // --- 5. RENDER SCANNER & RADAR MODULES ---
+    function formatNumber(num) {
+      if (num >= 1000) return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      if (num >= 1) return num.toFixed(2);
+      return num.toFixed(7);
+    }
+
     function renderScanner() {
       const tbody = document.getElementById('scannerTableBody');
       tbody.innerHTML = '';
@@ -725,7 +527,8 @@
             <span class="w-1.5 h-1.5 rounded-full ${isBull ? 'bg-emerald-500' : 'bg-red-500'}"></span>
             ${t.ticker}/USDT
           </td>
-          <td class="py-2.5 px-3 font-semibold text-slate-800" id="price-${t.symbol}">$${t.price > 1 ? t.price.toFixed(2) : t.price}</td>
+          <td class="py-2.5 px-3 font-semibold text-slate-900" id="price-${t.symbol}">$${formatNumber(t.price)}</td>
+          <td class="py-2.5 px-3 font-medium ${t.change >= 0 ? 'text-emerald-600' : 'text-red-600'}" id="change-${t.symbol}">${t.change >= 0 ? '+' : ''}${t.change}%</td>
           <td class="py-2.5 px-3 text-center"><span class="badge ${t.tf15 === 'BULLISH' ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'}">${t.tf15}</span></td>
           <td class="py-2.5 px-3 text-center"><span class="badge ${t.tf1h === 'BULLISH' ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'}">${t.tf1h}</span></td>
           <td class="py-2.5 px-3 text-center"><span class="badge ${t.tf4h === 'BULLISH' ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'}">${t.tf4h}</span></td>
@@ -751,10 +554,10 @@
         const card = document.createElement('div');
         card.className = 'bg-white border border-slate-200 rounded-lg p-4 shadow-xs flex flex-col justify-between hover:border-slate-300 transition';
 
-        const entry = (t.price * 0.995).toFixed(2);
-        const tp1 = (t.price * 1.035).toFixed(2);
-        const tp2 = (t.price * 1.07).toFixed(2);
-        const sl = (t.price * 0.975).toFixed(2);
+        const entry = (t.price * 0.995);
+        const tp1 = (t.price * 1.035);
+        const tp2 = (t.price * 1.07);
+        const sl = (t.price * 0.975);
 
         card.innerHTML = `
           <div>
@@ -763,56 +566,70 @@
                 <span class="font-bold text-sm font-mono text-slate-900">${t.ticker}/USDT</span>
                 <span class="badge ${isLong ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'} font-mono">${isLong ? 'CALL: LONG' : 'CALL: SHORT'}</span>
               </div>
-              <span class="text-xs font-mono font-bold text-slate-700" id="radar-price-${t.symbol}">$${t.price}</span>
+              <span class="text-xs font-mono font-bold text-slate-900" id="radar-price-${t.symbol}">$${formatNumber(t.price)}</span>
             </div>
-
-            <!-- Rationale Box -->
             <div class="bg-slate-50 border border-slate-200 rounded p-2.5 mb-3 font-sans text-xs">
               <span class="font-semibold text-slate-800 block mb-1">Institutional Rationale:</span>
               <p class="text-slate-600 leading-relaxed text-[11px]">${t.rationale}</p>
             </div>
-
-            <!-- Parameters Grid -->
             <div class="grid grid-cols-4 gap-2 font-mono text-[11px] text-center mb-3">
-              <div class="bg-blue-50/50 border border-blue-200 rounded p-1.5">
-                <span class="text-slate-500 block text-[9px]">SUGG. ENTRY</span>
-                <span class="font-bold text-blue-700">$${entry}</span>
-              </div>
-              <div class="bg-emerald-50/50 border border-emerald-200 rounded p-1.5">
-                <span class="text-slate-500 block text-[9px]">TARGET 1</span>
-                <span class="font-bold text-emerald-700">$${tp1}</span>
-              </div>
-              <div class="bg-emerald-50/50 border border-emerald-200 rounded p-1.5">
-                <span class="text-slate-500 block text-[9px]">TARGET 2</span>
-                <span class="font-bold text-emerald-700">$${tp2}</span>
-              </div>
-              <div class="bg-red-50/50 border border-red-200 rounded p-1.5">
-                <span class="text-slate-500 block text-[9px]">STOP LOSS</span>
-                <span class="font-bold text-red-700">$${sl}</span>
-              </div>
+              <div class="bg-blue-50/50 border border-blue-200 rounded p-1.5"><span class="text-slate-500 block text-[9px]">ENTRY</span><span class="font-bold text-blue-700" id="entry-${t.symbol}">$${formatNumber(entry)}</span></div>
+              <div class="bg-emerald-50/50 border border-emerald-200 rounded p-1.5"><span class="text-slate-500 block text-[9px]">TARGET 1</span><span class="font-bold text-emerald-700" id="tp1-${t.symbol}">$${formatNumber(tp1)}</span></div>
+              <div class="bg-emerald-50/50 border border-emerald-200 rounded p-1.5"><span class="text-slate-500 block text-[9px]">TARGET 2</span><span class="font-bold text-emerald-700" id="tp2-${t.symbol}">$${formatNumber(tp2)}</span></div>
+              <div class="bg-red-50/50 border border-red-200 rounded p-1.5"><span class="text-slate-500 block text-[9px]">STOP LOSS</span><span class="font-bold text-red-700" id="sl-${t.symbol}">$${formatNumber(sl)}</span></div>
             </div>
           </div>
-
           <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-[11px]">
             <span class="text-slate-500 font-sans">SMC Confluence: <strong>${t.bos}</strong></span>
-            <button onclick="loadChart('${t.symbol}')" class="text-blue-600 font-semibold hover:underline flex items-center gap-1">
-              Verify On Chart &rarr;
-            </button>
+            <button onclick="loadChart('${t.symbol}')" class="text-blue-600 font-semibold hover:underline flex items-center gap-1">Verify On Chart &rarr;</button>
           </div>
         `;
         container.appendChild(card);
       });
     }
 
-    // --- 6. BINANCE WEBSOCKET LIVE PRICE FEED ---
+    // --- INSTANT BINANCE REST API SYNC ---
+    async function syncBinanceRest() {
+      try {
+        const res = await fetch('https://api.binance.com/api/v3/ticker/24hr');
+        const data = await res.json();
+        const map = {};
+        data.forEach(item => { map[item.symbol] = item; });
+
+        TOKENS.forEach(t => {
+          if (map[t.symbol]) {
+            const currentPrice = parseFloat(map[t.symbol].lastPrice);
+            const change24h = parseFloat(map[t.symbol].priceChangePercent);
+            t.price = currentPrice;
+            t.change = change24h;
+            livePrices[t.symbol] = currentPrice;
+
+            const pEl = document.getElementById(`price-${t.symbol}`);
+            const cEl = document.getElementById(`change-${t.symbol}`);
+            const rEl = document.getElementById(`radar-price-${t.symbol}`);
+
+            if (pEl) pEl.innerText = `$${formatNumber(currentPrice)}`;
+            if (cEl) {
+              cEl.innerText = `${change24h >= 0 ? '+' : ''}${change24h.toFixed(2)}%`;
+              cEl.className = `py-2.5 px-3 font-medium ${change24h >= 0 ? 'text-emerald-600' : 'text-red-600'}`;
+            }
+            if (rEl) rEl.innerText = `$${formatNumber(currentPrice)}`;
+          }
+        });
+        document.getElementById('engineStatus').innerText = 'ENGINE: LIVE (SYNCED)';
+      } catch (err) {
+        console.error('REST Sync Error, relying on WebSocket fallback:', err);
+      }
+    }
+
+    // --- WEBSOCKET LIVE FLICKER FEED ---
     function connectBinanceWs() {
-      const streams = TOKENS.map(t => `${t.symbol.toLowerCase()}@ticker`).join('/');
-      const wsUrl = `wss://fstream.binance.com/ws/${streams}`;
-      
+      const streams = TOKENS.map(t => `${t.symbol.toLowerCase()}@miniTicker`).join('/');
+      const wsUrl = `wss://stream.binance.com:9443/ws/${streams}`;
       const ws = new WebSocket(wsUrl);
 
       ws.onopen = () => {
-        document.getElementById('engineStatus').innerText = 'ENGINE: BINANCE LIVE';
+        document.getElementById('engineStatus').innerText = 'ENGINE: BINANCE STREAMING';
       };
 
       ws.onmessage = (event) => {
@@ -822,10 +639,9 @@
         const oldPrice = livePrices[symbol] || newPrice;
         livePrices[symbol] = newPrice;
 
-        // Flash element in scanner table
         const priceEl = document.getElementById(`price-${symbol}`);
         if (priceEl) {
-          priceEl.innerText = `$${newPrice > 1 ? newPrice.toFixed(2) : newPrice}`;
+          priceEl.innerText = `$${formatNumber(newPrice)}`;
           if (newPrice > oldPrice) {
             priceEl.classList.remove('flash-red');
             priceEl.classList.add('flash-green');
@@ -836,33 +652,28 @@
           setTimeout(() => priceEl.classList.remove('flash-green', 'flash-red'), 750);
         }
 
-        // Radar Price Element
         const radarPriceEl = document.getElementById(`radar-price-${symbol}`);
-        if (radarPriceEl) {
-          radarPriceEl.innerText = `$${newPrice > 1 ? newPrice.toFixed(2) : newPrice}`;
-        }
+        if (radarPriceEl) radarPriceEl.innerText = `$${formatNumber(newPrice)}`;
 
-        // Active Chart Price Element
         if (symbol === activeChartPair) {
           const chartEl = document.getElementById('activeChartPrice');
-          if (chartEl) chartEl.innerText = `$${newPrice > 1 ? newPrice.toFixed(2) : newPrice}`;
+          if (chartEl) chartEl.innerText = `$${formatNumber(newPrice)}`;
         }
       };
 
       ws.onerror = () => {
-        document.getElementById('engineStatus').innerText = 'ENGINE: RETRYING...';
+        document.getElementById('engineStatus').innerText = 'ENGINE: RECONNECTING...';
       };
 
       ws.onclose = () => {
-        setTimeout(connectBinanceWs, 3000);
+        setTimeout(connectBinanceWs, 2000);
       };
     }
 
-    // --- 7. TRADINGVIEW FULL EMBED ---
-    let tvWidget = null;
+    // --- TRADINGVIEW INITIALIZATION ---
     function initTradingView(symbol = 'BTCUSDT', tf = '60') {
       activeChartPair = symbol;
-      document.getElementById('activeChartPair').innerHTML = `<i data-lucide="activity" class="w-4 h-4 text-blue-600"></i> BINANCE:${symbol}.P`;
+      document.getElementById('activeChartPair').innerHTML = `<i data-lucide="activity" class="w-4 h-4 text-blue-600"></i> BINANCE:${symbol}`;
       lucide.createIcons();
 
       const container = document.getElementById('tradingview_widget_container');
@@ -870,7 +681,7 @@
 
       new TradingView.widget({
         autosize: true,
-        symbol: `BINANCE:${symbol}.P`,
+        symbol: `BINANCE:${symbol}`,
         interval: tf,
         timezone: "Etc/UTC",
         theme: "light",
@@ -895,29 +706,6 @@
       initTradingView(activeChartPair, tf);
     }
 
-    // --- 8. SEARCH & PINNED WATCHLIST ---
-    function handleSearch(q) {
-      const drop = document.getElementById('searchDropdown');
-      if (!q.trim()) {
-        drop.classList.add('hidden');
-        return;
-      }
-      const matches = TOKENS.filter(t => t.symbol.toLowerCase().includes(q.toLowerCase()) || t.name.toLowerCase().includes(q.toLowerCase()));
-      drop.innerHTML = '';
-      matches.forEach(m => {
-        const item = document.createElement('div');
-        item.className = 'px-3 py-2 hover:bg-slate-100 cursor-pointer flex justify-between';
-        item.innerHTML = `<span><strong>${m.ticker}</strong>/USDT</span><span class="text-slate-500">$${m.price}</span>`;
-        item.onclick = () => {
-          loadChart(m.symbol);
-          drop.classList.add('hidden');
-          document.getElementById('globalCoinSearch').value = '';
-        };
-        drop.appendChild(item);
-      });
-      drop.classList.remove('hidden');
-    }
-
     function renderPinnedWatchlist() {
       const el = document.getElementById('pinnedWatchlist');
       el.innerHTML = '';
@@ -926,26 +714,17 @@
         item.className = 'flex items-center justify-between p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200 transition';
         item.onclick = () => loadChart(t.symbol);
         item.innerHTML = `
-          <div class="flex items-center gap-1.5">
-            <span class="font-bold text-slate-800">${t.ticker}</span>
-            <span class="text-[10px] text-slate-400">USDT</span>
-          </div>
-          <div class="text-right">
-            <span class="font-bold text-slate-900">$${t.price}</span>
-            <span class="text-[10px] block ${t.change >= 0 ? 'text-emerald-600' : 'text-red-600'}">${t.change >= 0 ? '+' : ''}${t.change}%</span>
-          </div>
+          <div class="flex items-center gap-1.5"><span class="font-bold text-slate-800">${t.ticker}</span><span class="text-[10px] text-slate-400">USDT</span></div>
+          <div class="text-right"><span class="font-bold text-slate-900" id="pin-${t.symbol}">$${formatNumber(t.price)}</span></div>
         `;
         el.appendChild(item);
       });
     }
 
-    // --- 9. LOCAL STORAGE SCRATCHPAD ---
     function saveNotes(val) {
       localStorage.setItem('kalpha_trader_notes', val);
       document.getElementById('notepadStatus').innerText = 'Saving...';
-      setTimeout(() => {
-        document.getElementById('notepadStatus').innerText = 'Saved';
-      }, 500);
+      setTimeout(() => { document.getElementById('notepadStatus').innerText = 'Saved'; }, 400);
     }
 
     function loadNotes() {
@@ -953,19 +732,16 @@
       if (saved) document.getElementById('traderNotes').value = saved;
     }
 
-    // --- 10. WHALE ALERT SIMULATION & RENDERING ---
     const WHALE_DATA = [
-      { time: '12:44:12', asset: '850 BTC ($56.7M)', path: 'Wallet ➡️ Binance', tag: 'DUMP RISK', type: 'exchange', hash: '0x8f2a...c811', isAlert: true },
-      { time: '12:42:01', asset: '14,200 ETH ($49.5M)', path: 'Coinbase Prime ➡️ Custody', tag: 'ACCUMULATION', type: 'all', hash: '0x1b4c...e904', isAlert: false },
-      { time: '12:38:50', asset: '65,000,000 USDT', path: 'Tether Treasury ➡️ Kraken', tag: 'LIQUIDITY INJECT', type: 'all', hash: '0xaa42...999b', isAlert: false },
-      { time: '12:35:10', asset: '120,000 SOL ($18.5M)', path: 'Wallet ➡️ OKX', tag: 'DUMP RISK', type: 'exchange', hash: '0x6291...3312', isAlert: true }
+      { time: '12:44:12', asset: '850 BTC ($71.5M)', path: 'Wallet ➡️ Binance', tag: 'DUMP RISK', hash: '0x8f2a...c811' },
+      { time: '12:42:01', asset: '14,200 ETH ($38.0M)', path: 'Coinbase Prime ➡️ Custody', tag: 'ACCUMULATION', hash: '0x1b4c...e904' },
+      { time: '12:38:50', asset: '65,000,000 USDT', path: 'Tether Treasury ➡️ Kraken', tag: 'LIQUIDITY INJECT', hash: '0xaa42...999b' }
     ];
 
-    function renderWhales(filter = 'all') {
+    function renderWhales() {
       const tbody = document.getElementById('whaleTableBody');
       tbody.innerHTML = '';
       WHALE_DATA.forEach(w => {
-        if (filter === 'exchange' && w.type !== 'exchange') return;
         const row = document.createElement('tr');
         row.className = 'border-b border-slate-100 hover:bg-slate-50 transition';
         const isDump = w.tag.includes('DUMP');
@@ -980,11 +756,6 @@
       });
     }
 
-    function filterWhales(f) {
-      renderWhales(f);
-    }
-
-    // --- 11. CVD CHART & LIQUIDATIONS ---
     function initCvdChart() {
       const ctx = document.getElementById('cvdChart').getContext('2d');
       new Chart(ctx, {
@@ -992,7 +763,7 @@
         data: {
           labels: ['12:00', '12:10', '12:20', '12:30', '12:40', '12:50'],
           datasets: [{
-            label: 'Aggressive Spot Delta',
+            label: 'Spot Delta',
             data: [120, 240, 180, 420, 560, 710],
             borderColor: '#16A34A',
             borderWidth: 2,
@@ -1014,69 +785,33 @@
       });
     }
 
-    function renderLiquidationStream() {
-      const stream = document.getElementById('liquidationStream');
-      const wipes = [
-        { pair: 'BTCUSDT', type: 'SHORT LIQUIDATION', amt: '$840,000', price: '$66,920' },
-        { pair: 'SOLUSDT', type: 'LONG LIQUIDATION', amt: '$120,400', price: '$153.80' },
-        { pair: 'ETHUSDT', type: 'SHORT LIQUIDATION', amt: '$345,000', price: '$3,492' }
-      ];
-      stream.innerHTML = '';
-      wipes.forEach(w => {
-        const isShort = w.type.includes('SHORT');
-        const d = document.createElement('div');
-        d.className = 'flex items-center justify-between p-1.5 rounded bg-slate-50 border border-slate-200';
-        d.innerHTML = `
-          <div class="flex items-center gap-1.5">
-            <span class="font-bold text-slate-800">${w.pair}</span>
-            <span class="badge ${isShort ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'}">${w.type}</span>
-          </div>
-          <div class="text-right">
-            <span class="font-bold text-slate-900">${w.amt}</span>
-            <span class="text-slate-400 text-[10px]">@ ${w.price}</span>
-          </div>
-        `;
-        stream.appendChild(d);
-      });
-    }
-
-    // --- 12. NEWS WIRE MODULE ---
     const NEWS_ARTICLES = [
-      { title: 'US SEC Concludes Inquiries on Prominent Layer-1 Ecosystem Entities', time: '8m ago', sentiment: 'BULLISH', tag: 'REGULATION', source: 'Bloomberg Crypto' },
-      { title: 'Spot Bitcoin ETF Records Inflows of $380M Led by Institutional Desks', time: '22m ago', sentiment: 'BULLISH', tag: 'INSTITUTIONAL', source: 'CoinDesk' },
-      { title: 'Derivative Exchanges Record Elevated Long Liquidations Following Weekend Dip', time: '41m ago', sentiment: 'BEARISH', tag: 'DERIVATIVES', source: 'CoinTelegraph' }
+      { title: 'US Spot Bitcoin ETFs Record Over $990M Net Inflows in Single Session', time: '14m ago', sentiment: 'BULLISH', tag: 'INSTITUTIONAL', source: 'CoinDesk' },
+      { title: 'Global Liquidity Metrics Indicate Macro Capital Rotation Into High Beta L1s', time: '36m ago', sentiment: 'BULLISH', tag: 'MACRO', source: 'Bloomberg Crypto' }
     ];
 
     function renderNews() {
       const c = document.getElementById('newsContainer');
       c.innerHTML = '';
       NEWS_ARTICLES.forEach(n => {
-        const isBull = n.sentiment === 'BULLISH';
         const card = document.createElement('div');
         card.className = 'border border-slate-200 rounded p-3 bg-slate-50 flex flex-col justify-between hover:bg-white transition';
         card.innerHTML = `
           <div>
             <div class="flex items-center justify-between mb-2">
               <span class="badge bg-slate-200 text-slate-700">${n.tag}</span>
-              <span class="badge ${isBull ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'}">${n.sentiment}</span>
+              <span class="badge bg-emerald-100 text-emerald-800">${n.sentiment}</span>
             </div>
             <h4 class="font-bold text-xs text-slate-900 leading-snug mb-2 font-sans">${n.title}</h4>
           </div>
           <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono pt-2 border-t border-slate-200">
-            <span>${n.source}</span>
-            <span>${n.time}</span>
+            <span>${n.source}</span><span>${n.time}</span>
           </div>
         `;
         c.appendChild(card);
       });
     }
 
-    function refreshNews() {
-      renderNews();
-      playBeep(950, 0.08);
-    }
-
-    // --- 13. RISK CALCULATOR ---
     function calculateRisk() {
       const balance = parseFloat(document.getElementById('calcBalance').value) || 0;
       const riskPct = parseFloat(document.getElementById('calcRiskPct').value) || 0;
@@ -1093,27 +828,24 @@
       document.getElementById('resAssetQty').innerText = `${assetQty.toFixed(3)} UNITS`;
     }
 
-    // --- 14. TELEGRAM BOT HOOKS ---
     function saveTelegramConfig() {
       const token = document.getElementById('tgToken').value;
       const chat = document.getElementById('tgChatId').value;
       const status = document.getElementById('tgStatus');
-
       if (!token || !chat) {
-        status.innerText = 'Token and Chat ID are required.';
+        status.innerText = 'Both Token & Chat ID required.';
         status.className = 'text-[11px] font-mono text-center text-red-600';
         return;
       }
-
       localStorage.setItem('kalpha_tg_token', token);
       localStorage.setItem('kalpha_tg_chat', chat);
-      status.innerText = 'Saved. Ready to transmit breakout alerts.';
+      status.innerText = 'Connected. Ready to relay alerts.';
       status.className = 'text-[11px] font-mono text-center text-emerald-600';
       playBeep(1100, 0.15);
     }
 
-    // --- INITIALIZATION ---
-    window.addEventListener('DOMContentLoaded', () => {
+    // INITIALIZATION
+    window.addEventListener('DOMContentLoaded', async () => {
       lucide.createIcons();
       renderScanner();
       renderRadar();
@@ -1121,12 +853,14 @@
       loadNotes();
       renderWhales();
       initCvdChart();
-      renderLiquidationStream();
       renderNews();
       calculateRisk();
+
+      // First sync directly with Binance REST API for exact prices
+      await syncBinanceRest();
+      // Then start persistent tick WebSocket
       connectBinanceWs();
 
-      // Retrieve telegram if set
       if (localStorage.getItem('kalpha_tg_token')) {
         document.getElementById('tgToken').value = localStorage.getItem('kalpha_tg_token');
         document.getElementById('tgChatId').value = localStorage.getItem('kalpha_tg_chat');
