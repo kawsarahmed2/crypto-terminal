@@ -1953,3 +1953,84 @@
   </script>
 </body>
 </html>
+<!-- Mobile Responsive Styling & White Mode Toggle -->
+<style>
+  /* White Mode Styling */
+  body.white-mode {
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+  }
+  body.white-mode header,
+  body.white-mode aside,
+  body.white-mode .glass-panel,
+  body.white-mode [class*="bg-dark"],
+  body.white-mode [class*="bg-slate-900"],
+  body.white-mode [class*="bg-slate-950"],
+  body.white-mode table {
+    background-color: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+  }
+  body.white-mode .text-white {
+    color: #0f172a !important;
+  }
+  body.white-mode .text-slate-400,
+  body.white-mode .text-slate-300 {
+    color: #475569 !important;
+  }
+  body.white-mode table thead tr {
+    background-color: #f1f5f9 !important;
+  }
+
+  /* Mobile Responsive View */
+  @media (max-width: 768px) {
+    body {
+      overflow-x: hidden !important;
+    }
+    aside {
+      width: 100% !important;
+      display: flex !important;
+      overflow-x: auto !important;
+      white-space: nowrap !important;
+      padding: 10px !important;
+    }
+    aside button {
+      flex-shrink: 0 !important;
+    }
+    .grid {
+      grid-template-columns: 1fr !important;
+    }
+    table {
+      display: block !important;
+      overflow-x: auto !important;
+      white-space: nowrap !important;
+      width: 100% !important;
+    }
+  }
+</style>
+
+<div style="position: fixed; bottom: 20px; right: 20px; z-index: 999999;">
+  <button 
+    id="themeSwitchBtn" 
+    onclick="toggleThemeMode()" 
+    style="background: #0284c7; color: white; border: none; padding: 10px 18px; border-radius: 50px; font-weight: bold; font-size: 13px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 6px;"
+  >
+    ☀️ White Mode
+  </button>
+</div>
+
+<script>
+  function toggleThemeMode() {
+    const isWhite = document.body.classList.toggle("white-mode");
+    const btn = document.getElementById("themeSwitchBtn");
+    if (isWhite) {
+      btn.innerText = "🌙 Dark Mode";
+      btn.style.background = "#0f172a";
+      btn.style.border = "1px solid #38bdf8";
+    } else {
+      btn.innerText = "☀️ White Mode";
+      btn.style.background = "#0284c7";
+      btn.style.border = "none";
+    }
+  }
+</script>
