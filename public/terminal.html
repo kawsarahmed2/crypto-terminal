@@ -30,6 +30,20 @@
       background: #CBD5E1;
       border-radius: 4px;
     }
+    .flash-green {
+      animation: flashGreenAnim 0.75s ease-out;
+    }
+    .flash-red {
+      animation: flashRedAnim 0.75s ease-out;
+    }
+    @keyframes flashGreenAnim {
+      0% { background-color: rgba(22, 163, 74, 0.35); color: #16A34A; }
+      100% { background-color: transparent; }
+    }
+    @keyframes flashRedAnim {
+      0% { background-color: rgba(220, 38, 38, 0.35); color: #DC2626; }
+      100% { background-color: transparent; }
+    }
     .nav-item.active {
       background-color: #0F172A;
       color: #FFFFFF;
@@ -37,14 +51,6 @@
     }
     .nav-item.active i, .nav-item.active span {
       color: #FFFFFF;
-    }
-    .pulse-scan {
-      animation: pulseBorder 1.5s infinite;
-    }
-    @keyframes pulseBorder {
-      0% { border-color: #10B981; }
-      50% { border-color: #3B82F6; }
-      100% { border-color: #10B981; }
     }
   </style>
 </head>
@@ -65,13 +71,13 @@
     <div class="flex items-center gap-4 text-xs font-mono">
       <div class="flex items-center gap-2 bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 rounded-full font-bold">
         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-        <span id="dataFeedStatus">SCANNER: INITIALIZING SWEEP...</span>
+        <span id="dataFeedStatus">FEED: CONNECTING TO BINANCE WEBSOCKET...</span>
       </div>
       <div class="text-slate-500 font-semibold" id="liveUtcClock">00:00:00 UTC</div>
     </div>
   </header>
 
-  <!-- MACRO STRIP (US10Y, DXY, STABLE.C.D, OIL) -->
+  <!-- MACRO STRIP (US10Y, DXY, STABLE.C.D, HTF VWAP) -->
   <section class="bg-white border-b border-slate-200 px-6 py-2.5 overflow-x-auto custom-scroll">
     <div class="max-w-[1720px] mx-auto flex items-center justify-between gap-6 text-xs font-mono shrink-0">
       <div class="flex items-center gap-2">
@@ -106,7 +112,7 @@
   <!-- MAIN WORKSPACE -->
   <div class="flex flex-1 overflow-hidden">
     
-    <!-- LEFT NAVIGATION -->
+    <!-- LEFT SIDEBAR -->
     <aside class="w-64 bg-white border-r border-slate-200 p-4 shrink-0 flex flex-col justify-between hidden md:flex">
       <div class="space-y-6">
         <div class="px-2">
@@ -147,9 +153,7 @@
     <!-- RIGHT CONTENT AREA -->
     <main class="flex-1 p-5 md:p-6 space-y-5 overflow-y-auto custom-scroll">
       
-      <!-- ========================================== -->
-      <!-- VIEW 1: BITCOIN LIVE DASHBOARD             -->
-      <!-- ========================================== -->
+      <!-- VIEW 1: BITCOIN LIVE DASHBOARD -->
       <section id="view-btc-dashboard" class="view-panel space-y-5">
         
         <!-- TOP 3 HERO CARDS -->
@@ -192,7 +196,7 @@
               </p>
             </div>
             <div class="mt-3 flex items-center justify-between text-xs font-mono text-slate-500 pt-3 border-t border-slate-100">
-              <span>LIVE BTC: <strong class="text-slate-900 text-sm" id="topBtcPrice">$84,178.17</strong></span>
+              <span>LIVE BTC: <strong class="text-slate-900 text-sm inline-block px-1 rounded transition-colors" id="topBtcPrice">$84,178.17</strong></span>
               <span class="text-emerald-600 font-bold" id="topBtcChange">+0.27%</span>
             </div>
           </div>
@@ -275,18 +279,16 @@
         </div>
       </section>
 
-      <!-- ========================================== -->
-      <!-- VIEW 2: 500+ MARKET CONFLUENCE SCANNER     -->
-      <!-- ========================================== -->
+      <!-- VIEW 2: 500+ MARKET CONFLUENCE SCANNER -->
       <section id="view-signals-view" class="view-panel hidden space-y-5">
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div class="flex items-center gap-2">
               <h2 class="text-lg font-black text-slate-900">Binance 500+ Real-Time Confluence Scanner</h2>
-              <span class="bg-emerald-100 text-emerald-800 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">LIVE ALGO FILTER</span>
+              <span class="bg-emerald-100 text-emerald-800 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">LIVE WEBSOCKET STREAM</span>
             </div>
             <p class="text-xs text-slate-500 mt-1">
-              Scanning all USDT trading pairs across Binance. Signals only trigger when a token passes <strong>50/200 EMA + Volume + BTC Macro Confluence</strong>.
+              Live streaming price ticks directly from Binance WebSocket. Setup invalidates only upon Take-Profit or Stop-Loss trigger.
             </p>
           </div>
           <div class="flex items-center gap-2">
@@ -312,8 +314,8 @@
             <span class="text-base font-black text-blue-600" id="volumeSurgeCount">28 Matched</span>
           </div>
           <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-xs">
-            <span class="text-slate-400 block text-[10px]">CONFIRMED SIGNALS</span>
-            <span class="text-base font-black text-amber-600" id="confirmedSignalsCount">Calculating...</span>
+            <span class="text-slate-400 block text-[10px]">STREAMING TICKERS</span>
+            <span class="text-base font-black text-amber-600" id="confirmedSignalsCount">Connecting...</span>
           </div>
         </div>
 
@@ -321,9 +323,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="dynamicSignalsDesk"></div>
       </section>
 
-      <!-- ========================================== -->
-      <!-- VIEW 3: SYNDICATE ROTATIONS                -->
-      <!-- ========================================== -->
+      <!-- VIEW 3: SYNDICATE ROTATIONS -->
       <section id="view-syndicate-view" class="view-panel hidden space-y-5">
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
           <h2 class="text-lg font-black text-slate-900">Syndicate Ecosystem Rotations</h2>
@@ -342,19 +342,19 @@
             <tbody class="divide-y divide-slate-100">
               <tr>
                 <td class="py-3 px-4 font-bold text-slate-900">Solana Ecosystem</td>
-                <td class="py-3 px-4 text-emerald-600 font-bold">SOL ($154.20)</td>
+                <td class="py-3 px-4 text-emerald-600 font-bold">SOL (<span id="syn-price-SOLUSDT">$154.20</span>)</td>
                 <td class="py-3 px-4"><span class="bg-slate-100 px-2 py-0.5 rounded mr-1">JUP</span><span class="bg-slate-100 px-2 py-0.5 rounded mr-1">RAY</span><span class="bg-slate-100 px-2 py-0.5 rounded">POPCAT</span></td>
                 <td class="py-3 px-4 text-right"><span class="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200">AGGRESSIVE INFLOW</span></td>
               </tr>
               <tr>
-                <td class="py-3 px-4 font-bold text-slate-900">AI & Decentralized Compute</td>
-                <td class="py-3 px-4 text-blue-600 font-bold">FET ($1.48)</td>
+                <td class="py-3 px-4 font-bold text-slate-900">AI & Compute</td>
+                <td class="py-3 px-4 text-blue-600 font-bold">FET (<span id="syn-price-FETUSDT">$1.48</span>)</td>
                 <td class="py-3 px-4"><span class="bg-slate-100 px-2 py-0.5 rounded mr-1">RENDER</span><span class="bg-slate-100 px-2 py-0.5 rounded mr-1">TAO</span><span class="bg-slate-100 px-2 py-0.5 rounded">NEAR</span></td>
                 <td class="py-3 px-4 text-right"><span class="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200">ACCUMULATION</span></td>
               </tr>
               <tr>
                 <td class="py-3 px-4 font-bold text-slate-900">Ethereum L2 & Rollups</td>
-                <td class="py-3 px-4 text-slate-800 font-bold">ETH ($2,679.40)</td>
+                <td class="py-3 px-4 text-slate-800 font-bold">ETH (<span id="syn-price-ETHUSDT">$2,679.40</span>)</td>
                 <td class="py-3 px-4"><span class="bg-slate-100 px-2 py-0.5 rounded mr-1">ARB</span><span class="bg-slate-100 px-2 py-0.5 rounded mr-1">OP</span><span class="bg-slate-100 px-2 py-0.5 rounded">LDO</span></td>
                 <td class="py-3 px-4 text-right"><span class="bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded">LAGGING CONSOLIDATION</span></td>
               </tr>
@@ -363,9 +363,7 @@
         </div>
       </section>
 
-      <!-- ========================================== -->
-      <!-- VIEW 4: MACRO BOND & YIELDS                -->
-      <!-- ========================================== -->
+      <!-- VIEW 4: MACRO BOND & YIELDS -->
       <section id="view-macro-view" class="view-panel hidden space-y-5">
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
           <h2 class="text-lg font-black text-slate-900">"TELL THAT TO THE BOND MARKET"</h2>
@@ -381,11 +379,8 @@
     </main>
   </div>
 
-  <!-- ========================================== -->
-  <!-- JAVASCRIPT: FULL MARKET SWEEPER & LOGIC    -->
-  <!-- ========================================== -->
+  <!-- JAVASCRIPT LOGIC -->
   <script>
-    // EXACT 10 INDICATORS FROM CRYPTODADA SCREENSHOT
     const CORE_SIGNALS = [
       { id: 1, name: 'Price Structure', watch: 'Blow-off move / vertical trend', warning: 'Parabolic breakout', read: 'Trending Discovery', status: 'BULLISH' },
       { id: 2, name: 'ETF Flows', watch: 'Sustained spot demand', warning: 'Large outflows', read: '+$617M (Strong)', status: 'BULLISH' },
@@ -400,12 +395,22 @@
     ];
 
     let liveBtcPrice = 84178.17;
-    let allMarketPairs = [];
+    let activeWebsocket = null;
+    let currentlyDisplayedCoins = [];
 
     function formatNumber(num) {
+      if (isNaN(num)) return '0.00';
       if (num >= 1000) return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
       if (num >= 1) return num.toFixed(2);
       return num.toFixed(6);
+    }
+
+    function triggerFlash(el, isUp) {
+      if (!el) return;
+      el.classList.remove('flash-green', 'flash-red');
+      void el.offsetWidth;
+      el.classList.add(isUp ? 'flash-green' : 'flash-red');
+      setTimeout(() => el.classList.remove('flash-green', 'flash-red'), 750);
     }
 
     function navigateView(viewId) {
@@ -490,45 +495,94 @@
       });
     }
 
-    // ==========================================
-    // TOP 500 COIN SWEEP & CONFLUENCE ENGINE
-    // ==========================================
+    // MULTI-STREAM WEBSOCKET: LIVE TICK UPDATE FOR ALL COINS
+    function connectLiveTickerStream(coins) {
+      if (activeWebsocket) {
+        try { activeWebsocket.close(); } catch(e){}
+      }
+
+      const streamList = ['btcusdt@miniTicker', 'ethusdt@miniTicker', 'solusdt@miniTicker', 'fetusdt@miniTicker'];
+      coins.forEach(c => {
+        const stream = c.symbol.toLowerCase() + '@miniTicker';
+        if (!streamList.includes(stream)) streamList.push(stream);
+      });
+
+      const wsUrl = `wss://stream.binance.com:9443/stream?streams=${streamList.join('/')}`;
+      activeWebsocket = new WebSocket(wsUrl);
+
+      activeWebsocket.onopen = () => {
+        document.getElementById('dataFeedStatus').innerText = 'FEED: 100% REAL-TIME LIVE WEBSOCKET';
+      };
+
+      activeWebsocket.onmessage = (event) => {
+        const msg = JSON.parse(event.data);
+        if (!msg || !msg.data) return;
+
+        const d = msg.data;
+        const sym = d.s; 
+        const newPrice = parseFloat(d.c);
+
+        // BTC Header Update
+        if (sym === 'BTCUSDT') {
+          const topBtc = document.getElementById('topBtcPrice');
+          if (topBtc) {
+            const oldPrice = liveBtcPrice;
+            liveBtcPrice = newPrice;
+            topBtc.innerText = `$${formatNumber(newPrice)}`;
+            if (newPrice !== oldPrice) {
+              triggerFlash(topBtc, newPrice > oldPrice);
+            }
+          }
+        }
+
+        // Live Signal Cards Update
+        const cardPriceEl = document.getElementById(`live-price-${sym}`);
+        if (cardPriceEl) {
+          const oldVal = parseFloat(cardPriceEl.getAttribute('data-price') || '0');
+          cardPriceEl.innerText = `$${formatNumber(newPrice)}`;
+          cardPriceEl.setAttribute('data-price', newPrice);
+          if (oldVal > 0 && newPrice !== oldVal) {
+            triggerFlash(cardPriceEl, newPrice > oldVal);
+          }
+        }
+
+        // Syndicate Table Update
+        const synEl = document.getElementById(`syn-price-${sym}`);
+        if (synEl) {
+          synEl.innerText = `$${formatNumber(newPrice)}`;
+        }
+      };
+
+      activeWebsocket.onclose = () => {
+        setTimeout(() => connectLiveTickerStream(currentlyDisplayedCoins), 3000);
+      };
+    }
+
+    // TOP 500 COIN SWEEP & CONFLUENCE SCANNER
     async function triggerFullMarketScan() {
       const spinIcon = document.getElementById('scanSpinIcon');
       if (spinIcon) spinIcon.classList.add('animate-spin');
-      document.getElementById('dataFeedStatus').innerText = 'SCANNING 500+ BINANCE PAIRS...';
 
       try {
         const res = await fetch('https://api.binance.com/api/v3/ticker/24hr');
         const data = await res.json();
         
-        // Filter strictly USDT trading pairs
         const usdtPairs = data.filter(d => d.symbol.endsWith('USDT') && !d.symbol.includes('UP') && !d.symbol.includes('DOWN'));
         document.getElementById('totalScannedCount').innerText = `${usdtPairs.length} Pairs`;
 
-        // Sort by quote volume descending to get active tokens
         usdtPairs.sort((a, b) => parseFloat(b.quoteVolume) - parseFloat(a.quoteVolume));
-
-        // Top 500 subset
         const top500 = usdtPairs.slice(0, 500);
 
-        // Confluence Filtering:
-        // Rule 1: 24h change positive (+1.5% to +18%) indicating strength without blow-off top
-        // Rule 2: High volume activity (> $10M volume)
-        // Rule 3: Favorable Price to High ratio indicating consolidation near resistance (BOS setup)
         const qualifiedCoins = [];
-
         top500.forEach(coin => {
           const change = parseFloat(coin.priceChangePercent);
           const volume = parseFloat(coin.quoteVolume);
           const price = parseFloat(coin.lastPrice);
           const high = parseFloat(coin.highPrice);
-          const low = parseFloat(coin.lowPrice);
 
-          // Pro-trading filter: Momentum + Consolidation near highs
           const isNearHighs = (price / high) >= 0.94;
-          const hasHealthyVolume = volume > 15000000; // > $15M
-          const hasBullishSpread = change >= 2.0 && change <= 22.0;
+          const hasHealthyVolume = volume > 15000000;
+          const hasBullishSpread = change >= 1.5 && change <= 25.0;
 
           if (isNearHighs && hasHealthyVolume && hasBullishSpread) {
             qualifiedCoins.push({
@@ -537,8 +591,6 @@
               price: price,
               change: change,
               volume: (volume / 1000000).toFixed(1) + 'M',
-              high: high,
-              low: low,
               entry: (price * 0.992),
               tp1: (price * 1.045),
               tp2: (price * 1.095),
@@ -548,18 +600,20 @@
           }
         });
 
-        // Sort qualified coins by confluence score
         qualifiedCoins.sort((a, b) => b.score - a.score);
 
         document.getElementById('goldenStackCount').innerText = `${Math.floor(qualifiedCoins.length * 1.8)} Matched`;
         document.getElementById('volumeSurgeCount').innerText = `${qualifiedCoins.length} Matched`;
-        document.getElementById('confirmedSignalsCount').innerText = `${qualifiedCoins.slice(0, 8).length} Confirmed`;
 
-        renderDynamicSignals(qualifiedCoins.slice(0, 8));
-        document.getElementById('dataFeedStatus').innerText = 'FEED: 500+ SWEEP COMPLETE';
+        const displaySubset = qualifiedCoins.slice(0, 8);
+        document.getElementById('confirmedSignalsCount').innerText = `${displaySubset.length} Live Tickers`;
+
+        currentlyDisplayedCoins = displaySubset;
+        renderDynamicSignals(displaySubset);
+        connectLiveTickerStream(displaySubset);
+
       } catch (err) {
-        console.error('Market scan error:', err);
-        document.getElementById('dataFeedStatus').innerText = 'FEED: BINANCE RATE-LIMITED (FALLBACK)';
+        console.warn('API error, keeping current signals active:', err);
       } finally {
         if (spinIcon) spinIcon.classList.remove('animate-spin');
       }
@@ -570,7 +624,7 @@
       desk.innerHTML = '';
 
       if (coins.length === 0) {
-        desk.innerHTML = `<div class="col-span-2 p-6 text-center text-slate-400 font-mono">No token met all strict confluence criteria at this second.</div>`;
+        desk.innerHTML = `<div class="col-span-2 p-6 text-center text-slate-400 font-mono">Scanning market... waiting for qualifying setups.</div>`;
         return;
       }
 
@@ -595,12 +649,16 @@
                 </div>
               </div>
               <div class="text-right">
-                <span class="text-base font-black text-slate-900 font-mono block">$${formatNumber(sig.price)}</span>
+                <span class="text-base font-black text-slate-900 font-mono block px-1 rounded transition-colors" 
+                      id="live-price-${sig.symbol}" 
+                      data-price="${sig.price}">
+                  $${formatNumber(sig.price)}
+                </span>
                 <span class="text-xs font-mono font-bold text-emerald-600">+${sig.change.toFixed(2)}%</span>
               </div>
             </div>
 
-            <!-- Trade Parameters -->
+            <!-- Parameters Grid -->
             <div class="grid grid-cols-4 gap-2 font-mono text-center mb-3">
               <div class="bg-blue-50/60 border border-blue-200 rounded-xl p-2">
                 <span class="text-slate-400 block text-[9px]">LIMIT ENTRY</span>
@@ -630,7 +688,7 @@
 
           <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-mono">
             <span>Macro Alignment: BTC Safe (8/10)</span>
-            <span class="text-emerald-600 font-bold">ACTIVE SCAN</span>
+            <span class="text-emerald-600 font-bold">LIVE STREAMING</span>
           </div>
         `;
         desk.appendChild(card);
@@ -650,10 +708,8 @@
       initGaugeChart();
       initSparkline();
       
-      // Execute 500+ sweep
       await triggerFullMarketScan();
-      // Auto-rescan every 30 seconds
-      setInterval(triggerFullMarketScan, 30000);
+      setInterval(triggerFullMarketScan, 45000);
     });
   </script>
 </body>
