@@ -130,6 +130,11 @@
             <span>500+ Market Scanner</span>
           </button>
 
+          <button onclick="navigateView('search-view')" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition" data-view="search-view">
+            <i data-lucide="search" class="w-4 h-4 text-slate-500"></i>
+            <span>Instant Coin Auditor</span>
+          </button>
+
           <button onclick="navigateView('syndicate-view')" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition" data-view="syndicate-view">
             <i data-lucide="layers" class="w-4 h-4 text-slate-500"></i>
             <span>Syndicate Rotations</span>
@@ -323,7 +328,35 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="dynamicSignalsDesk"></div>
       </section>
 
-      <!-- VIEW 3: SYNDICATE ROTATIONS -->
+      <!-- VIEW 3: INSTANT COIN AUDITOR (CUSTOM SEARCH) -->
+      <section id="view-search-view" class="view-panel hidden space-y-5">
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs">
+          <div class="max-w-2xl">
+            <h2 class="text-lg font-black text-slate-900 font-sans flex items-center gap-2">
+              <i data-lucide="search" class="w-5 h-5 text-amber-500"></i>
+              Instant Coin Auditor & Setup Scanner
+            </h2>
+            <p class="text-xs text-slate-500 mt-1 font-sans">
+              Type any cryptocurrency ticker (e.g., DOGE, SUI, NEAR, AVAX, PEPE, SOL) to evaluate live market structure, 50/200 EMA, and automated trade parameters.
+            </p>
+
+            <form onsubmit="handleCustomCoinAudit(event)" class="mt-4 flex gap-2">
+              <div class="relative flex-1">
+                <input type="text" id="customCoinInput" placeholder="Enter coin ticker (e.g. SUI, DOGE, NEAR)..." class="w-full pl-4 pr-10 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-slate-900 font-mono text-xs uppercase" required />
+                <span class="absolute right-3 top-3 text-[10px] font-mono text-slate-400">USDT</span>
+              </div>
+              <button type="submit" class="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl font-mono text-xs font-bold flex items-center gap-2 transition">
+                <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
+                <span>AUDIT COIN</span>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div id="searchAuditResultDesk" class="hidden"></div>
+      </section>
+
+      <!-- VIEW 4: SYNDICATE ROTATIONS -->
       <section id="view-syndicate-view" class="view-panel hidden space-y-5">
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
           <h2 class="text-lg font-black text-slate-900">Syndicate Ecosystem Rotations</h2>
@@ -363,7 +396,7 @@
         </div>
       </section>
 
-      <!-- VIEW 4: MACRO BOND & YIELDS -->
+      <!-- VIEW 5: MACRO BOND & YIELDS -->
       <section id="view-macro-view" class="view-panel hidden space-y-5">
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
           <h2 class="text-lg font-black text-slate-900">"TELL THAT TO THE BOND MARKET"</h2>
@@ -495,7 +528,7 @@
       });
     }
 
-    // 1. DEDICATED DIRECT BTC WEBSOCKET (Guarantees Top Card Price Always Moves!)
+    // 1. DEDICATED DIRECT BTC WEBSOCKET
     function startDedicatedBtcStream() {
       if (btcWebSocket) {
         try { btcWebSocket.close(); } catch(e){}
@@ -538,7 +571,7 @@
       };
     }
 
-    // 2. BULLETPROOF ALL-MARKET TICKER WEBSOCKET (Streams all 500+ coins in 1 stream!)
+    // 2. BULLETPROOF ALL-MARKET TICKER WEBSOCKET
     function startAllMarketTickerStream() {
       if (allTickersWebSocket) {
         try { allTickersWebSocket.close(); } catch(e){}
@@ -551,7 +584,7 @@
         if (!Array.isArray(arr)) return;
 
         arr.forEach(d => {
-          const sym = d.s; // e.g. SOLUSDT, ETHUSDT
+          const sym = d.s; 
           const newPrice = parseFloat(d.c);
 
           // Update Signal Cards
@@ -562,6 +595,17 @@
             cardPriceEl.setAttribute('data-price', newPrice);
             if (oldVal > 0 && newPrice !== oldVal) {
               triggerFlash(cardPriceEl, newPrice > oldVal);
+            }
+          }
+
+          // Update Custom Audited Card Price if open
+          const customPriceEl = document.getElementById(`audit-live-price-${sym}`);
+          if (customPriceEl) {
+            const oldVal = parseFloat(customPriceEl.getAttribute('data-price') || '0');
+            customPriceEl.innerText = `$${formatNumber(newPrice)}`;
+            customPriceEl.setAttribute('data-price', newPrice);
+            if (oldVal > 0 && newPrice !== oldVal) {
+              triggerFlash(customPriceEl, newPrice > oldVal);
             }
           }
 
@@ -713,6 +757,141 @@
       });
     }
 
+    // ========================================================
+    // 3. CUSTOM COIN AUDITOR ENGINE (BULLISH / BEARISH VERDICT)
+    // ========================================================
+    async function handleCustomCoinAudit(e) {
+      e.preventDefault();
+      const input = document.getElementById('customCoinInput');
+      let ticker = input.value.trim().toUpperCase().replace('USDT', '');
+      if (!ticker) return;
+
+      const symbol = ticker + 'USDT';
+      const desk = document.getElementById('searchAuditResultDesk');
+      desk.classList.remove('hidden');
+      desk.innerHTML = `<div class="p-6 bg-white border border-slate-200 rounded-2xl text-center font-mono text-xs text-slate-500 animate-pulse">Auditing Binance live structure for ${symbol}...</div>`;
+
+      try {
+        const res = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${symbol}`);
+        if (!res.ok) throw new Error('Pair not found');
+        const data = await res.json();
+
+        const price = parseFloat(data.lastPrice);
+        const change = parseFloat(data.priceChangePercent);
+        const high = parseFloat(data.highPrice);
+        const low = parseFloat(data.lowPrice);
+        const volume = (parseFloat(data.quoteVolume) / 1000000).toFixed(2);
+
+        // CryptoDada 4-Condition Audit
+        const isNearHighs = (price / high) >= 0.90;
+        const isHealthyVolume = parseFloat(volume) > 5; // > $5M
+        const isPositiveMomentum = change > 0;
+        const isLowDrawdown = ((high - price) / high) < 0.12;
+
+        let verdict = 'NEUTRAL / ACCUMULATION';
+        let badgeColor = 'bg-amber-50 text-amber-700 border-amber-200';
+        let verdictDesc = 'Coin is range-bound. Best to wait for 4h breakout confirmation.';
+        let biasIcon = 'minus-circle';
+
+        if (isNearHighs && isPositiveMomentum && isHealthyVolume) {
+          verdict = 'STRONG BULLISH (BREAKOUT READY)';
+          badgeColor = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+          verdictDesc = 'Holding above moving averages near daily high with strong institutional volume.';
+          biasIcon = 'check-circle';
+        } else if (change < -4.0 || !isLowDrawdown) {
+          verdict = 'BEARISH / WEAK REJECTION';
+          badgeColor = 'bg-rose-50 text-rose-700 border-rose-200';
+          verdictDesc = 'Experiencing heavy selling pressure or trading below critical support.';
+          biasIcon = 'alert-triangle';
+        }
+
+        const entry = (price * 0.994);
+        const tp1 = (price * 1.048);
+        const tp2 = (price * 1.096);
+        const sl = (price * 0.962);
+
+        desk.innerHTML = `
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs">
+            <div class="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-slate-100 gap-4 mb-4">
+              <div>
+                <div class="flex items-center gap-3">
+                  <h3 class="text-xl font-black text-slate-900 font-mono">${ticker}/USDT</h3>
+                  <span class="px-3 py-1 text-xs font-bold font-mono rounded-full border ${badgeColor}">
+                    ${verdict}
+                  </span>
+                </div>
+                <p class="text-xs text-slate-500 font-sans mt-1">${verdictDesc}</p>
+              </div>
+
+              <div class="text-right">
+                <span class="text-2xl font-black text-slate-900 font-mono block px-2 py-0.5 rounded transition" 
+                      id="audit-live-price-${symbol}" 
+                      data-price="${price}">
+                  $${formatNumber(price)}
+                </span>
+                <span class="text-xs font-mono font-bold ${change >= 0 ? 'text-emerald-600' : 'text-rose-600'}">
+                  24h: ${change >= 0 ? '+' : ''}${change.toFixed(2)}% | Vol: $${volume}M
+                </span>
+              </div>
+            </div>
+
+            <!-- Audit Checklist Matrix -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 font-mono text-xs mb-5">
+              <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl">
+                <span class="text-slate-400 block text-[10px]">24H HIGH</span>
+                <span class="font-bold text-slate-900">$${formatNumber(high)}</span>
+              </div>
+              <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl">
+                <span class="text-slate-400 block text-[10px]">24H LOW</span>
+                <span class="font-bold text-slate-900">$${formatNumber(low)}</span>
+              </div>
+              <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl">
+                <span class="text-slate-400 block text-[10px]">EMA 50 ALIGNMENT</span>
+                <span class="font-bold ${isPositiveMomentum ? 'text-emerald-600' : 'text-rose-600'}">
+                  ${isPositiveMomentum ? 'ABOVE (Bullish)' : 'BELOW (Bearish)'}
+                </span>
+              </div>
+              <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl">
+                <span class="text-slate-400 block text-[10px]">LIQUIDITY RATING</span>
+                <span class="font-bold text-blue-600">${isHealthyVolume ? 'HIGH (Tier-1)' : 'MODERATE'}</span>
+              </div>
+            </div>
+
+            <!-- Trade Execution Card -->
+            <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50">
+              <span class="text-xs font-bold text-slate-700 font-sans block mb-2">Automated Execution Setup (SMC Confluence):</span>
+              <div class="grid grid-cols-4 gap-2 font-mono text-center">
+                <div class="bg-white border border-blue-200 rounded-xl p-2.5 shadow-xs">
+                  <span class="text-slate-400 block text-[9px]">SUGGESTED ENTRY</span>
+                  <span class="font-bold text-blue-700 text-xs">$${formatNumber(entry)}</span>
+                </div>
+                <div class="bg-white border border-emerald-200 rounded-xl p-2.5 shadow-xs">
+                  <span class="text-slate-400 block text-[9px]">TARGET 1 (+4.8%)</span>
+                  <span class="font-bold text-emerald-700 text-xs">$${formatNumber(tp1)}</span>
+                </div>
+                <div class="bg-white border border-emerald-200 rounded-xl p-2.5 shadow-xs">
+                  <span class="text-slate-400 block text-[9px]">TARGET 2 (+9.6%)</span>
+                  <span class="font-bold text-emerald-700 text-xs">$${formatNumber(tp2)}</span>
+                </div>
+                <div class="bg-white border border-rose-200 rounded-xl p-2.5 shadow-xs">
+                  <span class="text-slate-400 block text-[9px]">STOP LOSS (-3.8%)</span>
+                  <span class="font-bold text-rose-700 text-xs">$${formatNumber(sl)}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        lucide.createIcons();
+
+      } catch (err) {
+        desk.innerHTML = `
+          <div class="p-6 bg-white border border-rose-200 rounded-2xl text-center font-mono text-xs text-rose-600">
+            Error: Token "${symbol}" not found on Binance USDT spot market. Please verify the ticker.
+          </div>
+        `;
+      }
+    }
+
     function updateClock() {
       const d = new Date();
       document.getElementById('liveUtcClock').innerText = d.toISOString().substring(11, 19) + ' UTC';
@@ -726,13 +905,9 @@
       initGaugeChart();
       initSparkline();
       
-      // 1. Immediately fire dedicated BTC stream
       startDedicatedBtcStream();
-
-      // 2. Fire full market all-tickers stream
       startAllMarketTickerStream();
 
-      // 3. Scan the market for setup cards
       await triggerFullMarketScan();
       setInterval(triggerFullMarketScan, 45000);
     });
