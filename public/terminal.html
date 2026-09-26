@@ -15,8 +15,8 @@
 
   <style>
     body {
-      background-color: #F8FAFC;
-      color: #0F172A;
+      background-color: #06090E;
+      color: #E2E8F0;
       font-family: 'Inter', sans-serif;
     }
     .custom-scroll::-webkit-scrollbar {
@@ -24,10 +24,10 @@
       height: 5px;
     }
     .custom-scroll::-webkit-scrollbar-track {
-      background: #F1F5F9;
+      background: #0B111A;
     }
     .custom-scroll::-webkit-scrollbar-thumb {
-      background: #CBD5E1;
+      background: #1E293B;
       border-radius: 4px;
     }
     .flash-green {
@@ -37,88 +37,83 @@
       animation: flashRedAnim 0.7s ease-out;
     }
     @keyframes flashGreenAnim {
-      0% { background-color: rgba(22, 163, 74, 0.45); color: #16A34A; }
+      0% { background-color: rgba(34, 197, 94, 0.35); color: #22C55E; }
       100% { background-color: transparent; }
     }
     @keyframes flashRedAnim {
-      0% { background-color: rgba(220, 38, 38, 0.45); color: #DC2626; }
+      0% { background-color: rgba(239, 68, 68, 0.35); color: #EF4444; }
       100% { background-color: transparent; }
     }
     .nav-item.active {
-      background-color: #0F172A;
-      color: #FFFFFF;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      background-color: #10B981;
+      color: #04120B;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+      font-weight: 700;
     }
     .nav-item.active i, .nav-item.active span {
-      color: #FFFFFF;
+      color: #04120B !important;
     }
-    .modal-tf-btn.active {
-      background-color: #0F172A !important;
-      color: #FFFFFF !important;
+    .terminal-card {
+      background: #0B111A;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 1rem;
     }
-    .card-tf-pill.active-bull {
-      background-color: #16A34A !important;
-      color: #FFFFFF !important;
-      border-color: #16A34A !important;
-    }
-    .card-tf-pill.active-bear {
-      background-color: #DC2626 !important;
-      color: #FFFFFF !important;
-      border-color: #DC2626 !important;
+    .terminal-card:hover {
+      border-color: rgba(16, 185, 129, 0.4);
     }
   </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased">
 
   <!-- TOP HEADER -->
-  <header class="bg-white border-b border-slate-200 py-2.5 px-6 flex items-center justify-between shadow-xs sticky top-0 z-50">
+  <header class="bg-[#080D14] border-b border-emerald-950/60 py-2.5 px-6 flex items-center justify-between sticky top-0 z-50">
     <div class="flex items-center gap-3">
-      <div class="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center font-black text-lg shadow-sm">
+      <div class="w-8 h-8 rounded-lg bg-emerald-500 text-slate-950 flex items-center justify-center font-black text-lg shadow-sm">
         ₿
       </div>
       <div>
-        <h1 class="text-base font-black tracking-tight text-slate-900 leading-none">CRYPTO DADA</h1>
-        <span class="text-[10px] font-mono text-slate-500 tracking-wider">INSTITUTIONAL INTELLIGENCE & S/R RADAR</span>
+        <h1 class="text-base font-black tracking-tight text-white leading-none">CRYPTO DADA</h1>
+        <span class="text-[10px] font-mono text-emerald-400 tracking-wider">INSTITUTIONAL INTELLIGENCE & S/R RADAR</span>
       </div>
     </div>
     
     <div class="flex items-center gap-4 text-xs font-mono">
-      <div class="flex items-center gap-2 bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 rounded-full font-bold">
-        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+      <div class="flex items-center gap-2 bg-emerald-950/60 text-emerald-400 border border-emerald-800/50 px-3 py-1 rounded-full font-bold">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
         <span id="dataFeedStatus">FEED: 100% REAL LIVE DATA PIPELINE ACTIVE</span>
       </div>
-      <div class="text-slate-500 font-semibold" id="liveUtcClock">00:00:00 UTC</div>
+      <div class="text-slate-400 font-semibold" id="liveUtcClock">00:00:00 UTC</div>
     </div>
   </header>
 
   <!-- MACRO STRIP -->
-  <section class="bg-white border-b border-slate-200 px-6 py-2.5 overflow-x-auto custom-scroll">
+  <section class="bg-[#0B111A] border-b border-slate-800/80 px-6 py-2 overflow-x-auto custom-scroll">
     <div class="max-w-[1720px] mx-auto flex items-center justify-between gap-6 text-xs font-mono shrink-0">
       <div class="flex items-center gap-2">
         <span class="text-slate-400 font-bold">US10Y (Bond Yield):</span>
-        <span class="font-black text-slate-900" id="macroUs10y">4.730%</span>
-        <span class="text-rose-600 font-bold bg-rose-50 px-1.5 py-0.5 rounded text-[10px] border border-rose-200">Easing (Bullish BTC)</span>
+        <span class="font-black text-white" id="macroUs10y">4.730%</span>
+        <span class="text-emerald-400 font-bold bg-emerald-950/60 px-1.5 py-0.5 rounded text-[10px] border border-emerald-800/40">Easing (Bullish BTC)</span>
       </div>
-      <div class="h-3 w-px bg-slate-200"></div>
+      <div class="h-3 w-px bg-slate-800"></div>
 
       <div class="flex items-center gap-2">
         <span class="text-slate-400 font-bold">STABLE.C.D:</span>
-        <span class="font-black text-slate-900">10.95%</span>
-        <span class="text-emerald-600 font-bold bg-emerald-50 px-1.5 py-0.5 rounded text-[10px] border border-emerald-200">Alt Rally Hard Active</span>
+        <span class="font-black text-white">10.95%</span>
+        <span class="text-emerald-400 font-bold bg-emerald-950/60 px-1.5 py-0.5 rounded text-[10px] border border-emerald-800/40">Alt Rally Hard Active</span>
       </div>
-      <div class="h-3 w-px bg-slate-200"></div>
+      <div class="h-3 w-px bg-slate-800"></div>
 
       <div class="flex items-center gap-2">
         <span class="text-slate-400 font-bold">DXY:</span>
-        <span class="font-black text-slate-900">103.82</span>
-        <span class="text-rose-600 font-bold bg-rose-50 px-1.5 py-0.5 rounded text-[10px] border border-rose-200">Weakening</span>
+        <span class="font-black text-white">103.82</span>
+        <span class="text-rose-400 font-bold bg-rose-950/60 px-1.5 py-0.5 rounded text-[10px] border border-rose-800/40">Weakening</span>
       </div>
-      <div class="h-3 w-px bg-slate-200"></div>
+      <div class="h-3 w-px bg-slate-800"></div>
 
       <div class="flex items-center gap-2">
         <span class="text-slate-400 font-bold">HTF VWAP:</span>
-        <span class="font-black text-blue-600">$81,950</span>
-        <span class="text-emerald-700 font-bold text-[10px]">Above Line In The Sand</span>
+        <span class="font-black text-emerald-400">$81,950</span>
+        <span class="text-slate-400 font-bold text-[10px]">Above Line In The Sand</span>
       </div>
     </div>
   </section>
@@ -127,44 +122,44 @@
   <div class="flex flex-1 overflow-hidden">
     
     <!-- LEFT SIDEBAR -->
-    <aside class="w-64 bg-white border-r border-slate-200 p-4 shrink-0 flex flex-col justify-between hidden md:flex">
+    <aside class="w-64 bg-[#080D14] border-r border-slate-800/80 p-4 shrink-0 flex flex-col justify-between hidden md:flex">
       <div class="space-y-6">
         <div class="px-2">
-          <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Terminal Modules</div>
+          <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Terminal Modules</div>
         </div>
 
-        <nav class="space-y-1 font-sans text-xs font-medium" id="sideNav">
+        <nav class="space-y-1.5 font-sans text-xs font-medium" id="sideNav">
           <button onclick="navigateView('btc-dashboard')" class="nav-item active w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition" data-view="btc-dashboard">
-            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
-            <span class="font-bold">Bitcoin Live Dashboard</span>
+            <span class="w-2 h-2 rounded-full bg-slate-950"></span>
+            <span>Bitcoin Live Dashboard</span>
           </button>
           
-          <button onclick="navigateView('signals-view')" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition" data-view="signals-view">
-            <i data-lucide="scan" class="w-4 h-4 text-slate-500"></i>
+          <button onclick="navigateView('signals-view')" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:bg-slate-800/50 hover:text-white transition" data-view="signals-view">
+            <i data-lucide="scan" class="w-4 h-4"></i>
             <span>500+ Market Scanner</span>
           </button>
 
-          <button onclick="navigateView('search-view')" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition" data-view="search-view">
-            <i data-lucide="search" class="w-4 h-4 text-slate-500"></i>
+          <button onclick="navigateView('search-view')" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:bg-slate-800/50 hover:text-white transition" data-view="search-view">
+            <i data-lucide="search" class="w-4 h-4"></i>
             <span>Instant Coin Auditor</span>
           </button>
 
-          <button onclick="navigateView('syndicate-view')" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition" data-view="syndicate-view">
-            <i data-lucide="layers" class="w-4 h-4 text-slate-500"></i>
+          <button onclick="navigateView('syndicate-view')" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:bg-slate-800/50 hover:text-white transition" data-view="syndicate-view">
+            <i data-lucide="layers" class="w-4 h-4"></i>
             <span>Syndicate Rotations</span>
           </button>
 
-          <button onclick="navigateView('macro-view')" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition" data-view="macro-view">
-            <i data-lucide="landmark" class="w-4 h-4 text-slate-500"></i>
+          <button onclick="navigateView('macro-view')" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:bg-slate-800/50 hover:text-white transition" data-view="macro-view">
+            <i data-lucide="landmark" class="w-4 h-4"></i>
             <span>Macro Bond & Yields</span>
           </button>
         </nav>
       </div>
 
-      <div class="pt-4 border-t border-slate-100">
-        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs font-mono">
-          <span class="text-slate-400 block text-[10px]">ANALYSIS ENGINE</span>
-          <span class="font-bold text-emerald-600">Institutional Macro Live</span>
+      <div class="pt-4 border-t border-slate-800/80">
+        <div class="p-3 bg-[#0B111A] rounded-xl border border-emerald-950 text-xs font-mono">
+          <span class="text-slate-500 block text-[10px]">ANALYSIS ENGINE</span>
+          <span class="font-bold text-emerald-400">Institutional Matrix Active</span>
         </div>
       </div>
     </aside>
@@ -172,233 +167,348 @@
     <!-- RIGHT CONTENT AREA -->
     <main class="flex-1 p-5 md:p-6 space-y-6 overflow-y-auto custom-scroll">
       
-      <!-- VIEW 1: BITCOIN LIVE DASHBOARD (FULL 11 CATEGORIES FROM SCREENSHOTS) -->
-      <section id="view-btc-dashboard" class="view-panel space-y-6">
+      <!-- ========================================================================= -->
+      <!-- VIEW 1: BITCOIN LIVE DASHBOARD (EXACT SCREENSHOT LAYOUT MATCH)            -->
+      <!-- ========================================================================= -->
+      <section id="view-btc-dashboard" class="view-panel space-y-5">
         
-        <!-- MODULE 1: CORE INSTITUTIONAL INTELLIGENCE (CATEGORIES 1 TO 8) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 font-mono text-xs">
+        <!-- TOP DATE & HEADER (From Screenshot 14) -->
+        <div class="text-center font-mono">
+          <span class="text-xs text-slate-400 flex items-center justify-center gap-1.5 mb-1" id="dashDynamicDate">
+            <i data-lucide="calendar" class="w-3.5 h-3.5 text-emerald-400"></i>
+            <span>September 26, 2026</span>
+          </span>
+          <h2 class="text-sm font-black text-emerald-400 tracking-wider uppercase">Crypto Dada's Today's Snapshot</h2>
+          <div class="text-[11px] text-amber-400 font-bold mt-0.5">⚠️ CURRENT MARKET READ</div>
+        </div>
+
+        <!-- TOP 3 HERO CARDS (From Screenshot 14) -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 font-mono">
           
-          <!-- 1. Market Snapshot -->
-          <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between">
+          <!-- Card 1: PRICE ACTION -->
+          <div class="terminal-card p-5 flex flex-col justify-between">
             <div>
-              <div class="flex items-center gap-2 mb-2 pb-2 border-b border-slate-100 font-bold text-slate-900">
-                <span>📊</span> <span>Market Snapshot</span>
+              <div class="flex items-center gap-2 mb-2 text-emerald-400 font-bold text-xs">
+                <i data-lucide="bar-chart-2" class="w-4 h-4"></i>
+                <span>PRICE ACTION</span>
               </div>
-              <ul class="space-y-1.5 text-slate-600">
-                <li>• BTC Price: <strong class="text-slate-900" id="dashBtcPrice">$83,940</strong></li>
-                <li>• 24H Range: <span class="font-semibold text-slate-700" id="dash24hRange">$83.1K – $85.2K</span></li>
-                <li>• Structure: <span class="text-emerald-600 font-bold" id="dashStructure">Discovery Shelf</span></li>
-                <li>• Key Support: <span class="text-emerald-700 font-bold" id="dashKeySupport">$83,180</span></li>
-                <li>• Key Resistance: <span class="text-rose-700 font-bold" id="dashKeyResistance">$85,250</span></li>
-              </ul>
+              <div class="mb-2">
+                <span class="text-xs text-slate-400">BTC Price (Close):</span>
+                <span class="text-xl font-black text-emerald-400 ml-1.5" id="heroBtcPrice">$83,940</span>
+              </div>
+              <div class="text-[11px] text-slate-400 mb-3" id="hero24hRange">
+                24h Range: $83,180.00 - $85,250.00
+              </div>
+
+              <!-- Sparkline Chart Box -->
+              <div class="h-20 w-full mb-3 bg-[#060A0F] rounded-lg p-1.5 border border-slate-800">
+                <canvas id="structureSparkline"></canvas>
+              </div>
+
+              <div class="space-y-1.5 text-xs pt-2 border-t border-slate-800/80">
+                <div class="flex justify-between">
+                  <span class="text-slate-400">↗ Structure:</span>
+                  <span class="font-bold text-amber-400" id="heroStructure">Discovery Shelf</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-400">⊕ Key Support:</span>
+                  <span class="font-bold text-emerald-400" id="heroSupport">$$83,180</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-400">⊖ Key Resistance:</span>
+                  <span class="font-bold text-rose-400" id="heroResistance">$$85,250</span>
+                </div>
+              </div>
             </div>
-            <div class="mt-3 pt-2 border-t border-slate-100 text-right">
-              <button onclick="openChartModal('BTCUSDT', 'BTC', null, 'LONG', '60')" class="text-blue-600 hover:text-blue-800 font-bold text-[11px]">
-                View Live Candle Chart &rarr;
+
+            <div class="mt-3 pt-3 border-t border-slate-800/80 text-[11px] text-slate-400">
+              <span class="text-amber-400 font-bold">• Simple Read:</span>
+              <span class="ml-1 text-slate-300" id="heroSimpleRead">Bitcoin is consolidating above structural support with steady absorption.</span>
+            </div>
+          </div>
+
+          <!-- Card 2: NOT A CYCLE TOP YET (Hero Warning) -->
+          <div class="terminal-card p-6 flex flex-col justify-between text-center relative overflow-hidden border-amber-500/30">
+            <div>
+              <div class="text-[11px] text-amber-400 font-bold tracking-widest uppercase mb-1">
+                ⚠️ CURRENT MARKET READ
+              </div>
+              <h2 class="text-3xl font-black text-amber-400 tracking-tight leading-none mb-1">
+                NOT A CYCLE<br>TOP YET
+              </h2>
+              <div class="text-xs font-bold text-slate-300 tracking-wider mb-4">
+                RECLAIMING THE FLOOR
+              </div>
+
+              <div class="text-left text-xs text-slate-300 leading-relaxed bg-[#060A0F]/80 p-3.5 rounded-xl border border-slate-800 flex gap-2.5">
+                <span class="text-base text-amber-400">📊</span>
+                <p id="heroNarrativeText">
+                  Bitcoin is consolidating with healthy momentum. While institutional flows fluctuate, the price remains firmly anchored above structural baseline support. On-chain data shows ongoing spot accumulation with exchange outflows resuming, signaling cycle expansion.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between text-xs">
+              <span class="text-slate-400">Market Phase: <strong class="text-emerald-400">Markup Expansion</strong></span>
+              <button onclick="openChartModal('BTCUSDT', 'BTC', null, 'LONG', '60')" class="text-emerald-400 hover:text-emerald-300 font-bold text-[11px] flex items-center gap-1">
+                <span>View Full Chart &rarr;</span>
               </button>
             </div>
           </div>
 
-          <!-- 2. Spot BTC ETF Flows -->
-          <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs">
-            <div class="flex items-center gap-2 mb-2 pb-2 border-b border-slate-100 font-bold text-slate-900">
-              <span>🏛️</span> <span>Spot BTC ETF Flows</span>
-            </div>
-            <ul class="space-y-1.5 text-slate-600">
-              <li>• Recent ETF trend: <strong id="etfTrendStatus" class="text-emerald-600">Positive Inflows</strong></li>
-              <li>• Farside + reports: <span id="etfReportSummary">Institutional accumulation active</span></li>
-              <li>• Estimated weekly flow: <strong id="etfEstimatedFlow" class="text-slate-900">+$382M+</strong></li>
-              <li>• Institutional sentiment: <span id="etfSentimentTone" class="font-bold text-slate-800">Constructive</span></li>
-            </ul>
-          </div>
-
-          <!-- 3. Funding Rates -->
-          <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs">
-            <div class="flex items-center gap-2 mb-2 pb-2 border-b border-slate-100 font-bold text-slate-900">
-              <span>📈</span> <span>Funding Rates</span>
-            </div>
-            <ul class="space-y-1.5 text-slate-600">
-              <li>• Rate: <strong id="dashFundingVal" class="text-slate-900">0.0100%</strong> (Slightly positive)</li>
-              <li>• Long euphoria: <span class="text-emerald-600 font-bold">No extreme long-side euphoria</span></li>
-              <li>• Crowd condition: <span>Traders still cautious, not mania</span></li>
-            </ul>
-          </div>
-
-          <!-- 4. Open Interest & Leverage -->
-          <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs">
-            <div class="flex items-center gap-2 mb-2 pb-2 border-b border-slate-100 font-bold text-slate-900">
-              <span>🔥</span> <span>Open Interest & Leverage</span>
-            </div>
-            <ul class="space-y-1.5 text-slate-600">
-              <li>• BTC Open Interest: <strong id="dashOiContracts" class="text-slate-900">142,500 BTC (~$11.9B)</strong></li>
-              <li>• OI trend: <span class="text-amber-600 font-bold">OI steady after recent volatility</span></li>
-              <li>• Leverage status: <span>Market leverage cooling down</span></li>
-              <li>• Recent liquidations: <span>Spiked near ~$210M</span></li>
-            </ul>
-          </div>
-
-          <!-- 5. Futures Premium -->
-          <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs">
-            <div class="flex items-center gap-2 mb-2 pb-2 border-b border-slate-100 font-bold text-slate-900">
-              <span>📉</span> <span>Futures Premium</span>
-            </div>
-            <ul class="space-y-1.5 text-slate-600">
-              <li>• Futures premium: <strong class="text-emerald-600" id="dashPremiumSpread">+0.15% Spread</strong> (Mild)</li>
-              <li>• Overheating check: <span class="font-bold text-slate-800">No aggressive overheating</span></li>
-              <li>• CME basis: <span>CME institutional basis relatively healthy</span></li>
-            </ul>
-          </div>
-
-          <!-- 6. On-Chain Metrics -->
-          <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs">
-            <div class="flex items-center gap-2 mb-2 pb-2 border-b border-slate-100 font-bold text-slate-900">
-              <span>⛓️</span> <span>On-Chain Metrics</span>
-            </div>
-            <ul class="space-y-1.5 text-slate-600">
-              <li>• MVRV Z-Score: <strong class="text-slate-900">1.82</strong> (Far below macro top levels)</li>
-              <li>• NUPL: <strong class="text-emerald-600">0.48</strong> (Optimism / Belief zone)</li>
-              <li>• Long-term holders: <span>Showing relatively low sell pressure</span></li>
-            </ul>
-          </div>
-
-          <!-- 7. Retail Sentiment -->
-          <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs">
-            <div class="flex items-center gap-2 mb-2 pb-2 border-b border-slate-100 font-bold text-slate-900">
-              <span>😨</span> <span>Retail Sentiment</span>
-            </div>
-            <ul class="space-y-1.5 text-slate-600">
-              <li>• Fear & Greed: <strong id="dashFngVal" class="text-amber-600">68 (Greed / Neutral)</strong></li>
-              <li>• Retail sentiment: <span>Cautious / Steady engagement</span></li>
-              <li>• Market psychology: <span class="font-bold text-emerald-600">NOT showing blow-off-top behavior</span></li>
-            </ul>
-          </div>
-
-          <!-- 8. Whale / Exchange Flows -->
-          <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs">
-            <div class="flex items-center gap-2 mb-2 pb-2 border-b border-slate-100 font-bold text-slate-900">
-              <span>🐳</span> <span>Whale / Exchange Flows</span>
-            </div>
-            <ul class="space-y-1.5 text-slate-600">
-              <li>• Exchange balances: <strong class="text-emerald-600">Remain historically lower</strong></li>
-              <li>• Whale activity: <span>Mixed, not showing mass distribution</span></li>
-              <li>• Panic deposit check: <span class="font-bold text-slate-800">No full-scale panic deposits</span></li>
-            </ul>
-          </div>
-
-        </div>
-
-        <!-- MODULE 2: CURRENT MARKET READ & CYCLE METRICS (FROM SCREENSHOT 2) -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-          
-          <!-- Left: Current Market Read Card -->
-          <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col justify-between font-mono">
+          <!-- Card 3: MARKET CYCLE SCORE (Gauge Speedometer) -->
+          <div class="terminal-card p-5 flex flex-col justify-between text-center">
             <div>
-              <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
-                <div class="flex items-center gap-2">
-                  <span class="text-base">🎯</span>
-                  <h3 class="text-xs font-black uppercase tracking-wider text-slate-900">CURRENT MARKET READ</h3>
-                </div>
-                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold border bg-amber-50 text-amber-700 border-amber-200" id="marketReadHeadline">
-                  ⚠️ CAUTION: DEFENSIVE MARKUP
+              <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
+                <span class="flex items-center gap-1.5 font-bold text-emerald-400">
+                  <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                  <span>MARKET CYCLE SCORE</span>
                 </span>
+                <span class="text-[10px] text-slate-500">1 - 10 SCALE</span>
               </div>
 
-              <div class="flex items-center gap-4 mb-4">
-                <div class="text-3xl font-black text-slate-900 font-sans" id="cycleScoreVal">5.4 / 10</div>
-                <div class="text-xs text-slate-500 font-sans">
-                  Market Cycle Score (Derived from live derivatives & macro pillars)
+              <!-- Speedometer Gauge -->
+              <div class="relative w-48 h-24 mx-auto my-2">
+                <canvas id="gaugeChart"></canvas>
+                <div class="absolute bottom-0 left-0 right-0 text-center">
+                  <span class="text-3xl font-black text-white font-mono" id="gaugeScoreNum">8/10</span>
                 </div>
               </div>
 
-              <div class="text-xs text-slate-600 space-y-1.5 pt-2 border-t border-slate-100">
-                <span class="text-slate-400 block text-[10px] uppercase font-bold">Current environment resembles:</span>
-                <div>• defensive markup with strong base consolidation</div>
-                <div>• macro uncertainty balanced by bond easing</div>
-                <div>• institutional ETF-driven support levels</div>
-                <div>• healthy leverage flushes without structural damage</div>
-                <div class="text-emerald-600 font-bold pt-1">...but NOT full euphoric cycle-top conditions yet.</div>
+              <div class="flex items-center justify-center gap-2 text-[10px] text-slate-400 mt-3">
+                <span class="text-emerald-400">Accumulation</span> |
+                <span class="text-amber-400 font-bold">Markup</span> |
+                <span>Distribution</span> |
+                <span>Markdown</span>
               </div>
             </div>
-          </div>
 
-          <!-- Right: Signal Status Summary Strip (From Screenshot 2) -->
-          <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs font-mono">
-            <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
-              <h3 class="text-xs font-black uppercase tracking-wider text-slate-900">Signal Status Summary</h3>
-              <span class="text-[10px] text-slate-400">Live Confluence Reads</span>
-            </div>
-
-            <div class="divide-y divide-slate-100 text-xs">
-              <div class="py-2 flex items-center justify-between">
-                <span class="text-slate-600">Price Structure</span>
-                <span class="flex items-center gap-1.5 font-bold text-amber-600"><span class="w-2 h-2 rounded-full bg-amber-500"></span> Neutral</span>
+            <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between text-xs">
+              <div class="text-left text-[11px] text-slate-400">
+                Cycle Stage:<br>
+                <span class="text-slate-200 font-bold" id="gaugeCycleStage">Consolidating above support as ETF inflows absorb flow</span>
               </div>
-              <div class="py-2 flex items-center justify-between">
-                <span class="text-slate-600">ETF Demand</span>
-                <span class="flex items-center gap-1.5 font-bold text-emerald-600"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Bullish Inflow</span>
-              </div>
-              <div class="py-2 flex items-center justify-between">
-                <span class="text-slate-600">Funding Rates</span>
-                <span class="flex items-center gap-1.5 font-bold text-emerald-600"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Healthy (0.01%)</span>
-              </div>
-              <div class="py-2 flex items-center justify-between">
-                <span class="text-slate-600">Open Interest</span>
-                <span class="flex items-center gap-1.5 font-bold text-amber-600"><span class="w-2 h-2 rounded-full bg-amber-500"></span> Cooling Down</span>
-              </div>
-              <div class="py-2 flex items-center justify-between">
-                <span class="text-slate-600">On-Chain Metrics</span>
-                <span class="flex items-center gap-1.5 font-bold text-emerald-600"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Constructive</span>
-              </div>
-              <div class="py-2 flex items-center justify-between">
-                <span class="text-slate-600">Retail Sentiment</span>
-                <span class="flex items-center gap-1.5 font-bold text-amber-600"><span class="w-2 h-2 rounded-full bg-amber-500"></span> Cautious / Fearful</span>
-              </div>
-              <div class="py-2 flex items-center justify-between">
-                <span class="text-slate-600">Liquidation Risk</span>
-                <span class="flex items-center gap-1.5 font-bold text-rose-600"><span class="w-2 h-2 rounded-full bg-rose-500"></span> Elevated Cluster</span>
-              </div>
+              <span class="bg-emerald-950/80 text-emerald-400 border border-emerald-800/60 px-2.5 py-1 rounded font-bold text-[10px]">
+                ⚠️ STABLE
+              </span>
             </div>
           </div>
 
         </div>
 
-        <!-- MODULE 3: KEY TAKEAWAYS (FROM SCREENSHOT 3) -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs font-mono">
-          <div class="flex items-center gap-2 mb-3 pb-2 border-b border-slate-100">
-            <span class="text-base">📌</span>
-            <h3 class="text-xs font-black uppercase tracking-wider text-slate-900">Key Takeaways</h3>
+        <!-- MIDDLE MODULE: SNAPSHOT METRICS, RULES, CYCLE MAP, TAKEAWAYS (From Screenshot 13) -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 font-mono text-xs">
+          
+          <!-- Column 1: ETF/Derivatives Snapshot & Top Alert Rules -->
+          <div class="space-y-4">
+            
+            <!-- ETF / Derivatives Snapshot -->
+            <div class="terminal-card p-4">
+              <div class="flex items-center gap-1.5 text-amber-400 font-bold text-xs mb-3">
+                <span>⚠️</span> <span>ETF / DERIVATIVES SNAPSHOT</span>
+              </div>
+              <div class="grid grid-cols-3 gap-2 text-center">
+                <div class="bg-[#060A0F] border border-rose-950/80 p-2.5 rounded-xl">
+                  <span class="text-[9px] text-rose-400 block font-bold">↓ ETF FLOWS</span>
+                  <span class="text-sm font-black text-rose-400" id="dashEtfVal">+$184.2M</span>
+                  <span class="text-[9px] text-slate-500 block mt-0.5" id="dashEtfDate">Sept 26</span>
+                </div>
+                <div class="bg-[#060A0F] border border-emerald-950/80 p-2.5 rounded-xl">
+                  <span class="text-[9px] text-emerald-400 block font-bold">% FUNDING</span>
+                  <span class="text-xs font-black text-emerald-400">Bullish</span>
+                  <span class="text-[9px] text-slate-400 block mt-0.5">Binance 0.010%</span>
+                </div>
+                <div class="bg-[#060A0F] border border-emerald-950/80 p-2.5 rounded-xl">
+                  <span class="text-[9px] text-emerald-400 block font-bold">📊 OPEN INTEREST</span>
+                  <span class="text-xs font-black text-white" id="dashOiVal">142.5k BTC</span>
+                  <span class="text-[9px] text-emerald-400 block mt-0.5">+0.15%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Top Alert Rules -->
+            <div class="terminal-card p-4">
+              <div class="flex items-center gap-1.5 text-amber-400 font-bold text-xs mb-3">
+                <span>⚠️</span> <span>TOP ALERT RULES</span>
+              </div>
+              <div class="space-y-2 text-[11px]">
+                <div class="text-emerald-400">
+                  <strong>▲ GREEN (Healthy):</strong> <span class="text-slate-300">No parabolic price. On-chain not euphoric.</span>
+                </div>
+                <div class="text-amber-400">
+                  <strong>▲ YELLOW (Caution):</strong> <span class="text-slate-300">Demand fragile. OI cooling. Exchange-flow mixed.</span>
+                </div>
+                <div class="text-rose-400">
+                  <strong>▲ RED (Top Zone):</strong> <span class="text-slate-300">Parabolic price + overheated funding + exploding OI + euphoric retail.</span>
+                </div>
+              </div>
+            </div>
+
           </div>
-          <ul class="space-y-2 text-xs text-slate-700 font-sans">
-            <li>• <strong>ETF outflows / inflows</strong> are the primary institutional warning signal to track daily.</li>
-            <li>• <strong>Funding remains non-euphoric</strong>, meaning the market is not burdened by blind long leverage.</li>
-            <li>• <strong>MVRV and NUPL metrics do NOT resemble prior macro tops</strong>; valuation sits well within mid-cycle territory.</li>
-            <li>• <strong>Leverage flushes continue periodically</strong>, removing weak hands and clearing the order book for clean continuation.</li>
-            <li>• <strong>BTC holding above critical ~$83,100 support</strong> remains the essential line-in-the-sand for bull market structure.</li>
-          </ul>
+
+          <!-- Column 2: Cycle Map + Exclusive Content VIP Box -->
+          <div class="terminal-card p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1.5 text-emerald-400 font-bold text-xs mb-4">
+                <span>🗺️</span> <span>CYCLE MAP</span>
+              </div>
+
+              <!-- Pipeline Nodes -->
+              <div class="flex items-center justify-between px-2 mb-4 text-center">
+                <div class="flex flex-col items-center">
+                  <div class="w-9 h-9 rounded-full bg-emerald-950 border-2 border-emerald-400 flex items-center justify-center text-emerald-400 text-xs mb-1">
+                    💾
+                  </div>
+                  <span class="text-[10px] text-emerald-400 font-bold">Accumulation</span>
+                  <span class="text-[9px] text-emerald-400 font-bold mt-1">↑ WE ARE HERE</span>
+                </div>
+                <span class="text-slate-600 text-xs">&rarr;</span>
+                <div class="flex flex-col items-center">
+                  <div class="w-8 h-8 rounded-full bg-[#060A0F] border border-amber-500/50 flex items-center justify-center text-amber-400 text-xs mb-1">
+                    📊
+                  </div>
+                  <span class="text-[10px] text-slate-400">Markup</span>
+                </div>
+                <span class="text-slate-600 text-xs">&rarr;</span>
+                <div class="flex flex-col items-center">
+                  <div class="w-8 h-8 rounded-full bg-[#060A0F] border border-orange-500/50 flex items-center justify-center text-orange-400 text-xs mb-1">
+                    ⚖️
+                  </div>
+                  <span class="text-[10px] text-slate-400">Distribution</span>
+                </div>
+                <span class="text-slate-600 text-xs">&rarr;</span>
+                <div class="flex flex-col items-center">
+                  <div class="w-8 h-8 rounded-full bg-[#060A0F] border border-rose-500/50 flex items-center justify-center text-rose-400 text-xs mb-1">
+                    📉
+                  </div>
+                  <span class="text-[10px] text-slate-400">Markdown</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Exclusive Content / VIP Box with Crypto Dada CD Logo (From Screenshot 13) -->
+            <div class="border border-amber-500/40 rounded-xl p-3 bg-gradient-to-r from-amber-950/20 to-transparent flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-amber-500/20 border border-amber-400/60 flex items-center justify-center text-amber-400 font-black text-sm shrink-0">
+                CD
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5 text-amber-400 font-bold text-[11px]">
+                  <span>🔒</span> <span>EXCLUSIVE CONTENT</span>
+                </div>
+                <p class="text-[10px] text-slate-400 font-sans mt-0.5">
+                  This institutional radar content is exclusively for premium members of Cryptodada.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 3: Key Takeaways (From Screenshot 13) -->
+          <div class="terminal-card p-5">
+            <div class="flex items-center gap-1.5 text-emerald-400 font-bold text-xs mb-3 pb-2 border-b border-slate-800">
+              <span>💡</span> <span>KEY TAKEAWAYS</span>
+            </div>
+            <ul class="space-y-2.5 text-xs text-slate-300 font-sans">
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-400 font-bold">✔</span>
+                <span><strong>$83,180 remains primary support;</strong> a clean daily close below this level is required to invalidate current structural momentum.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-400 font-bold">✔</span>
+                <span><strong>Institutional distribution is exhausting;</strong> declining outflows suggest Wall Street's selling pressure is nearing a pause.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-400 font-bold">✔</span>
+                <span><strong>Futures premiums have stabilized near healthy spreads,</strong> indicating measured speculative appetite while funding remains within healthy bounds.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-400 font-bold">✔</span>
+                <span><strong>Spot-driven accumulation has resumed</strong> with net exchange outflows confirming long-term investor holding behavior.</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- BOTTOM TICKER STRIP (From Screenshot 13) -->
+        <div class="bg-[#080D14] border border-slate-800/80 rounded-xl px-5 py-2.5 flex flex-wrap items-center justify-between text-xs font-mono">
+          <div class="flex items-center gap-2">
+            <span class="text-emerald-400">📈</span>
+            <span class="text-slate-400">MVRV Z-SCORE:</span>
+            <span class="font-bold text-white">0.09</span>
+          </div>
+          <div class="h-3 w-px bg-slate-800 hidden sm:block"></div>
+
+          <div class="flex items-center gap-2">
+            <span class="text-emerald-400">😊</span>
+            <span class="text-slate-400">NUPL:</span>
+            <span class="font-bold text-emerald-400">0.135 Hope</span>
+          </div>
+          <div class="h-3 w-px bg-slate-800 hidden sm:block"></div>
+
+          <div class="flex items-center gap-2">
+            <span class="text-slate-400">⇄ EXCHANGE FLOW:</span>
+            <span class="font-bold text-emerald-400">-0.016</span>
+          </div>
+          <div class="h-3 w-px bg-slate-800 hidden sm:block"></div>
+
+          <div class="flex items-center gap-2">
+            <span class="text-rose-400">🍓</span>
+            <span class="text-slate-400">IN/OUT TOTALS:</span>
+            <span class="font-bold text-amber-400 bg-amber-950/60 border border-amber-800/40 px-2 py-0.5 rounded text-[10px]">Outflow</span>
+          </div>
+        </div>
+
+        <!-- SIGNAL TABLE (CORE OF DASHBOARD - EXACT MATCH FROM SCREENSHOT 14) -->
+        <div class="terminal-card overflow-hidden font-mono text-xs">
+          <div class="px-5 py-3 border-b border-slate-800 bg-[#060A0F] flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="text-emerald-400 font-bold">▦</span>
+              <h3 class="font-black text-white uppercase tracking-wider text-xs">SIGNAL TABLE (CORE OF DASHBOARD)</h3>
+            </div>
+            <span class="text-[10px] text-slate-400" id="matrixScoreCounter">LIVE CONFLUENCE STATUS</span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b border-slate-800 text-slate-500 bg-[#080D14] text-[11px]">
+                  <th class="py-3 px-4 w-10 text-center">#</th>
+                  <th class="py-3 px-4">SIGNAL</th>
+                  <th class="py-3 px-4">WHAT TO WATCH</th>
+                  <th class="py-3 px-4">TOP WARNING LEVEL</th>
+                  <th class="py-3 px-4">CURRENT READ</th>
+                  <th class="py-3 px-4 text-right">STATUS</th>
+                </tr>
+              </thead>
+              <tbody id="signalTableBody" class="divide-y divide-slate-850"></tbody>
+            </table>
+          </div>
         </div>
 
       </section>
 
-      <!-- VIEW 2: 500+ MARKET SCANNER WITH STRATEGIC S/R GUIDANCE -->
+      <!-- ========================================================================= -->
+      <!-- VIEW 2: 500+ MARKET SCANNER (SUPPORT & RESISTANCE STRATEGIC GUIDANCE)     -->
+      <!-- ========================================================================= -->
       <section id="view-signals-view" class="view-panel hidden space-y-5">
-        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="terminal-card p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div class="flex items-center gap-2">
-              <h2 class="text-lg font-black text-slate-900">Binance 500+ Scanner: S/R & Trendline Radar</h2>
-              <span class="bg-emerald-100 text-emerald-800 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">REAL SUPPORT & RESISTANCE</span>
+              <h2 class="text-lg font-black text-white font-mono">Binance 500+ Scanner: S/R & Trendline Radar</h2>
+              <span class="bg-emerald-950 text-emerald-400 border border-emerald-800 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">REAL SUPPORT & RESISTANCE</span>
             </div>
-            <p class="text-xs text-slate-500 mt-1">
-              Do not enter at current price! Limit orders at Key Support (Long) or Key Resistance (Short).
+            <p class="text-xs text-slate-400 mt-1">
+              Do not enter blindly at current price! Use limit orders at Key Support (Longs) or Key Resistance (Shorts).
             </p>
           </div>
           
           <div class="flex items-center gap-2">
-            <div class="inline-flex rounded-xl border border-slate-200 p-1 bg-slate-50 font-mono text-xs">
-              <button onclick="setScannerFilter('ALL')" id="filter-btn-ALL" class="px-3 py-1.5 rounded-lg font-bold bg-slate-900 text-white transition">ALL</button>
-              <button onclick="setScannerFilter('LONG')" id="filter-btn-LONG" class="px-3 py-1.5 rounded-lg font-bold text-slate-600 hover:text-slate-900 transition">LONGS</button>
-              <button onclick="setScannerFilter('SHORT')" id="filter-btn-SHORT" class="px-3 py-1.5 rounded-lg font-bold text-slate-600 hover:text-slate-900 transition">SHORTS</button>
+            <div class="inline-flex rounded-xl border border-slate-800 p-1 bg-[#060A0F] font-mono text-xs">
+              <button onclick="setScannerFilter('ALL')" id="filter-btn-ALL" class="px-3 py-1.5 rounded-lg font-bold bg-emerald-500 text-slate-950 transition">ALL</button>
+              <button onclick="setScannerFilter('LONG')" id="filter-btn-LONG" class="px-3 py-1.5 rounded-lg font-bold text-slate-400 hover:text-white transition">LONGS</button>
+              <button onclick="setScannerFilter('SHORT')" id="filter-btn-SHORT" class="px-3 py-1.5 rounded-lg font-bold text-slate-400 hover:text-white transition">SHORTS</button>
             </div>
-            <button onclick="triggerFullMarketScan()" class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-xl text-xs font-mono font-bold flex items-center gap-2 transition">
+            <button onclick="triggerFullMarketScan()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-4 py-2 rounded-xl text-xs font-mono font-bold flex items-center gap-2 transition">
               <i data-lucide="refresh-cw" class="w-3.5 h-3.5" id="scanSpinIcon"></i>
               <span>RE-SCAN</span>
             </button>
@@ -406,45 +516,47 @@
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 font-mono text-xs">
-          <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-xs">
-            <span class="text-slate-400 block text-[10px]">TOTAL PAIRS SCANNED</span>
-            <span class="text-base font-black text-slate-900" id="totalScannedCount">512 Pairs</span>
+          <div class="terminal-card p-3.5">
+            <span class="text-slate-500 block text-[10px]">TOTAL PAIRS SCANNED</span>
+            <span class="text-base font-black text-white" id="totalScannedCount">512 Pairs</span>
           </div>
-          <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-xs">
-            <span class="text-slate-400 block text-[10px]">BULLISH CONFLUENCE (LONG)</span>
-            <span class="text-base font-black text-emerald-600" id="goldenStackCount">-- Matched</span>
+          <div class="terminal-card p-3.5">
+            <span class="text-slate-500 block text-[10px]">BULLISH CONFLUENCE (LONG)</span>
+            <span class="text-base font-black text-emerald-400" id="goldenStackCount">-- Matched</span>
           </div>
-          <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-xs">
-            <span class="text-slate-400 block text-[10px]">BEARISH BREAKDOWN (SHORT)</span>
-            <span class="text-base font-black text-rose-600" id="bearishBreakdownCount">-- Matched</span>
+          <div class="terminal-card p-3.5">
+            <span class="text-slate-500 block text-[10px]">BEARISH BREAKDOWN (SHORT)</span>
+            <span class="text-base font-black text-rose-400" id="bearishBreakdownCount">-- Matched</span>
           </div>
-          <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-xs">
-            <span class="text-slate-400 block text-[10px]">DISPLAY SETUPS</span>
-            <span class="text-base font-black text-amber-600" id="confirmedSignalsCount">Active</span>
+          <div class="terminal-card p-3.5">
+            <span class="text-slate-500 block text-[10px]">DISPLAY SETUPS</span>
+            <span class="text-base font-black text-amber-400" id="confirmedSignalsCount">Active</span>
           </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="dynamicSignalsDesk"></div>
       </section>
 
-      <!-- VIEW 3: INSTANT COIN AUDITOR -->
+      <!-- ========================================================================= -->
+      <!-- VIEW 3: INSTANT COIN AUDITOR                                              -->
+      <!-- ========================================================================= -->
       <section id="view-search-view" class="view-panel hidden space-y-5">
-        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs">
+        <div class="terminal-card p-6">
           <div class="max-w-2xl">
-            <h2 class="text-lg font-black text-slate-900 font-sans flex items-center gap-2">
-              <i data-lucide="search" class="w-5 h-5 text-amber-500"></i>
+            <h2 class="text-lg font-black text-white font-mono flex items-center gap-2">
+              <i data-lucide="search" class="w-5 h-5 text-emerald-400"></i>
               Instant Coin Auditor & S/R Confluence Radar
             </h2>
-            <p class="text-xs text-slate-500 mt-1 font-sans">
+            <p class="text-xs text-slate-400 mt-1 font-sans">
               Type any cryptocurrency ticker to evaluate support, resistance, trendline bias, and automated execution setups.
             </p>
 
             <form onsubmit="handleCustomCoinAudit(event)" class="mt-4 flex gap-2">
               <div class="relative flex-1">
-                <input type="text" id="customCoinInput" placeholder="Enter coin ticker (e.g. SUI, DOGE, NEAR, SOL)..." class="w-full pl-4 pr-10 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-slate-900 font-mono text-xs uppercase" required />
-                <span class="absolute right-3 top-3 text-[10px] font-mono text-slate-400">USDT</span>
+                <input type="text" id="customCoinInput" placeholder="Enter coin ticker (e.g. SUI, DOGE, NEAR, SOL)..." class="w-full pl-4 pr-10 py-2.5 rounded-xl border border-slate-700 bg-[#060A0F] focus:outline-none focus:border-emerald-400 font-mono text-xs uppercase text-white" required />
+                <span class="absolute right-3 top-3 text-[10px] font-mono text-slate-500">USDT</span>
               </div>
-              <button type="submit" class="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl font-mono text-xs font-bold flex items-center gap-2 transition">
+              <button type="submit" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-5 py-2.5 rounded-xl font-mono text-xs font-bold flex items-center gap-2 transition">
                 <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
                 <span>AUDIT COIN</span>
               </button>
@@ -455,158 +567,162 @@
         <div id="searchAuditResultDesk" class="hidden"></div>
       </section>
 
-      <!-- VIEW 4: SYNDICATE ROTATIONS -->
+      <!-- ========================================================================= -->
+      <!-- VIEW 4: SYNDICATE ROTATIONS                                               -->
+      <!-- ========================================================================= -->
       <section id="view-syndicate-view" class="view-panel hidden space-y-5">
-        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <div class="terminal-card p-5 flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div>
-            <h2 class="text-lg font-black text-slate-900">Institutional Syndicate Capital Rotations</h2>
-            <p class="text-xs text-slate-500 mt-0.5">Tracking live liquidity flows across Layer 1s, Layer 2s, RWA, AI, DePIN, DeFi, and Memes against Bitcoin dominance.</p>
+            <h2 class="text-lg font-black text-white font-mono">Institutional Syndicate Capital Rotations</h2>
+            <p class="text-xs text-slate-400 mt-0.5">Tracking live liquidity flows across Layer 1s, Layer 2s, RWA, AI, DePIN, DeFi, and Memes against Bitcoin dominance.</p>
           </div>
-          <span class="bg-emerald-50 text-emerald-700 text-xs font-mono font-bold px-3 py-1 rounded-full border border-emerald-200 self-start md:self-auto">
+          <span class="bg-emerald-950 text-emerald-400 text-xs font-mono font-bold px-3 py-1 rounded-full border border-emerald-800">
             ALL SECTORS LIVE TICKING
           </span>
         </div>
 
-        <div class="bg-white border border-slate-200 rounded-2xl shadow-xs overflow-hidden">
+        <div class="terminal-card overflow-hidden">
           <table class="w-full text-left font-mono text-xs border-collapse">
             <thead>
-              <tr class="border-b border-slate-200 text-slate-400 bg-slate-50/90 text-[11px]">
+              <tr class="border-b border-slate-800 text-slate-500 bg-[#060A0F] text-[11px]">
                 <th class="py-3.5 px-4">SECTOR / ECOSYSTEM</th>
                 <th class="py-3.5 px-4">ANCHOR LEADER</th>
                 <th class="py-3.5 px-4">CATCH-UP SYMPATHY RUNNERS</th>
                 <th class="py-3.5 px-4 text-right">CAPITAL BIAS</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr class="hover:bg-slate-50/60 transition">
-                <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
+            <tbody class="divide-y divide-slate-800/80">
+              <tr class="hover:bg-slate-800/30 transition">
+                <td class="py-3.5 px-4 font-bold text-white flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
                   Layer 1 Majors & High-Throughput
                 </td>
-                <td class="py-3.5 px-4 text-indigo-600 font-bold">SOL (<span id="syn-price-SOLUSDT">$154.20</span>)</td>
+                <td class="py-3.5 px-4 text-indigo-400 font-bold">SOL (<span id="syn-price-SOLUSDT">$154.20</span>)</td>
                 <td class="py-3.5 px-4">
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">SUI</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">AVAX</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">APT</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">SEI</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded">NEAR</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">SUI</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">AVAX</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">APT</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">SEI</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded">NEAR</span>
                 </td>
-                <td class="py-3.5 px-4 text-right"><span class="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200 text-[10px]">AGGRESSIVE EXPANSION</span></td>
+                <td class="py-3.5 px-4 text-right"><span class="bg-emerald-950 text-emerald-400 font-bold px-2 py-0.5 rounded border border-emerald-800 text-[10px]">AGGRESSIVE EXPANSION</span></td>
               </tr>
-              <tr class="hover:bg-slate-50/60 transition">
-                <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
+              <tr class="hover:bg-slate-800/30 transition">
+                <td class="py-3.5 px-4 font-bold text-white flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-blue-500"></span>
                   Ethereum L2 & Rollups (ETH Beta)
                 </td>
-                <td class="py-3.5 px-4 text-blue-600 font-bold">ETH (<span id="syn-price-ETHUSDT">$2,679.40</span>)</td>
+                <td class="py-3.5 px-4 text-blue-400 font-bold">ETH (<span id="syn-price-ETHUSDT">$2,679.40</span>)</td>
                 <td class="py-3.5 px-4">
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">ARB</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">OP</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">MATIC</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded">LDO</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">ARB</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">OP</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">MATIC</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded">LDO</span>
                 </td>
-                <td class="py-3.5 px-4 text-right"><span class="bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded text-[10px]">LAGGING CONSOLIDATION</span></td>
+                <td class="py-3.5 px-4 text-right"><span class="bg-slate-800 text-slate-300 font-bold px-2 py-0.5 rounded text-[10px]">LAGGING CONSOLIDATION</span></td>
               </tr>
-              <tr class="hover:bg-slate-50/60 transition">
-                <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
+              <tr class="hover:bg-slate-800/30 transition">
+                <td class="py-3.5 px-4 font-bold text-white flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
                   RWA (Real World Assets)
                 </td>
-                <td class="py-3.5 px-4 text-emerald-600 font-bold">ONDO (<span id="syn-price-ONDOUSDT">$0.78</span>)</td>
+                <td class="py-3.5 px-4 text-emerald-400 font-bold">ONDO (<span id="syn-price-ONDOUSDT">$0.78</span>)</td>
                 <td class="py-3.5 px-4">
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">PENDLE</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">MKR</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">TRU</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded">LINK</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">PENDLE</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">MKR</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">TRU</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded">LINK</span>
                 </td>
-                <td class="py-3.5 px-4 text-right"><span class="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200 text-[10px]">INSTITUTIONAL INFLOW</span></td>
+                <td class="py-3.5 px-4 text-right"><span class="bg-emerald-950 text-emerald-400 font-bold px-2 py-0.5 rounded border border-emerald-800 text-[10px]">INSTITUTIONAL INFLOW</span></td>
               </tr>
-              <tr class="hover:bg-slate-50/60 transition">
-                <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
+              <tr class="hover:bg-slate-800/30 transition">
+                <td class="py-3.5 px-4 font-bold text-white flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-cyan-500"></span>
                   AI & Decentralized Compute
                 </td>
-                <td class="py-3.5 px-4 text-cyan-600 font-bold">FET (<span id="syn-price-FETUSDT">$1.48</span>)</td>
+                <td class="py-3.5 px-4 text-cyan-400 font-bold">FET (<span id="syn-price-FETUSDT">$1.48</span>)</td>
                 <td class="py-3.5 px-4">
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">RENDER</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">TAO</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">WLD</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded">IO</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">RENDER</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">TAO</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">WLD</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded">IO</span>
                 </td>
-                <td class="py-3.5 px-4 text-right"><span class="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200 text-[10px]">ACCUMULATION SPIKE</span></td>
+                <td class="py-3.5 px-4 text-right"><span class="bg-emerald-950 text-emerald-400 font-bold px-2 py-0.5 rounded border border-emerald-800 text-[10px]">ACCUMULATION SPIKE</span></td>
               </tr>
-              <tr class="hover:bg-slate-50/60 transition">
-                <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
+              <tr class="hover:bg-slate-800/30 transition">
+                <td class="py-3.5 px-4 font-bold text-white flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-teal-500"></span>
                   DePIN (Physical Infrastructure)
                 </td>
-                <td class="py-3.5 px-4 text-teal-600 font-bold">HNT (<span id="syn-price-HNTUSDT">$6.42</span>)</td>
+                <td class="py-3.5 px-4 text-teal-400 font-bold">HNT (<span id="syn-price-HNTUSDT">$6.42</span>)</td>
                 <td class="py-3.5 px-4">
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">FIL</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">AR</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">THETA</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded">JASMY</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">FIL</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">AR</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">THETA</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded">JASMY</span>
                 </td>
-                <td class="py-3.5 px-4 text-right"><span class="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200 text-[10px]">EARLY ROTATION</span></td>
+                <td class="py-3.5 px-4 text-right"><span class="bg-emerald-950 text-emerald-400 font-bold px-2 py-0.5 rounded border border-emerald-800 text-[10px]">EARLY ROTATION</span></td>
               </tr>
-              <tr class="hover:bg-slate-50/60 transition">
-                <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
+              <tr class="hover:bg-slate-800/30 transition">
+                <td class="py-3.5 px-4 font-bold text-white flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-purple-500"></span>
                   DeFi, DEXs & Yield Engines
                 </td>
-                <td class="py-3.5 px-4 text-purple-600 font-bold">UNI (<span id="syn-price-UNIUSDT">$9.60</span>)</td>
+                <td class="py-3.5 px-4 text-purple-400 font-bold">UNI (<span id="syn-price-UNIUSDT">$9.60</span>)</td>
                 <td class="py-3.5 px-4">
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">AAVE</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">ENA</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">CRV</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded">SNX</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">AAVE</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">ENA</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">CRV</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded">SNX</span>
                 </td>
-                <td class="py-3.5 px-4 text-right"><span class="bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded text-[10px]">STEADY BASING</span></td>
+                <td class="py-3.5 px-4 text-right"><span class="bg-slate-800 text-slate-300 font-bold px-2 py-0.5 rounded text-[10px]">STEADY BASING</span></td>
               </tr>
-              <tr class="hover:bg-slate-50/60 transition">
-                <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
+              <tr class="hover:bg-slate-800/30 transition">
+                <td class="py-3.5 px-4 font-bold text-white flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-amber-500"></span>
                   Memecoins & High-Beta Retail Flow
                 </td>
-                <td class="py-3.5 px-4 text-amber-600 font-bold">DOGE (<span id="syn-price-DOGEUSDT">$0.142</span>)</td>
+                <td class="py-3.5 px-4 text-amber-400 font-bold">DOGE (<span id="syn-price-DOGEUSDT">$0.142</span>)</td>
                 <td class="py-3.5 px-4">
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">SHIB</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">PEPE</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">WIF</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">BONK</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded">FLOKI</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">SHIB</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">PEPE</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">WIF</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">BONK</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded">FLOKI</span>
                 </td>
-                <td class="py-3.5 px-4 text-right"><span class="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200 text-[10px]">SPECULATIVE MANIA</span></td>
+                <td class="py-3.5 px-4 text-right"><span class="bg-emerald-950 text-emerald-400 font-bold px-2 py-0.5 rounded border border-emerald-800 text-[10px]">SPECULATIVE MANIA</span></td>
               </tr>
-              <tr class="hover:bg-slate-50/60 transition">
-                <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
+              <tr class="hover:bg-slate-800/30 transition">
+                <td class="py-3.5 px-4 font-bold text-white flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-rose-500"></span>
                   Gaming, Metaverse & NFTs
                 </td>
-                <td class="py-3.5 px-4 text-rose-600 font-bold">GALA (<span id="syn-price-GALAUSDT">$0.024</span>)</td>
+                <td class="py-3.5 px-4 text-rose-400 font-bold">GALA (<span id="syn-price-GALAUSDT">$0.024</span>)</td>
                 <td class="py-3.5 px-4">
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">IMX</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">BEAM</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">AXS</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded">SAND</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">IMX</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">BEAM</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded mr-1">AXS</span>
+                  <span class="bg-slate-800 px-2 py-0.5 rounded">SAND</span>
                 </td>
-                <td class="py-3.5 px-4 text-right"><span class="bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded text-[10px]">BOTTOM FORMATION</span></td>
+                <td class="py-3.5 px-4 text-right"><span class="bg-slate-800 text-slate-300 font-bold px-2 py-0.5 rounded text-[10px]">BOTTOM FORMATION</span></td>
               </tr>
             </tbody>
           </table>
         </div>
       </section>
 
-      <!-- VIEW 5: MACRO BOND & YIELDS -->
+      <!-- ========================================================================= -->
+      <!-- VIEW 5: MACRO BOND & YIELDS                                               -->
+      <!-- ========================================================================= -->
       <section id="view-macro-view" class="view-panel hidden space-y-5">
-        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
-          <h2 class="text-lg font-black text-slate-900">"TELL THAT TO THE BOND MARKET"</h2>
-          <p class="text-xs text-slate-500">Liquidity relationship between US10Y Bond Yields and crypto expansion.</p>
+        <div class="terminal-card p-5">
+          <h2 class="text-lg font-black text-white font-mono">"TELL THAT TO THE BOND MARKET"</h2>
+          <p class="text-xs text-slate-400">Liquidity relationship between US10Y Bond Yields and crypto expansion.</p>
         </div>
       </section>
 
       <!-- FOOTER -->
-      <footer class="py-3 text-center text-xs font-mono text-slate-400 border-t border-slate-200">
+      <footer class="py-3 text-center text-xs font-mono text-slate-500 border-t border-slate-800/80">
         I am not a financial advisor, all content is for educational purposes only. Live API feeds from Binance & Alternative.me.
       </footer>
 
@@ -614,28 +730,28 @@
   </div>
 
   <!-- 100% RELIABLE EMBEDDED TRADINGVIEW CANDLESTICK MODAL -->
-  <div id="chartModalBackdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-3 md:p-6">
-    <div class="bg-white border border-slate-200 rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden flex flex-col h-[90vh]">
+  <div id="chartModalBackdrop" class="fixed inset-0 bg-slate-950/80 backdrop-blur-xs z-50 hidden flex items-center justify-center p-3 md:p-6">
+    <div class="bg-[#0B111A] border border-slate-700 rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden flex flex-col h-[90vh]">
       <!-- Modal Header -->
-      <div class="px-5 py-3 border-b border-slate-200 flex items-center justify-between bg-slate-50/80">
+      <div class="px-5 py-3 border-b border-slate-800 flex items-center justify-between bg-[#080D14]">
         <div class="flex items-center gap-3">
-          <h3 class="text-base font-black text-slate-900 font-mono" id="modalCoinTitle">BTC/USDT</h3>
-          <span class="text-xs font-mono font-bold text-slate-900 px-2 py-0.5 rounded bg-slate-100" id="modalLivePrice">$0.00</span>
+          <h3 class="text-base font-black text-white font-mono" id="modalCoinTitle">BTC/USDT</h3>
+          <span class="text-xs font-mono font-bold text-white px-2 py-0.5 rounded bg-slate-800" id="modalLivePrice">$0.00</span>
           <span class="text-xs font-mono font-bold" id="modalLiveChange">+0.00%</span>
           <span class="text-xs font-mono font-bold px-2 py-0.5 rounded" id="modalDirectionBadge">LONG SETUP</span>
         </div>
 
         <!-- Custom Timeframe Quick Bar + Custom Dropdown -->
         <div class="flex items-center gap-1.5 font-mono text-xs">
-          <button onclick="switchModalTimeframe('1', this)" class="modal-tf-btn px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold text-[11px]">1m</button>
-          <button onclick="switchModalTimeframe('5', this)" class="modal-tf-btn px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold text-[11px]">5m</button>
-          <button onclick="switchModalTimeframe('15', this)" class="modal-tf-btn px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold text-[11px]">15m</button>
-          <button onclick="switchModalTimeframe('60', this)" class="modal-tf-btn active px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold text-[11px]">1h</button>
-          <button onclick="switchModalTimeframe('240', this)" class="modal-tf-btn px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold text-[11px]">4h</button>
-          <button onclick="switchModalTimeframe('D', this)" class="modal-tf-btn px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold text-[11px]">1d</button>
-          <button onclick="switchModalTimeframe('W', this)" class="modal-tf-btn px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold text-[11px]">1w</button>
+          <button onclick="switchModalTimeframe('1', this)" class="modal-tf-btn px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 transition font-bold text-[11px] text-white">1m</button>
+          <button onclick="switchModalTimeframe('5', this)" class="modal-tf-btn px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 transition font-bold text-[11px] text-white">5m</button>
+          <button onclick="switchModalTimeframe('15', this)" class="modal-tf-btn px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 transition font-bold text-[11px] text-white">15m</button>
+          <button onclick="switchModalTimeframe('60', this)" class="modal-tf-btn active px-2 py-1 rounded bg-emerald-500 text-slate-950 transition font-bold text-[11px]">1h</button>
+          <button onclick="switchModalTimeframe('240', this)" class="modal-tf-btn px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 transition font-bold text-[11px] text-white">4h</button>
+          <button onclick="switchModalTimeframe('D', this)" class="modal-tf-btn px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 transition font-bold text-[11px] text-white">1d</button>
+          <button onclick="switchModalTimeframe('W', this)" class="modal-tf-btn px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 transition font-bold text-[11px] text-white">1w</button>
 
-          <select id="modalCustomTfSelect" onchange="switchModalTimeframe(this.value, null)" class="bg-slate-100 border border-slate-200 rounded px-2 py-1 font-bold text-[11px] focus:outline-none ml-1">
+          <select id="modalCustomTfSelect" onchange="switchModalTimeframe(this.value, null)" class="bg-slate-800 border border-slate-700 rounded px-2 py-1 font-bold text-[11px] text-white focus:outline-none ml-1">
             <option value="1">1 min</option>
             <option value="3">3 min</option>
             <option value="5">5 min</option>
@@ -648,12 +764,12 @@
             <option value="W">1 week</option>
           </select>
 
-          <button onclick="closeChartModal()" class="ml-4 text-slate-400 hover:text-slate-700 text-xl font-bold">&times;</button>
+          <button onclick="closeChartModal()" class="ml-4 text-slate-400 hover:text-white text-xl font-bold">&times;</button>
         </div>
       </div>
 
       <!-- TradingView Embed Frame -->
-      <div class="flex-1 w-full bg-white relative">
+      <div class="flex-1 w-full bg-[#0B111A] relative">
         <iframe id="tradingViewEmbedFrame" 
                 class="w-full h-full border-0" 
                 src="" 
@@ -664,7 +780,7 @@
       </div>
 
       <!-- Modal Footer Trade Parameters -->
-      <div class="px-5 py-2.5 border-t border-slate-200 bg-slate-50 flex items-center justify-between font-mono text-xs" id="modalTradeLevelsStrip">
+      <div class="px-5 py-2.5 border-t border-slate-800 bg-[#080D14] flex items-center justify-between font-mono text-xs" id="modalTradeLevelsStrip">
       </div>
     </div>
   </div>
@@ -679,8 +795,23 @@
       'BTCUSDT', 'ETHUSDT', 'SOLUSDT', 'ONDOUSDT', 
       'FETUSDT', 'HNTUSDT', 'UNIUSDT', 'DOGEUSDT', 'GALAUSDT'
     ];
+    let gaugeChartInstance = null;
     let currentModalSymbol = 'BTCUSDT';
     let currentModalInterval = '60';
+
+    // 10 SIGNALS EXACT MATCH FROM SCREENSHOT 14
+    let liveMatrixData = [
+      { id: 1, icon: '📈', name: 'Price Structure', watch: 'Blow-off move / vertical trend', warning: 'Parabolic breakout', read: 'Discovery Shelf', status: 'BULLISH' },
+      { id: 2, icon: '🏛️', name: 'ETF Flows', watch: 'Sustained spot demand', warning: 'Large outflows', read: 'Outflows slowing to -$24M', status: 'BULLISH' },
+      { id: 3, icon: '📈', name: '% Funding Rates', watch: 'Overheated longs', warning: 'Strong positive spike', read: 'Neutral (0.006%)', status: 'BULLISH' },
+      { id: 4, icon: '📊', name: 'Open Interest (OI)', watch: 'Leverage buildup', warning: 'OI exploding higher', read: 'Stable at 163.9k BTC', status: 'BULLISH' },
+      { id: 5, icon: '🖥️', name: 'Futures Premium', watch: 'Excessive bullish basis', warning: 'Premium sharply elevated', read: 'Elevated at 6.6%', status: 'NEUTRAL' },
+      { id: 6, icon: '📈', name: 'MVRV Z-Score', watch: 'Valuation overheating', warning: 'High top-zone valuation', read: 'Low (0.09)', status: 'BULLISH' },
+      { id: 7, icon: '😊', name: 'NUPL', watch: 'Euphoria', warning: 'Euphoric zone', read: 'Hope (0.135)', status: 'BULLISH' },
+      { id: 8, icon: '👥', name: 'Retail Mania', watch: 'Euphoric crowd behavior', warning: 'FOMO mania everywhere', read: 'Low Risk ($69.8M)', status: 'BULLISH' },
+      { id: 9, icon: '🔄', name: 'Exchange Inflows / Outflows', watch: 'Coins moving to / from exchanges', warning: 'Heavy inflows / balance rise', read: 'Below Resistance', status: 'NEUTRAL' },
+      { id: 10, icon: '⚡', name: 'Liquidation Risk', watch: 'Crowded leverage', warning: 'One-sided crowded setup', read: 'Greed (56)', status: 'NEUTRAL' }
+    ];
 
     function formatNumber(num) {
       if (isNaN(num)) return '0.00';
@@ -707,6 +838,57 @@
       if (activeBtn) activeBtn.classList.add('active');
     }
 
+    function renderSignalTable() {
+      const tbody = document.getElementById('signalTableBody');
+      tbody.innerHTML = '';
+
+      liveMatrixData.forEach(s => {
+        let badgeStyle = 'bg-emerald-950/80 text-emerald-400 border border-emerald-800/60';
+        if (s.status === 'BEARISH') badgeStyle = 'bg-rose-950/80 text-rose-400 border border-rose-800/60';
+        if (s.status === 'NEUTRAL') badgeStyle = 'bg-amber-950/80 text-amber-400 border border-amber-800/60';
+
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-800/20 transition border-b border-slate-800/80';
+        tr.innerHTML = `
+          <td class="py-3 px-4 text-center font-bold text-slate-500 text-xs">${s.id}</td>
+          <td class="py-3 px-4 font-bold text-white flex items-center gap-1.5">
+            <span>${s.icon}</span> <span>${s.name}</span>
+          </td>
+          <td class="py-3 px-4 text-slate-400">${s.watch}</td>
+          <td class="py-3 px-4 text-slate-400">${s.warning}</td>
+          <td class="py-3 px-4 font-bold text-slate-200">${s.read}</td>
+          <td class="py-3 px-4 text-right">
+            <span class="inline-block px-2.5 py-0.5 rounded text-[10px] font-bold ${badgeStyle}">${s.status}</span>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function initGaugeChart() {
+      const ctx = document.getElementById('gaugeChart').getContext('2d');
+      gaugeChartInstance = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Score', 'Remaining'],
+          datasets: [{
+            data: [8, 2],
+            backgroundColor: ['#10B981', '#1E293B'],
+            borderWidth: 0,
+            circumference: 180,
+            rotation: 270,
+            borderRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { enabled: false } },
+          cutout: '75%'
+        }
+      });
+    }
+
     function initSparkline(prices) {
       const canvas = document.getElementById('structureSparkline');
       if (!canvas) return;
@@ -719,11 +901,11 @@
           labels: prices.map((_, i) => i),
           datasets: [{
             data: prices,
-            borderColor: '#16A34A',
+            borderColor: '#F59E0B',
             borderWidth: 2,
             pointRadius: 0,
             fill: false,
-            tension: 0.35
+            tension: 0.3
           }]
         },
         options: {
@@ -735,7 +917,6 @@
       });
     }
 
-    // MODAL TRADINGVIEW CANDLESTICK ENGINE
     function openChartModal(symbol, ticker, levels = null, side = 'LONG', interval = '60') {
       currentModalSymbol = symbol;
       currentModalInterval = interval;
@@ -748,19 +929,19 @@
       const dirBadge = document.getElementById('modalDirectionBadge');
       if (side === 'SHORT') {
         dirBadge.innerText = 'SHORT BREAKDOWN';
-        dirBadge.className = 'text-xs font-mono font-bold px-2 py-0.5 rounded bg-rose-100 text-rose-800 border border-rose-200';
+        dirBadge.className = 'text-xs font-mono font-bold px-2 py-0.5 rounded bg-rose-950 text-rose-400 border border-rose-800';
       } else {
         dirBadge.innerText = 'LONG BREAKOUT';
-        dirBadge.className = 'text-xs font-mono font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-200';
+        dirBadge.className = 'text-xs font-mono font-bold px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800';
       }
 
       const strip = document.getElementById('modalTradeLevelsStrip');
       if (levels) {
         strip.innerHTML = `
-          <span>${side === 'SHORT' ? 'Key Resistance Entry' : 'Key Support Entry'}: <strong class="text-blue-600">$${formatNumber(levels.entry)}</strong></span>
-          <span>Target 1: <strong class="text-emerald-600">$${formatNumber(levels.tp1)}</strong></span>
-          <span>Target 2: <strong class="text-emerald-600">$${formatNumber(levels.tp2)}</strong></span>
-          <span>Stop Loss: <strong class="text-rose-600">$${formatNumber(levels.sl)}</strong></span>
+          <span>${side === 'SHORT' ? 'Key Resistance Entry' : 'Key Support Entry'}: <strong class="text-emerald-400">$${formatNumber(levels.entry)}</strong></span>
+          <span>Target 1: <strong class="text-emerald-400">$${formatNumber(levels.tp1)}</strong></span>
+          <span>Target 2: <strong class="text-emerald-400">$${formatNumber(levels.tp2)}</strong></span>
+          <span>Stop Loss: <strong class="text-rose-400">$${formatNumber(levels.sl)}</strong></span>
         `;
       } else {
         strip.innerHTML = `<span>Institutional Momentum: <strong>Live Multi-Timeframe Feed Active</strong></span>`;
@@ -777,7 +958,7 @@
     function loadTradingViewIframe(symbol, interval) {
       const iframe = document.getElementById('tradingViewEmbedFrame');
       const tvSymbol = `BINANCE:${symbol}`;
-      const embedUrl = `https://s.tradingview.com/widgetembed/?frameElementId=tradingview_widget&symbol=${tvSymbol}&interval=${interval}&hidesidetoolbar=0&symboledit=1&saveimage=1&toolbarbg=f1f3f6&studies=[]&theme=light&style=1&timezone=Etc%2FUTC&studies_overrides={}&overrides={}&enabled_features=[]&disabled_features=[]&locale=en&utm_source=localhost`;
+      const embedUrl = `https://s.tradingview.com/widgetembed/?frameElementId=tradingview_widget&symbol=${tvSymbol}&interval=${interval}&hidesidetoolbar=0&symboledit=1&saveimage=1&toolbarbg=06090e&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC&studies_overrides={}&overrides={}&enabled_features=[]&disabled_features=[]&locale=en&utm_source=localhost`;
 
       iframe.src = embedUrl;
     }
@@ -800,12 +981,11 @@
       iframe.src = '';
     }
 
-    // CENTRAL TICK HANDLER
     function applyTickerUpdate(sym, newPrice, changePercent) {
       if (isNaN(newPrice) || newPrice <= 0) return;
 
       if (sym === 'BTCUSDT') {
-        const topBtc = document.getElementById('dashBtcPrice');
+        const topBtc = document.getElementById('heroBtcPrice');
         if (topBtc) {
           const oldPrice = liveBtcPrice;
           liveBtcPrice = newPrice;
@@ -849,7 +1029,6 @@
       }
     }
 
-    // FAST DIRECT BTC INITIALIZER
     async function initImmediateBtcPrices() {
       try {
         const res = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT');
@@ -858,16 +1037,15 @@
           applyTickerUpdate('BTCUSDT', parseFloat(d.lastPrice), parseFloat(d.priceChangePercent));
           const low = parseFloat(d.lowPrice);
           const high = parseFloat(d.highPrice);
-          document.getElementById('dashKeySupport').innerText = `$${formatNumber(low)}`;
-          document.getElementById('dashKeyResistance').innerText = `$${formatNumber(high)}`;
-          document.getElementById('dash24hRange').innerText = `$${(low/1000).toFixed(1)}K – $${(high/1000).toFixed(1)}K`;
+          document.getElementById('heroSupport').innerText = `$$${formatNumber(low)}`;
+          document.getElementById('heroResistance').innerText = `$$${formatNumber(high)}`;
+          document.getElementById('hero24hRange').innerText = `24h Range: $${formatNumber(low)} - $${formatNumber(high)}`;
         }
       } catch(e) {
         applyTickerUpdate('BTCUSDT', 83940.00, 0.20);
       }
     }
 
-    // 100% RELIABLE PRICE STRUCTURE & METRICS SYNC
     async function syncRealInstitutionalMetrics() {
       try {
         const btcRes = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT');
@@ -880,43 +1058,18 @@
 
         applyTickerUpdate('BTCUSDT', curPrice, changeP);
 
-        document.getElementById('dashKeySupport').innerText = `$${formatNumber(low24h)}`;
-        document.getElementById('dashKeyResistance').innerText = `$${formatNumber(high24h)}`;
-        document.getElementById('dash24hRange').innerText = `$${(low24h/1000).toFixed(1)}K – $${(high24h/1000).toFixed(1)}K`;
+        document.getElementById('heroSupport').innerText = `$$${formatNumber(low24h)}`;
+        document.getElementById('heroResistance').innerText = `$$${formatNumber(high24h)}`;
+        document.getElementById('hero24hRange').innerText = `24h Range: $${formatNumber(low24h)} - $${formatNumber(high24h)}`;
 
-        // ETF Calculation (Positive vs Negative Flow Check)
         const netFlowEst = (volumeUSDT * (changeP / 100) * 0.12) / 1000000;
         const isEtfPositive = netFlowEst >= 0;
-        document.getElementById('etfTrendStatus').innerText = isEtfPositive ? 'Positive Inflows' : 'Defensive / Outflows';
-        document.getElementById('etfTrendStatus').className = isEtfPositive ? 'text-emerald-600 font-bold' : 'text-rose-600 font-bold';
-        document.getElementById('etfEstimatedFlow').innerText = `${isEtfPositive ? '+' : ''}$${Math.abs(netFlowEst).toFixed(1)}M+`;
-        document.getElementById('etfSentimentTone').innerText = isEtfPositive ? 'Accumulation' : 'Defensive';
+        document.getElementById('dashEtfVal').innerText = `${isEtfPositive ? '+' : '-'}$${Math.abs(netFlowEst).toFixed(1)}M`;
+        document.getElementById('dashEtfVal').className = `text-sm font-black ${isEtfPositive ? 'text-emerald-400' : 'text-rose-400'}`;
 
-        // Funding rate
-        const derivedRate = Math.min(0.035, Math.max(0.005, 0.01 + (changeP * 0.0015)));
-        document.getElementById('dashFundingVal').innerText = `${derivedRate.toFixed(4)}%`;
-
-        // Open Interest
         const estOI = Math.round(volumeUSDT / curPrice * 0.65);
-        document.getElementById('dashOiContracts').innerText = `${formatNumber(estOI)} BTC (~$${((estOI * curPrice) / 1000000000).toFixed(1)}B)`;
+        document.getElementById('dashOiVal').innerText = `${(estOI / 1000).toFixed(1)}k BTC`;
 
-        // Premium spread
-        const calcSpread = Math.min(1.2, Math.max(-0.5, (changeP * 0.08)));
-        document.getElementById('dashPremiumSpread').innerText = `${calcSpread >= 0 ? '+' : ''}${calcSpread.toFixed(2)}% Spread`;
-
-        // Fear and greed
-        const estSentiment = Math.round(50 + (changeP * 2.2));
-        const boundedSent = Math.max(25, Math.min(85, estSentiment));
-        document.getElementById('dashFngVal').innerText = `${boundedSent} (${boundedSent > 65 ? 'Greed' : (boundedSent < 45 ? 'Fear' : 'Neutral')})`;
-
-        // Cycle score calculation
-        let cycleScore = 5.4;
-        if (isEtfPositive) cycleScore += 1.2;
-        if (changeP > 0) cycleScore += 0.8;
-        if (derivedRate < 0.02) cycleScore += 0.4;
-        document.getElementById('cycleScoreVal').innerText = `${cycleScore.toFixed(1)} / 10`;
-
-        // Sparkline
         try {
           const klineRes = await fetch('https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1d&limit=25');
           const klineData = await klineRes.json();
@@ -931,7 +1084,6 @@
       }
     }
 
-    // WEBSOCKET & PULSE
     function startDedicatedBtcStream() {
       if (btcWebSocket) {
         try { btcWebSocket.close(); } catch(e){}
@@ -962,7 +1114,6 @@
       }, 1000);
     }
 
-    // REAL TIME-FRAME MATRIX BUILDER (NON-BLOCKING)
     function buildFastTfProfile(price, change, high, low) {
       const is15mBull = (price / high) >= 0.95 || change > 1.0;
       const is1hBull = change >= 0;
@@ -977,7 +1128,6 @@
       };
     }
 
-    // FAST 500+ MARKET SCANNER WITH STRATEGIC S/R GUIDANCE
     async function triggerFullMarketScan() {
       const spinIcon = document.getElementById('scanSpinIcon');
       if (spinIcon) spinIcon.classList.add('animate-spin');
@@ -1072,9 +1222,9 @@
       ['ALL', 'LONG', 'SHORT'].forEach(f => {
         const btn = document.getElementById(`filter-btn-${f}`);
         if (f === filter) {
-          btn.className = 'px-3 py-1.5 rounded-lg font-bold bg-slate-900 text-white transition';
+          btn.className = 'px-3 py-1.5 rounded-lg font-bold bg-emerald-500 text-slate-950 transition';
         } else {
-          btn.className = 'px-3 py-1.5 rounded-lg font-bold text-slate-600 hover:text-slate-900 transition';
+          btn.className = 'px-3 py-1.5 rounded-lg font-bold text-slate-400 hover:text-white transition';
         }
       });
       renderFilteredCards();
@@ -1103,7 +1253,6 @@
       const isLong = tfInfo.side === 'LONG';
       const price = coin.price;
 
-      // Realistic Entry / TP / SL mapped around Support & Resistance
       let entry, tp1, tp2, sl;
       if (isLong) {
         entry = coin.keySupport ? Math.min(price, coin.keySupport * 1.005) : price * 0.992;
@@ -1120,15 +1269,15 @@
       const badgeEl = document.getElementById(`side-badge-${symbol}`);
       if (badgeEl) {
         badgeEl.innerText = `${tf} ${tfInfo.label}`;
-        badgeEl.className = `px-2 py-0.5 text-[10px] font-bold rounded-full border font-mono ${isLong ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}`;
+        badgeEl.className = `px-2 py-0.5 text-[10px] font-bold rounded-full border font-mono ${isLong ? 'bg-emerald-950 text-emerald-400 border-emerald-800' : 'bg-rose-950 text-rose-400 border-rose-800'}`;
       }
 
       const guideEl = document.getElementById(`exec-guide-${symbol}`);
       if (guideEl) {
         if (isLong) {
-          guideEl.innerHTML = `⚠️ <strong>Wait for pullback near Key Support ($${formatNumber(entry)})</strong> to buy bounce. Sell / take profit as price approaches Resistance ($${formatNumber(tp1)}).`;
+          guideEl.innerHTML = `⚠️ <strong>Wait for pullback near Key Support ($${formatNumber(entry)})</strong> to buy bounce. Sell near Resistance ($${formatNumber(tp1)}).`;
         } else {
-          guideEl.innerHTML = `⚠️ <strong>Wait for relief bounce to Resistance ($${formatNumber(entry)})</strong> to enter short. Cover / take profit near Key Support ($${formatNumber(tp1)}).`;
+          guideEl.innerHTML = `⚠️ <strong>Wait for relief bounce to Resistance ($${formatNumber(entry)})</strong> to enter short. Cover near Support ($${formatNumber(tp1)}).`;
         }
       }
 
@@ -1147,18 +1296,6 @@
       const slValEl = document.getElementById(`sl-val-${symbol}`);
       if (slValEl) slValEl.innerText = `$${formatNumber(sl)}`;
 
-      ['15m', '1h', '4h', '1d'].forEach(t => {
-        const btn = document.getElementById(`tf-btn-${symbol}-${t}`);
-        if (btn) {
-          if (t === tf) {
-            btn.className = `card-tf-pill text-[10px] font-bold px-2 py-0.5 rounded border ${isLong ? 'active-bull' : 'active-bear'}`;
-          } else {
-            const isTfBull = coin.tfProfile[t].side === 'LONG';
-            btn.className = `card-tf-pill text-[10px] font-bold px-2 py-0.5 rounded border bg-slate-50 ${isTfBull ? 'text-emerald-700 border-emerald-200' : 'text-rose-700 border-rose-200'} hover:opacity-80`;
-          }
-        }
-      });
-
       const chartBtn = document.getElementById(`chart-btn-${symbol}`);
       if (chartBtn) {
         const newLevels = { entry, tp1, tp2, sl };
@@ -1173,14 +1310,14 @@
       desk.innerHTML = '';
 
       if (coins.length === 0) {
-        desk.innerHTML = `<div class="col-span-2 p-6 text-center text-slate-400 font-mono">No qualified setups matching "${currentScannerFilter}" filter currently.</div>`;
+        desk.innerHTML = `<div class="col-span-2 p-6 text-center text-slate-500 font-mono">No qualified setups matching "${currentScannerFilter}" filter currently.</div>`;
         return;
       }
 
       coins.forEach(sig => {
         const isLong = sig.side === 'LONG';
         const card = document.createElement('div');
-        card.className = 'bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col justify-between';
+        card.className = 'terminal-card p-5 flex flex-col justify-between';
 
         const price = sig.price;
         const entry = isLong ? (sig.keySupport ? Math.min(price, sig.keySupport * 1.005) : price * 0.992) : (sig.keyResistance ? Math.max(price, sig.keyResistance * 0.995) : price * 1.008);
@@ -1191,51 +1328,49 @@
         const jsonLevels = JSON.stringify({ entry, tp1, tp2, sl }).replace(/"/g, '&quot;');
 
         const badgeColor = isLong 
-          ? 'bg-emerald-50 text-emerald-700 border-emerald-200' 
-          : 'bg-rose-50 text-rose-700 border-rose-200';
+          ? 'bg-emerald-950 text-emerald-400 border-emerald-800' 
+          : 'bg-rose-950 text-rose-400 border-rose-800';
 
         const sideText = isLong ? '1H BULLISH (SUPPORT BOUNCE)' : '1H BEARISH (RESIST REJECT)';
-        const emaFilterText = isLong ? '50 & 200 EMA Golden Stack' : '50 & 200 EMA Bearish Cloud';
-
         const tfP = sig.tfProfile || buildFastTfProfile(price, sig.change, sig.high, sig.low);
 
         card.innerHTML = `
           <div>
-            <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
               <div>
                 <div class="flex items-center gap-2">
-                  <span class="text-base font-black text-slate-900 font-mono">${sig.ticker}/USDT</span>
+                  <span class="text-base font-black text-white font-mono">${sig.ticker}/USDT</span>
                   <span id="side-badge-${sig.symbol}" class="px-2 py-0.5 text-[10px] font-bold rounded-full border ${badgeColor} font-mono">
                     ${sideText}
                   </span>
                 </div>
-                <div class="flex items-center gap-2 mt-1 font-mono text-[10px] text-slate-500">
+                <div class="flex items-center gap-2 mt-1 font-mono text-[10px] text-slate-400">
                   <span>24h Vol: <strong>$${sig.volume}</strong></span>
                   <span>•</span>
-                  <span class="${isLong ? 'text-emerald-600' : 'text-rose-600'} font-bold">${emaFilterText}</span>
+                  <span class="${isLong ? 'text-emerald-400' : 'text-rose-400'} font-bold">${isLong ? '50 & 200 EMA Golden Stack' : '50 & 200 EMA Death Cross'}</span>
                 </div>
               </div>
               <div class="text-right">
-                <span class="text-base font-black text-slate-900 font-mono block px-1.5 py-0.5 rounded transition font-bold" 
+                <span class="text-base font-black text-white font-mono block px-1.5 py-0.5 rounded transition" 
                       id="live-price-${sig.symbol}" 
                       data-price="${sig.price}">
                   $${formatNumber(sig.price)}
                 </span>
-                <span class="text-xs font-mono font-bold ${sig.change >= 0 ? 'text-emerald-600' : 'text-rose-600'}">
+                <span class="text-xs font-mono font-bold ${sig.change >= 0 ? 'text-emerald-400' : 'text-rose-400'}">
                   ${sig.change >= 0 ? '+' : ''}${sig.change.toFixed(2)}%
                 </span>
               </div>
             </div>
 
-            <!-- MULTI-TIMEFRAME CONFLUENCE BAR (CLICK TO SWITCH BIAS) -->
-            <div class="bg-slate-50/70 border border-slate-200 rounded-xl p-2.5 mb-3 font-mono">
+            <!-- MULTI-TIMEFRAME CONFLUENCE BAR -->
+            <div class="bg-[#060A0F] border border-slate-800 rounded-xl p-2.5 mb-3 font-mono">
               <div class="flex justify-between items-center text-[10px] text-slate-400 mb-1.5">
-                <span class="font-bold text-slate-700">TIMEFRAME RADAR (CLICK TO SWITCH BIAS):</span>
-                <span>Binance Multi-TF Feed</span>
+                <span class="font-bold text-slate-300">TIMEFRAME RADAR (CLICK TO SWITCH BIAS):</span>
+                <span>Binance Multi-TF</span>
               </div>
               <div class="grid grid-cols-4 gap-1.5 text-center">
                 <button onclick="switchCardTimeframe('${sig.symbol}', '15m')" id="tf-btn-${sig.symbol}-15m" 
-                        class="card-tf-pill text-[10px] font-bold px-1.5 py-1 rounded border ${tfP['15m'].side === 'LONG' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}">
+                        class="card-tf-pill text-[10px] font-bold px-1.5 py-1 rounded border ${tfP['15m'].side === 'LONG' ? 'bg-emerald-950 text-emerald-400 border-emerald-800' : 'bg-rose-950 text-rose-400 border-rose-800'}">
                   15m: ${tfP['15m'].label}
                 </button>
                 <button onclick="switchCardTimeframe('${sig.symbol}', '1h')" id="tf-btn-${sig.symbol}-1h" 
@@ -1243,11 +1378,11 @@
                   1h: ${tfP['1h'].label}
                 </button>
                 <button onclick="switchCardTimeframe('${sig.symbol}', '4h')" id="tf-btn-${sig.symbol}-4h" 
-                        class="card-tf-pill text-[10px] font-bold px-1.5 py-1 rounded border ${tfP['4h'].side === 'LONG' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}">
+                        class="card-tf-pill text-[10px] font-bold px-1.5 py-1 rounded border ${tfP['4h'].side === 'LONG' ? 'bg-emerald-950 text-emerald-400 border-emerald-800' : 'bg-rose-950 text-rose-400 border-rose-800'}">
                   4h: ${tfP['4h'].label}
                 </button>
                 <button onclick="switchCardTimeframe('${sig.symbol}', '1d')" id="tf-btn-${sig.symbol}-1d" 
-                        class="card-tf-pill text-[10px] font-bold px-1.5 py-1 rounded border ${tfP['1d'].side === 'LONG' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}">
+                        class="card-tf-pill text-[10px] font-bold px-1.5 py-1 rounded border ${tfP['1d'].side === 'LONG' ? 'bg-emerald-950 text-emerald-400 border-emerald-800' : 'bg-rose-950 text-rose-400 border-rose-800'}">
                   1d: ${tfP['1d'].label}
                 </button>
               </div>
@@ -1255,42 +1390,42 @@
 
             <!-- Parameters Grid (Support & Resistance based) -->
             <div class="grid grid-cols-4 gap-2 font-mono text-center mb-3">
-              <div class="bg-blue-50/60 border border-blue-200 rounded-xl p-2">
+              <div class="bg-[#060A0F] border border-blue-950 p-2 rounded-xl">
                 <span class="text-slate-400 block text-[9px]" id="entry-label-${sig.symbol}">${isLong ? 'BUY AT SUPPORT' : 'SELL AT RESIST'}</span>
-                <span class="font-bold text-blue-700 text-xs" id="entry-val-${sig.symbol}">$${formatNumber(entry)}</span>
+                <span class="font-bold text-blue-400 text-xs" id="entry-val-${sig.symbol}">$${formatNumber(entry)}</span>
               </div>
-              <div class="bg-emerald-50/60 border border-emerald-200 rounded-xl p-2">
+              <div class="bg-[#060A0F] border border-emerald-950 p-2 rounded-xl">
                 <span class="text-slate-400 block text-[9px]">TARGET 1</span>
-                <span class="font-bold text-emerald-700 text-xs" id="tp1-val-${sig.symbol}">$${formatNumber(tp1)}</span>
+                <span class="font-bold text-emerald-400 text-xs" id="tp1-val-${sig.symbol}">$${formatNumber(tp1)}</span>
               </div>
-              <div class="bg-emerald-50/60 border border-emerald-200 rounded-xl p-2">
+              <div class="bg-[#060A0F] border border-emerald-950 p-2 rounded-xl">
                 <span class="text-slate-400 block text-[9px]">TARGET 2</span>
-                <span class="font-bold text-emerald-700 text-xs" id="tp2-val-${sig.symbol}">$${formatNumber(tp2)}</span>
+                <span class="font-bold text-emerald-400 text-xs" id="tp2-val-${sig.symbol}">$${formatNumber(tp2)}</span>
               </div>
-              <div class="bg-rose-50/60 border border-rose-200 rounded-xl p-2">
+              <div class="bg-[#060A0F] border border-rose-950 p-2 rounded-xl">
                 <span class="text-slate-400 block text-[9px]">STOP LOSS</span>
-                <span class="font-bold text-rose-700 text-xs" id="sl-val-${sig.symbol}">$${formatNumber(sl)}</span>
+                <span class="font-bold text-rose-400 text-xs" id="sl-val-${sig.symbol}">$${formatNumber(sl)}</span>
               </div>
             </div>
 
-            <!-- Strategic S/R & Trendline Guidance Box -->
-            <div class="bg-slate-50 border border-slate-200 rounded-xl p-2.5 font-mono text-[11px] text-slate-700 mb-2">
+            <!-- Strategic Guidance Box -->
+            <div class="bg-[#060A0F] border border-slate-800 rounded-xl p-2.5 font-mono text-[11px] text-slate-300 mb-2">
               <p id="exec-guide-${sig.symbol}">
                 ${isLong 
-                  ? `⚠️ <strong>Wait for pullback near Key Support ($${formatNumber(entry)})</strong> to buy bounce. Sell / take profit near Major Resistance ($${formatNumber(tp1)}).`
-                  : `⚠️ <strong>Wait for relief bounce to Resistance ($${formatNumber(entry)})</strong> to enter short. Cover / take profit near Key Support ($${formatNumber(tp1)}).`
+                  ? `⚠️ <strong>Wait for pullback near Key Support ($${formatNumber(entry)})</strong> to buy bounce. Sell near Major Resistance ($${formatNumber(tp1)}).`
+                  : `⚠️ <strong>Wait for relief bounce to Resistance ($${formatNumber(entry)})</strong> to enter short. Cover near Key Support ($${formatNumber(tp1)}).`
                 }
               </p>
             </div>
           </div>
 
           <!-- Bottom Action Strip -->
-          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-mono">
-            <span class="text-slate-400 text-[11px]">Macro Alignment: BTC Safe</span>
+          <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs font-mono">
+            <span class="text-slate-500 text-[11px]">Macro Alignment: BTC Safe</span>
             <button id="chart-btn-${sig.symbol}" 
                     onclick="openChartModal('${sig.symbol}', '${sig.ticker}', ${jsonLevels}, '${sig.side}', '60')" 
-                    class="bg-slate-900 hover:bg-slate-800 text-white px-3.5 py-1.5 rounded-xl font-bold flex items-center gap-1.5 transition text-[11px]">
-              <i data-lucide="line-chart" class="w-3.5 h-3.5 text-emerald-400"></i>
+                    class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-3.5 py-1.5 rounded-xl font-bold flex items-center gap-1.5 transition text-[11px]">
+              <i data-lucide="line-chart" class="w-3.5 h-3.5"></i>
               <span>OPEN LIVE CANDLE CHART</span>
             </button>
           </div>
@@ -1300,7 +1435,6 @@
       lucide.createIcons();
     }
 
-    // AUDITOR ENGINE WITH STRATEGIC S/R GUIDANCE
     let currentAuditData = null;
     function switchAuditTimeframe(tf) {
       if (!currentAuditData || !currentAuditData.tfProfile || !currentAuditData.tfProfile[tf]) return;
@@ -1317,11 +1451,11 @@
       const badge = document.getElementById('auditVerdictBadge');
       if (badge) {
         badge.innerText = `${tf} ${tfObj.label} (${isLong ? 'SUPPORT BOUNCE' : 'RESISTANCE REJECT'})`;
-        badge.className = `px-3 py-1 text-xs font-bold font-mono rounded-full border ${isLong ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}`;
+        badge.className = `px-3 py-1 text-xs font-bold font-mono rounded-full border ${isLong ? 'bg-emerald-950 text-emerald-400 border-emerald-800' : 'bg-rose-950 text-rose-400 border-rose-800'}`;
       }
 
       const desc = document.getElementById('auditVerdictDesc');
-      if (desc) desc.innerText = `${tf} Structure: ${tfObj.desc}.`;
+      if (desc) desc.innerText = `${tf} Structure: ${tfObj.desc}. Support/Resistance mapped via live candle pivots.`;
 
       const guide = document.getElementById('auditExecGuide');
       if (guide) {
@@ -1347,18 +1481,6 @@
       const slVal = document.getElementById('auditSlVal');
       if (slVal) slVal.innerText = `$${formatNumber(sl)}`;
 
-      ['15m', '1h', '4h', '1d'].forEach(t => {
-        const btn = document.getElementById(`audit-tf-${t}`);
-        if (btn) {
-          if (t === tf) {
-            btn.className = `text-xs font-bold font-mono px-3 py-1.5 rounded-lg border ${isLong ? 'active-bull' : 'active-bear'}`;
-          } else {
-            const isTfBull = d.tfProfile[t].side === 'LONG';
-            btn.className = `text-xs font-bold font-mono px-3 py-1.5 rounded-lg border bg-slate-50 ${isTfBull ? 'text-emerald-700 border-emerald-200' : 'text-rose-700 border-rose-200'}`;
-          }
-        }
-      });
-
       const chartBtn = document.getElementById('auditChartBtn');
       if (chartBtn) {
         const newLevels = { entry, tp1, tp2, sl };
@@ -1377,7 +1499,7 @@
       const symbol = ticker + 'USDT';
       const desk = document.getElementById('searchAuditResultDesk');
       desk.classList.remove('hidden');
-      desk.innerHTML = `<div class="p-6 bg-white border border-slate-200 rounded-2xl text-center font-mono text-xs text-slate-500 animate-pulse">Auditing Binance multi-timeframe radar for ${symbol}...</div>`;
+      desk.innerHTML = `<div class="p-6 terminal-card text-center font-mono text-xs text-slate-400 animate-pulse">Auditing Binance multi-timeframe radar for ${symbol}...</div>`;
 
       try {
         const res = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${symbol}`);
@@ -1413,41 +1535,41 @@
         const jsonLevels = JSON.stringify({ entry, tp1, tp2, sl }).replace(/"/g, '&quot;');
 
         desk.innerHTML = `
-          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs">
-            <div class="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-slate-100 gap-4 mb-4">
+          <div class="terminal-card p-6 shadow-xs">
+            <div class="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-slate-800 gap-4 mb-4">
               <div>
                 <div class="flex items-center gap-3">
-                  <h3 class="text-xl font-black text-slate-900 font-mono">${ticker}/USDT</h3>
-                  <span id="auditVerdictBadge" class="px-3 py-1 text-xs font-bold font-mono rounded-full border ${isLong ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}">
+                  <h3 class="text-xl font-black text-white font-mono">${ticker}/USDT</h3>
+                  <span id="auditVerdictBadge" class="px-3 py-1 text-xs font-bold font-mono rounded-full border ${isLong ? 'bg-emerald-950 text-emerald-400 border-emerald-800' : 'bg-rose-950 text-rose-400 border-rose-800'}">
                     ${activeTf} ${tfObj.label} (${isLong ? 'SUPPORT BOUNCE' : 'RESIST REJECT'})
                   </span>
                 </div>
-                <p id="auditVerdictDesc" class="text-xs text-slate-500 font-sans mt-1">
+                <p id="auditVerdictDesc" class="text-xs text-slate-400 font-sans mt-1">
                   ${activeTf} Structure: ${tfObj.desc}. Support/Resistance mapped via live candle pivots.
                 </p>
               </div>
 
               <div class="text-right">
-                <span class="text-2xl font-black text-slate-900 font-mono block px-2 py-0.5 rounded transition" 
+                <span class="text-2xl font-black text-white font-mono block px-2 py-0.5 rounded transition" 
                       id="audit-live-price-${symbol}" 
                       data-price="${price}">
                   $${formatNumber(price)}
                 </span>
-                <span class="text-xs font-mono font-bold ${change >= 0 ? 'text-emerald-600' : 'text-rose-600'}">
+                <span class="text-xs font-mono font-bold ${change >= 0 ? 'text-emerald-400' : 'text-rose-400'}">
                   24h: ${change >= 0 ? '+' : ''}${change.toFixed(2)}% | Vol: $${volume}M
                 </span>
               </div>
             </div>
 
-            <!-- INTERACTIVE MULTI-TIMEFRAME SWITCHER BAR -->
-            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 mb-5">
-              <div class="flex justify-between items-center text-xs font-mono text-slate-500 mb-2">
-                <span><strong>TIMEFRAME CONFLUENCE RADAR:</strong> (Click any to evaluate scalp vs swing bias)</span>
-                <span class="text-emerald-600 font-bold">Binance Multi-TF Feed</span>
+            <!-- Multi-TF Selector -->
+            <div class="bg-[#060A0F] border border-slate-800 rounded-xl p-3 mb-5">
+              <div class="flex justify-between items-center text-xs font-mono text-slate-400 mb-2">
+                <span><strong>TIMEFRAME CONFLUENCE RADAR:</strong></span>
+                <span class="text-emerald-400 font-bold">Binance Multi-TF Feed</span>
               </div>
               <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-center">
                 <button onclick="switchAuditTimeframe('15m')" id="audit-tf-15m" 
-                        class="text-xs font-bold font-mono px-3 py-2 rounded-lg border ${tfProfile['15m'].side === 'LONG' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}">
+                        class="text-xs font-bold font-mono px-3 py-2 rounded-lg border ${tfProfile['15m'].side === 'LONG' ? 'bg-emerald-950 text-emerald-400 border-emerald-800' : 'bg-rose-950 text-rose-400 border-rose-800'}">
                   15m: ${tfProfile['15m'].label}
                   <span class="block text-[10px] font-normal text-slate-500 mt-0.5">Scalp Bias</span>
                 </button>
@@ -1457,12 +1579,12 @@
                   <span class="block text-[10px] font-normal mt-0.5">Intraday Bias</span>
                 </button>
                 <button onclick="switchAuditTimeframe('4h')" id="audit-tf-4h" 
-                        class="text-xs font-bold font-mono px-3 py-2 rounded-lg border ${tfProfile['4h'].side === 'LONG' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}">
+                        class="text-xs font-bold font-mono px-3 py-2 rounded-lg border ${tfProfile['4h'].side === 'LONG' ? 'bg-emerald-950 text-emerald-400 border-emerald-800' : 'bg-rose-950 text-rose-400 border-rose-800'}">
                   4h: ${tfProfile['4h'].label}
                   <span class="block text-[10px] font-normal text-slate-500 mt-0.5">Swing Trend</span>
                 </button>
                 <button onclick="switchAuditTimeframe('1d')" id="audit-tf-1d" 
-                        class="text-xs font-bold font-mono px-3 py-2 rounded-lg border ${tfProfile['1d'].side === 'LONG' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}">
+                        class="text-xs font-bold font-mono px-3 py-2 rounded-lg border ${tfProfile['1d'].side === 'LONG' ? 'bg-emerald-950 text-emerald-400 border-emerald-800' : 'bg-rose-950 text-rose-400 border-rose-800'}">
                   1d: ${tfProfile['1d'].label}
                   <span class="block text-[10px] font-normal text-slate-500 mt-0.5">Macro Health</span>
                 </button>
@@ -1471,41 +1593,41 @@
 
             <!-- Key Levels Grid -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3 font-mono text-xs mb-5">
-              <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl">
-                <span class="text-slate-400 block text-[10px]">MAJOR RESISTANCE</span>
-                <span class="font-bold text-rose-600">$${formatNumber(keyResistance)}</span>
+              <div class="bg-[#060A0F] border border-slate-800 p-3 rounded-xl">
+                <span class="text-slate-500 block text-[10px]">MAJOR RESISTANCE</span>
+                <span class="font-bold text-rose-400">$${formatNumber(keyResistance)}</span>
               </div>
-              <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl">
-                <span class="text-slate-400 block text-[10px]">MAJOR SUPPORT</span>
-                <span class="font-bold text-emerald-600">$${formatNumber(keySupport)}</span>
+              <div class="bg-[#060A0F] border border-slate-800 p-3 rounded-xl">
+                <span class="text-slate-500 block text-[10px]">MAJOR SUPPORT</span>
+                <span class="font-bold text-emerald-400">$${formatNumber(keySupport)}</span>
               </div>
-              <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl">
-                <span class="text-slate-400 block text-[10px]">TRENDLINE STATUS</span>
-                <span class="font-bold ${isLong ? 'text-emerald-600' : 'text-rose-600'}">
+              <div class="bg-[#060A0F] border border-slate-800 p-3 rounded-xl">
+                <span class="text-slate-500 block text-[10px]">TRENDLINE STATUS</span>
+                <span class="font-bold ${isLong ? 'text-emerald-400' : 'text-rose-400'}">
                   ${isLong ? 'Ascending Support Held' : 'Descending Reject'}
                 </span>
               </div>
-              <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl">
-                <span class="text-slate-400 block text-[10px]">LIQUIDITY RATING</span>
-                <span class="font-bold text-blue-600">${parseFloat(volume) > 10 ? 'HIGH (Tier-1)' : 'MODERATE'}</span>
+              <div class="bg-[#060A0F] border border-slate-800 p-3 rounded-xl">
+                <span class="text-slate-500 block text-[10px]">LIQUIDITY RATING</span>
+                <span class="font-bold text-blue-400">${parseFloat(volume) > 10 ? 'HIGH (Tier-1)' : 'MODERATE'}</span>
               </div>
             </div>
 
-            <!-- Trade Execution Card with Strategic Guidance -->
-            <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50 mb-4">
+            <!-- Trade Execution Card -->
+            <div class="border border-slate-800 rounded-xl p-4 bg-[#060A0F] mb-4">
               <div class="flex justify-between items-center mb-2">
-                <span class="text-xs font-bold text-slate-700 font-sans">
-                  Automated ${activeTf} Confluence Parameters (${isLong ? 'LONG BOUNCE' : 'SHORT REJECTION'}):
+                <span class="text-xs font-bold text-slate-300 font-sans">
+                  Automated ${activeTf} Confluence Parameters:
                 </span>
                 <button id="auditChartBtn" 
                         onclick="openChartModal('${symbol}', '${ticker}', ${jsonLevels}, '${isLong ? 'LONG' : 'SHORT'}', '60')" 
-                        class="bg-slate-900 hover:bg-slate-800 text-white px-3.5 py-1.5 rounded-xl font-mono font-bold text-xs flex items-center gap-1.5 transition">
-                  <i data-lucide="line-chart" class="w-3.5 h-3.5 text-emerald-400"></i>
+                        class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-3.5 py-1.5 rounded-xl font-mono font-bold text-xs flex items-center gap-1.5 transition">
+                  <i data-lucide="line-chart" class="w-3.5 h-3.5"></i>
                   <span>OPEN CANDLESTICK CHART</span>
                 </button>
               </div>
 
-              <div class="p-3 bg-white border border-slate-200 rounded-xl mb-3 font-mono text-xs text-slate-700" id="auditExecGuide">
+              <div class="p-3 bg-[#080D14] border border-slate-800 rounded-xl mb-3 font-mono text-xs text-slate-300" id="auditExecGuide">
                 ${isLong 
                   ? `💡 <strong>Strategic Execution:</strong> Do NOT buy at market price. Place Limit Buy near <strong>Key Support ($${formatNumber(entry)})</strong> on trendline test. Scale out / Sell near <strong>Resistance ($${formatNumber(tp1)})</strong>.`
                   : `💡 <strong>Strategic Execution:</strong> Do NOT short at the floor. Place Sell Limit near <strong>Resistance Rejection ($${formatNumber(entry)})</strong>. Cover near <strong>Key Support ($${formatNumber(tp1)})</strong>.`
@@ -1513,21 +1635,21 @@
               </div>
 
               <div class="grid grid-cols-4 gap-2 font-mono text-center">
-                <div class="bg-white border border-blue-200 rounded-xl p-2.5 shadow-xs">
-                  <span class="text-slate-400 block text-[9px]" id="auditEntryLabel">${isLong ? 'BUY AT SUPPORT' : 'SELL AT RESIST'}</span>
-                  <span class="font-bold text-blue-700 text-xs" id="auditEntryVal">$${formatNumber(entry)}</span>
+                <div class="bg-[#080D14] border border-blue-950 p-2.5 rounded-xl">
+                  <span class="text-slate-500 block text-[9px]" id="auditEntryLabel">${isLong ? 'BUY AT SUPPORT' : 'SELL AT RESIST'}</span>
+                  <span class="font-bold text-blue-400 text-xs" id="auditEntryVal">$${formatNumber(entry)}</span>
                 </div>
-                <div class="bg-white border border-emerald-200 rounded-xl p-2.5 shadow-xs">
-                  <span class="text-slate-400 block text-[9px]">TARGET 1</span>
-                  <span class="font-bold text-emerald-700 text-xs" id="auditTp1Val">$${formatNumber(tp1)}</span>
+                <div class="bg-[#080D14] border border-emerald-950 p-2.5 rounded-xl">
+                  <span class="text-slate-500 block text-[9px]">TARGET 1</span>
+                  <span class="font-bold text-emerald-400 text-xs" id="auditTp1Val">$${formatNumber(tp1)}</span>
                 </div>
-                <div class="bg-white border border-emerald-200 rounded-xl p-2.5 shadow-xs">
-                  <span class="text-slate-400 block text-[9px]">TARGET 2</span>
-                  <span class="font-bold text-emerald-700 text-xs" id="auditTp2Val">$${formatNumber(tp2)}</span>
+                <div class="bg-[#080D14] border border-emerald-950 p-2.5 rounded-xl">
+                  <span class="text-slate-500 block text-[9px]">TARGET 2</span>
+                  <span class="font-bold text-emerald-400 text-xs" id="auditTp2Val">$${formatNumber(tp2)}</span>
                 </div>
-                <div class="bg-white border border-rose-200 rounded-xl p-2.5 shadow-xs">
-                  <span class="text-slate-400 block text-[9px]">STOP LOSS</span>
-                  <span class="font-bold text-rose-700 text-xs" id="auditSlVal">$${formatNumber(sl)}</span>
+                <div class="bg-[#080D14] border border-rose-950 p-2.5 rounded-xl">
+                  <span class="text-slate-500 block text-[9px]">STOP LOSS</span>
+                  <span class="font-bold text-rose-400 text-xs" id="auditSlVal">$${formatNumber(sl)}</span>
                 </div>
               </div>
             </div>
@@ -1537,7 +1659,7 @@
 
       } catch (err) {
         desk.innerHTML = `
-          <div class="p-6 bg-white border border-rose-200 rounded-2xl text-center font-mono text-xs text-rose-600">
+          <div class="p-6 terminal-card text-center font-mono text-xs text-rose-400">
             Error: Token "${symbol}" not found on Binance USDT spot market. Please verify the ticker.
           </div>
         `;
@@ -1547,14 +1669,21 @@
     function updateClock() {
       const d = new Date();
       document.getElementById('liveUtcClock').innerText = d.toISOString().substring(11, 19) + ' UTC';
+      const options = { month: 'long', day: 'numeric', year: 'numeric' };
+      const dateEl = document.getElementById('dashDynamicDate');
+      if (dateEl) {
+        dateEl.innerHTML = `<i data-lucide="calendar" class="w-3.5 h-3.5 text-emerald-400 inline-block mr-1"></i> ${d.toLocaleDateString('en-US', options)}`;
+        lucide.createIcons();
+      }
     }
     setInterval(updateClock, 1000);
     updateClock();
 
     window.addEventListener('DOMContentLoaded', async () => {
       lucide.createIcons();
+      initGaugeChart();
+      renderSignalTable();
 
-      // Immediate price baseline
       await initImmediateBtcPrices();
 
       startDedicatedBtcStream();
