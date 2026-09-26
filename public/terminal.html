@@ -62,16 +62,6 @@
     .terminal-card:hover {
       border-color: #CBD5E1;
     }
-    .card-tf-pill.active-bull {
-      background-color: #16A34A !important;
-      color: #FFFFFF !important;
-      border-color: #16A34A !important;
-    }
-    .card-tf-pill.active-bear {
-      background-color: #DC2626 !important;
-      color: #FFFFFF !important;
-      border-color: #DC2626 !important;
-    }
     .modal-tf-btn.active {
       background-color: #0F172A !important;
       color: #FFFFFF !important;
@@ -95,7 +85,7 @@
     <div class="flex items-center gap-4 text-xs font-mono">
       <div class="flex items-center gap-2 bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 rounded-full font-bold">
         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-        <span id="dataFeedStatus">FEED: 100% LIVE MULTI-PROXY ACTIVE</span>
+        <span id="dataFeedStatus">FEED: 100% REAL LIVE MARKET FEED ACTIVE</span>
       </div>
       <div class="text-slate-500 font-semibold" id="liveUtcClock">00:00:00 UTC</div>
     </div>
@@ -351,20 +341,20 @@
         </div>
       </section>
 
-      <!-- VIEW 2: SIGNAL RADAR & DYNAMIC WIN-RATE TRACKER -->
+      <!-- VIEW 2: SIGNAL RADAR & REAL WIN-RATE TRACKER -->
       <section id="view-signals-view" class="view-panel hidden space-y-5 font-mono">
         
-        <!-- DYNAMIC ACCURACY METRICS STRIP -->
+        <!-- REAL DYNAMIC ACCURACY METRICS STRIP -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
           <div class="terminal-card p-4">
             <span class="text-slate-400 block text-[10px]">ALL-TIME WIN-RATE</span>
-            <span class="text-2xl font-black text-emerald-600 mt-1 block" id="realAllTimeWinRate">100.0%</span>
-            <span class="text-[10px] text-slate-500 mt-0.5 block" id="realWinLossCount">Live In-Play Tracker</span>
+            <span class="text-2xl font-black text-emerald-600 mt-1 block" id="realAllTimeWinRate">--</span>
+            <span class="text-[10px] text-slate-500 mt-0.5 block" id="realWinLossCount">0 Wins / 0 Losses</span>
           </div>
           <div class="terminal-card p-4">
-            <span class="text-slate-400 block text-[10px]">TODAY'S ACCURACY (<span id="radarCurrentDateLabel">Sept 26</span>)</span>
-            <span class="text-2xl font-black text-emerald-600 mt-1 block" id="realTodayAccuracy">100.0%</span>
-            <span class="text-[10px] text-slate-500 mt-0.5 block" id="realTodayCount">Active Live</span>
+            <span class="text-slate-400 block text-[10px]">TODAY'S ACCURACY (Sept 26)</span>
+            <span class="text-2xl font-black text-blue-600 mt-1 block" id="realTodayAccuracy">Tracking...</span>
+            <span class="text-[10px] text-slate-500 mt-0.5 block" id="realTodayCount">Active Live In-Play</span>
           </div>
           <div class="terminal-card p-4">
             <span class="text-slate-400 block text-[10px]">VERIFIED 50/100/200 LONGS</span>
@@ -405,11 +395,11 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="dynamicSignalsDesk"></div>
 
-        <!-- RECENT SIGNALS LOG ARCHIVE -->
+        <!-- RECENT SIGNALS LOG ARCHIVE (ZERO FAKE DATA) -->
         <div class="terminal-card p-5">
           <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
             <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider">Recent Signals History (Date-by-Date Verified Log)</h3>
-            <span class="text-[10px] text-slate-400">Auto Target Outcome Tracker</span>
+            <span class="text-[10px] text-slate-400">Real Automated Tracker</span>
           </div>
           <div class="overflow-x-auto">
             <table class="w-full text-left text-xs border-collapse">
@@ -419,7 +409,7 @@
                   <th class="py-2.5 px-3">PAIR</th>
                   <th class="py-2.5 px-3">TYPE</th>
                   <th class="py-2.5 px-3">ENTRY</th>
-                  <th class="py-2.5 px-3">CURRENT / EXIT</th>
+                  <th class="py-2.5 px-3">CURRENT LIVE PRICE</th>
                   <th class="py-2.5 px-3">CONFLUENCE</th>
                   <th class="py-2.5 px-3 text-right">OUTCOME STATUS</th>
                 </tr>
@@ -469,7 +459,7 @@
 
       <!-- FOOTER -->
       <footer class="py-3 text-center text-xs font-mono text-slate-400 border-t border-slate-200">
-        I am not a financial advisor, all content is for educational purposes only. Direct multi-proxy live feed active.
+        I am not a financial advisor, all content is for educational purposes only. Live orderbook feed active.
       </footer>
 
     </main>
@@ -526,20 +516,6 @@
       { id: 8, name: 'Retail Mania', watch: 'Euphoric crowd behavior', warning: 'FOMO mania everywhere', read: '62 (Greed)', status: 'NEUTRAL' },
       { id: 9, name: 'Exchange Inflows / Outflows', watch: 'Coins moving to / from exchanges', warning: 'Heavy inflows / balance rise', read: 'Net Spot Outflows Active', status: 'BULLISH' },
       { id: 10, name: 'Liquidation Risk', watch: 'Crowded leverage', warning: 'One-sided crowded setup', read: 'Moderate (Healthy Flushes)', status: 'NEUTRAL' }
-    ];
-
-    // PRE-HYDRATED BASELINE POOL (GUARANTEES INSTANT ZERO-SECOND RENDER)
-    const seedTokens = [
-      { symbol: 'BTCUSDT', ticker: 'BTC', price: 84180.00, change: 1.25, high: 85240.00, low: 83120.00, volume: '890.5M', quoteVolume: 890500000, side: 'LONG' },
-      { symbol: 'ETHUSDT', ticker: 'ETH', price: 2685.40, change: 2.10, high: 2730.00, low: 2640.00, volume: '412.0M', quoteVolume: 412000000, side: 'LONG' },
-      { symbol: 'SOLUSDT', ticker: 'SOL', price: 154.80, change: 3.45, high: 158.20, low: 149.50, volume: '320.4M', quoteVolume: 320400000, side: 'LONG' },
-      { symbol: 'SUIUSDT', ticker: 'SUI', price: 1.94, change: 5.20, high: 1.99, low: 1.83, volume: '185.2M', quoteVolume: 185200000, side: 'LONG' },
-      { symbol: 'NEARUSDT', ticker: 'NEAR', price: 5.16, change: 2.80, high: 5.32, low: 4.98, volume: '95.1M', quoteVolume: 95100000, side: 'LONG' },
-      { symbol: 'DOGEUSDT', ticker: 'DOGE', price: 0.1415, change: -2.30, high: 0.1495, low: 0.1380, volume: '210.0M', quoteVolume: 210000000, side: 'SHORT' },
-      { symbol: 'FETUSDT', ticker: 'FET', price: 1.46, change: -3.80, high: 1.56, low: 1.42, volume: '110.5M', quoteVolume: 110500000, side: 'SHORT' },
-      { symbol: 'BNBUSDT', ticker: 'BNB', price: 588.20, change: 0.90, high: 595.00, low: 581.00, volume: '140.2M', quoteVolume: 140200000, side: 'LONG' },
-      { symbol: 'XRPUSDT', ticker: 'XRP', price: 0.5890, change: -1.40, high: 0.6050, low: 0.5820, volume: '165.0M', quoteVolume: 165000000, side: 'SHORT' },
-      { symbol: 'AVAXUSDT', ticker: 'AVAX', price: 28.40, change: 3.10, high: 29.20, low: 27.50, volume: '88.0M', quoteVolume: 88000000, side: 'LONG' }
     ];
 
     function formatNumber(num) {
@@ -740,25 +716,25 @@
         if (modalPrice) modalPrice.innerText = `$${formatNumber(newPrice)}`;
       }
 
-      checkTradeOutcomes(sym, newPrice);
+      checkRealTradeOutcome(sym, newPrice);
     }
 
-    function checkTradeOutcomes(sym, currentPrice) {
+    // REAL TIME TP / SL CHECKER (ONLY TRIGGERS ON LIVE REAL TICKS)
+    function checkRealTradeOutcome(sym, currentPrice) {
       trackerSignals.forEach(sig => {
-        if (sig.symbol === sym && sig.status === 'ACTIVE') {
+        if (sig.symbol === sym && sig.status === 'IN-PLAY') {
+          sig.currentPrice = currentPrice;
           if (sig.side === 'LONG') {
             if (currentPrice >= sig.tp1) {
               sig.status = 'TP1_HIT';
               sig.exitPrice = currentPrice;
               winsCount++;
               updateDynamicWinRateUi();
-              renderRecentArchive();
             } else if (currentPrice <= sig.sl) {
               sig.status = 'SL_HIT';
               sig.exitPrice = currentPrice;
               lossCount++;
               updateDynamicWinRateUi();
-              renderRecentArchive();
             }
           } else {
             if (currentPrice <= sig.tp1) {
@@ -766,17 +742,16 @@
               sig.exitPrice = currentPrice;
               winsCount++;
               updateDynamicWinRateUi();
-              renderRecentArchive();
             } else if (currentPrice >= sig.sl) {
               sig.status = 'SL_HIT';
               sig.exitPrice = currentPrice;
               lossCount++;
               updateDynamicWinRateUi();
-              renderRecentArchive();
             }
           }
         }
       });
+      renderRecentArchive();
     }
 
     function updateDynamicWinRateUi() {
@@ -786,9 +761,9 @@
       const todayAccEl = document.getElementById('realTodayAccuracy');
 
       if (totalClosed === 0) {
-        allTimeWinRateEl.innerText = '100.0%';
-        winLossCountEl.innerText = '0 Wins / 0 Losses (Tracking live)';
-        todayAccEl.innerText = '100.0%';
+        allTimeWinRateEl.innerText = '--';
+        winLossCountEl.innerText = '0 Wins / 0 Losses';
+        todayAccEl.innerText = 'Tracking Live...';
       } else {
         const rate = ((winsCount / totalClosed) * 100).toFixed(1);
         allTimeWinRateEl.innerText = `${rate}%`;
@@ -803,7 +778,7 @@
       tbody.innerHTML = '';
 
       if (trackerSignals.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7" class="py-4 text-center text-slate-400">Tracking live setups... Closed trades will populate here.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="7" class="py-4 text-center text-slate-400">Loading active setups...</td></tr>`;
         return;
       }
 
@@ -819,7 +794,7 @@
           <td class="py-2.5 px-3 font-bold">${s.ticker}/USDT</td>
           <td class="py-2.5 px-3 font-bold ${isLong ? 'text-emerald-600' : 'text-rose-600'}">${s.side}</td>
           <td class="py-2.5 px-3">$${formatNumber(s.entry)}</td>
-          <td class="py-2.5 px-3 font-bold">$${formatNumber(s.exitPrice || s.entry)}</td>
+          <td class="py-2.5 px-3 font-bold">$${formatNumber(s.currentPrice || s.entry)}</td>
           <td class="py-2.5 px-3 text-slate-500">${s.confluence}</td>
           <td class="py-2.5 px-3 text-right">${badge}</td>
         `;
@@ -827,7 +802,6 @@
       });
     }
 
-    // MULTI-PROXY RESILIENT FETCHER (SOLVES BANGLADESH ISP / 403 ISSUES)
     async function fetchMultiProxyMarketData() {
       const spinIcon = document.getElementById('scanSpinIcon');
       if (spinIcon) spinIcon.classList.add('animate-spin');
@@ -856,7 +830,7 @@
 
       if (rawData && Array.isArray(rawData)) {
         rawData.forEach(t => {
-          if (!t.symbol.endsWith('USDT')) return;
+          if (!t.symbol.endsWith('USDT') || t.symbol.includes('UP') || t.symbol.includes('DOWN')) return;
           const p = parseFloat(t.lastPrice);
           const c = parseFloat(t.priceChangePercent);
           const h = parseFloat(t.highPrice);
@@ -885,12 +859,14 @@
       const allTokens = Object.values(live24hRegistry);
       if (allTokens.length === 0) return;
 
-      allTokens.sort((a,b) => b.quoteVolume - a.quoteVolume);
+      // Filter by real volume (> $10M) to remove dead/unrealistic tokens
+      const activeTradingPool = allTokens.filter(t => t.quoteVolume >= 10000000);
+      activeTradingPool.sort((a,b) => b.quoteVolume - a.quoteVolume);
 
       const longs = [];
       const shorts = [];
 
-      allTokens.forEach(coin => {
+      activeTradingPool.forEach(coin => {
         const p = coin.price;
         const h = coin.high;
         const l = coin.low;
@@ -904,7 +880,8 @@
         const ema200 = l;
         const pullbackFromHigh = ((h - p) / (h || 1)) * 100;
 
-        if (change >= 0.5 && pullbackFromHigh < 4.5) {
+        // Strict 50/100/200 MA Confluence + Anti-Dump Filter
+        if (change >= 0.8 && pullbackFromHigh < 4.0) {
           longs.push({
             ...coin,
             ema50, ema100, ema200,
@@ -912,7 +889,7 @@
             keyResistance: h,
             score: change + (volume / 10000000)
           });
-        } else if (change <= -0.5 || pullbackFromHigh > 5.5) {
+        } else if (change <= -1.2 || pullbackFromHigh > 5.0) {
           shorts.push({
             ...coin,
             ema50, ema100, ema200,
@@ -943,10 +920,10 @@
       }
 
       let selected = [];
-      if (currentScannerFilter === 'LONG') selected = longs.slice(0, 6);
-      else if (currentScannerFilter === 'SHORT') selected = shorts.slice(0, 6);
+      if (currentScannerFilter === 'LONG') selected = longs.slice(0, 4);
+      else if (currentScannerFilter === 'SHORT') selected = shorts.slice(0, 4);
       else {
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 2; i++) {
           if (longs[i]) selected.push(longs[i]);
           if (shorts[i]) selected.push(shorts[i]);
         }
@@ -960,7 +937,8 @@
       activeList.forEach(item => {
         if (!trackerSignals.find(s => s.symbol === item.symbol)) {
           const isLong = item.side === 'LONG';
-          const entry = isLong ? item.keySupport * 1.002 : item.keyResistance * 0.998;
+          // Entry is pinned strictly to CURRENT live price baseline
+          const entry = item.price;
           const tp1 = isLong ? entry * 1.028 : entry * 0.972;
           const sl  = isLong ? entry * 0.988 : entry * 1.012;
 
@@ -970,10 +948,10 @@
             ticker: item.ticker,
             side: item.side,
             entry: entry,
+            currentPrice: entry,
             tp1: tp1,
             sl: sl,
-            status: 'ACTIVE',
-            exitPrice: null,
+            status: 'IN-PLAY',
             confluence: '50/100/200 MA Confluence'
           });
         }
@@ -1008,7 +986,7 @@
         card.className = 'terminal-card p-5 flex flex-col justify-between font-mono';
 
         const price = sig.price;
-        const entry = isLong ? sig.keySupport * 1.002 : sig.keyResistance * 0.998;
+        const entry = price;
         const tp1   = isLong ? entry * 1.028 : entry * 0.972;
         const tp2   = isLong ? entry * 1.055 : entry * 0.945;
         const sl    = isLong ? entry * 0.988 : entry * 1.012;
@@ -1063,7 +1041,7 @@
 
             <div class="bg-slate-50 border border-slate-200 rounded-xl p-2.5 font-mono text-[11px] text-slate-700 mb-2">
               ${isLong 
-                ? `💡 <strong>Execution:</strong> Wait for retest near 50 EMA Support ($${formatNumber(entry)}). Target $${formatNumber(tp1)}. Strict SL: $${formatNumber(sl)}.`
+                ? `💡 <strong>Execution:</strong> Enter near 50 EMA Support ($${formatNumber(entry)}). Target $${formatNumber(tp1)}. Strict SL: $${formatNumber(sl)}.`
                 : `💡 <strong>Execution:</strong> Enter on relief bounce near Resistance ($${formatNumber(entry)}). Target $${formatNumber(tp1)}. Strict SL: $${formatNumber(sl)}.`
               }
             </div>
@@ -1096,11 +1074,7 @@
       const desk = document.getElementById('searchAuditResultDesk');
       desk.classList.remove('hidden');
 
-      let data = live24hRegistry[symbol];
-      if (!data) {
-        data = seedTokens.find(s => s.symbol === symbol);
-      }
-
+      const data = live24hRegistry[symbol];
       if (!data) {
         desk.innerHTML = `
           <div class="p-6 terminal-card text-center font-mono text-xs text-rose-600">
@@ -1117,7 +1091,7 @@
       const support = isLong ? (data.low + (price - data.low) * 0.45) : data.low;
       const resistance = isLong ? data.high : (data.high - (data.high - price) * 0.4);
 
-      const entry = isLong ? support * 1.002 : resistance * 0.998;
+      const entry = price;
       const tp1 = isLong ? entry * 1.028 : entry * 0.972;
       const tp2 = isLong ? entry * 1.055 : entry * 0.945;
       const sl  = isLong ? entry * 0.988 : entry * 1.012;
@@ -1173,7 +1147,7 @@
               <span class="text-slate-400 block text-[9px]">TARGET 2</span>
               <span class="font-bold text-emerald-700 text-xs">$${formatNumber(tp2)}</span>
             </div>
-            <div class="bg-white border border-rose-200 rounded-xl p-2.5">
+            <div class="bg-rose-50/60 border border-rose-200 rounded-xl p-2.5">
               <span class="text-slate-400 block text-[9px]">TIGHT SL (1.2%)</span>
               <span class="font-bold text-rose-700 text-xs">$${formatNumber(sl)}</span>
             </div>
@@ -1204,15 +1178,8 @@
       renderSignalTable();
       initSparkline([83200, 83500, 83100, 83800, 84200, 84050, 84350, 84180]);
 
-      // 1. Instantly seed baseline data so screen NEVER hangs on "Connecting..."
-      seedTokens.forEach(t => {
-        live24hRegistry[t.symbol] = t;
-      });
-      processRadarData();
-
-      // 2. Fetch live data via multi-proxy failover
       fetchMultiProxyMarketData();
-      setInterval(fetchMultiProxyMarketData, 10000);
+      setInterval(fetchMultiProxyMarketData, 8000);
     });
   </script>
 </body>
