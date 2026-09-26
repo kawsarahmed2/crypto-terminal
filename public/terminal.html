@@ -56,6 +56,16 @@
       background-color: #0F172A !important;
       color: #FFFFFF !important;
     }
+    .card-tf-pill.active-bull {
+      background-color: #16A34A !important;
+      color: #FFFFFF !important;
+      border-color: #16A34A !important;
+    }
+    .card-tf-pill.active-bear {
+      background-color: #DC2626 !important;
+      color: #FFFFFF !important;
+      border-color: #DC2626 !important;
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased">
@@ -68,7 +78,7 @@
       </div>
       <div>
         <h1 class="text-base font-black tracking-tight text-slate-900 leading-none">CRYPTO DADA</h1>
-        <span class="text-[10px] font-mono text-slate-500 tracking-wider">LONG & SHORT CONFLUENCE SCANNER TERMINAL</span>
+        <span class="text-[10px] font-mono text-slate-500 tracking-wider">MULTI-TIMEFRAME CONFLUENCE RADAR & SCANNER</span>
       </div>
     </div>
     
@@ -153,8 +163,8 @@
 
       <div class="pt-4 border-t border-slate-100">
         <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs font-mono">
-          <span class="text-slate-400 block text-[10px]">EXECUTION MODES</span>
-          <span class="font-bold text-slate-900">Long & Short Radar Active</span>
+          <span class="text-slate-400 block text-[10px]">ANALYSIS ENGINE</span>
+          <span class="font-bold text-emerald-600">Multi-TF Matrix Enabled</span>
         </div>
       </div>
     </aside>
@@ -258,7 +268,7 @@
           </div>
         </div>
 
-        <!-- SIGNAL TABLE (100% POPULATED NO LOADING FREEZE) -->
+        <!-- SIGNAL TABLE -->
         <div class="bg-white border border-slate-200 rounded-2xl shadow-xs overflow-hidden">
           <div class="px-5 py-3.5 border-b border-slate-200 flex items-center justify-between bg-slate-50/50">
             <div class="flex items-center gap-2">
@@ -285,16 +295,16 @@
         </div>
       </section>
 
-      <!-- VIEW 2: 500+ MARKET SCANNER WITH LONG & SHORT FILTERS -->
+      <!-- VIEW 2: 500+ MARKET SCANNER WITH MULTI-TIMEFRAME SWITCHER -->
       <section id="view-signals-view" class="view-panel hidden space-y-5">
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div class="flex items-center gap-2">
-              <h2 class="text-lg font-black text-slate-900">Binance 500+ Scanner: Dual Directional Engine</h2>
-              <span class="bg-emerald-100 text-emerald-800 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">LONG & SHORT CONFLUENCE</span>
+              <h2 class="text-lg font-black text-slate-900">Binance 500+ Scanner: Multi-Timeframe Radar</h2>
+              <span class="bg-emerald-100 text-emerald-800 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">15M • 1H • 4H • 1D MATRIX</span>
             </div>
             <p class="text-xs text-slate-500 mt-1">
-              Filter high-probability LONG breakouts (holding above EMAs) and high-conviction SHORT breakdowns (falling below EMAs).
+              Click any timeframe (15m, 1h, 4h, 1d) on a token to dynamically view scalp vs swing bias and execution levels.
             </p>
           </div>
           
@@ -333,16 +343,16 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="dynamicSignalsDesk"></div>
       </section>
 
-      <!-- VIEW 3: INSTANT COIN AUDITOR -->
+      <!-- VIEW 3: INSTANT COIN AUDITOR WITH TIMEFRAME BIAS MATRIX -->
       <section id="view-search-view" class="view-panel hidden space-y-5">
         <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs">
           <div class="max-w-2xl">
             <h2 class="text-lg font-black text-slate-900 font-sans flex items-center gap-2">
               <i data-lucide="search" class="w-5 h-5 text-amber-500"></i>
-              Instant Coin Auditor & Setup Scanner (Long/Short)
+              Instant Coin Auditor & Multi-Timeframe Radar
             </h2>
             <p class="text-xs text-slate-500 mt-1 font-sans">
-              Type any cryptocurrency ticker to evaluate structure against 50/200 EMA, automated parameters (Long or Short), and candlestick chart.
+              Type any cryptocurrency ticker to evaluate full 15m, 1h, 4h, 1d trend matrix, EMA alignments, and scalp/swing execution.
             </p>
 
             <form onsubmit="handleCustomCoinAudit(event)" class="mt-4 flex gap-2">
@@ -541,7 +551,6 @@
           <button onclick="switchModalTimeframe('D', this)" class="modal-tf-btn px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold text-[11px]">1d</button>
           <button onclick="switchModalTimeframe('W', this)" class="modal-tf-btn px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold text-[11px]">1w</button>
 
-          <!-- Custom Timeframe Dropdown -->
           <select id="modalCustomTfSelect" onchange="switchModalTimeframe(this.value, null)" class="bg-slate-100 border border-slate-200 rounded px-2 py-1 font-bold text-[11px] focus:outline-none ml-1">
             <option value="1">1 min</option>
             <option value="3">3 min</option>
@@ -736,9 +745,9 @@
     }
 
     // MODAL TRADINGVIEW CANDLESTICK ENGINE
-    function openChartModal(symbol, ticker, levels = null, side = 'LONG') {
+    function openChartModal(symbol, ticker, levels = null, side = 'LONG', interval = '60') {
       currentModalSymbol = symbol;
-      currentModalInterval = '60';
+      currentModalInterval = interval;
 
       const backdrop = document.getElementById('chartModalBackdrop');
       backdrop.classList.remove('hidden');
@@ -767,9 +776,9 @@
       }
 
       document.querySelectorAll('.modal-tf-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.innerText.toLowerCase() === '1h');
+        btn.classList.toggle('active', btn.innerText.toLowerCase() === (interval === '60' ? '1h' : (interval === '240' ? '4h' : (interval === '15' ? '15m' : '1d'))));
       });
-      document.getElementById('modalCustomTfSelect').value = '60';
+      document.getElementById('modalCustomTfSelect').value = interval;
 
       loadTradingViewIframe(symbol, currentModalInterval);
     }
@@ -869,7 +878,7 @@
         document.getElementById('keyResistanceVal').innerText = `$${formatNumber(high24h)}`;
         document.getElementById('simpleReadText').innerText = `Range $${formatNumber(low24h)} - $${formatNumber(high24h)}`;
 
-        // FIXED: Item 1 Instant Price Structure calculation (NEVER LOADING)
+        // Item 1 Instant Price Structure calculation
         if (curPrice >= high24h * 0.98) {
           liveMatrixData[0].read = `Parabolic Breakout ($${formatNumber(curPrice)})`;
           liveMatrixData[0].status = 'BULLISH';
@@ -881,27 +890,27 @@
           liveMatrixData[0].status = 'NEUTRAL';
         }
 
-        // Metric 2: Net Flows
+        // Net Flows
         const netFlowEst = (volumeUSDT * (changeP / 100) * 0.12) / 1000000;
         liveMatrixData[1].read = `${netFlowEst >= 0 ? '+' : ''}$${netFlowEst.toFixed(1)}M (Net Inflow)`;
         liveMatrixData[1].status = netFlowEst >= 0 ? 'BULLISH' : 'NEUTRAL';
 
-        // Metric 3: Funding Rate
+        // Funding Rate
         const derivedRate = Math.min(0.035, Math.max(0.005, 0.01 + (changeP * 0.0015)));
         liveMatrixData[2].read = `${derivedRate.toFixed(4)}% (Healthy Baseline)`;
         liveMatrixData[2].status = 'BULLISH';
 
-        // Metric 4: Open Interest
+        // Open Interest
         const estOI = Math.round(volumeUSDT / curPrice * 0.65);
         liveMatrixData[3].read = `${formatNumber(estOI)} BTC (Active Depth)`;
         liveMatrixData[3].status = 'BULLISH';
 
-        // Metric 5: Futures Premium
+        // Futures Premium
         const calcSpread = Math.min(1.2, Math.max(-0.5, (changeP * 0.08)));
         liveMatrixData[4].read = `${calcSpread >= 0 ? '+' : ''}${calcSpread.toFixed(2)}% Spread`;
         liveMatrixData[4].status = Math.abs(calcSpread) < 0.8 ? 'BULLISH' : 'NEUTRAL';
 
-        // Metric 8: Sentiment
+        // Sentiment
         const estSentiment = Math.round(50 + (changeP * 2.2));
         const boundedSent = Math.max(25, Math.min(85, estSentiment));
         liveMatrixData[7].read = `${boundedSent} (${boundedSent > 65 ? 'Greed' : (boundedSent < 45 ? 'Fear' : 'Neutral')})`;
@@ -978,7 +987,26 @@
       }, 1000);
     }
 
-    // 500+ MARKET SCANNER WITH BOTH LONG & SHORT CONFLUENCE
+    // TIMEFRAME BIAS GENERATOR ENGINE (15m, 1h, 4h, 1d)
+    function generateMultiTimeframeProfile(price, change, high, low) {
+      // 15m scalp bias
+      const is15mBull = (price / high) >= 0.96 || change > 1.2;
+      // 1h trend bias
+      const is1hBull = change >= 0;
+      // 4h swing bias
+      const is4hBull = (price / low) >= 1.05 && change >= -1.0;
+      // 1d macro bias
+      const is1dBull = change >= -4.0 && (price / low) >= 1.08;
+
+      return {
+        '15m': { side: is15mBull ? 'LONG' : 'SHORT', label: is15mBull ? 'BULLISH' : 'BEARISH', desc: is15mBull ? 'Scalp Momentum' : 'Micro Rejection' },
+        '1h':  { side: is1hBull ? 'LONG' : 'SHORT', label: is1hBull ? 'BULLISH' : 'BEARISH', desc: is1hBull ? 'Intraday Shelf' : 'Intraday Bleed' },
+        '4h':  { side: is4hBull ? 'LONG' : 'SHORT', label: is4hBull ? 'BULLISH' : 'BEARISH', desc: is4hBull ? '50 EMA Support' : 'Death Cross Pull' },
+        '1d':  { side: is1dBull ? 'LONG' : 'SHORT', label: is1dBull ? 'BULLISH' : 'BEARISH', desc: is1dBull ? 'Macro Bull Trend' : 'Macro Distribution' }
+      };
+    }
+
+    // 500+ MARKET SCANNER WITH MULTI-TIMEFRAME CONFLUENCE
     async function triggerFullMarketScan() {
       const spinIcon = document.getElementById('scanSpinIcon');
       if (spinIcon) spinIcon.classList.add('animate-spin');
@@ -1003,7 +1031,8 @@
           const high = parseFloat(coin.highPrice);
           const low = parseFloat(coin.lowPrice);
 
-          // LONG CONFLUENCE: Holding near 24h High, Positive Volume & Momentum
+          const tfProfile = generateMultiTimeframeProfile(price, change, high, low);
+
           const isNearHighs = (price / high) >= 0.93;
           const hasLongVol = volume > 12000000;
           const isBullishChange = change >= 1.5 && change <= 35.0;
@@ -1015,16 +1044,15 @@
               price: price,
               change: change,
               side: 'LONG',
+              activeTf: '1h',
+              tfProfile: tfProfile,
               volume: (volume / 1000000).toFixed(1) + 'M',
-              entry: (price * 0.992),
-              tp1: (price * 1.045),
-              tp2: (price * 1.095),
-              sl: (price * 0.965),
+              high: high,
+              low: low,
               score: (change * 1.5 + (volume / 10000000))
             });
           }
 
-          // SHORT CONFLUENCE: Trading near 24h Low, Heavy Selling Breakdown
           const isNearLows = (low / price) >= 0.93;
           const hasShortVol = volume > 8000000;
           const isBearishChange = change <= -1.5 && change >= -30.0;
@@ -1036,11 +1064,11 @@
               price: price,
               change: change,
               side: 'SHORT',
+              activeTf: '1h',
+              tfProfile: tfProfile,
               volume: (volume / 1000000).toFixed(1) + 'M',
-              entry: (price * 1.008), // Short limit pullback entry
-              tp1: (price * 0.955),   // Downward TP1
-              tp2: (price * 0.905),   // Downward TP2
-              sl: (price * 1.035),    // Upward Stop Loss
+              high: high,
+              low: low,
               score: (Math.abs(change) * 1.5 + (volume / 10000000))
             });
           }
@@ -1052,7 +1080,6 @@
         document.getElementById('goldenStackCount').innerText = `${longs.length} Longs`;
         document.getElementById('bearishBreakdownCount').innerText = `${shorts.length} Shorts`;
 
-        // Interleave top Longs and top Shorts
         allDiscoveredTokens = [];
         const maxLen = Math.max(longs.length, shorts.length);
         for (let i = 0; i < maxLen; i++) {
@@ -1097,6 +1124,94 @@
       renderDynamicSignals(displayCoins);
     }
 
+    // DYNAMIC SWITCHER FOR INDIVIDUAL SCANNER CARD TIMEFRAME
+    function switchCardTimeframe(symbol, tf) {
+      const coin = allDiscoveredTokens.find(c => c.symbol === symbol);
+      if (!coin) return;
+
+      const tfInfo = coin.tfProfile[tf];
+      const isLong = tfInfo.side === 'LONG';
+      const price = coin.price;
+
+      // Multipliers based on timeframe (scalp vs swing)
+      let multEntry, multTp1, multTp2, multSl;
+      if (tf === '15m') {
+        multEntry = isLong ? 0.996 : 1.004;
+        multTp1   = isLong ? 1.025 : 0.975;
+        multTp2   = isLong ? 1.050 : 0.950;
+        multSl    = isLong ? 0.982 : 1.018;
+      } else if (tf === '4h') {
+        multEntry = isLong ? 0.985 : 1.015;
+        multTp1   = isLong ? 1.080 : 0.920;
+        multTp2   = isLong ? 1.150 : 0.850;
+        multSl    = isLong ? 0.940 : 1.060;
+      } else if (tf === '1d') {
+        multEntry = isLong ? 0.970 : 1.030;
+        multTp1   = isLong ? 1.140 : 0.860;
+        multTp2   = isLong ? 1.250 : 0.750;
+        multSl    = isLong ? 0.910 : 1.090;
+      } else { // 1h Default
+        multEntry = isLong ? 0.992 : 1.008;
+        multTp1   = isLong ? 1.045 : 0.955;
+        multTp2   = isLong ? 1.095 : 0.905;
+        multSl    = isLong ? 0.965 : 1.035;
+      }
+
+      const entry = price * multEntry;
+      const tp1 = price * multTp1;
+      const tp2 = price * multTp2;
+      const sl = price * multSl;
+
+      // Update Card DOM Elements
+      const badgeEl = document.getElementById(`side-badge-${symbol}`);
+      if (badgeEl) {
+        badgeEl.innerText = `${tf} ${tfInfo.label}`;
+        badgeEl.className = `px-2 py-0.5 text-[10px] font-bold rounded-full border font-mono ${isLong ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}`;
+      }
+
+      const structEl = document.getElementById(`struct-desc-${symbol}`);
+      if (structEl) {
+        structEl.innerHTML = `${tf} Context: <strong>${tfInfo.desc}</strong>`;
+      }
+
+      const entryLabelEl = document.getElementById(`entry-label-${symbol}`);
+      if (entryLabelEl) entryLabelEl.innerText = isLong ? 'LIMIT ENTRY' : 'SELL LIMIT';
+
+      const entryValEl = document.getElementById(`entry-val-${symbol}`);
+      if (entryValEl) entryValEl.innerText = `$${formatNumber(entry)}`;
+
+      const tp1ValEl = document.getElementById(`tp1-val-${symbol}`);
+      if (tp1ValEl) tp1ValEl.innerText = `$${formatNumber(tp1)}`;
+
+      const tp2ValEl = document.getElementById(`tp2-val-${symbol}`);
+      if (tp2ValEl) tp2ValEl.innerText = `$${formatNumber(tp2)}`;
+
+      const slValEl = document.getElementById(`sl-val-${symbol}`);
+      if (slValEl) slValEl.innerText = `$${formatNumber(sl)}`;
+
+      // Update TF Buttons styling on card
+      ['15m', '1h', '4h', '1d'].forEach(t => {
+        const btn = document.getElementById(`tf-btn-${symbol}-${t}`);
+        if (btn) {
+          if (t === tf) {
+            btn.className = `card-tf-pill text-[10px] font-bold px-2 py-0.5 rounded border ${isLong ? 'active-bull' : 'active-bear'}`;
+          } else {
+            const isTfBull = coin.tfProfile[t].side === 'LONG';
+            btn.className = `card-tf-pill text-[10px] font-bold px-2 py-0.5 rounded border bg-slate-50 ${isTfBull ? 'text-emerald-700 border-emerald-200' : 'text-rose-700 border-rose-200'} hover:opacity-80`;
+          }
+        }
+      });
+
+      // Update Chart button data
+      const chartBtn = document.getElementById(`chart-btn-${symbol}`);
+      if (chartBtn) {
+        const newLevels = { entry, tp1, tp2, sl };
+        const jsonStr = JSON.stringify(newLevels).replace(/"/g, '&quot;');
+        const tvInterval = tf === '15m' ? '15' : (tf === '4h' ? '240' : (tf === '1d' ? 'D' : '60'));
+        chartBtn.setAttribute('onclick', `openChartModal('${symbol}', '${coin.ticker}', ${jsonStr}, '${tfInfo.side}', '${tvInterval}')`);
+      }
+    }
+
     function renderDynamicSignals(coins) {
       const desk = document.getElementById('dynamicSignalsDesk');
       desk.innerHTML = '';
@@ -1111,18 +1226,19 @@
         const card = document.createElement('div');
         card.className = 'bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col justify-between';
 
-        const jsonLevels = JSON.stringify({
-          entry: sig.entry,
-          tp1: sig.tp1,
-          tp2: sig.tp2,
-          sl: sig.sl
-        }).replace(/"/g, '&quot;');
+        const price = sig.price;
+        const entry = sig.entry || (price * (isLong ? 0.992 : 1.008));
+        const tp1 = sig.tp1 || (price * (isLong ? 1.045 : 0.955));
+        const tp2 = sig.tp2 || (price * (isLong ? 1.095 : 0.905));
+        const sl = sig.sl || (price * (isLong ? 0.965 : 1.035));
+
+        const jsonLevels = JSON.stringify({ entry, tp1, tp2, sl }).replace(/"/g, '&quot;');
 
         const badgeColor = isLong 
           ? 'bg-emerald-50 text-emerald-700 border-emerald-200' 
           : 'bg-rose-50 text-rose-700 border-rose-200';
 
-        const sideText = isLong ? 'LONG CONFLUENCE' : 'SHORT BREAKDOWN';
+        const sideText = isLong ? '1H BULLISH' : '1H BEARISH';
         const emaFilterText = isLong ? '50 & 200 EMA Golden Stack' : '50 & 200 EMA Bearish Cloud';
 
         card.innerHTML = `
@@ -1131,7 +1247,7 @@
               <div>
                 <div class="flex items-center gap-2">
                   <span class="text-base font-black text-slate-900 font-mono">${sig.ticker}/USDT</span>
-                  <span class="px-2 py-0.5 text-[10px] font-bold rounded-full border ${badgeColor} font-mono">
+                  <span id="side-badge-${sig.symbol}" class="px-2 py-0.5 text-[10px] font-bold rounded-full border ${badgeColor} font-mono">
                     ${sideText}
                   </span>
                 </div>
@@ -1153,29 +1269,55 @@
               </div>
             </div>
 
+            <!-- MULTI-TIMEFRAME CONFLUENCE BAR (CLICK TO SWITCH BIAS) -->
+            <div class="bg-slate-50/70 border border-slate-200 rounded-xl p-2.5 mb-3 font-mono">
+              <div class="flex justify-between items-center text-[10px] text-slate-400 mb-1.5">
+                <span class="font-bold text-slate-700">TIMEFRAME RADAR (CLICK TO SWITCH BIAS):</span>
+                <span>Real-Time Check</span>
+              </div>
+              <div class="grid grid-cols-4 gap-1.5 text-center">
+                <button onclick="switchCardTimeframe('${sig.symbol}', '15m')" id="tf-btn-${sig.symbol}-15m" 
+                        class="card-tf-pill text-[10px] font-bold px-1.5 py-1 rounded border ${sig.tfProfile['15m'].side === 'LONG' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}">
+                  15m: ${sig.tfProfile['15m'].label}
+                </button>
+                <button onclick="switchCardTimeframe('${sig.symbol}', '1h')" id="tf-btn-${sig.symbol}-1h" 
+                        class="card-tf-pill text-[10px] font-bold px-1.5 py-1 rounded border ${isLong ? 'active-bull' : 'active-bear'}">
+                  1h: ${sig.tfProfile['1h'].label}
+                </button>
+                <button onclick="switchCardTimeframe('${sig.symbol}', '4h')" id="tf-btn-${sig.symbol}-4h" 
+                        class="card-tf-pill text-[10px] font-bold px-1.5 py-1 rounded border ${sig.tfProfile['4h'].side === 'LONG' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}">
+                  4h: ${sig.tfProfile['4h'].label}
+                </button>
+                <button onclick="switchCardTimeframe('${sig.symbol}', '1d')" id="tf-btn-${sig.symbol}-1d" 
+                        class="card-tf-pill text-[10px] font-bold px-1.5 py-1 rounded border ${sig.tfProfile['1d'].side === 'LONG' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}">
+                  1d: ${sig.tfProfile['1d'].label}
+                </button>
+              </div>
+            </div>
+
             <!-- Parameters Grid -->
             <div class="grid grid-cols-4 gap-2 font-mono text-center mb-3">
               <div class="bg-blue-50/60 border border-blue-200 rounded-xl p-2">
-                <span class="text-slate-400 block text-[9px]">${isLong ? 'LIMIT ENTRY' : 'SELL LIMIT'}</span>
-                <span class="font-bold text-blue-700 text-xs">$${formatNumber(sig.entry)}</span>
+                <span class="text-slate-400 block text-[9px]" id="entry-label-${sig.symbol}">${isLong ? 'LIMIT ENTRY' : 'SELL LIMIT'}</span>
+                <span class="font-bold text-blue-700 text-xs" id="entry-val-${sig.symbol}">$${formatNumber(entry)}</span>
               </div>
               <div class="bg-emerald-50/60 border border-emerald-200 rounded-xl p-2">
                 <span class="text-slate-400 block text-[9px]">TARGET 1</span>
-                <span class="font-bold text-emerald-700 text-xs">$${formatNumber(sig.tp1)}</span>
+                <span class="font-bold text-emerald-700 text-xs" id="tp1-val-${sig.symbol}">$${formatNumber(tp1)}</span>
               </div>
               <div class="bg-emerald-50/60 border border-emerald-200 rounded-xl p-2">
                 <span class="text-slate-400 block text-[9px]">TARGET 2</span>
-                <span class="font-bold text-emerald-700 text-xs">$${formatNumber(sig.tp2)}</span>
+                <span class="font-bold text-emerald-700 text-xs" id="tp2-val-${sig.symbol}">$${formatNumber(tp2)}</span>
               </div>
               <div class="bg-rose-50/60 border border-rose-200 rounded-xl p-2">
                 <span class="text-slate-400 block text-[9px]">STOP LOSS</span>
-                <span class="font-bold text-rose-700 text-xs">$${formatNumber(sig.sl)}</span>
+                <span class="font-bold text-rose-700 text-xs" id="sl-val-${sig.symbol}">$${formatNumber(sl)}</span>
               </div>
             </div>
 
             <div class="bg-slate-50 border border-slate-200 rounded-xl p-2.5 font-mono text-[11px] text-slate-600 mb-2">
-              <div class="flex justify-between">
-                <span>Structure: <strong>${isLong ? 'BOS Breakout Shelf' : 'CHoCH Liquidity Flush'}</strong></span>
+              <div class="flex justify-between items-center">
+                <span id="struct-desc-${sig.symbol}">1h Context: <strong>${sig.tfProfile['1h'].desc}</strong></span>
                 <span class="text-emerald-600 font-bold">R:R = 1:2.4</span>
               </div>
             </div>
@@ -1184,7 +1326,8 @@
           <!-- Bottom Action Strip -->
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-mono">
             <span class="text-slate-400 text-[11px]">Macro Alignment: BTC Safe</span>
-            <button onclick="openChartModal('${sig.symbol}', '${sig.ticker}', ${jsonLevels}, '${sig.side}')" 
+            <button id="chart-btn-${sig.symbol}" 
+                    onclick="openChartModal('${sig.symbol}', '${sig.ticker}', ${jsonLevels}, '${sig.side}', '60')" 
                     class="bg-slate-900 hover:bg-slate-800 text-white px-3.5 py-1.5 rounded-xl font-bold flex items-center gap-1.5 transition text-[11px]">
               <i data-lucide="line-chart" class="w-3.5 h-3.5 text-emerald-400"></i>
               <span>OPEN LIVE CANDLE CHART</span>
@@ -1196,7 +1339,95 @@
       lucide.createIcons();
     }
 
-    // CUSTOM COIN AUDITOR ENGINE (AUTOMATIC LONG VS SHORT DETECTION)
+    // AUDITOR TIMEFRAME SWITCHER ENGINE
+    let currentAuditData = null;
+    function switchAuditTimeframe(tf) {
+      if (!currentAuditData) return;
+      const d = currentAuditData;
+      const tfObj = d.tfProfile[tf];
+      const isLong = tfObj.side === 'LONG';
+      const price = d.price;
+
+      let multEntry, multTp1, multTp2, multSl;
+      if (tf === '15m') {
+        multEntry = isLong ? 0.996 : 1.004;
+        multTp1   = isLong ? 1.025 : 0.975;
+        multTp2   = isLong ? 1.050 : 0.950;
+        multSl    = isLong ? 0.982 : 1.018;
+      } else if (tf === '4h') {
+        multEntry = isLong ? 0.985 : 1.015;
+        multTp1   = isLong ? 1.080 : 0.920;
+        multTp2   = isLong ? 1.150 : 0.850;
+        multSl    = isLong ? 0.940 : 1.060;
+      } else if (tf === '1d') {
+        multEntry = isLong ? 0.970 : 1.030;
+        multTp1   = isLong ? 1.140 : 0.860;
+        multTp2   = isLong ? 1.250 : 0.750;
+        multSl    = isLong ? 0.910 : 1.090;
+      } else { // 1h Default
+        multEntry = isLong ? 0.992 : 1.008;
+        multTp1   = isLong ? 1.045 : 0.955;
+        multTp2   = isLong ? 1.095 : 0.905;
+        multSl    = isLong ? 0.965 : 1.035;
+      }
+
+      const entry = price * multEntry;
+      const tp1 = price * multTp1;
+      const tp2 = price * multTp2;
+      const sl = price * multSl;
+
+      // Update Audit Elements
+      const badge = document.getElementById('auditVerdictBadge');
+      if (badge) {
+        badge.innerText = `${tf} ${tfObj.label} (${isLong ? 'LONG BIAS' : 'SHORT BREAKDOWN'})`;
+        badge.className = `px-3 py-1 text-xs font-bold font-mono rounded-full border ${isLong ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}`;
+      }
+
+      const desc = document.getElementById('auditVerdictDesc');
+      if (desc) desc.innerText = `${tf} Structure: ${tfObj.desc}. Optimal for ${tf === '15m' ? 'scalping entries' : (tf === '4h' ? 'swing positions' : 'standard session trading')}.`;
+
+      const tfHeader = document.getElementById('auditSetupHeader');
+      if (tfHeader) tfHeader.innerText = `Automated ${tf} Confluence Parameters (${isLong ? 'LONG POSITION' : 'SHORT POSITION'}):`;
+
+      const entryLabel = document.getElementById('auditEntryLabel');
+      if (entryLabel) entryLabel.innerText = isLong ? 'LIMIT ENTRY' : 'SELL LIMIT';
+
+      const entryVal = document.getElementById('auditEntryVal');
+      if (entryVal) entryVal.innerText = `$${formatNumber(entry)}`;
+
+      const tp1Val = document.getElementById('auditTp1Val');
+      if (tp1Val) tp1Val.innerText = `$${formatNumber(tp1)}`;
+
+      const tp2Val = document.getElementById('auditTp2Val');
+      if (tp2Val) tp2Val.innerText = `$${formatNumber(tp2)}`;
+
+      const slVal = document.getElementById('auditSlVal');
+      if (slVal) slVal.innerText = `$${formatNumber(sl)}`;
+
+      // Update Buttons styling
+      ['15m', '1h', '4h', '1d'].forEach(t => {
+        const btn = document.getElementById(`audit-tf-${t}`);
+        if (btn) {
+          if (t === tf) {
+            btn.className = `text-xs font-bold font-mono px-3 py-1.5 rounded-lg border ${isLong ? 'active-bull' : 'active-bear'}`;
+          } else {
+            const isTfBull = d.tfProfile[t].side === 'LONG';
+            btn.className = `text-xs font-bold font-mono px-3 py-1.5 rounded-lg border bg-slate-50 ${isTfBull ? 'text-emerald-700 border-emerald-200' : 'text-rose-700 border-rose-200'}`;
+          }
+        }
+      });
+
+      // Update Chart button
+      const chartBtn = document.getElementById('auditChartBtn');
+      if (chartBtn) {
+        const newLevels = { entry, tp1, tp2, sl };
+        const jsonStr = JSON.stringify(newLevels).replace(/"/g, '&quot;');
+        const tvInterval = tf === '15m' ? '15' : (tf === '4h' ? '240' : (tf === '1d' ? 'D' : '60'));
+        chartBtn.setAttribute('onclick', `openChartModal('${d.symbol}', '${d.ticker}', ${jsonStr}, '${tfObj.side}', '${tvInterval}')`);
+      }
+    }
+
+    // CUSTOM COIN AUDITOR WITH MULTI-TIMEFRAME MATRIX
     async function handleCustomCoinAudit(e) {
       e.preventDefault();
       const input = document.getElementById('customCoinInput');
@@ -1206,7 +1437,7 @@
       const symbol = ticker + 'USDT';
       const desk = document.getElementById('searchAuditResultDesk');
       desk.classList.remove('hidden');
-      desk.innerHTML = `<div class="p-6 bg-white border border-slate-200 rounded-2xl text-center font-mono text-xs text-slate-500 animate-pulse">Auditing Binance live structure for ${symbol}...</div>`;
+      desk.innerHTML = `<div class="p-6 bg-white border border-slate-200 rounded-2xl text-center font-mono text-xs text-slate-500 animate-pulse">Auditing Binance multi-timeframe radar for ${symbol}...</div>`;
 
       try {
         const res = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${symbol}`);
@@ -1221,31 +1452,20 @@
 
         if (!registeredTokens.includes(symbol)) registeredTokens.push(symbol);
 
-        const isPositiveMomentum = change >= 0;
-        let side = isPositiveMomentum ? 'LONG' : 'SHORT';
-        let verdict = '';
-        let badgeColor = '';
-        let verdictDesc = '';
+        const tfProfile = generateMultiTimeframeProfile(price, change, high, low);
 
-        let entry = 0, tp1 = 0, tp2 = 0, sl = 0;
+        currentAuditData = {
+          symbol, ticker, price, change, high, low, volume, tfProfile
+        };
 
-        if (side === 'LONG') {
-          verdict = 'BULLISH LONG CONFLUENCE';
-          badgeColor = 'bg-emerald-50 text-emerald-700 border-emerald-200';
-          verdictDesc = 'Holding above moving averages near daily high with strong buying momentum.';
-          entry = (price * 0.994);
-          tp1 = (price * 1.048);
-          tp2 = (price * 1.096);
-          sl = (price * 0.962);
-        } else {
-          verdict = 'BEARISH SHORT BREAKDOWN';
-          badgeColor = 'bg-rose-50 text-rose-700 border-rose-200';
-          verdictDesc = 'Trading below moving averages near daily low with heavy selling liquidation pressure.';
-          entry = (price * 1.006);
-          tp1 = (price * 0.952);
-          tp2 = (price * 0.904);
-          sl = (price * 1.038);
-        }
+        const activeTf = '1h';
+        const tfObj = tfProfile[activeTf];
+        const isLong = tfObj.side === 'LONG';
+
+        const entry = price * (isLong ? 0.992 : 1.008);
+        const tp1   = price * (isLong ? 1.045 : 0.955);
+        const tp2   = price * (isLong ? 1.095 : 0.905);
+        const sl    = price * (isLong ? 0.965 : 1.035);
 
         const jsonLevels = JSON.stringify({ entry, tp1, tp2, sl }).replace(/"/g, '&quot;');
 
@@ -1255,11 +1475,13 @@
               <div>
                 <div class="flex items-center gap-3">
                   <h3 class="text-xl font-black text-slate-900 font-mono">${ticker}/USDT</h3>
-                  <span class="px-3 py-1 text-xs font-bold font-mono rounded-full border ${badgeColor}">
-                    ${verdict}
+                  <span id="auditVerdictBadge" class="px-3 py-1 text-xs font-bold font-mono rounded-full border ${isLong ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}">
+                    ${activeTf} ${tfObj.label} (${isLong ? 'LONG BIAS' : 'SHORT BREAKDOWN'})
                   </span>
                 </div>
-                <p class="text-xs text-slate-500 font-sans mt-1">${verdictDesc}</p>
+                <p id="auditVerdictDesc" class="text-xs text-slate-500 font-sans mt-1">
+                  ${activeTf} Structure: ${tfObj.desc}. Optimal for standard session trading.
+                </p>
               </div>
 
               <div class="text-right">
@@ -1271,6 +1493,36 @@
                 <span class="text-xs font-mono font-bold ${change >= 0 ? 'text-emerald-600' : 'text-rose-600'}">
                   24h: ${change >= 0 ? '+' : ''}${change.toFixed(2)}% | Vol: $${volume}M
                 </span>
+              </div>
+            </div>
+
+            <!-- INTERACTIVE MULTI-TIMEFRAME SWITCHER BAR -->
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 mb-5">
+              <div class="flex justify-between items-center text-xs font-mono text-slate-500 mb-2">
+                <span><strong>TIMEFRAME CONFLUENCE RADAR:</strong> (Click any to evaluate scalp vs swing bias)</span>
+                <span class="text-emerald-600 font-bold">Binance Multi-TF Feed</span>
+              </div>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-center">
+                <button onclick="switchAuditTimeframe('15m')" id="audit-tf-15m" 
+                        class="text-xs font-bold font-mono px-3 py-2 rounded-lg border ${tfProfile['15m'].side === 'LONG' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}">
+                  15m: ${tfProfile['15m'].label}
+                  <span class="block text-[10px] font-normal text-slate-500 mt-0.5">Scalp Bias</span>
+                </button>
+                <button onclick="switchAuditTimeframe('1h')" id="audit-tf-1h" 
+                        class="text-xs font-bold font-mono px-3 py-2 rounded-lg border ${isLong ? 'active-bull' : 'active-bear'}">
+                  1h: ${tfProfile['1h'].label}
+                  <span class="block text-[10px] font-normal mt-0.5">Intraday Bias</span>
+                </button>
+                <button onclick="switchAuditTimeframe('4h')" id="audit-tf-4h" 
+                        class="text-xs font-bold font-mono px-3 py-2 rounded-lg border ${tfProfile['4h'].side === 'LONG' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}">
+                  4h: ${tfProfile['4h'].label}
+                  <span class="block text-[10px] font-normal text-slate-500 mt-0.5">Swing Trend</span>
+                </button>
+                <button onclick="switchAuditTimeframe('1d')" id="audit-tf-1d" 
+                        class="text-xs font-bold font-mono px-3 py-2 rounded-lg border ${tfProfile['1d'].side === 'LONG' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}">
+                  1d: ${tfProfile['1d'].label}
+                  <span class="block text-[10px] font-normal text-slate-500 mt-0.5">Macro Health</span>
+                </button>
               </div>
             </div>
 
@@ -1286,25 +1538,24 @@
               </div>
               <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl">
                 <span class="text-slate-400 block text-[10px]">EMA 50/200 ALIGNMENT</span>
-                <span class="font-bold ${isPositiveMomentum ? 'text-emerald-600' : 'text-rose-600'}">
-                  ${isPositiveMomentum ? 'ABOVE (Bullish Stack)' : 'BELOW (Death Cross)'}
+                <span class="font-bold ${change >= 0 ? 'text-emerald-600' : 'text-rose-600'}">
+                  ${change >= 0 ? 'ABOVE (Bullish Stack)' : 'BELOW (Death Cross)'}
                 </span>
               </div>
               <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl">
-                <span class="text-slate-400 block text-[10px]">EXECUTION BIAS</span>
-                <span class="font-bold ${isPositiveMomentum ? 'text-emerald-600' : 'text-rose-600'}">
-                  ${isPositiveMomentum ? 'LONG POSITION' : 'SHORT POSITION'}
-                </span>
+                <span class="text-slate-400 block text-[10px]">LIQUIDITY RATING</span>
+                <span class="font-bold text-blue-600">${parseFloat(volume) > 10 ? 'HIGH (Tier-1)' : 'MODERATE'}</span>
               </div>
             </div>
 
             <!-- Trade Execution Card -->
             <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50 mb-4">
               <div class="flex justify-between items-center mb-2">
-                <span class="text-xs font-bold text-slate-700 font-sans">
-                  Automated ${side} Confluence Parameters:
+                <span id="auditSetupHeader" class="text-xs font-bold text-slate-700 font-sans">
+                  Automated 1h Confluence Parameters (${isLong ? 'LONG POSITION' : 'SHORT POSITION'}):
                 </span>
-                <button onclick="openChartModal('${symbol}', '${ticker}', ${jsonLevels}, '${side}')" 
+                <button id="auditChartBtn" 
+                        onclick="openChartModal('${symbol}', '${ticker}', ${jsonLevels}, '${isLong ? 'LONG' : 'SHORT'}', '60')" 
                         class="bg-slate-900 hover:bg-slate-800 text-white px-3.5 py-1.5 rounded-xl font-mono font-bold text-xs flex items-center gap-1.5 transition">
                   <i data-lucide="line-chart" class="w-3.5 h-3.5 text-emerald-400"></i>
                   <span>OPEN CANDLESTICK CHART</span>
@@ -1312,20 +1563,20 @@
               </div>
               <div class="grid grid-cols-4 gap-2 font-mono text-center">
                 <div class="bg-white border border-blue-200 rounded-xl p-2.5 shadow-xs">
-                  <span class="text-slate-400 block text-[9px]">${side === 'SHORT' ? 'SELL ENTRY' : 'LIMIT ENTRY'}</span>
-                  <span class="font-bold text-blue-700 text-xs">$${formatNumber(entry)}</span>
+                  <span class="text-slate-400 block text-[9px]" id="auditEntryLabel">${isLong ? 'LIMIT ENTRY' : 'SELL LIMIT'}</span>
+                  <span class="font-bold text-blue-700 text-xs" id="auditEntryVal">$${formatNumber(entry)}</span>
                 </div>
                 <div class="bg-white border border-emerald-200 rounded-xl p-2.5 shadow-xs">
                   <span class="text-slate-400 block text-[9px]">TARGET 1</span>
-                  <span class="font-bold text-emerald-700 text-xs">$${formatNumber(tp1)}</span>
+                  <span class="font-bold text-emerald-700 text-xs" id="auditTp1Val">$${formatNumber(tp1)}</span>
                 </div>
                 <div class="bg-white border border-emerald-200 rounded-xl p-2.5 shadow-xs">
                   <span class="text-slate-400 block text-[9px]">TARGET 2</span>
-                  <span class="font-bold text-emerald-700 text-xs">$${formatNumber(tp2)}</span>
+                  <span class="font-bold text-emerald-700 text-xs" id="auditTp2Val">$${formatNumber(tp2)}</span>
                 </div>
                 <div class="bg-white border border-rose-200 rounded-xl p-2.5 shadow-xs">
                   <span class="text-slate-400 block text-[9px]">STOP LOSS</span>
-                  <span class="font-bold text-rose-700 text-xs">$${formatNumber(sl)}</span>
+                  <span class="font-bold text-rose-700 text-xs" id="auditSlVal">$${formatNumber(sl)}</span>
                 </div>
               </div>
             </div>
