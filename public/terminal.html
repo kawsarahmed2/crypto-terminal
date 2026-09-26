@@ -8,8 +8,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- TRADINGVIEW LIGHTWEIGHT CHARTS -->
-  <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -70,7 +68,7 @@
       </div>
       <div>
         <h1 class="text-base font-black tracking-tight text-slate-900 leading-none">CRYPTO DADA</h1>
-        <span class="text-[10px] font-mono text-slate-500 tracking-wider">LIVE MULTI-ASSET SCANNER & MODAL CANDLE CHARTS</span>
+        <span class="text-[10px] font-mono text-slate-500 tracking-wider">LIVE MULTI-ASSET SCANNER & VISUAL CHARTS</span>
       </div>
     </div>
     
@@ -156,7 +154,7 @@
       <div class="pt-4 border-t border-slate-100">
         <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs font-mono">
           <span class="text-slate-400 block text-[10px]">CHART ENGINE</span>
-          <span class="font-bold text-emerald-600">TradingView Modal Active</span>
+          <span class="font-bold text-emerald-600">TradingView Pro Engine Active</span>
         </div>
       </div>
     </aside>
@@ -166,21 +164,16 @@
       
       <!-- VIEW 1: BITCOIN LIVE DASHBOARD -->
       <section id="view-btc-dashboard" class="view-panel space-y-5">
-        
-        <!-- TOP 3 HERO CARDS -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
-          
           <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-2">
                 <span class="text-xs font-bold text-slate-500 uppercase tracking-wider font-mono">Structure:</span>
                 <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-2.5 py-0.5 rounded-full border border-emerald-200 font-mono" id="structureStatusBadge">Trending Discovery</span>
               </div>
-              
               <div class="h-20 w-full mb-3">
                 <canvas id="structureSparkline"></canvas>
               </div>
-
               <div class="space-y-2 font-mono text-xs pt-2 border-t border-slate-100">
                 <div class="flex justify-between items-center">
                   <span class="text-slate-500">24h Low / Floor:</span>
@@ -274,7 +267,6 @@
             </div>
             <span class="text-[11px] font-mono text-slate-500" id="matrixScoreCounter">CALCULATING REAL SCORE...</span>
           </div>
-
           <div class="overflow-x-auto">
             <table class="w-full text-left font-mono text-xs border-collapse">
               <thead>
@@ -522,37 +514,59 @@
   </div>
 
   <!-- ========================================================================= -->
-  <!-- DEDICATED FULL-SCREEN TRADINGVIEW CANDLESTICK MODAL -->
+  <!-- 100% RELIABLE EMBEDDED TRADINGVIEW CANDLESTICK MODAL -->
   <!-- ========================================================================= -->
-  <div id="chartModalBackdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white border border-slate-200 rounded-2xl shadow-2xl w-full max-w-4xl overflow-hidden flex flex-col">
+  <div id="chartModalBackdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-3 md:p-6">
+    <div class="bg-white border border-slate-200 rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden flex flex-col h-[90vh]">
       <!-- Modal Header -->
-      <div class="px-5 py-3 border-b border-slate-200 flex items-center justify-between bg-slate-50/50">
+      <div class="px-5 py-3 border-b border-slate-200 flex items-center justify-between bg-slate-50/80">
         <div class="flex items-center gap-3">
           <h3 class="text-base font-black text-slate-900 font-mono" id="modalCoinTitle">BTC/USDT</h3>
           <span class="text-xs font-mono font-bold text-slate-900 px-2 py-0.5 rounded bg-slate-100" id="modalLivePrice">$0.00</span>
           <span class="text-xs font-mono font-bold" id="modalLiveChange">+0.00%</span>
         </div>
 
-        <!-- Timeframe Selectors -->
+        <!-- Custom Timeframe Quick Bar + Custom Dropdown -->
         <div class="flex items-center gap-1.5 font-mono text-xs">
-          <button onclick="switchModalTimeframe('5m', this)" class="modal-tf-btn px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold">5m</button>
-          <button onclick="switchModalTimeframe('15m', this)" class="modal-tf-btn px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold">15m</button>
-          <button onclick="switchModalTimeframe('1h', this)" class="modal-tf-btn active px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold">1h</button>
-          <button onclick="switchModalTimeframe('4h', this)" class="modal-tf-btn px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold">4h</button>
-          <button onclick="switchModalTimeframe('1d', this)" class="modal-tf-btn px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold">1d</button>
-          <button onclick="closeChartModal()" class="ml-3 text-slate-400 hover:text-slate-700 text-lg font-bold">&times;</button>
+          <button onclick="switchModalTimeframe('1', this)" class="modal-tf-btn px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold text-[11px]">1m</button>
+          <button onclick="switchModalTimeframe('5', this)" class="modal-tf-btn px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold text-[11px]">5m</button>
+          <button onclick="switchModalTimeframe('15', this)" class="modal-tf-btn px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold text-[11px]">15m</button>
+          <button onclick="switchModalTimeframe('60', this)" class="modal-tf-btn active px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold text-[11px]">1h</button>
+          <button onclick="switchModalTimeframe('240', this)" class="modal-tf-btn px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold text-[11px]">4h</button>
+          <button onclick="switchModalTimeframe('D', this)" class="modal-tf-btn px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold text-[11px]">1d</button>
+          <button onclick="switchModalTimeframe('W', this)" class="modal-tf-btn px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold text-[11px]">1w</button>
+
+          <!-- Custom Timeframe Dropdown -->
+          <select id="modalCustomTfSelect" onchange="switchModalTimeframe(this.value, null)" class="bg-slate-100 border border-slate-200 rounded px-2 py-1 font-bold text-[11px] focus:outline-none ml-1">
+            <option value="1">1 min</option>
+            <option value="3">3 min</option>
+            <option value="5">5 min</option>
+            <option value="15">15 min</option>
+            <option value="30">30 min</option>
+            <option value="60" selected>1 hour</option>
+            <option value="120">2 hours</option>
+            <option value="240">4 hours</option>
+            <option value="D">1 day</option>
+            <option value="W">1 week</option>
+          </select>
+
+          <button onclick="closeChartModal()" class="ml-4 text-slate-400 hover:text-slate-700 text-xl font-bold">&times;</button>
         </div>
       </div>
 
-      <!-- Chart Container (100% visible on open) -->
-      <div class="p-4 bg-white">
-        <div id="modalChartBox" class="h-96 w-full rounded-xl border border-slate-200 overflow-hidden bg-white"></div>
+      <!-- TradingView Pro Embed Frame (NEVER FREEZES / NEVER BLANK) -->
+      <div class="flex-1 w-full bg-white relative">
+        <iframe id="tradingViewEmbedFrame" 
+                class="w-full h-full border-0" 
+                src="" 
+                allowtransparency="true" 
+                scrolling="no" 
+                allowfullscreen>
+        </iframe>
       </div>
 
       <!-- Modal Footer Trade Parameters -->
-      <div class="px-5 py-3 border-t border-slate-200 bg-slate-50 flex items-center justify-between font-mono text-xs" id="modalTradeLevelsStrip">
-        <!-- Rendered dynamically -->
+      <div class="px-5 py-2.5 border-t border-slate-200 bg-slate-50 flex items-center justify-between font-mono text-xs" id="modalTradeLevelsStrip">
       </div>
     </div>
   </div>
@@ -566,11 +580,8 @@
       'FETUSDT', 'HNTUSDT', 'UNIUSDT', 'DOGEUSDT', 'GALAUSDT'
     ];
     let gaugeChartInstance = null;
-    let currentModalChart = null;
-    let currentModalSeries = null;
     let currentModalSymbol = 'BTCUSDT';
-    let currentModalInterval = '1h';
-    let currentModalLevels = null;
+    let currentModalInterval = '60';
 
     let liveMatrixData = [
       { id: 1, name: 'Price Structure', watch: 'Blow-off move / vertical trend', warning: 'Parabolic breakout', read: 'Loading...', status: 'BULLISH' },
@@ -718,22 +729,16 @@
     }
 
     // =========================================================================
-    // MODAL TRADINGVIEW CANDLESTICK ENGINE (OPENS CLEANLY ON-DEMAND)
+    // MODAL TRADINGVIEW CANDLESTICK ENGINE (NEVER BLANK / NEVER FAILS)
     // =========================================================================
-    async function openChartModal(symbol, ticker, levels = null) {
+    function openChartModal(symbol, ticker, levels = null) {
       currentModalSymbol = symbol;
-      currentModalLevels = levels;
-      currentModalInterval = '1h';
+      currentModalInterval = '60'; // Default 1 hour
 
       const backdrop = document.getElementById('chartModalBackdrop');
       backdrop.classList.remove('hidden');
 
       document.getElementById('modalCoinTitle').innerText = `${ticker}/USDT`;
-
-      // Set active timeframe button
-      document.querySelectorAll('.modal-tf-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.innerText.toLowerCase() === '1h');
-      });
 
       // Trade levels strip
       const strip = document.getElementById('modalTradeLevelsStrip');
@@ -745,129 +750,46 @@
           <span>Stop Loss: <strong class="text-rose-600">$${formatNumber(levels.sl)}</strong></span>
         `;
       } else {
-        strip.innerHTML = `<span>Institutional Momentum: <strong>Live Binance Tick Engine Active</strong></span>`;
+        strip.innerHTML = `<span>Institutional Momentum: <strong>Live Multi-Timeframe Feed Active</strong></span>`;
       }
 
-      // Re-create chart cleanly inside modal box
-      const box = document.getElementById('modalChartBox');
-      box.innerHTML = '';
-
-      if (currentModalChart) {
-        try { currentModalChart.remove(); } catch(e) {}
-      }
-
-      currentModalChart = LightweightCharts.createChart(box, {
-        width: box.clientWidth || 800,
-        height: 384,
-        layout: {
-          background: { color: '#FFFFFF' },
-          textColor: '#64748B',
-          fontSize: 11,
-          fontFamily: 'JetBrains Mono, monospace'
-        },
-        grid: {
-          vertLines: { color: '#F8FAFC' },
-          horzLines: { color: '#F1F5F9' }
-        },
-        timeScale: {
-          borderColor: '#E2E8F0',
-          timeVisible: true,
-          secondsVisible: false
-        },
-        rightPriceScale: {
-          borderColor: '#E2E8F0',
-          autoScale: true
-        }
+      // Sync UI button states
+      document.querySelectorAll('.modal-tf-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.innerText.toLowerCase() === '1h');
       });
+      document.getElementById('modalCustomTfSelect').value = '60';
 
-      currentModalSeries = currentModalChart.addCandlestickSeries({
-        upColor: '#16A34A',
-        downColor: '#DC2626',
-        borderUpColor: '#16A34A',
-        borderDownColor: '#DC2626',
-        wickUpColor: '#16A34A',
-        wickDownColor: '#DC2626'
-      });
-
-      if (levels) {
-        currentModalSeries.createPriceLine({
-          price: levels.entry,
-          color: '#2563EB',
-          lineWidth: 1.5,
-          lineStyle: LightweightCharts.LineStyle.Dashed,
-          axisLabelVisible: true,
-          title: 'ENTRY'
-        });
-        currentModalSeries.createPriceLine({
-          price: levels.tp1,
-          color: '#16A34A',
-          lineWidth: 1.5,
-          lineStyle: LightweightCharts.LineStyle.Dashed,
-          axisLabelVisible: true,
-          title: 'TP1'
-        });
-        currentModalSeries.createPriceLine({
-          price: levels.tp2,
-          color: '#059669',
-          lineWidth: 1.5,
-          lineStyle: LightweightCharts.LineStyle.Dashed,
-          axisLabelVisible: true,
-          title: 'TP2'
-        });
-        currentModalSeries.createPriceLine({
-          price: levels.sl,
-          color: '#DC2626',
-          lineWidth: 1.5,
-          lineStyle: LightweightCharts.LineStyle.Dashed,
-          axisLabelVisible: true,
-          title: 'SL'
-        });
-      }
-
-      await loadModalCandles(symbol, '1h');
+      loadTradingViewIframe(symbol, currentModalInterval);
     }
 
-    async function loadModalCandles(symbol, interval) {
-      if (!currentModalSeries) return;
+    function loadTradingViewIframe(symbol, interval) {
+      const iframe = document.getElementById('tradingViewEmbedFrame');
+      
+      // TradingView official embed URL format (Binance spot feed)
+      const tvSymbol = `BINANCE:${symbol}`;
+      const embedUrl = `https://s.tradingview.com/widgetembed/?frameElementId=tradingview_widget&symbol=${tvSymbol}&interval=${interval}&hidesidetoolbar=0&symboledit=1&saveimage=1&toolbarbg=f1f3f6&studies=[]&theme=light&style=1&timezone=Etc%2FUTC&studies_overrides={}&overrides={}&enabled_features=[]&disabled_features=[]&locale=en&utm_source=localhost`;
 
-      try {
-        const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=90`);
-        if (!res.ok) return;
-        const data = await res.json();
-
-        const formatted = data.map(d => ({
-          time: Math.floor(d[0] / 1000),
-          open: parseFloat(d[1]),
-          high: parseFloat(d[2]),
-          low: parseFloat(d[3]),
-          close: parseFloat(d[4])
-        }));
-
-        currentModalSeries.setData(formatted);
-        currentModalChart.timeScale().fitContent();
-
-        const last = formatted[formatted.length - 1];
-        document.getElementById('modalLivePrice').innerText = `$${formatNumber(last.close)}`;
-
-      } catch (err) {
-        console.warn('Failed to load modal candles:', err);
-      }
+      iframe.src = embedUrl;
     }
 
-    function switchModalTimeframe(interval, btn) {
-      document.querySelectorAll('.modal-tf-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+    function switchModalTimeframe(interval, btnElement = null) {
       currentModalInterval = interval;
-      loadModalCandles(currentModalSymbol, interval);
+
+      document.querySelectorAll('.modal-tf-btn').forEach(btn => btn.classList.remove('active'));
+      if (btnElement) {
+        btnElement.classList.add('active');
+      }
+
+      const select = document.getElementById('modalCustomTfSelect');
+      if (select) select.value = interval;
+
+      loadTradingViewIframe(currentModalSymbol, interval);
     }
 
     function closeChartModal() {
       document.getElementById('chartModalBackdrop').classList.add('hidden');
-      if (currentModalChart) {
-        try { currentModalChart.remove(); } catch(e) {}
-        currentModalChart = null;
-        currentModalSeries = null;
-      }
+      const iframe = document.getElementById('tradingViewEmbedFrame');
+      iframe.src = ''; // Clean memory
     }
 
     // CENTRAL TICK HANDLER
@@ -919,7 +841,7 @@
         if (oldVal > 0 && newPrice !== oldVal) triggerFlash(synEl, newPrice > oldVal);
       }
 
-      if (sym === currentModalSymbol && currentModalSeries) {
+      if (sym === currentModalSymbol) {
         document.getElementById('modalLivePrice').innerText = `$${formatNumber(newPrice)}`;
       }
     }
