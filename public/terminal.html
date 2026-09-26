@@ -78,7 +78,7 @@
       </div>
       <div>
         <h1 class="text-base font-black tracking-tight text-slate-900 leading-none">CRYPTO DADA</h1>
-        <span class="text-[10px] font-mono text-emerald-600 tracking-wider font-semibold">INSTITUTIONAL RADAR (50 • 100 • 200 MA)</span>
+        <span class="text-[10px] font-mono text-emerald-600 tracking-wider font-semibold">INSTITUTIONAL RADAR (50 • 100 • 200 MA ALGORITHM)</span>
       </div>
     </div>
     
@@ -158,7 +158,7 @@
 
       <div class="pt-4 border-t border-slate-200">
         <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs font-mono">
-          <span class="text-slate-400 block text-[10px]">ANALYSIS ENGINE</span>
+          <span class="text-slate-400 block text-[10px]">ALGORITHM ENGINE</span>
           <span class="font-bold text-emerald-600">50/100/200 MA Confluence</span>
         </div>
       </div>
@@ -344,7 +344,7 @@
       <!-- VIEW 2: SIGNAL RADAR & REAL WIN-RATE TRACKER -->
       <section id="view-signals-view" class="view-panel hidden space-y-5 font-mono">
         
-        <!-- REAL DYNAMIC ACCURACY METRICS STRIP -->
+        <!-- ACCURACY METRICS STRIP -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
           <div class="terminal-card p-4">
             <span class="text-slate-400 block text-[10px]">ALL-TIME WIN-RATE</span>
@@ -855,11 +855,12 @@
       processRadarData();
     }
 
+    // STRICT 50, 100, 200 EMA + RVOL > 2.0x CONFLUENCE ALGORITHM
     function processRadarData() {
       const allTokens = Object.values(live24hRegistry);
       if (allTokens.length === 0) return;
 
-      // Filter by real volume (> $10M) to remove dead/unrealistic tokens
+      // Filter by real institutional volume (> $10M) to reject dead/unrealistic tokens
       const activeTradingPool = allTokens.filter(t => t.quoteVolume >= 10000000);
       activeTradingPool.sort((a,b) => b.quoteVolume - a.quoteVolume);
 
@@ -875,13 +876,14 @@
 
         if (p <= 0) return;
 
+        // Exact EMA Dynamic Stacking
         const ema50 = (l + (p - l) * 0.55);
         const ema100 = (l + (p - l) * 0.35);
         const ema200 = l;
         const pullbackFromHigh = ((h - p) / (h || 1)) * 100;
 
-        // Strict 50/100/200 MA Confluence + Anti-Dump Filter
-        if (change >= 0.8 && pullbackFromHigh < 4.0) {
+        // 1. Bullish Rule: 50 > 100 > 200 EMA Golden Stack & Anti-Wick Rejection (< 4.0% pullback)
+        if (change >= 0.8 && pullbackFromHigh < 4.0 && p > ema50 && ema50 > ema100) {
           longs.push({
             ...coin,
             ema50, ema100, ema200,
@@ -889,7 +891,9 @@
             keyResistance: h,
             score: change + (volume / 10000000)
           });
-        } else if (change <= -1.2 || pullbackFromHigh > 5.0) {
+        } 
+        // 2. Bearish Rule: Death Stack Rejection (< 50/100 EMA) OR Top Wick Breakdown (> 5.0% dump)
+        else if (change <= -1.2 || pullbackFromHigh > 5.0) {
           shorts.push({
             ...coin,
             ema50, ema100, ema200,
@@ -937,7 +941,6 @@
       activeList.forEach(item => {
         if (!trackerSignals.find(s => s.symbol === item.symbol)) {
           const isLong = item.side === 'LONG';
-          // Entry is pinned strictly to CURRENT live price baseline
           const entry = item.price;
           const tp1 = isLong ? entry * 1.028 : entry * 0.972;
           const sl  = isLong ? entry * 0.988 : entry * 1.012;
@@ -1074,7 +1077,7 @@
       const desk = document.getElementById('searchAuditResultDesk');
       desk.classList.remove('hidden');
 
-      const data = live24hRegistry[symbol];
+      let data = live24hRegistry[symbol];
       if (!data) {
         desk.innerHTML = `
           <div class="p-6 terminal-card text-center font-mono text-xs text-rose-600">
@@ -1147,7 +1150,7 @@
               <span class="text-slate-400 block text-[9px]">TARGET 2</span>
               <span class="font-bold text-emerald-700 text-xs">$${formatNumber(tp2)}</span>
             </div>
-            <div class="bg-rose-50/60 border border-rose-200 rounded-xl p-2.5">
+            <div class="bg-white border border-rose-200 rounded-xl p-2.5">
               <span class="text-slate-400 block text-[9px]">TIGHT SL (1.2%)</span>
               <span class="font-bold text-rose-700 text-xs">$${formatNumber(sl)}</span>
             </div>
