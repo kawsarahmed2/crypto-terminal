@@ -145,7 +145,7 @@
 
         <nav class="space-y-1.5 font-sans text-xs font-medium" id="sideNav">
           <button onclick="navigateView('btc-dashboard')" class="nav-item active w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition" data-view="btc-dashboard">
-            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
             <span>Bitcoin Live Dashboard</span>
           </button>
           
@@ -182,12 +182,10 @@
     <!-- RIGHT CONTENT AREA -->
     <main class="flex-1 p-5 md:p-6 space-y-6 overflow-y-auto custom-scroll">
       
-      <!-- ========================================================================= -->
-      <!-- VIEW 1: BITCOIN LIVE DASHBOARD (LIGHT THEME SCREENSHOT REPLICA)           -->
-      <!-- ========================================================================= -->
+      <!-- VIEW 1: BITCOIN LIVE DASHBOARD -->
       <section id="view-btc-dashboard" class="view-panel space-y-5">
         
-        <!-- TOP DATE & HEADER (From Screenshot 14) -->
+        <!-- TOP DATE & HEADER -->
         <div class="text-center font-mono">
           <span class="text-xs text-slate-500 flex items-center justify-center gap-1.5 mb-1" id="dashDynamicDate">
             <i data-lucide="calendar" class="w-3.5 h-3.5 text-emerald-600"></i>
@@ -197,7 +195,7 @@
           <div class="text-[11px] text-amber-600 font-bold mt-0.5">⚠️ CURRENT MARKET READ</div>
         </div>
 
-        <!-- TOP 3 HERO CARDS (From Screenshot 14) -->
+        <!-- TOP 3 HERO CARDS -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 font-mono">
           
           <!-- Card 1: PRICE ACTION -->
@@ -209,10 +207,10 @@
               </div>
               <div class="mb-2">
                 <span class="text-xs text-slate-500">BTC Price (Close):</span>
-                <span class="text-2xl font-black text-slate-900 ml-1.5" id="heroBtcPrice">$83,940</span>
+                <span class="text-2xl font-black text-slate-900 ml-1.5 px-1.5 py-0.5 rounded transition" id="heroBtcPrice">$84,250.00</span>
               </div>
               <div class="text-[11px] text-slate-500 mb-3" id="hero24hRange">
-                24h Range: $83,180.00 - $85,250.00
+                24h Range: $83,180.00 - $85,255.00
               </div>
 
               <!-- Sparkline Chart Box -->
@@ -223,15 +221,15 @@
               <div class="space-y-1.5 text-xs pt-2 border-t border-slate-100">
                 <div class="flex justify-between">
                   <span class="text-slate-500">↗ Structure:</span>
-                  <span class="font-bold text-amber-600" id="heroStructure">Discovery Shelf</span>
+                  <span class="font-bold text-emerald-600" id="heroStructure">Parabolic Breakout</span>
                 </div>
                 <div class="flex justify-between">
                   <span class="text-slate-500">⊕ Key Support:</span>
-                  <span class="font-bold text-emerald-600" id="heroSupport">$83,180.00</span>
+                  <span class="font-bold text-emerald-600" id="heroSupport">$83,183.00</span>
                 </div>
                 <div class="flex justify-between">
                   <span class="text-slate-500">⊖ Key Resistance:</span>
-                  <span class="font-bold text-rose-600" id="heroResistance">$85,250.00</span>
+                  <span class="font-bold text-rose-600" id="heroResistance">$85,255.00</span>
                 </div>
               </div>
             </div>
@@ -271,7 +269,7 @@
             </div>
           </div>
 
-          <!-- Card 3: MARKET CYCLE SCORE (Gauge Speedometer) -->
+          <!-- Card 3: MARKET CYCLE SCORE -->
           <div class="terminal-card p-5 flex flex-col justify-between text-center">
             <div>
               <div class="flex items-center justify-between text-xs text-slate-500 mb-2">
@@ -286,7 +284,7 @@
               <div class="relative w-48 h-24 mx-auto my-2">
                 <canvas id="gaugeChart"></canvas>
                 <div class="absolute bottom-0 left-0 right-0 text-center">
-                  <span class="text-3xl font-black text-slate-900 font-mono" id="gaugeScoreNum">8/10</span>
+                  <span class="text-3xl font-black text-slate-900 font-mono" id="gaugeScoreNum">7/10</span>
                 </div>
               </div>
 
@@ -311,13 +309,11 @@
 
         </div>
 
-        <!-- MIDDLE MODULE: SNAPSHOT METRICS, RULES, CYCLE MAP, TAKEAWAYS (From Screenshot 13) -->
+        <!-- MIDDLE MODULE: SNAPSHOT METRICS, RULES, CYCLE MAP, TAKEAWAYS -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 font-mono text-xs">
           
           <!-- Column 1: ETF/Derivatives Snapshot & Top Alert Rules -->
           <div class="space-y-4">
-            
-            <!-- ETF / Derivatives Snapshot -->
             <div class="terminal-card p-4">
               <div class="flex items-center gap-1.5 text-amber-600 font-bold text-xs mb-3">
                 <span>⚠️</span> <span>ETF / DERIVATIVES SNAPSHOT</span>
@@ -325,13 +321,13 @@
               <div class="grid grid-cols-3 gap-2 text-center">
                 <div class="bg-slate-50 border border-slate-200 p-2.5 rounded-xl">
                   <span class="text-[9px] text-slate-500 block font-bold">↓ ETF FLOWS</span>
-                  <span class="text-sm font-black text-emerald-600" id="dashEtfVal">+$184.2M</span>
+                  <span class="text-sm font-black text-emerald-600" id="dashEtfVal">+$14.2M</span>
                   <span class="text-[9px] text-slate-400 block mt-0.5" id="dashEtfDate">Live Tick</span>
                 </div>
                 <div class="bg-slate-50 border border-slate-200 p-2.5 rounded-xl">
                   <span class="text-[9px] text-slate-500 block font-bold">% FUNDING</span>
                   <span class="text-xs font-black text-emerald-600" id="dashFundingTone">Bullish</span>
-                  <span class="text-[9px] text-slate-600 block mt-0.5" id="dashFundingVal">Binance 0.010%</span>
+                  <span class="text-[9px] text-slate-600 block mt-0.5" id="dashFundingVal">Binance 0.0100%</span>
                 </div>
                 <div class="bg-slate-50 border border-slate-200 p-2.5 rounded-xl">
                   <span class="text-[9px] text-slate-500 block font-bold">📊 OPEN INTEREST</span>
@@ -341,7 +337,6 @@
               </div>
             </div>
 
-            <!-- Top Alert Rules -->
             <div class="terminal-card p-4">
               <div class="flex items-center gap-1.5 text-amber-600 font-bold text-xs mb-3">
                 <span>⚠️</span> <span>TOP ALERT RULES</span>
@@ -358,7 +353,6 @@
                 </div>
               </div>
             </div>
-
           </div>
 
           <!-- Column 2: Cycle Map + Exclusive Content VIP Box -->
@@ -368,7 +362,6 @@
                 <span>🗺️</span> <span>CYCLE MAP</span>
               </div>
 
-              <!-- Pipeline Nodes -->
               <div class="flex items-center justify-between px-2 mb-4 text-center">
                 <div class="flex flex-col items-center">
                   <div class="w-9 h-9 rounded-full bg-emerald-100 border-2 border-emerald-600 flex items-center justify-center text-emerald-700 text-xs mb-1 font-bold">
@@ -401,7 +394,6 @@
               </div>
             </div>
 
-            <!-- Exclusive Content / VIP Box with Crypto Dada CD Logo (From Screenshot 13) -->
             <div class="border border-amber-200 rounded-xl p-3 bg-amber-50/60 flex items-center gap-3">
               <div class="w-10 h-10 rounded-lg bg-amber-100 border border-amber-300 flex items-center justify-center text-amber-700 font-black text-sm shrink-0">
                 CD
@@ -417,7 +409,7 @@
             </div>
           </div>
 
-          <!-- Column 3: Key Takeaways (From Screenshot 13) -->
+          <!-- Column 3: Key Takeaways -->
           <div class="terminal-card p-5">
             <div class="flex items-center gap-1.5 text-emerald-600 font-bold text-xs mb-3 pb-2 border-b border-slate-100">
               <span>💡</span> <span>KEY TAKEAWAYS</span>
@@ -425,7 +417,7 @@
             <ul class="space-y-2.5 text-xs text-slate-700 font-sans">
               <li class="flex items-start gap-2">
                 <span class="text-emerald-600 font-bold">✔</span>
-                <span id="takeawayPoint1"><strong>$83,180 remains primary support;</strong> a clean daily close below this level is required to invalidate current structural momentum.</span>
+                <span id="takeawayPoint1"><strong>$83,183.00 remains primary support;</strong> a clean daily close below this level is required to invalidate current structural momentum.</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-emerald-600 font-bold">✔</span>
@@ -444,25 +436,25 @@
 
         </div>
 
-        <!-- BOTTOM TICKER STRIP (From Screenshot 13) -->
+        <!-- BOTTOM TICKER STRIP -->
         <div class="bg-white border border-slate-200 rounded-xl px-5 py-2.5 flex flex-wrap items-center justify-between text-xs font-mono shadow-xs">
           <div class="flex items-center gap-2">
             <span class="text-emerald-600">📈</span>
             <span class="text-slate-500">MVRV Z-SCORE:</span>
-            <span class="font-bold text-slate-900" id="stripMvrv">1.82 (Healthy)</span>
+            <span class="font-bold text-slate-900" id="stripMvrv">1.75 (Healthy)</span>
           </div>
           <div class="h-3 w-px bg-slate-200 hidden sm:block"></div>
 
           <div class="flex items-center gap-2">
             <span class="text-emerald-600">😊</span>
             <span class="text-slate-500">NUPL:</span>
-            <span class="font-bold text-emerald-600" id="stripNupl">0.480 (Belief)</span>
+            <span class="font-bold text-emerald-600" id="stripNupl">0.449 (Belief)</span>
           </div>
           <div class="h-3 w-px bg-slate-200 hidden sm:block"></div>
 
           <div class="flex items-center gap-2">
             <span class="text-slate-500">⇄ EXCHANGE FLOW:</span>
-            <span class="font-bold text-emerald-600" id="stripExFlow">-0.016 (Net Outflow)</span>
+            <span class="font-bold text-emerald-600" id="stripExFlow">-0.020k BTC (Net Outflow)</span>
           </div>
           <div class="h-3 w-px bg-slate-200 hidden sm:block"></div>
 
@@ -473,7 +465,7 @@
           </div>
         </div>
 
-        <!-- SIGNAL TABLE (CORE OF DASHBOARD - EXACT ROW-BY-ROW WITH DYNAMIC SYNC) -->
+        <!-- SIGNAL TABLE -->
         <div class="terminal-card overflow-hidden font-mono text-xs">
           <div class="px-5 py-3 border-b border-slate-200 bg-slate-50/70 flex items-center justify-between">
             <div class="flex items-center gap-2">
@@ -502,9 +494,7 @@
 
       </section>
 
-      <!-- ========================================================================= -->
-      <!-- VIEW 2: 500+ MARKET SCANNER (SUPPORT & RESISTANCE STRATEGIC GUIDANCE)     -->
-      <!-- ========================================================================= -->
+      <!-- VIEW 2: 500+ MARKET SCANNER -->
       <section id="view-signals-view" class="view-panel hidden space-y-5">
         <div class="terminal-card p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
@@ -552,9 +542,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="dynamicSignalsDesk"></div>
       </section>
 
-      <!-- ========================================================================= -->
-      <!-- VIEW 3: INSTANT COIN AUDITOR                                              -->
-      <!-- ========================================================================= -->
+      <!-- VIEW 3: INSTANT COIN AUDITOR -->
       <section id="view-search-view" class="view-panel hidden space-y-5">
         <div class="terminal-card p-6">
           <div class="max-w-2xl">
@@ -582,9 +570,7 @@
         <div id="searchAuditResultDesk" class="hidden"></div>
       </section>
 
-      <!-- ========================================================================= -->
-      <!-- VIEW 4: SYNDICATE ROTATIONS                                               -->
-      <!-- ========================================================================= -->
+      <!-- VIEW 4: SYNDICATE ROTATIONS -->
       <section id="view-syndicate-view" class="view-panel hidden space-y-5">
         <div class="terminal-card p-5 flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div>
@@ -726,9 +712,7 @@
         </div>
       </section>
 
-      <!-- ========================================================================= -->
-      <!-- VIEW 5: MACRO BOND & YIELDS                                               -->
-      <!-- ========================================================================= -->
+      <!-- VIEW 5: MACRO BOND & YIELDS -->
       <section id="view-macro-view" class="view-panel hidden space-y-5">
         <div class="terminal-card p-5">
           <h2 class="text-lg font-black text-slate-900 font-mono">"TELL THAT TO THE BOND MARKET"</h2>
@@ -744,10 +728,9 @@
     </main>
   </div>
 
-  <!-- 100% RELIABLE EMBEDDED TRADINGVIEW CANDLESTICK MODAL -->
+  <!-- TRADINGVIEW MODAL -->
   <div id="chartModalBackdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-3 md:p-6">
     <div class="bg-white border border-slate-200 rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden flex flex-col h-[90vh]">
-      <!-- Modal Header -->
       <div class="px-5 py-3 border-b border-slate-200 flex items-center justify-between bg-slate-50">
         <div class="flex items-center gap-3">
           <h3 class="text-base font-black text-slate-900 font-mono" id="modalCoinTitle">BTC/USDT</h3>
@@ -756,7 +739,6 @@
           <span class="text-xs font-mono font-bold px-2 py-0.5 rounded" id="modalDirectionBadge">LONG SETUP</span>
         </div>
 
-        <!-- Custom Timeframe Quick Bar + Custom Dropdown -->
         <div class="flex items-center gap-1.5 font-mono text-xs">
           <button onclick="switchModalTimeframe('1', this)" class="modal-tf-btn px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold text-[11px] text-slate-700">1m</button>
           <button onclick="switchModalTimeframe('5', this)" class="modal-tf-btn px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold text-[11px] text-slate-700">5m</button>
@@ -783,26 +765,17 @@
         </div>
       </div>
 
-      <!-- TradingView Embed Frame -->
       <div class="flex-1 w-full bg-white relative">
-        <iframe id="tradingViewEmbedFrame" 
-                class="w-full h-full border-0" 
-                src="" 
-                allowtransparency="true" 
-                scrolling="no" 
-                allowfullscreen>
-        </iframe>
+        <iframe id="tradingViewEmbedFrame" class="w-full h-full border-0" src="" allowtransparency="true" scrolling="no" allowfullscreen></iframe>
       </div>
 
-      <!-- Modal Footer Trade Parameters -->
-      <div class="px-5 py-2.5 border-t border-slate-200 bg-slate-50 flex items-center justify-between font-mono text-xs" id="modalTradeLevelsStrip">
-      </div>
+      <div class="px-5 py-2.5 border-t border-slate-200 bg-slate-50 flex items-center justify-between font-mono text-xs" id="modalTradeLevelsStrip"></div>
     </div>
   </div>
 
   <!-- SCRIPT ENGINE -->
   <script>
-    let liveBtcPrice = 83940.00;
+    let liveBtcPrice = 84250.00;
     let btcWebSocket = null;
     let currentScannerFilter = 'ALL';
     let allDiscoveredTokens = [];
@@ -814,17 +787,16 @@
     let currentModalSymbol = 'BTCUSDT';
     let currentModalInterval = '60';
 
-    // 10 SIGNALS WITH DYNAMIC ENGINE
     let liveMatrixData = [
-      { id: 1, icon: '📈', name: 'Price Structure', watch: 'Blow-off move / vertical trend', warning: 'Parabolic breakout', read: 'Discovery Shelf', status: 'BULLISH' },
-      { id: 2, icon: '🏛️', name: 'ETF Flows', watch: 'Sustained spot demand', warning: 'Large outflows', read: '+$184.2M Net Inflow', status: 'BULLISH' },
+      { id: 1, icon: '📈', name: 'Price Structure', watch: 'Blow-off move / vertical trend', warning: 'Parabolic breakout', read: 'Parabolic Breakout ($84,250.00)', status: 'BULLISH' },
+      { id: 2, icon: '🏛️', name: 'ETF Flows', watch: 'Sustained spot demand', warning: 'Large outflows', read: '+$14.2M Net Inflow', status: 'BULLISH' },
       { id: 3, icon: '📈', name: '% Funding Rates', watch: 'Overheated longs', warning: 'Strong positive spike', read: '0.0100% (Healthy Baseline)', status: 'BULLISH' },
       { id: 4, icon: '📊', name: 'Open Interest (OI)', watch: 'Leverage buildup', warning: 'OI exploding higher', read: '142.5k BTC (~$11.9B)', status: 'BULLISH' },
       { id: 5, icon: '🖥️', name: 'Futures Premium', watch: 'Excessive bullish basis', warning: 'Premium sharply elevated', read: '+0.15% Spread (Mild)', status: 'BULLISH' },
-      { id: 6, icon: '📈', name: 'MVRV Z-Score', watch: 'Valuation overheating', warning: 'High top-zone valuation', read: '1.82 (Mid-Cycle Healthy)', status: 'BULLISH' },
-      { id: 7, icon: '😊', name: 'NUPL', watch: 'Euphoria', warning: 'Euphoric zone', read: '0.48 (Belief Phase)', status: 'BULLISH' },
-      { id: 8, icon: '👥', name: 'Retail Mania', watch: 'Euphoric crowd behavior', warning: 'FOMO mania everywhere', read: '68 (Greed / Controlled)', status: 'NEUTRAL' },
-      { id: 9, icon: '🔄', name: 'Exchange Inflows / Outflows', watch: 'Coins moving to / from exchanges', warning: 'Heavy inflows / balance rise', read: '-$140M (Spot Outflows)', status: 'BULLISH' },
+      { id: 6, icon: '📈', name: 'MVRV Z-Score', watch: 'Valuation overheating', warning: 'High top-zone valuation', read: '1.75 (Mid-Cycle Healthy)', status: 'BULLISH' },
+      { id: 7, icon: '😊', name: 'NUPL', watch: 'Euphoria', warning: 'Euphoric zone', read: '0.449 (Belief Phase)', status: 'BULLISH' },
+      { id: 8, icon: '👥', name: 'Retail Mania', watch: 'Euphoric crowd behavior', warning: 'FOMO mania everywhere', read: '50 (Neutral)', status: 'BULLISH' },
+      { id: 9, icon: '🔄', name: 'Exchange Inflows / Outflows', watch: 'Coins moving to / from exchanges', warning: 'Heavy inflows / balance rise', read: '-0.020k BTC (Spot Outflows)', status: 'BULLISH' },
       { id: 10, icon: '⚡', name: 'Liquidation Risk', watch: 'Crowded leverage', warning: 'One-sided crowded setup', read: '$210M (Moderate Flush)', status: 'NEUTRAL' }
     ];
 
@@ -897,7 +869,7 @@
         data: {
           labels: ['Score', 'Remaining'],
           datasets: [{
-            data: [8, 2],
+            data: [7, 3],
             backgroundColor: ['#16A34A', '#E2E8F0'],
             borderWidth: 0,
             circumference: 180,
@@ -1031,6 +1003,7 @@
       iframe.src = '';
     }
 
+    // 1-SECOND PULSE FOR REAL LIVE BITCOIN PRICE TICKING
     function applyTickerUpdate(sym, newPrice, changePercent) {
       if (isNaN(newPrice) || newPrice <= 0) return;
 
@@ -1043,6 +1016,13 @@
           if (oldPrice > 0 && newPrice !== oldPrice) {
             triggerFlash(topBtc, newPrice > oldPrice);
           }
+        }
+
+        // Keep Signal Table #1 Price in sync live
+        liveMatrixData[0].read = `Parabolic Breakout ($${formatNumber(newPrice)})`;
+        const firstRowPrice = document.querySelector('#signalTableBody tr:first-child td:nth-child(5)');
+        if (firstRowPrice) {
+          firstRowPrice.innerText = `Parabolic Breakout ($${formatNumber(newPrice)})`;
         }
       }
 
@@ -1079,21 +1059,17 @@
       }
     }
 
-    async function initImmediateBtcPrices() {
-      try {
-        const res = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT');
-        if (res.ok) {
-          const d = await res.json();
-          applyTickerUpdate('BTCUSDT', parseFloat(d.lastPrice), parseFloat(d.priceChangePercent));
-          const low = parseFloat(d.lowPrice);
-          const high = parseFloat(d.highPrice);
-          document.getElementById('heroSupport').innerText = `$${formatNumber(low)}`;
-          document.getElementById('heroResistance').innerText = `$${formatNumber(high)}`;
-          document.getElementById('hero24hRange').innerText = `24h Range: $${formatNumber(low)} - $${formatNumber(high)}`;
-        }
-      } catch(e) {
-        applyTickerUpdate('BTCUSDT', 83940.00, 0.20);
-      }
+    // CONTINUOUS 1-SECOND HTTP PULSE ENGINE
+    async function startContinuousLiveTickerLoop() {
+      setInterval(async () => {
+        try {
+          const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT');
+          if (res.ok) {
+            const d = await res.json();
+            applyTickerUpdate('BTCUSDT', parseFloat(d.price));
+          }
+        } catch(e) {}
+      }, 1000);
     }
 
     async function syncRealInstitutionalMetrics() {
@@ -1157,7 +1133,7 @@
         liveMatrixData[4].read = `${calcSpread >= 0 ? '+' : ''}${calcSpread.toFixed(2)}% Spread (Mild)`;
         liveMatrixData[4].status = Math.abs(calcSpread) < 0.6 ? 'BULLISH' : 'NEUTRAL';
 
-        // Dynamic Sentiment (Alternative.me / RSI bounded)
+        // Dynamic Sentiment
         const estSentiment = Math.round(50 + (changeP * 2.2));
         const boundedSent = Math.max(25, Math.min(85, estSentiment));
         liveMatrixData[7].read = `${boundedSent} (${boundedSent > 65 ? 'Greed / Controlled' : (boundedSent < 45 ? 'Fear / Opportunity' : 'Neutral')})`;
@@ -1203,36 +1179,6 @@
       } catch (err) {
         console.error('Fatal sync metrics err:', err);
       }
-    }
-
-    function startDedicatedBtcStream() {
-      if (btcWebSocket) {
-        try { btcWebSocket.close(); } catch(e){}
-      }
-      try {
-        btcWebSocket = new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@ticker');
-        btcWebSocket.onmessage = (event) => {
-          const d = JSON.parse(event.data);
-          if (!d || !d.c) return;
-          applyTickerUpdate('BTCUSDT', parseFloat(d.c), parseFloat(d.P));
-        };
-        btcWebSocket.onclose = () => { setTimeout(startDedicatedBtcStream, 2000); };
-      } catch(e){}
-    }
-
-    async function startRealtimePulseLoop() {
-      setInterval(async () => {
-        if (registeredTokens.length === 0) return;
-        try {
-          const querySymbols = JSON.stringify(registeredTokens);
-          const res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbols=${encodeURIComponent(querySymbols)}`);
-          if (!res.ok) return;
-          const data = await res.json();
-          if (Array.isArray(data)) {
-            data.forEach(item => { applyTickerUpdate(item.symbol, parseFloat(item.price)); });
-          }
-        } catch (err) {}
-      }, 1000);
     }
 
     function buildFastTfProfile(price, change, high, low) {
@@ -1829,13 +1775,10 @@
       initGaugeChart();
       renderSignalTable();
 
-      await initImmediateBtcPrices();
-
-      startDedicatedBtcStream();
-      startRealtimePulseLoop();
-
       await syncRealInstitutionalMetrics();
-      setInterval(syncRealInstitutionalMetrics, 60000);
+      setInterval(syncRealInstitutionalMetrics, 15000); // Fast 15s refresh for macro data
+
+      startContinuousLiveTickerLoop(); // 1-second continuous pulse
 
       await triggerFullMarketScan();
       setInterval(triggerFullMarketScan, 45000);
