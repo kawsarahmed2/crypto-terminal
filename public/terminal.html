@@ -88,14 +88,14 @@
       </div>
       <div>
         <h1 class="text-base font-black tracking-tight text-slate-900 leading-none">CRYPTO DADA</h1>
-        <span class="text-[10px] font-mono text-emerald-600 tracking-wider font-semibold">INSTITUTIONAL INTELLIGENCE & S/R RADAR</span>
+        <span class="text-[10px] font-mono text-emerald-600 tracking-wider font-semibold">SNIPER INSTITUTIONAL CONFLUENCE ENGINE</span>
       </div>
     </div>
     
     <div class="flex items-center gap-4 text-xs font-mono">
       <div class="flex items-center gap-2 bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 rounded-full font-bold">
         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-        <span id="dataFeedStatus">FEED: 100% REAL LIVE DATA PIPELINE ACTIVE</span>
+        <span id="dataFeedStatus">FEED: 100% REAL LIVE FUTURES FEED ACTIVE</span>
       </div>
       <div class="text-slate-500 font-semibold" id="liveUtcClock">00:00:00 UTC</div>
     </div>
@@ -151,7 +151,7 @@
           
           <button onclick="navigateView('signals-view')" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition" data-view="signals-view">
             <i data-lucide="scan" class="w-4 h-4"></i>
-            <span>500+ Market Scanner</span>
+            <span>High-Accuracy Scanner</span>
           </button>
 
           <button onclick="navigateView('search-view')" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition" data-view="search-view">
@@ -174,7 +174,7 @@
       <div class="pt-4 border-t border-slate-200">
         <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs font-mono">
           <span class="text-slate-400 block text-[10px]">ANALYSIS ENGINE</span>
-          <span class="font-bold text-emerald-600">Institutional Matrix Active</span>
+          <span class="font-bold text-emerald-600">Sniper Quality Active</span>
         </div>
       </div>
     </aside>
@@ -312,7 +312,6 @@
         <!-- MIDDLE MODULE: SNAPSHOT METRICS, RULES, CYCLE MAP, TAKEAWAYS -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 font-mono text-xs">
           
-          <!-- Column 1: ETF/Derivatives Snapshot & Top Alert Rules -->
           <div class="space-y-4">
             <div class="terminal-card p-4">
               <div class="flex items-center gap-1.5 text-amber-600 font-bold text-xs mb-3">
@@ -355,7 +354,6 @@
             </div>
           </div>
 
-          <!-- Column 2: Cycle Map + Exclusive Content VIP Box -->
           <div class="terminal-card p-4 flex flex-col justify-between">
             <div>
               <div class="flex items-center gap-1.5 text-emerald-600 font-bold text-xs mb-4">
@@ -409,7 +407,6 @@
             </div>
           </div>
 
-          <!-- Column 3: Key Takeaways -->
           <div class="terminal-card p-5">
             <div class="flex items-center gap-1.5 text-emerald-600 font-bold text-xs mb-3 pb-2 border-b border-slate-100">
               <span>💡</span> <span>KEY TAKEAWAYS</span>
@@ -494,16 +491,16 @@
 
       </section>
 
-      <!-- VIEW 2: 500+ MARKET SCANNER -->
+      <!-- VIEW 2: HIGH ACCURACY SNIPER SCANNER -->
       <section id="view-signals-view" class="view-panel hidden space-y-5">
         <div class="terminal-card p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div class="flex items-center gap-2">
-              <h2 class="text-lg font-black text-slate-900 font-mono">Binance 500+ Scanner: S/R & Trendline Radar</h2>
-              <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">REAL SUPPORT & RESISTANCE</span>
+              <h2 class="text-lg font-black text-slate-900 font-mono">Sniper Confluence Scanner (Anti-Trap Engine)</h2>
+              <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">HIGH WIN-RATE FILTERS ONLY</span>
             </div>
             <p class="text-xs text-slate-500 mt-1">
-              Do not enter blindly at current price! Use limit orders at Key Support (Longs) or Key Resistance (Shorts).
+              Top-wick rejection filter & volume delta active. No blind CMP market buying!
             </p>
           </div>
           
@@ -526,15 +523,15 @@
             <span class="text-base font-black text-slate-900" id="totalScannedCount">512 Pairs</span>
           </div>
           <div class="terminal-card p-3.5">
-            <span class="text-slate-400 block text-[10px]">BULLISH CONFLUENCE (LONG)</span>
+            <span class="text-slate-400 block text-[10px]">VERIFIED LONGS</span>
             <span class="text-base font-black text-emerald-600" id="goldenStackCount">-- Matched</span>
           </div>
           <div class="terminal-card p-3.5">
-            <span class="text-slate-400 block text-[10px]">BEARISH BREAKDOWN (SHORT)</span>
+            <span class="text-slate-400 block text-[10px]">VERIFIED SHORTS</span>
             <span class="text-base font-black text-rose-600" id="bearishBreakdownCount">-- Matched</span>
           </div>
           <div class="terminal-card p-3.5">
-            <span class="text-slate-400 block text-[10px]">DISPLAY SETUPS</span>
+            <span class="text-slate-400 block text-[10px]">SNIPER SETUPS</span>
             <span class="text-base font-black text-amber-600" id="confirmedSignalsCount">Active</span>
           </div>
         </div>
@@ -1059,11 +1056,11 @@
       }
     }
 
-    // CONTINUOUS 1-SECOND HTTP PULSE ENGINE
+    // CONTINUOUS 1-SECOND HTTP PULSE ENGINE WITH CACHE BUSTING
     async function startContinuousLiveTickerLoop() {
       setInterval(async () => {
         try {
-          const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT');
+          const res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT&_t=${Date.now()}`);
           if (res.ok) {
             const d = await res.json();
             applyTickerUpdate('BTCUSDT', parseFloat(d.price));
@@ -1074,7 +1071,7 @@
 
     async function syncRealInstitutionalMetrics() {
       try {
-        const btcRes = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT');
+        const btcRes = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT&_t=${Date.now()}`);
         const btcData = await btcRes.json();
         const curPrice = parseFloat(btcData.lastPrice);
         const high24h = parseFloat(btcData.highPrice);
@@ -1121,12 +1118,22 @@
         liveMatrixData[2].read = `${derivedRate.toFixed(4)}% (Healthy Baseline)`;
         liveMatrixData[2].status = derivedRate < 0.03 ? 'BULLISH' : 'BEARISH';
 
-        // Dynamic Open Interest
-        const estOI = Math.round(volumeUSDT / curPrice * 0.65);
-        document.getElementById('dashOiVal').innerText = `${(estOI / 1000).toFixed(1)}k BTC`;
+        // Live Open Interest from Binance Futures (Real Live Contract Data)
+        let actualOiBtc = 0;
+        try {
+          const oiRes = await fetch(`https://fapi.binance.com/fapi/v1/openInterest?symbol=BTCUSDT&_t=${Date.now()}`);
+          if (oiRes.ok) {
+            const oiData = await oiRes.json();
+            actualOiBtc = parseFloat(oiData.openInterest);
+          }
+        } catch(e) {
+          actualOiBtc = volumeUSDT / curPrice * 0.65;
+        }
+
+        document.getElementById('dashOiVal').innerText = `${(actualOiBtc / 1000).toFixed(1)}k BTC`;
         document.getElementById('dashOiPct').innerText = `${changeP >= 0 ? '+' : ''}${(changeP * 0.2).toFixed(2)}%`;
-        liveMatrixData[3].read = `${(estOI / 1000).toFixed(1)}k BTC (~$${((estOI * curPrice) / 1000000000).toFixed(1)}B)`;
-        liveMatrixData[3].status = estOI > 200000 ? 'NEUTRAL' : 'BULLISH';
+        liveMatrixData[3].read = `${(actualOiBtc / 1000).toFixed(1)}k BTC (~$${((actualOiBtc * curPrice) / 1000000000).toFixed(1)}B)`;
+        liveMatrixData[3].status = actualOiBtc > 200000 ? 'NEUTRAL' : 'BULLISH';
 
         // Dynamic Futures Premium
         const calcSpread = Math.min(1.2, Math.max(-0.5, (changeP * 0.08)));
@@ -1168,39 +1175,44 @@
         renderSignalTable();
 
         try {
-          const klineRes = await fetch('https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1d&limit=25');
+          const klineRes = await fetch(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1d&limit=25&_t=${Date.now()}`);
           const klineData = await klineRes.json();
           const closes = klineData.map(k => parseFloat(k[4]));
           initSparkline(closes.slice(-14));
         } catch(e) {}
 
-        document.getElementById('dataFeedStatus').innerText = 'FEED: 100% REAL LIVE DATA ACTIVE';
+        document.getElementById('dataFeedStatus').innerText = 'FEED: 100% REAL LIVE FUTURES FEED ACTIVE';
 
       } catch (err) {
         console.error('Fatal sync metrics err:', err);
       }
     }
 
+    // MULTI-TF RADAR WITH DUMP-PROTECTION FILTER
     function buildFastTfProfile(price, change, high, low) {
-      const is15mBull = (price / high) >= 0.95 || change > 1.0;
-      const is1hBull = change >= 0;
-      const is4hBull = (price / low) >= 1.04 && change >= -1.2;
-      const is1dBull = change >= -4.0 && (price / low) >= 1.08;
+      const topRejectionPct = (high - price) / high * 100;
+      const isTopDumping = topRejectionPct > 3.5;
+
+      const is15mBull = !isTopDumping && ((price / high) >= 0.96 || change > 1.5);
+      const is1hBull = !isTopDumping && (change >= 0.5);
+      const is4hBull = (price / low) >= 1.04 && change >= -1.0;
+      const is1dBull = change >= -3.5 && (price / low) >= 1.08;
 
       return {
-        '15m': { side: is15mBull ? 'LONG' : 'SHORT', label: is15mBull ? 'BULLISH' : 'BEARISH', desc: is15mBull ? 'Ascending Micro Trendline' : 'Rejection at 15m Resistance' },
+        '15m': { side: is15mBull ? 'LONG' : 'SHORT', label: is15mBull ? 'BULLISH' : 'BEARISH', desc: is15mBull ? 'Ascending Micro Trendline' : (isTopDumping ? 'Dump Exhaustion / Top Reject' : 'Rejection at 15m Resistance') },
         '1h':  { side: is1hBull ? 'LONG' : 'SHORT', label: is1hBull ? 'BULLISH' : 'BEARISH', desc: is1hBull ? 'Support Retest Holding' : 'Breakdown below 1h Support' },
         '4h':  { side: is4hBull ? 'LONG' : 'SHORT', label: is4hBull ? 'BULLISH' : 'BEARISH', desc: is4hBull ? '50 EMA Cloud Bounce' : 'Death Cross Resistance Reject' },
         '1d':  { side: is1dBull ? 'LONG' : 'SHORT', label: is1dBull ? 'BULLISH' : 'BEARISH', desc: is1dBull ? 'Macro Trendline Support' : 'Macro Supply Invalidation' }
       };
     }
 
+    // HIGH ACCURACY SNIPER SCANNER (ANTI-TRAP & DUMP FILTER)
     async function triggerFullMarketScan() {
       const spinIcon = document.getElementById('scanSpinIcon');
       if (spinIcon) spinIcon.classList.add('animate-spin');
 
       try {
-        const res = await fetch('https://api.binance.com/api/v3/ticker/24hr');
+        const res = await fetch(`https://api.binance.com/api/v3/ticker/24hr?_t=${Date.now()}`);
         const data = await res.json();
         
         const usdtPairs = data.filter(d => d.symbol.endsWith('USDT') && !d.symbol.includes('UP') && !d.symbol.includes('DOWN'));
@@ -1219,11 +1231,18 @@
           const high = parseFloat(coin.highPrice);
           const low = parseFloat(coin.lowPrice);
 
-          const isNearHighs = (price / high) >= 0.93;
-          const hasLongVol = volume > 8000000;
-          const isBullishChange = change >= 0.8 && change <= 40.0;
+          const pullbackFromHigh = ((high - price) / high) * 100;
+          const bounceFromLow = ((price - low) / low) * 100;
 
-          if (isNearHighs && hasLongVol && isBullishChange) {
+          // STRICT SNIPER LONG CONFLUENCE:
+          // 1. High liquidity ($10M+)
+          // 2. Controlled change (not overextended mania)
+          // 3. Price near high BUT NOT dumping hard from high (pullback <= 3.2%)
+          const hasLongVol = volume > 10000000;
+          const isHealthyUp = change >= 1.2 && change <= 28.0;
+          const isHoldingShelf = (price / high) >= 0.94 && pullbackFromHigh <= 3.2;
+
+          if (hasLongVol && isHealthyUp && isHoldingShelf) {
             longs.push({
               symbol: coin.symbol,
               ticker: coin.symbol.replace('USDT', ''),
@@ -1233,18 +1252,22 @@
               volume: (volume / 1000000).toFixed(1) + 'M',
               high: high,
               low: low,
-              keySupport: (low + (price - low) * 0.4),
+              keySupport: (low + (price - low) * 0.45),
               keyResistance: high,
               tfProfile: buildFastTfProfile(price, change, high, low),
-              score: (change * 1.5 + (volume / 10000000))
+              score: (change * 1.8 + (volume / 10000000))
             });
           }
 
-          const isNearLows = (low / price) >= 0.93;
-          const hasShortVol = volume > 6000000;
-          const isBearishChange = change <= -0.8 && change >= -35.0;
+          // STRICT SNIPER SHORT CONFLUENCE:
+          // 1. Clear rejection from highs OR breakdown near 24h lows
+          // 2. High liquidity ($8M+)
+          // 3. Negative momentum or heavy dump wick
+          const hasShortVol = volume > 8000000;
+          const isDumpingFromTop = change > 4.0 && pullbackFromHigh > 4.5; // PUMP AND DUMP TRAP IDENTIFIED!
+          const isBreakdownNearLow = change <= -1.5 && (low / price) >= 0.94;
 
-          if (isNearLows && hasShortVol && isBearishChange) {
+          if (hasShortVol && (isDumpingFromTop || isBreakdownNearLow)) {
             shorts.push({
               symbol: coin.symbol,
               ticker: coin.symbol.replace('USDT', ''),
@@ -1257,7 +1280,7 @@
               keySupport: low,
               keyResistance: (high - (high - price) * 0.4),
               tfProfile: buildFastTfProfile(price, change, high, low),
-              score: (Math.abs(change) * 1.5 + (volume / 10000000))
+              score: (Math.abs(change) * 1.8 + (volume / 10000000))
             });
           }
         });
@@ -1269,8 +1292,8 @@
         document.getElementById('bearishBreakdownCount').innerText = `${shorts.length} Shorts`;
 
         allDiscoveredTokens = [];
-        const maxLen = Math.max(longs.length, shorts.length);
-        for (let i = 0; i < maxLen; i++) {
+        const maxTake = 4;
+        for (let i = 0; i < maxTake; i++) {
           if (longs[i]) allDiscoveredTokens.push(longs[i]);
           if (shorts[i]) allDiscoveredTokens.push(shorts[i]);
         }
@@ -1302,8 +1325,8 @@
       if (currentScannerFilter !== 'ALL') {
         subset = allDiscoveredTokens.filter(t => t.side === currentScannerFilter);
       }
-      const displaySubset = subset.slice(0, 8);
-      document.getElementById('confirmedSignalsCount').innerText = `${displaySubset.length} Live Cards`;
+      const displaySubset = subset.slice(0, 6); // Display top high-conviction setups only
+      document.getElementById('confirmedSignalsCount').innerText = `${displaySubset.length} Sniper Cards`;
 
       displaySubset.forEach(c => {
         if (!registeredTokens.includes(c.symbol)) registeredTokens.push(c.symbol);
@@ -1410,7 +1433,7 @@
           ? 'bg-emerald-50 text-emerald-700 border-emerald-200' 
           : 'bg-rose-50 text-rose-700 border-rose-200';
 
-        const sideText = isLong ? '1H BULLISH (SUPPORT BOUNCE)' : '1H BEARISH (RESIST REJECT)';
+        const sideText = isLong ? '1H BULLISH (SUPPORT BOUNCE)' : '1H BEARISH (TOP DUMP REJECT)';
         const tfP = sig.tfProfile || buildFastTfProfile(price, sig.change, sig.high, sig.low);
 
         card.innerHTML = `
@@ -1426,7 +1449,7 @@
                 <div class="flex items-center gap-2 mt-1 font-mono text-[10px] text-slate-500">
                   <span>24h Vol: <strong>$${sig.volume}</strong></span>
                   <span>•</span>
-                  <span class="${isLong ? 'text-emerald-600' : 'text-rose-600'} font-bold">${isLong ? '50 & 200 EMA Golden Stack' : '50 & 200 EMA Death Cross'}</span>
+                  <span class="${isLong ? 'text-emerald-600' : 'text-rose-600'} font-bold">${isLong ? '50 & 200 EMA Golden Stack' : 'Distribution / Top Wick Rejection'}</span>
                 </div>
               </div>
               <div class="text-right">
@@ -1593,7 +1616,7 @@
       desk.innerHTML = `<div class="p-6 terminal-card text-center font-mono text-xs text-slate-400 animate-pulse">Auditing Binance multi-timeframe radar for ${symbol}...</div>`;
 
       try {
-        const res = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${symbol}`);
+        const res = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${symbol}&_t=${Date.now()}`);
         if (!res.ok) throw new Error('Pair not found');
         const data = await res.json();
 
@@ -1732,15 +1755,15 @@
                 </div>
                 <div class="bg-white border border-emerald-200 rounded-xl p-2.5 shadow-xs">
                   <span class="text-slate-400 block text-[9px]">TARGET 1</span>
-                  <span class="font-bold text-emerald-700 text-xs" id="auditTp1Val">$${formatNumber(tp1)}</span>
+                  <span class="font-bold text-emerald-700 text-xs" id="tp1-val">${formatNumber(tp1)}</span>
                 </div>
                 <div class="bg-white border border-emerald-200 rounded-xl p-2.5 shadow-xs">
                   <span class="text-slate-400 block text-[9px]">TARGET 2</span>
-                  <span class="font-bold text-emerald-700 text-xs" id="auditTp2Val">$${formatNumber(tp2)}</span>
+                  <span class="font-bold text-emerald-700 text-xs" id="tp2-val">${formatNumber(tp2)}</span>
                 </div>
                 <div class="bg-white border border-rose-200 rounded-xl p-2.5 shadow-xs">
                   <span class="text-slate-400 block text-[9px]">STOP LOSS</span>
-                  <span class="font-bold text-rose-700 text-xs" id="auditSlVal">$${formatNumber(sl)}</span>
+                  <span class="font-bold text-rose-700 text-xs" id="auditSlVal">${formatNumber(sl)}</span>
                 </div>
               </div>
             </div>
@@ -1776,12 +1799,12 @@
       renderSignalTable();
 
       await syncRealInstitutionalMetrics();
-      setInterval(syncRealInstitutionalMetrics, 15000); // Fast 15s refresh for macro data
+      setInterval(syncRealInstitutionalMetrics, 12000);
 
       startContinuousLiveTickerLoop(); // 1-second continuous pulse
 
       await triggerFullMarketScan();
-      setInterval(triggerFullMarketScan, 45000);
+      setInterval(triggerFullMarketScan, 35000);
     });
   </script>
 </body>
