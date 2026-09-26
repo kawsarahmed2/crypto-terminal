@@ -8,7 +8,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- TRADINGVIEW LIGHTWEIGHT CHARTS OFFICIAL CDN -->
+  <!-- TRADINGVIEW LIGHTWEIGHT CHARTS -->
   <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,9 +54,9 @@
     .nav-item.active i, .nav-item.active span {
       color: #FFFFFF;
     }
-    .tf-btn.active {
-      background-color: #0F172A;
-      color: #FFFFFF;
+    .modal-tf-btn.active {
+      background-color: #0F172A !important;
+      color: #FFFFFF !important;
     }
   </style>
 </head>
@@ -70,14 +70,14 @@
       </div>
       <div>
         <h1 class="text-base font-black tracking-tight text-slate-900 leading-none">CRYPTO DADA</h1>
-        <span class="text-[10px] font-mono text-slate-500 tracking-wider">LIVE MULTI-TIMEFRAME CANDLESTICK TERMINAL</span>
+        <span class="text-[10px] font-mono text-slate-500 tracking-wider">LIVE MULTI-ASSET SCANNER & MODAL CANDLE CHARTS</span>
       </div>
     </div>
     
     <div class="flex items-center gap-4 text-xs font-mono">
       <div class="flex items-center gap-2 bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 rounded-full font-bold">
         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-        <span id="dataFeedStatus">FEED: TRADINGVIEW ENGINE ACTIVE</span>
+        <span id="dataFeedStatus">FEED: 100% REAL LIVE DATA PIPELINE ACTIVE</span>
       </div>
       <div class="text-slate-500 font-semibold" id="liveUtcClock">00:00:00 UTC</div>
     </div>
@@ -156,7 +156,7 @@
       <div class="pt-4 border-t border-slate-100">
         <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs font-mono">
           <span class="text-slate-400 block text-[10px]">CHART ENGINE</span>
-          <span class="font-bold text-emerald-600">TradingView Multi-TF Active</span>
+          <span class="font-bold text-emerald-600">TradingView Modal Active</span>
         </div>
       </div>
     </aside>
@@ -177,18 +177,8 @@
                 <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-2.5 py-0.5 rounded-full border border-emerald-200 font-mono" id="structureStatusBadge">Trending Discovery</span>
               </div>
               
-              <!-- BITCOIN TRADINGVIEW CANDLESTICK CONTAINER -->
-              <div class="mb-3">
-                <div class="flex items-center justify-between mb-1 text-[10px] font-mono text-slate-400">
-                  <span>BTC/USDT CANDLES</span>
-                  <div class="flex gap-1" id="btc-tf-group">
-                    <button onclick="changeChartTimeframe('BTCUSDT', '15m', 'btcCandleChart')" class="tf-btn px-1.5 py-0.5 rounded bg-slate-100 hover:bg-slate-200 transition">15m</button>
-                    <button onclick="changeChartTimeframe('BTCUSDT', '1h', 'btcCandleChart')" class="tf-btn active px-1.5 py-0.5 rounded bg-slate-100 hover:bg-slate-200 transition">1h</button>
-                    <button onclick="changeChartTimeframe('BTCUSDT', '4h', 'btcCandleChart')" class="tf-btn px-1.5 py-0.5 rounded bg-slate-100 hover:bg-slate-200 transition">4h</button>
-                    <button onclick="changeChartTimeframe('BTCUSDT', '1d', 'btcCandleChart')" class="tf-btn px-1.5 py-0.5 rounded bg-slate-100 hover:bg-slate-200 transition">1d</button>
-                  </div>
-                </div>
-                <div class="h-44 w-full bg-white rounded-xl border border-slate-200 overflow-hidden" id="btcCandleChart"></div>
+              <div class="h-20 w-full mb-3">
+                <canvas id="structureSparkline"></canvas>
               </div>
 
               <div class="space-y-2 font-mono text-xs pt-2 border-t border-slate-100">
@@ -203,8 +193,9 @@
               </div>
             </div>
             <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-              <span class="text-slate-500">Simple Read:</span>
-              <span class="font-bold text-slate-900 font-mono" id="simpleReadText">Live Discovery Tracking</span>
+              <button onclick="openChartModal('BTCUSDT', 'BTC', null)" class="text-blue-600 hover:text-blue-800 font-bold font-mono flex items-center gap-1">
+                <span>View Live Candle Chart &rarr;</span>
+              </button>
             </div>
           </div>
 
@@ -302,16 +293,16 @@
         </div>
       </section>
 
-      <!-- VIEW 2: 500+ MARKET SCANNER WITH TIMEFRAME CANDLESTICK CHARTS -->
+      <!-- VIEW 2: 500+ MARKET SCANNER -->
       <section id="view-signals-view" class="view-panel hidden space-y-5">
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div class="flex items-center gap-2">
-              <h2 class="text-lg font-black text-slate-900">Binance 500+ Scanner & Interactive TradingView Charts</h2>
-              <span class="bg-emerald-100 text-emerald-800 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">REAL CANDLESTICKS + TIMEFRAMES</span>
+              <h2 class="text-lg font-black text-slate-900">Binance 500+ Market Confluence Scanner</h2>
+              <span class="bg-emerald-100 text-emerald-800 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">REAL TICK DATA PIPELINE</span>
             </div>
             <p class="text-xs text-slate-500 mt-1">
-              Select timeframes (5m, 15m, 1h, 4h, 1d) on any token to zoom, pan, and view real-time candlestick price action.
+              Click "OPEN LIVE CANDLE CHART" on any token to launch high-performance TradingView Candlestick view.
             </p>
           </div>
           <div class="flex items-center gap-2">
@@ -344,16 +335,16 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="dynamicSignalsDesk"></div>
       </section>
 
-      <!-- VIEW 3: INSTANT COIN AUDITOR WITH TIMEFRAME CHARTS -->
+      <!-- VIEW 3: INSTANT COIN AUDITOR -->
       <section id="view-search-view" class="view-panel hidden space-y-5">
         <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs">
           <div class="max-w-2xl">
             <h2 class="text-lg font-black text-slate-900 font-sans flex items-center gap-2">
               <i data-lucide="search" class="w-5 h-5 text-amber-500"></i>
-              Instant Coin Auditor & Candlestick Scanner
+              Instant Coin Auditor & Setup Scanner
             </h2>
             <p class="text-xs text-slate-500 mt-1 font-sans">
-              Type any cryptocurrency ticker to evaluate real-time structure, 50/200 EMA, and automated trade levels with interactive multi-timeframe charts.
+              Type any cryptocurrency ticker to evaluate real-time structure, 50/200 EMA, automated trade parameters, and view candle charts.
             </p>
 
             <form onsubmit="handleCustomCoinAudit(event)" class="mt-4 flex gap-2">
@@ -363,7 +354,7 @@
               </div>
               <button type="submit" class="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl font-mono text-xs font-bold flex items-center gap-2 transition">
                 <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
-                <span>AUDIT CANDLES</span>
+                <span>AUDIT COIN</span>
               </button>
             </form>
           </div>
@@ -530,6 +521,42 @@
     </main>
   </div>
 
+  <!-- ========================================================================= -->
+  <!-- DEDICATED FULL-SCREEN TRADINGVIEW CANDLESTICK MODAL -->
+  <!-- ========================================================================= -->
+  <div id="chartModalBackdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-2xl shadow-2xl w-full max-w-4xl overflow-hidden flex flex-col">
+      <!-- Modal Header -->
+      <div class="px-5 py-3 border-b border-slate-200 flex items-center justify-between bg-slate-50/50">
+        <div class="flex items-center gap-3">
+          <h3 class="text-base font-black text-slate-900 font-mono" id="modalCoinTitle">BTC/USDT</h3>
+          <span class="text-xs font-mono font-bold text-slate-900 px-2 py-0.5 rounded bg-slate-100" id="modalLivePrice">$0.00</span>
+          <span class="text-xs font-mono font-bold" id="modalLiveChange">+0.00%</span>
+        </div>
+
+        <!-- Timeframe Selectors -->
+        <div class="flex items-center gap-1.5 font-mono text-xs">
+          <button onclick="switchModalTimeframe('5m', this)" class="modal-tf-btn px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold">5m</button>
+          <button onclick="switchModalTimeframe('15m', this)" class="modal-tf-btn px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold">15m</button>
+          <button onclick="switchModalTimeframe('1h', this)" class="modal-tf-btn active px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold">1h</button>
+          <button onclick="switchModalTimeframe('4h', this)" class="modal-tf-btn px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold">4h</button>
+          <button onclick="switchModalTimeframe('1d', this)" class="modal-tf-btn px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold">1d</button>
+          <button onclick="closeChartModal()" class="ml-3 text-slate-400 hover:text-slate-700 text-lg font-bold">&times;</button>
+        </div>
+      </div>
+
+      <!-- Chart Container (100% visible on open) -->
+      <div class="p-4 bg-white">
+        <div id="modalChartBox" class="h-96 w-full rounded-xl border border-slate-200 overflow-hidden bg-white"></div>
+      </div>
+
+      <!-- Modal Footer Trade Parameters -->
+      <div class="px-5 py-3 border-t border-slate-200 bg-slate-50 flex items-center justify-between font-mono text-xs" id="modalTradeLevelsStrip">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
   <!-- SCRIPT ENGINE -->
   <script>
     let liveBtcPrice = 0;
@@ -539,7 +566,11 @@
       'FETUSDT', 'HNTUSDT', 'UNIUSDT', 'DOGEUSDT', 'GALAUSDT'
     ];
     let gaugeChartInstance = null;
-    let activeCharts = {}; // Stores TradingView chart instances
+    let currentModalChart = null;
+    let currentModalSeries = null;
+    let currentModalSymbol = 'BTCUSDT';
+    let currentModalInterval = '1h';
+    let currentModalLevels = null;
 
     let liveMatrixData = [
       { id: 1, name: 'Price Structure', watch: 'Blow-off move / vertical trend', warning: 'Parabolic breakout', read: 'Loading...', status: 'BULLISH' },
@@ -577,15 +608,6 @@
       document.querySelectorAll('#sideNav .nav-item').forEach(btn => btn.classList.remove('active'));
       const activeBtn = document.querySelector(`#sideNav [data-view="${viewId}"]`);
       if (activeBtn) activeBtn.classList.add('active');
-
-      // Auto resize visible charts when switching views
-      setTimeout(() => {
-        Object.values(activeCharts).forEach(c => {
-          if (c && c.chart && c.container) {
-            c.chart.applyOptions({ width: c.container.clientWidth });
-          }
-        });
-      }, 50);
     }
 
     function renderSignalTable() {
@@ -668,30 +690,83 @@
       }
     }
 
-    // =========================================================================
-    // TRADINGVIEW LIGHTWEIGHT CANDLESTICK ENGINE (MULTI-TIMEFRAME)
-    // =========================================================================
-    async function createTradingViewCandleChart(containerId, symbol, interval = '1h', levels = null) {
-      const container = document.getElementById(containerId);
-      if (!container) return;
+    function initSparkline(prices) {
+      const canvas = document.getElementById('structureSparkline');
+      const ctx = canvas.getContext('2d');
+      if (window.sparkChart) window.sparkChart.destroy();
 
-      if (activeCharts[containerId]) {
-        try { activeCharts[containerId].chart.remove(); } catch(e) {}
-        delete activeCharts[containerId];
+      window.sparkChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: prices.map((_, i) => i),
+          datasets: [{
+            data: prices,
+            borderColor: '#16A34A',
+            borderWidth: 2,
+            pointRadius: 0,
+            fill: false,
+            tension: 0.35
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: { x: { display: false }, y: { display: false } }
+        }
+      });
+    }
+
+    // =========================================================================
+    // MODAL TRADINGVIEW CANDLESTICK ENGINE (OPENS CLEANLY ON-DEMAND)
+    // =========================================================================
+    async function openChartModal(symbol, ticker, levels = null) {
+      currentModalSymbol = symbol;
+      currentModalLevels = levels;
+      currentModalInterval = '1h';
+
+      const backdrop = document.getElementById('chartModalBackdrop');
+      backdrop.classList.remove('hidden');
+
+      document.getElementById('modalCoinTitle').innerText = `${ticker}/USDT`;
+
+      // Set active timeframe button
+      document.querySelectorAll('.modal-tf-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.innerText.toLowerCase() === '1h');
+      });
+
+      // Trade levels strip
+      const strip = document.getElementById('modalTradeLevelsStrip');
+      if (levels) {
+        strip.innerHTML = `
+          <span>Limit Entry: <strong class="text-blue-600">$${formatNumber(levels.entry)}</strong></span>
+          <span>Target 1: <strong class="text-emerald-600">$${formatNumber(levels.tp1)}</strong></span>
+          <span>Target 2: <strong class="text-emerald-600">$${formatNumber(levels.tp2)}</strong></span>
+          <span>Stop Loss: <strong class="text-rose-600">$${formatNumber(levels.sl)}</strong></span>
+        `;
+      } else {
+        strip.innerHTML = `<span>Institutional Momentum: <strong>Live Binance Tick Engine Active</strong></span>`;
       }
-      container.innerHTML = '';
 
-      const chart = LightweightCharts.createChart(container, {
-        width: container.clientWidth || 300,
-        height: container.clientHeight || 170,
+      // Re-create chart cleanly inside modal box
+      const box = document.getElementById('modalChartBox');
+      box.innerHTML = '';
+
+      if (currentModalChart) {
+        try { currentModalChart.remove(); } catch(e) {}
+      }
+
+      currentModalChart = LightweightCharts.createChart(box, {
+        width: box.clientWidth || 800,
+        height: 384,
         layout: {
           background: { color: '#FFFFFF' },
           textColor: '#64748B',
-          fontSize: 10,
+          fontSize: 11,
           fontFamily: 'JetBrains Mono, monospace'
         },
         grid: {
-          vertLines: { color: '#F1F5F9' },
+          vertLines: { color: '#F8FAFC' },
           horzLines: { color: '#F1F5F9' }
         },
         timeScale: {
@@ -702,13 +777,10 @@
         rightPriceScale: {
           borderColor: '#E2E8F0',
           autoScale: true
-        },
-        crosshair: {
-          mode: LightweightCharts.CrosshairMode.Normal
         }
       });
 
-      const candleSeries = chart.addCandlestickSeries({
+      currentModalSeries = currentModalChart.addCandlestickSeries({
         upColor: '#16A34A',
         downColor: '#DC2626',
         borderUpColor: '#16A34A',
@@ -717,101 +789,85 @@
         wickDownColor: '#DC2626'
       });
 
-      // Horizontal Trade Levels Overlay (Limit Entry, TP1, TP2, Stop Loss)
       if (levels) {
-        if (levels.entry) {
-          candleSeries.createPriceLine({
-            price: levels.entry,
-            color: '#2563EB',
-            lineWidth: 1.5,
-            lineStyle: LightweightCharts.LineStyle.Dashed,
-            axisLabelVisible: true,
-            title: 'ENTRY'
-          });
-        }
-        if (levels.tp1) {
-          candleSeries.createPriceLine({
-            price: levels.tp1,
-            color: '#16A34A',
-            lineWidth: 1.5,
-            lineStyle: LightweightCharts.LineStyle.Dashed,
-            axisLabelVisible: true,
-            title: 'TP1'
-          });
-        }
-        if (levels.tp2) {
-          candleSeries.createPriceLine({
-            price: levels.tp2,
-            color: '#059669',
-            lineWidth: 1.5,
-            lineStyle: LightweightCharts.LineStyle.Dashed,
-            axisLabelVisible: true,
-            title: 'TP2'
-          });
-        }
-        if (levels.sl) {
-          candleSeries.createPriceLine({
-            price: levels.sl,
-            color: '#DC2626',
-            lineWidth: 1.5,
-            lineStyle: LightweightCharts.LineStyle.Dashed,
-            axisLabelVisible: true,
-            title: 'SL'
-          });
-        }
+        currentModalSeries.createPriceLine({
+          price: levels.entry,
+          color: '#2563EB',
+          lineWidth: 1.5,
+          lineStyle: LightweightCharts.LineStyle.Dashed,
+          axisLabelVisible: true,
+          title: 'ENTRY'
+        });
+        currentModalSeries.createPriceLine({
+          price: levels.tp1,
+          color: '#16A34A',
+          lineWidth: 1.5,
+          lineStyle: LightweightCharts.LineStyle.Dashed,
+          axisLabelVisible: true,
+          title: 'TP1'
+        });
+        currentModalSeries.createPriceLine({
+          price: levels.tp2,
+          color: '#059669',
+          lineWidth: 1.5,
+          lineStyle: LightweightCharts.LineStyle.Dashed,
+          axisLabelVisible: true,
+          title: 'TP2'
+        });
+        currentModalSeries.createPriceLine({
+          price: levels.sl,
+          color: '#DC2626',
+          lineWidth: 1.5,
+          lineStyle: LightweightCharts.LineStyle.Dashed,
+          axisLabelVisible: true,
+          title: 'SL'
+        });
       }
 
-      activeCharts[containerId] = {
-        chart: chart,
-        candleSeries: candleSeries,
-        symbol: symbol,
-        interval: interval,
-        container: container,
-        lastCandle: null
-      };
-
-      await loadChartCandleData(containerId, symbol, interval);
-
-      // Responsive Resize
-      window.addEventListener('resize', () => {
-        if (container && chart) {
-          chart.applyOptions({ width: container.clientWidth });
-        }
-      });
+      await loadModalCandles(symbol, '1h');
     }
 
-    async function loadChartCandleData(containerId, symbol, interval) {
-      const chartObj = activeCharts[containerId];
-      if (!chartObj) return;
+    async function loadModalCandles(symbol, interval) {
+      if (!currentModalSeries) return;
 
       try {
-        const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=60`);
+        const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=90`);
         if (!res.ok) return;
         const data = await res.json();
 
-        const formattedCandles = data.map(d => ({
-          time: Math.floor(d[0] / 1000), // UNIX seconds timestamp
+        const formatted = data.map(d => ({
+          time: Math.floor(d[0] / 1000),
           open: parseFloat(d[1]),
           high: parseFloat(d[2]),
           low: parseFloat(d[3]),
           close: parseFloat(d[4])
         }));
 
-        chartObj.candleSeries.setData(formattedCandles);
-        chartObj.lastCandle = formattedCandles[formattedCandles.length - 1];
-        chartObj.chart.timeScale().fitContent();
+        currentModalSeries.setData(formatted);
+        currentModalChart.timeScale().fitContent();
 
-      } catch (e) {
-        console.warn('Failed to load klines for:', symbol, e);
+        const last = formatted[formatted.length - 1];
+        document.getElementById('modalLivePrice').innerText = `$${formatNumber(last.close)}`;
+
+      } catch (err) {
+        console.warn('Failed to load modal candles:', err);
       }
     }
 
-    function changeChartTimeframe(symbol, interval, containerId, btnElement = null) {
-      if (btnElement && btnElement.parentElement) {
-        btnElement.parentElement.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('active'));
-        btnElement.classList.add('active');
+    function switchModalTimeframe(interval, btn) {
+      document.querySelectorAll('.modal-tf-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentModalInterval = interval;
+      loadModalCandles(currentModalSymbol, interval);
+    }
+
+    function closeChartModal() {
+      document.getElementById('chartModalBackdrop').classList.add('hidden');
+      if (currentModalChart) {
+        try { currentModalChart.remove(); } catch(e) {}
+        currentModalChart = null;
+        currentModalSeries = null;
       }
-      loadChartCandleData(containerId, symbol, interval);
     }
 
     // CENTRAL TICK HANDLER
@@ -863,16 +919,9 @@
         if (oldVal > 0 && newPrice !== oldVal) triggerFlash(synEl, newPrice > oldVal);
       }
 
-      // Update current open candle real-time on active TradingView charts
-      Object.keys(activeCharts).forEach(cId => {
-        const cObj = activeCharts[cId];
-        if (cObj && cObj.symbol === sym && cObj.lastCandle) {
-          cObj.lastCandle.close = newPrice;
-          if (newPrice > cObj.lastCandle.high) cObj.lastCandle.high = newPrice;
-          if (newPrice < cObj.lastCandle.low) cObj.lastCandle.low = newPrice;
-          cObj.candleSeries.update(cObj.lastCandle);
-        }
-      });
+      if (sym === currentModalSymbol && currentModalSeries) {
+        document.getElementById('modalLivePrice').innerText = `$${formatNumber(newPrice)}`;
+      }
     }
 
     // INSTITUTIONAL METRICS SYNC
@@ -951,6 +1000,8 @@
           const klineData = await klineRes.json();
           const closes = klineData.map(k => parseFloat(k[4]));
 
+          initSparkline(closes.slice(-14));
+
           const calcEMA = (data, period) => {
             const k = 2 / (period + 1);
             let ema = data[0];
@@ -1023,7 +1074,7 @@
       }, 1000);
     }
 
-    // 500+ MARKET SCANNER WITH TRADINGVIEW CHARTS
+    // 500+ MARKET SCANNER
     async function triggerFullMarketScan() {
       const spinIcon = document.getElementById('scanSpinIcon');
       if (spinIcon) spinIcon.classList.add('animate-spin');
@@ -1102,7 +1153,12 @@
         const card = document.createElement('div');
         card.className = 'bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col justify-between';
 
-        const chartContainerId = `tv-chart-${sig.symbol}`;
+        const jsonLevels = JSON.stringify({
+          entry: sig.entry,
+          tp1: sig.tp1,
+          tp2: sig.tp2,
+          sl: sig.sl
+        }).replace(/"/g, '&quot;');
 
         card.innerHTML = `
           <div>
@@ -1128,21 +1184,6 @@
                 </span>
                 <span class="text-xs font-mono font-bold text-emerald-600">+${sig.change.toFixed(2)}%</span>
               </div>
-            </div>
-
-            <!-- INTERACTIVE TRADINGVIEW CANDLESTICK CHART CONTAINER -->
-            <div class="border border-slate-200 rounded-xl p-2.5 mb-3 bg-slate-50/40">
-              <div class="flex justify-between items-center text-[10px] font-mono text-slate-400 mb-1.5">
-                <span class="font-bold text-slate-700">CANDLESTICK TIMEFRAME</span>
-                <div class="flex gap-1">
-                  <button onclick="changeChartTimeframe('${sig.symbol}', '5m', '${chartContainerId}', this)" class="tf-btn px-1.5 py-0.5 rounded bg-white border border-slate-200 hover:bg-slate-100 transition text-[9px]">5m</button>
-                  <button onclick="changeChartTimeframe('${sig.symbol}', '15m', '${chartContainerId}', this)" class="tf-btn px-1.5 py-0.5 rounded bg-white border border-slate-200 hover:bg-slate-100 transition text-[9px]">15m</button>
-                  <button onclick="changeChartTimeframe('${sig.symbol}', '1h', '${chartContainerId}', this)" class="tf-btn active px-1.5 py-0.5 rounded bg-white border border-slate-200 hover:bg-slate-100 transition text-[9px]">1h</button>
-                  <button onclick="changeChartTimeframe('${sig.symbol}', '4h', '${chartContainerId}', this)" class="tf-btn px-1.5 py-0.5 rounded bg-white border border-slate-200 hover:bg-slate-100 transition text-[9px]">4h</button>
-                  <button onclick="changeChartTimeframe('${sig.symbol}', '1d', '${chartContainerId}', this)" class="tf-btn px-1.5 py-0.5 rounded bg-white border border-slate-200 hover:bg-slate-100 transition text-[9px]">1d</button>
-                </div>
-              </div>
-              <div class="h-36 w-full rounded-lg overflow-hidden bg-white border border-slate-100" id="${chartContainerId}"></div>
             </div>
 
             <!-- Parameters Grid -->
@@ -1173,21 +1214,19 @@
             </div>
           </div>
 
-          <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-mono">
-            <span>Macro Alignment: BTC Safe (Live)</span>
-            <span class="text-emerald-600 font-bold">INTERACTIVE CANDLES ACTIVE</span>
+          <!-- Bottom Action Strip With Chart Launch Button -->
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-mono">
+            <span class="text-slate-400 text-[11px]">Macro Alignment: BTC Safe</span>
+            <button onclick="openChartModal('${sig.symbol}', '${sig.ticker}', ${jsonLevels})" 
+                    class="bg-slate-900 hover:bg-slate-800 text-white px-3.5 py-1.5 rounded-xl font-bold flex items-center gap-1.5 transition text-[11px]">
+              <i data-lucide="line-chart" class="w-3.5 h-3.5 text-emerald-400"></i>
+              <span>OPEN LIVE CANDLE CHART</span>
+            </button>
           </div>
         `;
         desk.appendChild(card);
-
-        // Mount TradingView Candlestick Chart with Entry/TP/SL Lines
-        createTradingViewCandleChart(chartContainerId, sig.symbol, '1h', {
-          entry: sig.entry,
-          tp1: sig.tp1,
-          tp2: sig.tp2,
-          sl: sig.sl
-        });
       });
+      lucide.createIcons();
     }
 
     // CUSTOM COIN AUDITOR ENGINE
@@ -1200,7 +1239,7 @@
       const symbol = ticker + 'USDT';
       const desk = document.getElementById('searchAuditResultDesk');
       desk.classList.remove('hidden');
-      desk.innerHTML = `<div class="p-6 bg-white border border-slate-200 rounded-2xl text-center font-mono text-xs text-slate-500 animate-pulse">Auditing Binance live structure and mounting TradingView engine for ${symbol}...</div>`;
+      desk.innerHTML = `<div class="p-6 bg-white border border-slate-200 rounded-2xl text-center font-mono text-xs text-slate-500 animate-pulse">Auditing Binance live structure for ${symbol}...</div>`;
 
       try {
         const res = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${symbol}`);
@@ -1241,7 +1280,7 @@
         const tp2 = (price * 1.096);
         const sl = (price * 0.962);
 
-        const customChartContainerId = 'audit-tv-chart';
+        const jsonLevels = JSON.stringify({ entry, tp1, tp2, sl }).replace(/"/g, '&quot;');
 
         desk.innerHTML = `
           <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs">
@@ -1268,21 +1307,6 @@
               </div>
             </div>
 
-            <!-- DEDICATED FULL-WIDTH TRADINGVIEW CANDLESTICK CHART -->
-            <div class="border border-slate-200 rounded-xl p-4 mb-5 bg-slate-50/40">
-              <div class="flex justify-between items-center text-xs font-mono text-slate-500 mb-2">
-                <span><strong>${ticker}</strong> Institutional Candlestick Profile</span>
-                <div class="flex gap-1">
-                  <button onclick="changeChartTimeframe('${symbol}', '5m', '${customChartContainerId}', this)" class="tf-btn px-2 py-0.5 rounded bg-white border border-slate-200 hover:bg-slate-100 transition text-[10px]">5m</button>
-                  <button onclick="changeChartTimeframe('${symbol}', '15m', '${customChartContainerId}', this)" class="tf-btn px-2 py-0.5 rounded bg-white border border-slate-200 hover:bg-slate-100 transition text-[10px]">15m</button>
-                  <button onclick="changeChartTimeframe('${symbol}', '1h', '${customChartContainerId}', this)" class="tf-btn active px-2 py-0.5 rounded bg-white border border-slate-200 hover:bg-slate-100 transition text-[10px]">1h</button>
-                  <button onclick="changeChartTimeframe('${symbol}', '4h', '${customChartContainerId}', this)" class="tf-btn px-2 py-0.5 rounded bg-white border border-slate-200 hover:bg-slate-100 transition text-[10px]">4h</button>
-                  <button onclick="changeChartTimeframe('${symbol}', '1d', '${customChartContainerId}', this)" class="tf-btn px-2 py-0.5 rounded bg-white border border-slate-200 hover:bg-slate-100 transition text-[10px]">1d</button>
-                </div>
-              </div>
-              <div class="h-64 w-full bg-white rounded-lg border border-slate-200 overflow-hidden" id="${customChartContainerId}"></div>
-            </div>
-
             <!-- Audit Checklist Matrix -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3 font-mono text-xs mb-5">
               <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl">
@@ -1306,8 +1330,15 @@
             </div>
 
             <!-- Trade Execution Card -->
-            <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50">
-              <span class="text-xs font-bold text-slate-700 font-sans block mb-2">Automated Execution Setup (SMC Confluence):</span>
+            <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50 mb-4">
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-xs font-bold text-slate-700 font-sans">Automated Execution Setup (SMC Confluence):</span>
+                <button onclick="openChartModal('${symbol}', '${ticker}', ${jsonLevels})" 
+                        class="bg-slate-900 hover:bg-slate-800 text-white px-3.5 py-1.5 rounded-xl font-mono font-bold text-xs flex items-center gap-1.5 transition">
+                  <i data-lucide="line-chart" class="w-3.5 h-3.5 text-emerald-400"></i>
+                  <span>OPEN CANDLESTICK CHART</span>
+                </button>
+              </div>
               <div class="grid grid-cols-4 gap-2 font-mono text-center">
                 <div class="bg-white border border-blue-200 rounded-xl p-2.5 shadow-xs">
                   <span class="text-slate-400 block text-[9px]">SUGGESTED ENTRY</span>
@@ -1330,13 +1361,6 @@
           </div>
         `;
         lucide.createIcons();
-
-        createTradingViewCandleChart(customChartContainerId, symbol, '1h', {
-          entry: entry,
-          tp1: tp1,
-          tp2: tp2,
-          sl: sl
-        });
 
       } catch (err) {
         desk.innerHTML = `
@@ -1364,9 +1388,6 @@
 
       await syncRealInstitutionalMetrics();
       setInterval(syncRealInstitutionalMetrics, 60000);
-
-      // Mount BTC Main Dashboard TradingView Chart
-      createTradingViewCandleChart('btcCandleChart', 'BTCUSDT', '1h');
 
       await triggerFullMarketScan();
       setInterval(triggerFullMarketScan, 45000);
