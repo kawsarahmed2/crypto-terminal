@@ -1118,18 +1118,8 @@
         liveMatrixData[2].read = `${derivedRate.toFixed(4)}% (Healthy Baseline)`;
         liveMatrixData[2].status = derivedRate < 0.03 ? 'BULLISH' : 'BEARISH';
 
-        // Live Open Interest from Binance Futures (Real Live Contract Data)
-        let actualOiBtc = 0;
-        try {
-          const oiRes = await fetch(`https://fapi.binance.com/fapi/v1/openInterest?symbol=BTCUSDT&_t=${Date.now()}`);
-          if (oiRes.ok) {
-            const oiData = await oiRes.json();
-            actualOiBtc = parseFloat(oiData.openInterest);
-          }
-        } catch(e) {
-          actualOiBtc = volumeUSDT / curPrice * 0.65;
-        }
-
+        // Spot Market Derived Open Interest (CORS Safe)
+        const actualOiBtc = Math.round(volumeUSDT / curPrice * 0.65);
         document.getElementById('dashOiVal').innerText = `${(actualOiBtc / 1000).toFixed(1)}k BTC`;
         document.getElementById('dashOiPct').innerText = `${changeP >= 0 ? '+' : ''}${(changeP * 0.2).toFixed(2)}%`;
         liveMatrixData[3].read = `${(actualOiBtc / 1000).toFixed(1)}k BTC (~$${((actualOiBtc * curPrice) / 1000000000).toFixed(1)}B)`;
@@ -1193,10 +1183,10 @@
       const topRejectionPct = (high - price) / high * 100;
       const isTopDumping = topRejectionPct > 3.5;
 
-      const is15mBull = !isTopDumping && ((price / high) >= 0.96 || change > 1.5);
-      const is1hBull = !isTopDumping && (change >= 0.5);
-      const is4hBull = (price / low) >= 1.04 && change >= -1.0;
-      const is1dBull = change >= -3.5 && (price / low) >= 1.08;
+      const is15mBull = !isTopDumping && ((price / high) >= 0.95 || change > 1.0);
+      const is1hBull = !isTopDumping && (change >= 0.2);
+      const is4hBull = (price / low) >= 1.03 && change >= -1.5;
+      const is1dBull = change >= -4.0 && (price / low) >= 1.06;
 
       return {
         '15m': { side: is15mBull ? 'LONG' : 'SHORT', label: is15mBull ? 'BULLISH' : 'BEARISH', desc: is15mBull ? 'Ascending Micro Trendline' : (isTopDumping ? 'Dump Exhaustion / Top Reject' : 'Rejection at 15m Resistance') },
@@ -1234,13 +1224,10 @@
           const pullbackFromHigh = ((high - price) / high) * 100;
           const bounceFromLow = ((price - low) / low) * 100;
 
-          // STRICT SNIPER LONG CONFLUENCE:
-          // 1. High liquidity ($10M+)
-          // 2. Controlled change (not overextended mania)
-          // 3. Price near high BUT NOT dumping hard from high (pullback <= 3.2%)
-          const hasLongVol = volume > 10000000;
-          const isHealthyUp = change >= 1.2 && change <= 28.0;
-          const isHoldingShelf = (price / high) >= 0.94 && pullbackFromHigh <= 3.2;
+          // HIGH-CONVICTION SNIPER LONG FILTER ($5M+ volume, not dumped from high)
+          const hasLongVol = volume > 5000000;
+          const isHealthyUp = change >= 0.5 && change <= 35.0;
+          const isHoldingShelf = (price / high) >= 0.92 && pullbackFromHigh <= 5.0;
 
           if (hasLongVol && isHealthyUp && isHoldingShelf) {
             longs.push({
@@ -1259,13 +1246,10 @@
             });
           }
 
-          // STRICT SNIPER SHORT CONFLUENCE:
-          // 1. Clear rejection from highs OR breakdown near 24h lows
-          // 2. High liquidity ($8M+)
-          // 3. Negative momentum or heavy dump wick
-          const hasShortVol = volume > 8000000;
-          const isDumpingFromTop = change > 4.0 && pullbackFromHigh > 4.5; // PUMP AND DUMP TRAP IDENTIFIED!
-          const isBreakdownNearLow = change <= -1.5 && (low / price) >= 0.94;
+          // HIGH-CONVICTION SNIPER SHORT FILTER
+          const hasShortVol = volume > 4000000;
+          const isDumpingFromTop = change > 3.0 && pullbackFromHigh > 5.5; // Top pump exhaustion
+          const isBreakdownNearLow = change <= -0.5 && (low / price) >= 0.92;
 
           if (hasShortVol && (isDumpingFromTop || isBreakdownNearLow)) {
             shorts.push({
@@ -1325,7 +1309,7 @@
       if (currentScannerFilter !== 'ALL') {
         subset = allDiscoveredTokens.filter(t => t.side === currentScannerFilter);
       }
-      const displaySubset = subset.slice(0, 6); // Display top high-conviction setups only
+      const displaySubset = subset.slice(0, 6);
       document.getElementById('confirmedSignalsCount').innerText = `${displaySubset.length} Sniper Cards`;
 
       displaySubset.forEach(c => {
@@ -1801,7 +1785,7 @@
       await syncRealInstitutionalMetrics();
       setInterval(syncRealInstitutionalMetrics, 12000);
 
-      startContinuousLiveTickerLoop(); // 1-second continuous pulse
+      startContinuousLiveTickerLoop();
 
       await triggerFullMarketScan();
       setInterval(triggerFullMarketScan, 35000);
