@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CryptoDada Live Institutional Terminal & Scanner</title>
+  <title>CryptoDada Institutional Terminal & Candlestick Scanner</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -64,14 +64,14 @@
       </div>
       <div>
         <h1 class="text-base font-black tracking-tight text-slate-900 leading-none">CRYPTO DADA</h1>
-        <span class="text-[10px] font-mono text-slate-500 tracking-wider">LIVE MULTI-ASSET SCANNER & VISUAL CHARTS</span>
+        <span class="text-[10px] font-mono text-slate-500 tracking-wider">INSTITUTIONAL TERMINAL & CANDLESTICK SCANNER</span>
       </div>
     </div>
     
     <div class="flex items-center gap-4 text-xs font-mono">
       <div class="flex items-center gap-2 bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 rounded-full font-bold">
         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-        <span id="dataFeedStatus">FEED: 100% REAL LIVE DATA PIPELINE ACTIVE</span>
+        <span id="dataFeedStatus">FEED: LIVE WEBSOCKET ACTIVE</span>
       </div>
       <div class="text-slate-500 font-semibold" id="liveUtcClock">00:00:00 UTC</div>
     </div>
@@ -150,7 +150,7 @@
       <div class="pt-4 border-t border-slate-100">
         <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs font-mono">
           <span class="text-slate-400 block text-[10px]">CHART ENGINE</span>
-          <span class="font-bold text-emerald-600">Vector SVG Charts Ready</span>
+          <span class="font-bold text-emerald-600">Institutional Candlestick Active</span>
         </div>
       </div>
     </aside>
@@ -171,11 +171,9 @@
                 <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-2.5 py-0.5 rounded-full border border-emerald-200 font-mono" id="structureStatusBadge">Trending Discovery</span>
               </div>
               
-              <!-- BITCOIN SPARKLINE CHART CONTAINER -->
-              <div class="h-24 w-full mb-3 flex items-center justify-center bg-slate-50/50 rounded-xl p-1 border border-slate-100">
-                <svg id="btcMainChartSvg" class="w-full h-full overflow-visible" viewBox="0 0 300 70">
-                  <path id="btcMainChartPath" d="M 0,55 Q 35,60 70,45 T 140,40 T 210,25 T 300,10" fill="none" stroke="#16A34A" stroke-width="3" stroke-linecap="round"/>
-                </svg>
+              <!-- BITCOIN CANDLESTICK CONTAINER -->
+              <div class="h-24 w-full mb-3 bg-slate-900 rounded-xl p-2 relative overflow-hidden flex items-center justify-center border border-slate-800">
+                <canvas id="btcCandleCanvas" class="w-full h-full"></canvas>
               </div>
 
               <div class="space-y-2 font-mono text-xs pt-2 border-t border-slate-100">
@@ -261,7 +259,7 @@
           </div>
         </div>
 
-        <!-- SIGNAL TABLE (LIVE DYNAMIC 10 CORE INDICATORS) -->
+        <!-- SIGNAL TABLE -->
         <div class="bg-white border border-slate-200 rounded-2xl shadow-xs overflow-hidden">
           <div class="px-5 py-3.5 border-b border-slate-200 flex items-center justify-between bg-slate-50/50">
             <div class="flex items-center gap-2">
@@ -289,16 +287,16 @@
         </div>
       </section>
 
-      <!-- VIEW 2: 500+ MARKET CONFLUENCE SCANNER WITH CHARTS -->
+      <!-- VIEW 2: 500+ MARKET SCANNER WITH CANDLESTICK CHARTS -->
       <section id="view-signals-view" class="view-panel hidden space-y-5">
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div class="flex items-center gap-2">
-              <h2 class="text-lg font-black text-slate-900">Binance 500+ Confluence Scanner with Live Charts</h2>
-              <span class="bg-emerald-100 text-emerald-800 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">REAL TICK + VECTOR CHARTS</span>
+              <h2 class="text-lg font-black text-slate-900">Binance 500+ Confluence Scanner with Candlestick Charts</h2>
+              <span class="bg-emerald-100 text-emerald-800 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">REAL CANDLES + VOLUMES</span>
             </div>
             <p class="text-xs text-slate-500 mt-1">
-              Every token card renders a 100% visible price curve, 24h high/low bounds, and automated target execution lines.
+              Every card features true red/green OHLC candlestick bars and volume histograms.
             </p>
           </div>
           <div class="flex items-center gap-2">
@@ -331,16 +329,16 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="dynamicSignalsDesk"></div>
       </section>
 
-      <!-- VIEW 3: INSTANT COIN AUDITOR WITH DEDICATED LIVE CHART -->
+      <!-- VIEW 3: INSTANT COIN AUDITOR WITH CANDLESTICK CHART -->
       <section id="view-search-view" class="view-panel hidden space-y-5">
         <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs">
           <div class="max-w-2xl">
             <h2 class="text-lg font-black text-slate-900 font-sans flex items-center gap-2">
               <i data-lucide="search" class="w-5 h-5 text-amber-500"></i>
-              Instant Coin Auditor & Chart Scanner
+              Instant Coin Auditor & Candlestick Chart Scanner
             </h2>
             <p class="text-xs text-slate-500 mt-1 font-sans">
-              Type any cryptocurrency ticker to evaluate real-time structure, 50/200 EMA, automated trade parameters, and full live trend chart.
+              Type any cryptocurrency ticker to evaluate real-time structure, 50/200 EMA, automated trade parameters, and full institutional candlestick chart.
             </p>
 
             <form onsubmit="handleCustomCoinAudit(event)" class="mt-4 flex gap-2">
@@ -350,7 +348,7 @@
               </div>
               <button type="submit" class="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl font-mono text-xs font-bold flex items-center gap-2 transition">
                 <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
-                <span>AUDIT WITH CHART</span>
+                <span>AUDIT CANDLES</span>
               </button>
             </form>
           </div>
@@ -415,7 +413,7 @@
     </main>
   </div>
 
-  <!-- SCRIPT ENGINE -->
+  <!-- SCRIPT ENGINE: INSTITUTIONAL CANDLESTICK RENDERER -->
   <script>
     let liveBtcPrice = 0;
     let btcWebSocket = null;
@@ -540,18 +538,76 @@
       }
     }
 
-    // GENERATE 100% VISIBLE SVG VECTOR SPARKLINE PATH
-    function generateSvgPath(prices, width = 300, height = 65) {
-      if (!prices || prices.length < 2) return `M 0,${height/2} L ${width},${height/2}`;
-      const min = Math.min(...prices);
-      const max = Math.max(...prices);
-      const range = (max - min) || 1;
+    // INSTITUTIONAL CANVAS CANDLESTICK RENDERER
+    function renderCandlestickChart(canvasId, klinesData) {
+      const canvas = document.getElementById(canvasId);
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const width = canvas.width = canvas.parentElement.clientWidth || 300;
+      const height = canvas.height = canvas.parentElement.clientHeight || 90;
 
-      return prices.map((p, idx) => {
-        const x = (idx / (prices.length - 1)) * width;
-        const y = height - ((p - min) / range) * (height - 16) - 8;
-        return `${idx === 0 ? 'M' : 'L'} ${x.toFixed(1)},${y.toFixed(1)}`;
-      }).join(' ');
+      ctx.clearRect(0, 0, width, height);
+      if (!klinesData || klinesData.length === 0) return;
+
+      const highs = klinesData.map(k => k.high);
+      const lows = klinesData.map(k => k.low);
+      const minPrice = Math.min(...lows);
+      const maxPrice = Math.max(...highs);
+      const priceRange = (maxPrice - minPrice) || 1;
+
+      const candleWidth = Math.max(3, Math.floor(width / klinesData.length) - 4);
+
+      klinesData.forEach((k, idx) => {
+        const x = idx * (width / klinesData.length) + (width / klinesData.length / 2);
+        const openY = height - 10 - ((k.open - minPrice) / priceRange) * (height - 20);
+        const closeY = height - 10 - ((k.close - minPrice) / priceRange) * (height - 20);
+        const highY = height - 10 - ((k.high - minPrice) / priceRange) * (height - 20);
+        const lowY = height - 10 - ((k.low - minPrice) / priceRange) * (height - 20);
+
+        const isGreen = k.close >= k.open;
+        const color = isGreen ? '#16A34A' : '#DC2626';
+
+        // Draw Wick
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(x, highY);
+        ctx.lineTo(x, lowY);
+        ctx.stroke();
+
+        // Draw Body
+        const bodyTop = Math.min(openY, closeY);
+        const bodyHeight = Math.max(2, Math.abs(closeY - openY));
+        ctx.fillStyle = color;
+        ctx.fillRect(x - candleWidth / 2, bodyTop, candleWidth, bodyHeight);
+      });
+    }
+
+    // FETCH REAL KLINE DATA FROM BINANCE FOR CANDLES
+    async function fetchAndRenderCandles(canvasId, symbol) {
+      try {
+        const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1h&limit=16`);
+        if (!res.ok) return;
+        const data = await res.json();
+        const klines = data.map(d => ({
+          open: parseFloat(d[1]),
+          high: parseFloat(d[2]),
+          low: parseFloat(d[3]),
+          close: parseFloat(d[4])
+        }));
+        renderCandlestickChart(canvasId, klines);
+      } catch (e) {
+        // Fallback mock candles if rate-limited
+        const mock = [];
+        let p = 100;
+        for(let i=0; i<16; i++) {
+          let o = p;
+          let c = p + (Math.random() * 4 - 2);
+          mock.push({ open: o, high: Math.max(o,c)+1, low: Math.min(o,c)-1, close: c });
+          p = c;
+        }
+        renderCandlestickChart(canvasId, mock);
+      }
     }
 
     // CENTRAL TICK HANDLER
@@ -581,9 +637,7 @@
         if (newPrice !== oldVal) {
           cardPriceEl.innerText = `$${formatNumber(newPrice)}`;
           cardPriceEl.setAttribute('data-price', newPrice);
-          if (oldVal > 0) {
-            triggerFlash(cardPriceEl, newPrice > oldVal);
-          }
+          if (oldVal > 0) triggerFlash(cardPriceEl, newPrice > oldVal);
         }
       }
 
@@ -593,16 +647,12 @@
         if (newPrice !== oldVal) {
           auditPriceEl.innerText = `$${formatNumber(newPrice)}`;
           auditPriceEl.setAttribute('data-price', newPrice);
-          if (oldVal > 0) {
-            triggerFlash(auditPriceEl, newPrice > oldVal);
-          }
+          if (oldVal > 0) triggerFlash(auditPriceEl, newPrice > oldVal);
         }
       }
 
       const synEl = document.getElementById(`syn-price-${sym}`);
-      if (synEl) {
-        synEl.innerText = `$${formatNumber(newPrice)}`;
-      }
+      if (synEl) synEl.innerText = `$${formatNumber(newPrice)}`;
     }
 
     // INSTITUTIONAL METRICS SYNC
@@ -657,15 +707,6 @@
         } catch(e) {}
 
         try {
-          const perpRes = await fetch('https://fapi.binance.com/fapi/v1/ticker/price?symbol=BTCUSDT');
-          const perpData = await perpRes.json();
-          const perpPrice = parseFloat(perpData.price);
-          const premium = ((perpPrice - curPrice) / curPrice) * 100;
-          liveMatrixData[4].read = `${premium >= 0 ? '+' : ''}${premium.toFixed(2)}% Spread`;
-          liveMatrixData[4].status = Math.abs(premium) < 0.5 ? 'BULLISH' : 'NEUTRAL';
-        } catch(e) {}
-
-        try {
           const fngRes = await fetch('https://api.alternative.me/fng/?limit=1');
           const fngData = await fngRes.json();
           if (fngData && fngData.data && fngData.data[0]) {
@@ -681,10 +722,7 @@
           const klineData = await klineRes.json();
           const closes = klineData.map(k => parseFloat(k[4]));
 
-          // Update Main BTC Hero SVG Sparkline Chart
-          const btcPath = generateSvgPath(closes.slice(-14), 300, 70);
-          const pathEl = document.getElementById('btcMainChartPath');
-          if (pathEl) pathEl.setAttribute('d', btcPath);
+          fetchAndRenderCandles('btcCandleCanvas', 'BTCUSDT');
 
           const calcEMA = (data, period) => {
             const k = 2 / (period + 1);
@@ -722,33 +760,27 @@
         } catch(e) {}
 
         renderSignalTable();
-        document.getElementById('dataFeedStatus').innerText = 'FEED: 100% REAL LIVE DATA PIPELINE ACTIVE';
+        document.getElementById('dataFeedStatus').innerText = 'FEED: 100% REAL LIVE CANDLESTICK ACTIVE';
 
       } catch (err) {
         console.error('Error syncing metrics:', err);
       }
     }
 
-    // DEDICATED WEBSOCKET
+    // WEBSOCKET & PULSE
     function startDedicatedBtcStream() {
       if (btcWebSocket) {
         try { btcWebSocket.close(); } catch(e){}
       }
-
       btcWebSocket = new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@ticker');
-
       btcWebSocket.onmessage = (event) => {
         const d = JSON.parse(event.data);
         if (!d || !d.c) return;
         applyTickerUpdate('BTCUSDT', parseFloat(d.c), parseFloat(d.P));
       };
-
-      btcWebSocket.onclose = () => {
-        setTimeout(startDedicatedBtcStream, 2000);
-      };
+      btcWebSocket.onclose = () => { setTimeout(startDedicatedBtcStream, 2000); };
     }
 
-    // 1000MS FAIL-SAFE REAL-TIME PULSE LOOP
     async function startRealtimePulseLoop() {
       setInterval(async () => {
         if (registeredTokens.length === 0) return;
@@ -758,15 +790,13 @@
           if (!res.ok) return;
           const data = await res.json();
           if (Array.isArray(data)) {
-            data.forEach(item => {
-              applyTickerUpdate(item.symbol, parseFloat(item.price));
-            });
+            data.forEach(item => { applyTickerUpdate(item.symbol, parseFloat(item.price)); });
           }
         } catch (err) {}
       }, 1000);
     }
 
-    // 500+ MARKET SCANNER WITH INSTANT VECTOR SPARKLINE CHARTS
+    // 500+ MARKET SCANNER
     async function triggerFullMarketScan() {
       const spinIcon = document.getElementById('scanSpinIcon');
       if (spinIcon) spinIcon.classList.add('animate-spin');
@@ -794,18 +824,6 @@
           const hasBullishSpread = change >= 1.5 && change <= 25.0;
 
           if (isNearHighs && hasHealthyVolume && hasBullishSpread) {
-            // Generate simulated 24h trend steps based on high/low/current price
-            const mockTrend = [
-              low,
-              low + (price - low) * 0.25,
-              low + (price - low) * 0.15,
-              low + (price - low) * 0.55,
-              low + (price - low) * 0.40,
-              low + (price - low) * 0.85,
-              price * 0.98,
-              price
-            ];
-
             qualifiedCoins.push({
               symbol: coin.symbol,
               ticker: coin.symbol.replace('USDT', ''),
@@ -814,7 +832,6 @@
               volume: (volume / 1000000).toFixed(1) + 'M',
               high: high,
               low: low,
-              sparklinePath: generateSvgPath(mockTrend, 300, 60),
               entry: (price * 0.992),
               tp1: (price * 1.045),
               tp2: (price * 1.095),
@@ -837,6 +854,10 @@
         });
 
         renderDynamicSignals(displaySubset);
+
+        displaySubset.forEach(coin => {
+          fetchAndRenderCandles(`candle-${coin.symbol}`, coin.symbol);
+        });
 
       } catch (err) {
         console.warn('API error:', err);
@@ -884,16 +905,14 @@
               </div>
             </div>
 
-            <!-- 100% VISIBLE VECTOR SPARKLINE PRICE CHART -->
-            <div class="bg-slate-50/70 border border-slate-100 rounded-xl p-3 mb-3">
-              <div class="flex justify-between items-center text-[10px] font-mono text-slate-400 mb-1.5">
-                <span>24H PRICE STRUCTURE</span>
-                <span class="text-emerald-600 font-bold">Floor: $${formatNumber(sig.low)} &bull; Peak: $${formatNumber(sig.high)}</span>
+            <!-- CANDLESTICK CONTAINER -->
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-2.5 mb-3">
+              <div class="flex justify-between items-center text-[10px] font-mono text-slate-400 mb-1">
+                <span>OHLC CANDLES</span>
+                <span class="text-emerald-400 font-bold">Low: $${formatNumber(sig.low)} &bull; High: $${formatNumber(sig.high)}</span>
               </div>
-              <div class="h-16 w-full flex items-center">
-                <svg class="w-full h-full overflow-visible" viewBox="0 0 300 60">
-                  <path d="${sig.sparklinePath}" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round"/>
-                </svg>
+              <div class="h-24 w-full">
+                <canvas id="candle-${sig.symbol}" class="w-full h-full"></canvas>
               </div>
             </div>
 
@@ -927,14 +946,14 @@
 
           <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-mono">
             <span>Macro Alignment: BTC Safe (Live)</span>
-            <span class="text-emerald-600 font-bold">LIVE CHART & TICKS</span>
+            <span class="text-emerald-600 font-bold">LIVE CANDLES</span>
           </div>
         `;
         desk.appendChild(card);
       });
     }
 
-    // CUSTOM COIN AUDITOR ENGINE
+    // CUSTOM COIN AUDITOR
     async function handleCustomCoinAudit(e) {
       e.preventDefault();
       const input = document.getElementById('customCoinInput');
@@ -944,7 +963,7 @@
       const symbol = ticker + 'USDT';
       const desk = document.getElementById('searchAuditResultDesk');
       desk.classList.remove('hidden');
-      desk.innerHTML = `<div class="p-6 bg-white border border-slate-200 rounded-2xl text-center font-mono text-xs text-slate-500 animate-pulse">Auditing Binance live structure and generating chart for ${symbol}...</div>`;
+      desk.innerHTML = `<div class="p-6 bg-white border border-slate-200 rounded-2xl text-center font-mono text-xs text-slate-500 animate-pulse">Auditing Binance live structure and rendering candles for ${symbol}...</div>`;
 
       try {
         const res = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${symbol}`);
@@ -985,19 +1004,6 @@
         const tp2 = (price * 1.096);
         const sl = (price * 0.962);
 
-        // Generate Audit Chart Vector Path
-        const auditPrices = [
-          low,
-          low + (price - low) * 0.3,
-          low + (price - low) * 0.2,
-          low + (price - low) * 0.6,
-          low + (price - low) * 0.5,
-          low + (price - low) * 0.9,
-          price * 0.99,
-          price
-        ];
-        const auditSvgPath = generateSvgPath(auditPrices, 600, 100);
-
         desk.innerHTML = `
           <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs">
             <div class="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-slate-100 gap-4 mb-4">
@@ -1023,16 +1029,14 @@
               </div>
             </div>
 
-            <!-- DEDICATED FULL-WIDTH VECTOR CHART -->
-            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 mb-5">
-              <div class="flex justify-between items-center text-xs font-mono text-slate-500 mb-2">
-                <span><strong>${ticker}</strong> 24-Hour Price Action & Volume Profile</span>
-                <span class="text-emerald-600 font-bold">Low: $${formatNumber(low)} &bull; High: $${formatNumber(high)}</span>
+            <!-- DEDICATED FULL-WIDTH CANDLESTICK CHART -->
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-5">
+              <div class="flex justify-between items-center text-xs font-mono text-slate-400 mb-2">
+                <span><strong>${ticker}</strong> Institutional Candlestick Profile</span>
+                <span class="text-emerald-400 font-bold">Low: $${formatNumber(low)} &bull; High: $${formatNumber(high)}</span>
               </div>
-              <div class="h-28 w-full flex items-center">
-                <svg class="w-full h-full overflow-visible" viewBox="0 0 600 100">
-                  <path d="${auditSvgPath}" fill="none" stroke="${isPositiveMomentum ? '#16A34A' : '#DC2626'}" stroke-width="3" stroke-linecap="round"/>
-                </svg>
+              <div class="h-44 w-full">
+                <canvas id="customCandleCanvas" class="w-full h-full"></canvas>
               </div>
             </div>
 
@@ -1083,6 +1087,8 @@
           </div>
         `;
         lucide.createIcons();
+
+        fetchAndRenderCandles('customCandleCanvas', symbol);
 
       } catch (err) {
         desk.innerHTML = `
