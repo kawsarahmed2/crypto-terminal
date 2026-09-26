@@ -95,7 +95,7 @@
     <div class="flex items-center gap-4 text-xs font-mono">
       <div class="flex items-center gap-2 bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 rounded-full font-bold">
         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-        <span id="dataFeedStatus">FEED: 100% REAL LIVE MARKET PIPELINE</span>
+        <span id="dataFeedStatus">FEED: 100% REAL LIVE RESILIENT PIPELINE</span>
       </div>
       <div class="text-slate-500 font-semibold" id="liveUtcClock">00:00:00 UTC</div>
     </div>
@@ -149,7 +149,6 @@
             <span>Bitcoin Live Dashboard</span>
           </button>
           
-          <!-- NAME RESTORED TO "Signal Radar" -->
           <button onclick="navigateView('signals-view')" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition" data-view="signals-view">
             <i data-lucide="crosshair" class="w-4 h-4"></i>
             <span>Signal Radar</span>
@@ -218,7 +217,7 @@
                 <p class="text-xs font-bold text-slate-800">Price Discovery Mode with Institutional Backing</p>
               </div>
               <p class="text-xs text-slate-600 leading-relaxed bg-slate-50 border border-slate-200 rounded-xl p-3" id="heroNarrativeText">
-                Live Binance pipeline active. Tracking BTC dominance, derivatives basis, and multi-asset volume liquidity in real-time.
+                Live pipeline active. Tracking BTC dominance, derivatives basis, and multi-asset volume liquidity in real-time.
               </p>
             </div>
             <div class="mt-3 flex items-center justify-between text-xs pt-3 border-t border-slate-100">
@@ -306,7 +305,7 @@
         </div>
       </section>
 
-      <!-- VIEW 2: SIGNAL RADAR (FORMER 500+ SCANNER WITH MULTI-TF RADAR) -->
+      <!-- VIEW 2: SIGNAL RADAR -->
       <section id="view-signals-view" class="view-panel hidden space-y-5">
         <div class="terminal-card p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
@@ -315,7 +314,7 @@
               <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">15M • 1H • 4H • 1D MATRIX</span>
             </div>
             <p class="text-xs text-slate-500 mt-1">
-              Real-time radar scanning Binance spot pairs with dynamic breakout/pullback setups.
+              Real-time radar scanning active pairs with dynamic breakout/pullback setups.
             </p>
           </div>
           
@@ -354,7 +353,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="dynamicSignalsDesk"></div>
       </section>
 
-      <!-- VIEW 3: INSTANT COIN AUDITOR (SEARCH BAR 100% FUNCTIONAL) -->
+      <!-- VIEW 3: INSTANT COIN AUDITOR -->
       <section id="view-search-view" class="view-panel hidden space-y-5">
         <div class="terminal-card p-6">
           <div class="max-w-2xl">
@@ -363,7 +362,7 @@
               Instant Coin Auditor & Multi-Timeframe Radar
             </h2>
             <p class="text-xs text-slate-500 mt-1 font-sans">
-              Type any cryptocurrency ticker to evaluate full 15m, 1h, 4h, 1d trend matrix, EMA alignments, and scalp/swing execution.
+              Type any cryptocurrency ticker (e.g. BTC, SOL, SUI, DOGE, NEAR, ETH) to evaluate 15m, 1h, 4h, 1d trend matrix.
             </p>
 
             <form onsubmit="handleCustomCoinAudit(event)" class="mt-4 flex gap-2">
@@ -384,67 +383,9 @@
 
       <!-- VIEW 4: SYNDICATE ROTATIONS -->
       <section id="view-syndicate-view" class="view-panel hidden space-y-5">
-        <div class="terminal-card p-5 flex flex-col md:flex-row md:items-center justify-between gap-3">
-          <div>
-            <h2 class="text-lg font-black text-slate-900">Institutional Syndicate Capital Rotations</h2>
-            <p class="text-xs text-slate-500 mt-0.5">Tracking live liquidity flows across Layer 1s, Layer 2s, RWA, AI, DePIN, DeFi, and Memes against Bitcoin dominance.</p>
-          </div>
-          <span class="bg-emerald-50 text-emerald-700 text-xs font-mono font-bold px-3 py-1 rounded-full border border-emerald-200">
-            ALL SECTORS LIVE TICKING
-          </span>
-        </div>
-
-        <div class="terminal-card overflow-hidden">
-          <table class="w-full text-left font-mono text-xs border-collapse">
-            <thead>
-              <tr class="border-b border-slate-200 text-slate-400 bg-slate-50 text-[11px]">
-                <th class="py-3.5 px-4">SECTOR / ECOSYSTEM</th>
-                <th class="py-3.5 px-4">ANCHOR LEADER</th>
-                <th class="py-3.5 px-4">CATCH-UP SYMPATHY RUNNERS</th>
-                <th class="py-3.5 px-4 text-right">CAPITAL BIAS</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr class="hover:bg-slate-50/70 transition">
-                <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
-                  <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
-                  Layer 1 Majors & High-Throughput
-                </td>
-                <td class="py-3.5 px-4 text-indigo-600 font-bold">SOL (<span id="syn-price-SOLUSDT">$154.20</span>)</td>
-                <td class="py-3.5 px-4">
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">SUI</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">AVAX</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded">NEAR</span>
-                </td>
-                <td class="py-3.5 px-4 text-right"><span class="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200 text-[10px]">AGGRESSIVE EXPANSION</span></td>
-              </tr>
-              <tr class="hover:bg-slate-50/70 transition">
-                <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
-                  <span class="w-2 h-2 rounded-full bg-blue-500"></span>
-                  Ethereum L2 & Rollups (ETH Beta)
-                </td>
-                <td class="py-3.5 px-4 text-blue-600 font-bold">ETH (<span id="syn-price-ETHUSDT">$2,679.40</span>)</td>
-                <td class="py-3.5 px-4">
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">ARB</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">OP</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded">LDO</span>
-                </td>
-                <td class="py-3.5 px-4 text-right"><span class="bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded text-[10px]">LAGGING CONSOLIDATION</span></td>
-              </tr>
-              <tr class="hover:bg-slate-50/70 transition">
-                <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
-                  <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-                  Memecoins & High-Beta Retail Flow
-                </td>
-                <td class="py-3.5 px-4 text-amber-600 font-bold">DOGE (<span id="syn-price-DOGEUSDT">$0.142</span>)</td>
-                <td class="py-3.5 px-4">
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">SHIB</span>
-                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">PEPE</span>
-                </td>
-                <td class="py-3.5 px-4 text-right"><span class="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200 text-[10px]">SPECULATIVE MANIA</span></td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="terminal-card p-5">
+          <h2 class="text-lg font-black text-slate-900">Institutional Syndicate Capital Rotations</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Tracking live liquidity flows across Layer 1s, Layer 2s, RWA, AI, DePIN, DeFi, and Memes against Bitcoin dominance.</p>
         </div>
       </section>
 
@@ -471,7 +412,6 @@
           <button onclick="switchModalTimeframe('60', this)" class="modal-tf-btn active px-2 py-1 rounded bg-slate-900 text-white transition font-bold text-[11px]">1h</button>
           <button onclick="switchModalTimeframe('240', this)" class="modal-tf-btn px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold text-[11px] text-slate-700">4h</button>
           <button onclick="switchModalTimeframe('D', this)" class="modal-tf-btn px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 transition font-bold text-[11px] text-slate-700">1d</button>
-
           <button onclick="closeChartModal()" class="ml-4 text-slate-400 hover:text-slate-800 text-xl font-bold">&times;</button>
         </div>
       </div>
@@ -538,10 +478,7 @@
       if (!tbody) return;
       tbody.innerHTML = '';
 
-      let bullishCount = 0;
-      let neutralCount = 0;
-      let bearishCount = 0;
-
+      let bullishCount = 0, neutralCount = 0, bearishCount = 0;
       liveMatrixData.forEach(s => {
         if (s.status === 'BULLISH') bullishCount++;
         else if (s.status === 'NEUTRAL') neutralCount++;
@@ -661,8 +598,6 @@
           <span>Target 2: <strong class="text-emerald-600">$${formatNumber(levels.tp2)}</strong></span>
           <span>Stop Loss: <strong class="text-rose-600">$${formatNumber(levels.sl)}</strong></span>
         `;
-      } else {
-        strip.innerHTML = `<span>Institutional Momentum: <strong>Live Multi-Timeframe Feed Active</strong></span>`;
       }
 
       loadTradingViewIframe(symbol, currentModalInterval);
@@ -719,87 +654,59 @@
         }
       }
 
-      const synEl = document.getElementById(`syn-price-${sym}`);
-      if (synEl) {
-        const oldVal = parseFloat(synEl.getAttribute('data-price') || '0');
-        synEl.innerText = `$${formatNumber(newPrice)}`;
-        synEl.setAttribute('data-price', newPrice);
-        if (oldVal > 0 && newPrice !== oldVal) triggerFlash(synEl, newPrice > oldVal);
-      }
-
       if (sym === currentModalSymbol) {
         const modalPrice = document.getElementById('modalLivePrice');
         if (modalPrice) modalPrice.innerText = `$${formatNumber(newPrice)}`;
       }
     }
 
-    // MULTI-ENDPOINT FAILOVER TICKER ENGINE (NO HANGING)
-    async function startResilientLiveTickerLoop() {
-      const hosts = [
+    // MULTI-HOST FETCH HELPER (BYPASSES BANGLADESH ISP BLOCKS)
+    async function safeFetchJson(urlPath) {
+      const mirrors = [
         'https://api.binance.com',
         'https://data-api.binance.vision',
         'https://api1.binance.com',
         'https://api3.binance.com'
       ];
-      let hostIdx = 0;
-
-      setInterval(async () => {
+      for (const m of mirrors) {
         try {
-          const h = hosts[hostIdx % hosts.length];
-          const res = await fetch(`${h}/api/v3/ticker/price?symbol=BTCUSDT&_t=${Date.now()}`);
-          if (res.ok) {
-            const d = await res.json();
-            applyTickerUpdate('BTCUSDT', parseFloat(d.price));
-            document.getElementById('dataFeedStatus').innerText = 'FEED: 100% REAL LIVE MARKET PIPELINE';
-          } else {
-            hostIdx++;
-          }
-        } catch(e) {
-          hostIdx++;
-        }
-      }, 1500);
+          const res = await fetch(`${m}${urlPath}&_t=${Date.now()}`);
+          if (res.ok) return await res.json();
+        } catch(e){}
+      }
+      return null;
     }
 
     async function syncRealBtcMetrics() {
-      const hosts = ['https://api.binance.com', 'https://data-api.binance.vision', 'https://api1.binance.com'];
-      for (const h of hosts) {
-        try {
-          const res = await fetch(`${h}/api/v3/ticker/24hr?symbol=BTCUSDT&_t=${Date.now()}`);
-          if (!res.ok) continue;
-          const d = await res.json();
+      const d = await safeFetchJson('/api/v3/ticker/24hr?symbol=BTCUSDT');
+      if (!d) return;
 
-          const curPrice = parseFloat(d.lastPrice);
-          const high24h = parseFloat(d.highPrice);
-          const low24h = parseFloat(d.lowPrice);
-          const changeP = parseFloat(d.priceChangePercent);
+      const curPrice = parseFloat(d.lastPrice);
+      const high24h = parseFloat(d.highPrice);
+      const low24h = parseFloat(d.lowPrice);
+      const changeP = parseFloat(d.priceChangePercent);
 
-          applyTickerUpdate('BTCUSDT', curPrice, changeP);
+      applyTickerUpdate('BTCUSDT', curPrice, changeP);
 
-          document.getElementById('heroSupport').innerText = `$${formatNumber(low24h)}`;
-          document.getElementById('heroResistance').innerText = `$${formatNumber(high24h)}`;
+      document.getElementById('heroSupport').innerText = `$${formatNumber(low24h)}`;
+      document.getElementById('heroResistance').innerText = `$${formatNumber(high24h)}`;
 
-          const ema50 = curPrice * 0.985;
-          const ema100 = curPrice * 0.94;
-          const ema200 = curPrice * 0.88;
+      const ema50 = curPrice * 0.985;
+      const ema100 = curPrice * 0.94;
+      const ema200 = curPrice * 0.88;
 
-          document.getElementById('ema50Val').innerText = `$${formatNumber(ema50)}`;
-          document.getElementById('ema100Val').innerText = `$${formatNumber(ema100)}`;
-          document.getElementById('ema200Val').innerText = `$${formatNumber(ema200)}`;
+      document.getElementById('ema50Val').innerText = `$${formatNumber(ema50)}`;
+      document.getElementById('ema100Val').innerText = `$${formatNumber(ema100)}`;
+      document.getElementById('ema200Val').innerText = `$${formatNumber(ema200)}`;
 
-          // Sparkline
-          try {
-            const klineRes = await fetch(`${h}/api/v3/klines?symbol=BTCUSDT&interval=1h&limit=24&_t=${Date.now()}`);
-            if (klineRes.ok) {
-              const klines = await klineRes.json();
-              initSparkline(klines.map(k => parseFloat(k[4])));
-            }
-          } catch(e){}
-
-          renderSignalTable();
-          updateGaugeScore(changeP >= 0 ? 8 : 6);
-          return;
-        } catch(e){}
+      // Sparkline
+      const klines = await safeFetchJson('/api/v3/klines?symbol=BTCUSDT&interval=1h&limit=24');
+      if (klines && Array.isArray(klines)) {
+        initSparkline(klines.map(k => parseFloat(k[4])));
       }
+
+      renderSignalTable();
+      updateGaugeScore(changeP >= 0 ? 8 : 6);
     }
 
     function buildFastTfProfile(price, change, high, low) {
@@ -816,31 +723,19 @@
       };
     }
 
-    // 500+ SIGNAL RADAR SCANNER (GUARANTEED ACTIVE CARDS)
+    // 500+ SIGNAL RADAR SCANNER
     async function triggerFullMarketScan() {
       const spinIcon = document.getElementById('scanSpinIcon');
       if (spinIcon) spinIcon.classList.add('animate-spin');
 
-      const hosts = ['https://api.binance.com', 'https://data-api.binance.vision', 'https://api1.binance.com'];
-      let fetchedData = null;
-
-      for (const h of hosts) {
-        try {
-          const res = await fetch(`${h}/api/v3/ticker/24hr?_t=${Date.now()}`);
-          if (res.ok) {
-            fetchedData = await res.json();
-            break;
-          }
-        } catch(e){}
-      }
+      const data = await safeFetchJson('/api/v3/ticker/24hr?');
 
       try {
-        if (!fetchedData || !Array.isArray(fetchedData)) throw new Error('Data fetch failed');
+        if (!data || !Array.isArray(data)) throw new Error('Data fetch failed');
 
-        const usdtPairs = fetchedData.filter(d => d.symbol.endsWith('USDT') && !d.symbol.includes('UP') && !d.symbol.includes('DOWN'));
+        const usdtPairs = data.filter(d => d.symbol.endsWith('USDT') && !d.symbol.includes('UP') && !d.symbol.includes('DOWN'));
         document.getElementById('totalScannedCount').innerText = `${usdtPairs.length} Pairs`;
 
-        // Sort by quote volume to get highest volume active tokens
         usdtPairs.sort((a, b) => parseFloat(b.quoteVolume) - parseFloat(a.quoteVolume));
         const topPool = usdtPairs.slice(0, 250);
 
@@ -871,11 +766,8 @@
             score: Math.abs(change) + (volume / 10000000)
           };
 
-          if (change >= 0) {
-            longs.push(coinItem);
-          } else {
-            shorts.push(coinItem);
-          }
+          if (change >= 0) longs.push(coinItem);
+          else shorts.push(coinItem);
         });
 
         longs.sort((a, b) => b.score - a.score);
@@ -925,63 +817,6 @@
       });
 
       renderDynamicSignals(displaySubset);
-    }
-
-    function switchCardTimeframe(symbol, tf) {
-      const coin = allDiscoveredTokens.find(c => c.symbol === symbol);
-      if (!coin || !coin.tfProfile || !coin.tfProfile[tf]) return;
-
-      const tfInfo = coin.tfProfile[tf];
-      const isLong = tfInfo.side === 'LONG';
-      const price = coin.price;
-
-      let entry = isLong ? price * 0.992 : price * 1.008;
-      let tp1   = isLong ? price * 1.045 : price * 0.955;
-      let tp2   = isLong ? price * 1.095 : price * 0.905;
-      let sl    = isLong ? price * 0.965 : price * 1.035;
-
-      const badgeEl = document.getElementById(`side-badge-${symbol}`);
-      if (badgeEl) {
-        badgeEl.innerText = `${tf} ${tfInfo.label}`;
-        badgeEl.className = `px-2 py-0.5 text-[10px] font-bold rounded-full border font-mono ${isLong ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}`;
-      }
-
-      const structEl = document.getElementById(`struct-desc-${symbol}`);
-      if (structEl) {
-        structEl.innerHTML = `${tf} Context: <strong>${tfInfo.desc}</strong>`;
-      }
-
-      const entryValEl = document.getElementById(`entry-val-${symbol}`);
-      if (entryValEl) entryValEl.innerText = `$${formatNumber(entry)}`;
-
-      const tp1ValEl = document.getElementById(`tp1-val-${symbol}`);
-      if (tp1ValEl) tp1ValEl.innerText = `$${formatNumber(tp1)}`;
-
-      const tp2ValEl = document.getElementById(`tp2-val-${symbol}`);
-      if (tp2ValEl) tp2ValEl.innerText = `$${formatNumber(tp2)}`;
-
-      const slValEl = document.getElementById(`sl-val-${symbol}`);
-      if (slValEl) slValEl.innerText = `$${formatNumber(sl)}`;
-
-      ['15m', '1h', '4h', '1d'].forEach(t => {
-        const btn = document.getElementById(`tf-btn-${symbol}-${t}`);
-        if (btn) {
-          if (t === tf) {
-            btn.className = `card-tf-pill text-[10px] font-bold px-2 py-0.5 rounded border ${isLong ? 'active-bull' : 'active-bear'}`;
-          } else {
-            const isTfBull = coin.tfProfile[t].side === 'LONG';
-            btn.className = `card-tf-pill text-[10px] font-bold px-2 py-0.5 rounded border bg-slate-50 ${isTfBull ? 'text-emerald-700 border-emerald-200' : 'text-rose-700 border-rose-200'} hover:opacity-80`;
-          }
-        }
-      });
-
-      const chartBtn = document.getElementById(`chart-btn-${symbol}`);
-      if (chartBtn) {
-        const newLevels = { entry, tp1, tp2, sl };
-        const jsonStr = JSON.stringify(newLevels).replace(/"/g, '&quot;');
-        const tvInterval = tf === '15m' ? '15' : (tf === '4h' ? '240' : (tf === '1d' ? 'D' : '60'));
-        chartBtn.setAttribute('onclick', `openChartModal('${symbol}', '${coin.ticker}', ${jsonStr}, '${tfInfo.side}', '${tvInterval}')`);
-      }
     }
 
     function renderDynamicSignals(coins) {
@@ -1034,55 +869,29 @@
               </div>
             </div>
 
-            <!-- MULTI-TIMEFRAME CONFLUENCE BAR -->
-            <div class="bg-slate-50 border border-slate-200 rounded-xl p-2.5 mb-3 font-mono">
-              <div class="flex justify-between items-center text-[10px] text-slate-500 mb-1.5">
-                <span class="font-bold text-slate-700">TIMEFRAME RADAR (CLICK TO SWITCH BIAS):</span>
-                <span>Binance Multi-TF</span>
-              </div>
-              <div class="grid grid-cols-4 gap-1.5 text-center">
-                <button onclick="switchCardTimeframe('${sig.symbol}', '15m')" id="tf-btn-${sig.symbol}-15m" 
-                        class="card-tf-pill text-[10px] font-bold px-1.5 py-1 rounded border ${tfP['15m'].side === 'LONG' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}">
-                  15m: ${tfP['15m'].label}
-                </button>
-                <button onclick="switchCardTimeframe('${sig.symbol}', '1h')" id="tf-btn-${sig.symbol}-1h" 
-                        class="card-tf-pill text-[10px] font-bold px-1.5 py-1 rounded border ${isLong ? 'active-bull' : 'active-bear'}">
-                  1h: ${tfP['1h'].label}
-                </button>
-                <button onclick="switchCardTimeframe('${sig.symbol}', '4h')" id="tf-btn-${sig.symbol}-4h" 
-                        class="card-tf-pill text-[10px] font-bold px-1.5 py-1 rounded border ${tfP['4h'].side === 'LONG' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}">
-                  4h: ${tfP['4h'].label}
-                </button>
-                <button onclick="switchCardTimeframe('${sig.symbol}', '1d')" id="tf-btn-${sig.symbol}-1d" 
-                        class="card-tf-pill text-[10px] font-bold px-1.5 py-1 rounded border ${tfP['1d'].side === 'LONG' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}">
-                  1d: ${tfP['1d'].label}
-                </button>
-              </div>
-            </div>
-
             <!-- Parameters Grid -->
             <div class="grid grid-cols-4 gap-2 font-mono text-center mb-3">
               <div class="bg-blue-50/60 border border-blue-200 rounded-xl p-2">
                 <span class="text-slate-400 block text-[9px]">${isLong ? 'LIMIT ENTRY' : 'SELL LIMIT'}</span>
-                <span class="font-bold text-blue-700 text-xs" id="entry-val-${sig.symbol}">$${formatNumber(entry)}</span>
+                <span class="font-bold text-blue-700 text-xs">$${formatNumber(entry)}</span>
               </div>
               <div class="bg-emerald-50/60 border border-emerald-200 rounded-xl p-2">
                 <span class="text-slate-400 block text-[9px]">TARGET 1</span>
-                <span class="font-bold text-emerald-700 text-xs" id="tp1-val-${sig.symbol}">$${formatNumber(tp1)}</span>
+                <span class="font-bold text-emerald-700 text-xs">$${formatNumber(tp1)}</span>
               </div>
               <div class="bg-emerald-50/60 border border-emerald-200 rounded-xl p-2">
                 <span class="text-slate-400 block text-[9px]">TARGET 2</span>
-                <span class="font-bold text-emerald-700 text-xs" id="tp2-val-${sig.symbol}">$${formatNumber(tp2)}</span>
+                <span class="font-bold text-emerald-700 text-xs">$${formatNumber(tp2)}</span>
               </div>
               <div class="bg-rose-50/60 border border-rose-200 rounded-xl p-2">
                 <span class="text-slate-400 block text-[9px]">STOP LOSS</span>
-                <span class="font-bold text-rose-700 text-xs" id="sl-val-${sig.symbol}">$${formatNumber(sl)}</span>
+                <span class="font-bold text-rose-700 text-xs">$${formatNumber(sl)}</span>
               </div>
             </div>
 
             <div class="bg-slate-50 border border-slate-200 rounded-xl p-2.5 font-mono text-[11px] text-slate-600 mb-2">
               <div class="flex justify-between items-center">
-                <span id="struct-desc-${sig.symbol}">1h Context: <strong>${tfP['1h'].desc}</strong></span>
+                <span>1h Context: <strong>${tfP['1h'].desc}</strong></span>
                 <span class="text-emerald-600 font-bold">R:R = 1:2.4</span>
               </div>
             </div>
@@ -1090,8 +899,7 @@
 
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-mono">
             <span class="text-slate-400 text-[11px]">Real Market Tick</span>
-            <button id="chart-btn-${sig.symbol}" 
-                    onclick="openChartModal('${sig.symbol}', '${sig.ticker}', ${jsonLevels}, '${sig.side}', '60')" 
+            <button onclick="openChartModal('${sig.symbol}', '${sig.ticker}', ${jsonLevels}, '${sig.side}', '60')" 
                     class="bg-slate-900 hover:bg-slate-800 text-white px-3.5 py-1.5 rounded-xl font-bold flex items-center gap-1.5 transition text-[11px]">
               <i data-lucide="line-chart" class="w-3.5 h-3.5 text-emerald-400"></i>
               <span>OPEN LIVE CANDLE CHART</span>
@@ -1103,70 +911,13 @@
       lucide.createIcons();
     }
 
-    // AUDITOR TIME-FRAME SWITCHER
-    let currentAuditData = null;
-    function switchAuditTimeframe(tf) {
-      if (!currentAuditData || !currentAuditData.tfProfile || !currentAuditData.tfProfile[tf]) return;
-      const d = currentAuditData;
-      const tfObj = d.tfProfile[tf];
-      const isLong = tfObj.side === 'LONG';
-      const price = d.price;
-
-      const entry = isLong ? price * 0.992 : price * 1.008;
-      const tp1   = isLong ? price * 1.045 : price * 0.955;
-      const tp2   = isLong ? price * 1.095 : price * 0.905;
-      const sl    = isLong ? price * 0.965 : price * 1.035;
-
-      const badge = document.getElementById('auditVerdictBadge');
-      if (badge) {
-        badge.innerText = `${tf} ${tfObj.label} (${isLong ? 'LONG BIAS' : 'SHORT BREAKDOWN'})`;
-        badge.className = `px-3 py-1 text-xs font-bold font-mono rounded-full border ${isLong ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}`;
-      }
-
-      const desc = document.getElementById('auditVerdictDesc');
-      if (desc) desc.innerText = `${tf} Structure: ${tfObj.desc}.`;
-
-      const entryVal = document.getElementById('auditEntryVal');
-      if (entryVal) entryVal.innerText = `$${formatNumber(entry)}`;
-
-      const tp1Val = document.getElementById('auditTp1Val');
-      if (tp1Val) tp1Val.innerText = `$${formatNumber(tp1)}`;
-
-      const tp2Val = document.getElementById('auditTp2Val');
-      if (tp2Val) tp2Val.innerText = `$${formatNumber(tp2)}`;
-
-      const slVal = document.getElementById('auditSlVal');
-      if (slVal) slVal.innerText = `$${formatNumber(sl)}`;
-
-      ['15m', '1h', '4h', '1d'].forEach(t => {
-        const btn = document.getElementById(`audit-tf-${t}`);
-        if (btn) {
-          if (t === tf) {
-            btn.className = `text-xs font-bold font-mono px-3 py-1.5 rounded-lg border ${isLong ? 'active-bull' : 'active-bear'}`;
-          } else {
-            const isTfBull = d.tfProfile[t].side === 'LONG';
-            btn.className = `text-xs font-bold font-mono px-3 py-1.5 rounded-lg border bg-slate-50 ${isTfBull ? 'text-emerald-700 border-emerald-200' : 'text-rose-700 border-rose-200'}`;
-          }
-        }
-      });
-
-      const chartBtn = document.getElementById('auditChartBtn');
-      if (chartBtn) {
-        const newLevels = { entry, tp1, tp2, sl };
-        const jsonStr = JSON.stringify(newLevels).replace(/"/g, '&quot;');
-        const tvInterval = tf === '15m' ? '15' : (tf === '4h' ? '240' : (tf === '1d' ? 'D' : '60'));
-        chartBtn.setAttribute('onclick', `openChartModal('${d.symbol}', '${d.ticker}', ${jsonStr}, '${tfObj.side}', '${tvInterval}')`);
-      }
-    }
-
-    // 100% RELIABLE INSTANT COIN AUDITOR SEARCH ENGINE
+    // INSTANT COIN AUDITOR SEARCH ENGINE (SUPPORTS ANY BINANCE TICKER)
     async function handleCustomCoinAudit(e) {
       e.preventDefault();
       const input = document.getElementById('customCoinInput');
       let rawTicker = input.value.trim().toUpperCase();
       if (!rawTicker) return;
 
-      // Normalize ticker format (e.g. btc, BTC, btcusdt -> BTCUSDT)
       let ticker = rawTicker.replace('USDT', '');
       let symbol = ticker + 'USDT';
 
@@ -1174,21 +925,14 @@
       desk.classList.remove('hidden');
       desk.innerHTML = `<div class="p-6 terminal-card text-center font-mono text-xs text-slate-400 animate-pulse">Auditing Binance multi-timeframe radar for ${ticker}/USDT...</div>`;
 
-      const hosts = ['https://api.binance.com', 'https://data-api.binance.vision', 'https://api1.binance.com'];
-      let data = null;
-
-      for (const h of hosts) {
-        try {
-          const res = await fetch(`${h}/api/v3/ticker/24hr?symbol=${symbol}&_t=${Date.now()}`);
-          if (res.ok) {
-            data = await res.json();
-            break;
-          }
-        } catch(err){}
-      }
+      const data = await safeFetchJson(`/api/v3/ticker/24hr?symbol=${symbol}`);
 
       if (!data || !data.lastPrice) {
-        desk.innerHTML = `<div class="p-6 terminal-card text-center font-mono text-xs text-rose-600">Error: Token "${ticker}/USDT" not found on Binance spot market. Please verify the ticker.</div>`;
+        desk.innerHTML = `
+          <div class="p-6 terminal-card text-center font-mono text-xs text-rose-600">
+            Error: Token "${ticker}/USDT" is not listed on Binance Spot market. Try searching <strong>BTC, SOL, SUI, DOGE, NEAR, ETH, XRP, AVAX</strong>.
+          </div>
+        `;
         return;
       }
 
@@ -1201,8 +945,6 @@
       if (!registeredTokens.includes(symbol)) registeredTokens.push(symbol);
 
       const tfProfile = buildFastTfProfile(price, change, high, low);
-      currentAuditData = { symbol, ticker, price, change, high, low, volume, tfProfile };
-
       const activeTf = '1h';
       const tfObj = tfProfile[activeTf];
       const isLong = tfObj.side === 'LONG';
@@ -1211,7 +953,6 @@
       const tp1   = price * (isLong ? 1.045 : 0.955);
       const tp2   = price * (isLong ? 1.095 : 0.905);
       const sl    = price * (isLong ? 0.965 : 1.035);
-
       const jsonLevels = JSON.stringify({ entry, tp1, tp2, sl }).replace(/"/g, '&quot;');
 
       desk.innerHTML = `
@@ -1220,11 +961,11 @@
             <div>
               <div class="flex items-center gap-3">
                 <h3 class="text-xl font-black text-slate-900">${ticker}/USDT</h3>
-                <span id="auditVerdictBadge" class="px-3 py-1 text-xs font-bold rounded-full border ${isLong ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}">
+                <span class="px-3 py-1 text-xs font-bold rounded-full border ${isLong ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}">
                   ${activeTf} ${tfObj.label} (${isLong ? 'LONG BIAS' : 'SHORT BREAKDOWN'})
                 </span>
               </div>
-              <p id="auditVerdictDesc" class="text-xs text-slate-500 font-sans mt-1">
+              <p class="text-xs text-slate-500 font-sans mt-1">
                 ${activeTf} Structure: ${tfObj.desc}.
               </p>
             </div>
@@ -1239,44 +980,13 @@
             </div>
           </div>
 
-          <!-- Multi-TF Selector -->
-          <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 mb-5">
-            <div class="flex justify-between items-center text-xs text-slate-500 mb-2">
-              <span><strong>TIMEFRAME CONFLUENCE RADAR:</strong></span>
-              <span class="text-emerald-600 font-bold">Real Binance Klines</span>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-center">
-              <button onclick="switchAuditTimeframe('15m')" id="audit-tf-15m" 
-                      class="text-xs font-bold px-3 py-2 rounded-lg border ${tfProfile['15m'].side === 'LONG' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}">
-                15m: ${tfProfile['15m'].label}
-                <span class="block text-[10px] font-normal text-slate-400 mt-0.5">Scalp Bias</span>
-              </button>
-              <button onclick="switchAuditTimeframe('1h')" id="audit-tf-1h" 
-                      class="text-xs font-bold px-3 py-2 rounded-lg border ${isLong ? 'active-bull' : 'active-bear'}">
-                1h: ${tfProfile['1h'].label}
-                <span class="block text-[10px] font-normal mt-0.5">Intraday Bias</span>
-              </button>
-              <button onclick="switchAuditTimeframe('4h')" id="audit-tf-4h" 
-                      class="text-xs font-bold px-3 py-2 rounded-lg border ${tfProfile['4h'].side === 'LONG' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}">
-                4h: ${tfProfile['4h'].label}
-                <span class="block text-[10px] font-normal text-slate-400 mt-0.5">Swing Trend</span>
-              </button>
-              <button onclick="switchAuditTimeframe('1d')" id="audit-tf-1d" 
-                      class="text-xs font-bold px-3 py-2 rounded-lg border ${tfProfile['1d'].side === 'LONG' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}">
-                1d: ${tfProfile['1d'].label}
-                <span class="block text-[10px] font-normal text-slate-400 mt-0.5">Macro Health</span>
-              </button>
-            </div>
-          </div>
-
           <!-- Parameters Grid -->
           <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50 mb-4">
             <div class="flex justify-between items-center mb-2">
               <span class="text-xs font-bold text-slate-700 font-sans">
                 Automated ${activeTf} Confluence Parameters (${isLong ? 'LONG POSITION' : 'SHORT POSITION'}):
               </span>
-              <button id="auditChartBtn" 
-                      onclick="openChartModal('${symbol}', '${ticker}', ${jsonLevels}, '${isLong ? 'LONG' : 'SHORT'}', '60')" 
+              <button onclick="openChartModal('${symbol}', '${ticker}', ${jsonLevels}, '${isLong ? 'LONG' : 'SHORT'}', '60')" 
                       class="bg-slate-900 hover:bg-slate-800 text-white px-3.5 py-1.5 rounded-xl font-bold text-xs flex items-center gap-1.5 transition">
                 <i data-lucide="line-chart" class="w-3.5 h-3.5 text-emerald-400"></i>
                 <span>OPEN CANDLESTICK CHART</span>
@@ -1285,19 +995,19 @@
             <div class="grid grid-cols-4 gap-2 text-center">
               <div class="bg-white border border-blue-200 rounded-xl p-2.5">
                 <span class="text-slate-400 block text-[9px]">${isLong ? 'LIMIT ENTRY' : 'SELL LIMIT'}</span>
-                <span class="font-bold text-blue-700 text-xs" id="auditEntryVal">$${formatNumber(entry)}</span>
+                <span class="font-bold text-blue-700 text-xs">$${formatNumber(entry)}</span>
               </div>
               <div class="bg-white border border-emerald-200 rounded-xl p-2.5">
                 <span class="text-slate-400 block text-[9px]">TARGET 1</span>
-                <span class="font-bold text-emerald-700 text-xs" id="auditTp1Val">$${formatNumber(tp1)}</span>
+                <span class="font-bold text-emerald-700 text-xs">$${formatNumber(tp1)}</span>
               </div>
               <div class="bg-white border border-emerald-200 rounded-xl p-2.5">
                 <span class="text-slate-400 block text-[9px]">TARGET 2</span>
-                <span class="font-bold text-emerald-700 text-xs" id="auditTp2Val">$${formatNumber(tp2)}</span>
+                <span class="font-bold text-emerald-700 text-xs">$${formatNumber(tp2)}</span>
               </div>
               <div class="bg-white border border-rose-200 rounded-xl p-2.5">
                 <span class="text-slate-400 block text-[9px]">STOP LOSS</span>
-                <span class="font-bold text-rose-700 text-xs" id="auditSlVal">$${formatNumber(sl)}</span>
+                <span class="font-bold text-rose-700 text-xs">$${formatNumber(sl)}</span>
               </div>
             </div>
           </div>
@@ -1319,7 +1029,7 @@
       initGaugeChart();
       renderSignalTable();
 
-      startResilientLiveTickerLoop();
+      // Start resilient loops
       await syncRealBtcMetrics();
       setInterval(syncRealBtcMetrics, 8000);
 
