@@ -8,6 +8,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- TRADINGVIEW LIGHTWEIGHT CHARTS OFFICIAL CDN -->
+  <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,6 +54,10 @@
     .nav-item.active i, .nav-item.active span {
       color: #FFFFFF;
     }
+    .tf-btn.active {
+      background-color: #0F172A;
+      color: #FFFFFF;
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased">
@@ -64,14 +70,14 @@
       </div>
       <div>
         <h1 class="text-base font-black tracking-tight text-slate-900 leading-none">CRYPTO DADA</h1>
-        <span class="text-[10px] font-mono text-slate-500 tracking-wider">LIVE MULTI-ASSET SCANNER & VISUAL CHARTS</span>
+        <span class="text-[10px] font-mono text-slate-500 tracking-wider">LIVE MULTI-TIMEFRAME CANDLESTICK TERMINAL</span>
       </div>
     </div>
     
     <div class="flex items-center gap-4 text-xs font-mono">
       <div class="flex items-center gap-2 bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 rounded-full font-bold">
         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-        <span id="dataFeedStatus">FEED: 100% REAL LIVE DATA PIPELINE ACTIVE</span>
+        <span id="dataFeedStatus">FEED: TRADINGVIEW ENGINE ACTIVE</span>
       </div>
       <div class="text-slate-500 font-semibold" id="liveUtcClock">00:00:00 UTC</div>
     </div>
@@ -149,8 +155,8 @@
 
       <div class="pt-4 border-t border-slate-100">
         <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs font-mono">
-          <span class="text-slate-400 block text-[10px]">CANDLE ENGINE</span>
-          <span class="font-bold text-emerald-600">Vector Candlesticks Active</span>
+          <span class="text-slate-400 block text-[10px]">CHART ENGINE</span>
+          <span class="font-bold text-emerald-600">TradingView Multi-TF Active</span>
         </div>
       </div>
     </aside>
@@ -171,7 +177,18 @@
                 <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-2.5 py-0.5 rounded-full border border-emerald-200 font-mono" id="structureStatusBadge">Trending Discovery</span>
               </div>
               
-              <div class="h-24 w-full mb-3 bg-slate-950 rounded-xl p-2.5 flex items-center justify-center border border-slate-800" id="btcCandleBox">
+              <!-- BITCOIN TRADINGVIEW CANDLESTICK CONTAINER -->
+              <div class="mb-3">
+                <div class="flex items-center justify-between mb-1 text-[10px] font-mono text-slate-400">
+                  <span>BTC/USDT CANDLES</span>
+                  <div class="flex gap-1" id="btc-tf-group">
+                    <button onclick="changeChartTimeframe('BTCUSDT', '15m', 'btcCandleChart')" class="tf-btn px-1.5 py-0.5 rounded bg-slate-100 hover:bg-slate-200 transition">15m</button>
+                    <button onclick="changeChartTimeframe('BTCUSDT', '1h', 'btcCandleChart')" class="tf-btn active px-1.5 py-0.5 rounded bg-slate-100 hover:bg-slate-200 transition">1h</button>
+                    <button onclick="changeChartTimeframe('BTCUSDT', '4h', 'btcCandleChart')" class="tf-btn px-1.5 py-0.5 rounded bg-slate-100 hover:bg-slate-200 transition">4h</button>
+                    <button onclick="changeChartTimeframe('BTCUSDT', '1d', 'btcCandleChart')" class="tf-btn px-1.5 py-0.5 rounded bg-slate-100 hover:bg-slate-200 transition">1d</button>
+                  </div>
+                </div>
+                <div class="h-44 w-full bg-white rounded-xl border border-slate-200 overflow-hidden" id="btcCandleChart"></div>
               </div>
 
               <div class="space-y-2 font-mono text-xs pt-2 border-t border-slate-100">
@@ -285,16 +302,16 @@
         </div>
       </section>
 
-      <!-- VIEW 2: 500+ MARKET SCANNER WITH CANDLESTICK CHARTS -->
+      <!-- VIEW 2: 500+ MARKET SCANNER WITH TIMEFRAME CANDLESTICK CHARTS -->
       <section id="view-signals-view" class="view-panel hidden space-y-5">
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div class="flex items-center gap-2">
-              <h2 class="text-lg font-black text-slate-900">Binance 500+ Confluence Scanner with Candlestick Charts</h2>
-              <span class="bg-emerald-100 text-emerald-800 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">REAL CANDLES VISIBLE</span>
+              <h2 class="text-lg font-black text-slate-900">Binance 500+ Scanner & Interactive TradingView Charts</h2>
+              <span class="bg-emerald-100 text-emerald-800 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">REAL CANDLESTICKS + TIMEFRAMES</span>
             </div>
             <p class="text-xs text-slate-500 mt-1">
-              Every token renders pure OHLC red & green candlestick bars with high/low wick boundaries.
+              Select timeframes (5m, 15m, 1h, 4h, 1d) on any token to zoom, pan, and view real-time candlestick price action.
             </p>
           </div>
           <div class="flex items-center gap-2">
@@ -327,7 +344,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="dynamicSignalsDesk"></div>
       </section>
 
-      <!-- VIEW 3: INSTANT COIN AUDITOR WITH CANDLESTICK CHART -->
+      <!-- VIEW 3: INSTANT COIN AUDITOR WITH TIMEFRAME CHARTS -->
       <section id="view-search-view" class="view-panel hidden space-y-5">
         <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs">
           <div class="max-w-2xl">
@@ -336,7 +353,7 @@
               Instant Coin Auditor & Candlestick Scanner
             </h2>
             <p class="text-xs text-slate-500 mt-1 font-sans">
-              Type any cryptocurrency ticker to evaluate real-time structure, 50/200 EMA, automated trade parameters, and full candlestick chart.
+              Type any cryptocurrency ticker to evaluate real-time structure, 50/200 EMA, and automated trade levels with interactive multi-timeframe charts.
             </p>
 
             <form onsubmit="handleCustomCoinAudit(event)" class="mt-4 flex gap-2">
@@ -355,7 +372,7 @@
         <div id="searchAuditResultDesk" class="hidden"></div>
       </section>
 
-      <!-- VIEW 4: SYNDICATE ROTATIONS (EXPANDED TO ALL SECTORS) -->
+      <!-- VIEW 4: SYNDICATE ROTATIONS -->
       <section id="view-syndicate-view" class="view-panel hidden space-y-5">
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div>
@@ -378,167 +395,119 @@
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-100">
-              <!-- 1. L1 Majors -->
               <tr class="hover:bg-slate-50/60 transition">
                 <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
                   Layer 1 Majors & High-Throughput
                 </td>
-                <td class="py-3.5 px-4 text-indigo-600 font-bold">
-                  SOL (<span id="syn-price-SOLUSDT" class="font-mono">$154.20</span>)
-                </td>
+                <td class="py-3.5 px-4 text-indigo-600 font-bold">SOL (<span id="syn-price-SOLUSDT">$154.20</span>)</td>
                 <td class="py-3.5 px-4">
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">SUI</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">AVAX</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">APT</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">SEI</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded">NEAR</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">SUI</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">AVAX</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">APT</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">SEI</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded">NEAR</span>
                 </td>
-                <td class="py-3.5 px-4 text-right">
-                  <span class="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200 text-[10px]">AGGRESSIVE EXPANSION</span>
-                </td>
+                <td class="py-3.5 px-4 text-right"><span class="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200 text-[10px]">AGGRESSIVE EXPANSION</span></td>
               </tr>
-
-              <!-- 2. Layer 2 & Rollups -->
               <tr class="hover:bg-slate-50/60 transition">
                 <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-blue-500"></span>
                   Ethereum L2 & Rollups (ETH Beta)
                 </td>
-                <td class="py-3.5 px-4 text-blue-600 font-bold">
-                  ETH (<span id="syn-price-ETHUSDT" class="font-mono">$2,679.40</span>)
-                </td>
+                <td class="py-3.5 px-4 text-blue-600 font-bold">ETH (<span id="syn-price-ETHUSDT">$2,679.40</span>)</td>
                 <td class="py-3.5 px-4">
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">ARB</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">OP</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">MATIC</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">STRK</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded">LDO</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">ARB</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">OP</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">MATIC</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded">LDO</span>
                 </td>
-                <td class="py-3.5 px-4 text-right">
-                  <span class="bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded text-[10px]">LAGGING CONSOLIDATION</span>
-                </td>
+                <td class="py-3.5 px-4 text-right"><span class="bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded text-[10px]">LAGGING CONSOLIDATION</span></td>
               </tr>
-
-              <!-- 3. RWA -->
               <tr class="hover:bg-slate-50/60 transition">
                 <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                  RWA (Real World Assets / Institutional)
+                  RWA (Real World Assets)
                 </td>
-                <td class="py-3.5 px-4 text-emerald-600 font-bold">
-                  ONDO (<span id="syn-price-ONDOUSDT" class="font-mono">$0.78</span>)
-                </td>
+                <td class="py-3.5 px-4 text-emerald-600 font-bold">ONDO (<span id="syn-price-ONDOUSDT">$0.78</span>)</td>
                 <td class="py-3.5 px-4">
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">PENDLE</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">MKR</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">TRU</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded">LINK</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">PENDLE</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">MKR</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">TRU</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded">LINK</span>
                 </td>
-                <td class="py-3.5 px-4 text-right">
-                  <span class="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200 text-[10px]">INSTITUTIONAL INFLOW</span>
-                </td>
+                <td class="py-3.5 px-4 text-right"><span class="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200 text-[10px]">INSTITUTIONAL INFLOW</span></td>
               </tr>
-
-              <!-- 4. AI & Compute -->
               <tr class="hover:bg-slate-50/60 transition">
                 <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-cyan-500"></span>
                   AI & Decentralized Compute
                 </td>
-                <td class="py-3.5 px-4 text-cyan-600 font-bold">
-                  FET (<span id="syn-price-FETUSDT" class="font-mono">$1.48</span>)
-                </td>
+                <td class="py-3.5 px-4 text-cyan-600 font-bold">FET (<span id="syn-price-FETUSDT">$1.48</span>)</td>
                 <td class="py-3.5 px-4">
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">RENDER</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">TAO</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">WLD</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded">IO</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">RENDER</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">TAO</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">WLD</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded">IO</span>
                 </td>
-                <td class="py-3.5 px-4 text-right">
-                  <span class="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200 text-[10px]">ACCUMULATION SPIKE</span>
-                </td>
+                <td class="py-3.5 px-4 text-right"><span class="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200 text-[10px]">ACCUMULATION SPIKE</span></td>
               </tr>
-
-              <!-- 5. DePIN -->
               <tr class="hover:bg-slate-50/60 transition">
                 <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-teal-500"></span>
-                  DePIN (Physical Infrastructure Networks)
+                  DePIN (Physical Infrastructure)
                 </td>
-                <td class="py-3.5 px-4 text-teal-600 font-bold">
-                  HNT (<span id="syn-price-HNTUSDT" class="font-mono">$6.42</span>)
-                </td>
+                <td class="py-3.5 px-4 text-teal-600 font-bold">HNT (<span id="syn-price-HNTUSDT">$6.42</span>)</td>
                 <td class="py-3.5 px-4">
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">FIL</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">AR</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">THETA</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded">JASMY</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">FIL</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">AR</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">THETA</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded">JASMY</span>
                 </td>
-                <td class="py-3.5 px-4 text-right">
-                  <span class="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200 text-[10px]">EARLY ROTATION</span>
-                </td>
+                <td class="py-3.5 px-4 text-right"><span class="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200 text-[10px]">EARLY ROTATION</span></td>
               </tr>
-
-              <!-- 6. DeFi & Lending -->
               <tr class="hover:bg-slate-50/60 transition">
                 <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-purple-500"></span>
                   DeFi, DEXs & Yield Engines
                 </td>
-                <td class="py-3.5 px-4 text-purple-600 font-bold">
-                  UNI (<span id="syn-price-UNIUSDT" class="font-mono">$9.60</span>)
-                </td>
+                <td class="py-3.5 px-4 text-purple-600 font-bold">UNI (<span id="syn-price-UNIUSDT">$9.60</span>)</td>
                 <td class="py-3.5 px-4">
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">AAVE</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">ENA</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">CRV</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded">SNX</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">AAVE</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">ENA</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">CRV</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded">SNX</span>
                 </td>
-                <td class="py-3.5 px-4 text-right">
-                  <span class="bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded text-[10px]">STEADY BASING</span>
-                </td>
+                <td class="py-3.5 px-4 text-right"><span class="bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded text-[10px]">STEADY BASING</span></td>
               </tr>
-
-              <!-- 7. Memecoins -->
               <tr class="hover:bg-slate-50/60 transition">
                 <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-amber-500"></span>
                   Memecoins & High-Beta Retail Flow
                 </td>
-                <td class="py-3.5 px-4 text-amber-600 font-bold">
-                  DOGE (<span id="syn-price-DOGEUSDT" class="font-mono">$0.142</span>)
-                </td>
+                <td class="py-3.5 px-4 text-amber-600 font-bold">DOGE (<span id="syn-price-DOGEUSDT">$0.142</span>)</td>
                 <td class="py-3.5 px-4">
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">SHIB</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">PEPE</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">WIF</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">BONK</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded">FLOKI</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">SHIB</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">PEPE</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">WIF</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">BONK</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded">FLOKI</span>
                 </td>
-                <td class="py-3.5 px-4 text-right">
-                  <span class="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200 text-[10px]">SPECULATIVE MANIA</span>
-                </td>
+                <td class="py-3.5 px-4 text-right"><span class="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200 text-[10px]">SPECULATIVE MANIA</span></td>
               </tr>
-
-              <!-- 8. Gaming & Metaverse -->
               <tr class="hover:bg-slate-50/60 transition">
                 <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-rose-500"></span>
-                  Gaming, Metaverse & NFT Infrastructure
+                  Gaming, Metaverse & NFTs
                 </td>
-                <td class="py-3.5 px-4 text-rose-600 font-bold">
-                  GALA (<span id="syn-price-GALAUSDT" class="font-mono">$0.024</span>)
-                </td>
+                <td class="py-3.5 px-4 text-rose-600 font-bold">GALA (<span id="syn-price-GALAUSDT">$0.024</span>)</td>
                 <td class="py-3.5 px-4">
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">IMX</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">BEAM</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded mr-1">AXS</span>
-                  <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded">SAND</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">IMX</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">BEAM</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded mr-1">AXS</span>
+                  <span class="bg-slate-100 px-2 py-0.5 rounded">SAND</span>
                 </td>
-                <td class="py-3.5 px-4 text-right">
-                  <span class="bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded text-[10px]">BOTTOM FORMATION</span>
-                </td>
+                <td class="py-3.5 px-4 text-right"><span class="bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded text-[10px]">BOTTOM FORMATION</span></td>
               </tr>
             </tbody>
           </table>
@@ -570,6 +539,7 @@
       'FETUSDT', 'HNTUSDT', 'UNIUSDT', 'DOGEUSDT', 'GALAUSDT'
     ];
     let gaugeChartInstance = null;
+    let activeCharts = {}; // Stores TradingView chart instances
 
     let liveMatrixData = [
       { id: 1, name: 'Price Structure', watch: 'Blow-off move / vertical trend', warning: 'Parabolic breakout', read: 'Loading...', status: 'BULLISH' },
@@ -607,6 +577,15 @@
       document.querySelectorAll('#sideNav .nav-item').forEach(btn => btn.classList.remove('active'));
       const activeBtn = document.querySelector(`#sideNav [data-view="${viewId}"]`);
       if (activeBtn) activeBtn.classList.add('active');
+
+      // Auto resize visible charts when switching views
+      setTimeout(() => {
+        Object.values(activeCharts).forEach(c => {
+          if (c && c.chart && c.container) {
+            c.chart.applyOptions({ width: c.container.clientWidth });
+          }
+        });
+      }, 50);
     }
 
     function renderSignalTable() {
@@ -689,45 +668,150 @@
       }
     }
 
-    // PURE VECTOR CANDLESTICK GENERATOR
-    function generateCandlestickSvg(low, high, currentPrice, width = 300, height = 75, numCandles = 16) {
-      const range = (high - low) || 1;
-      const stepX = width / numCandles;
-      const candleW = Math.max(4, stepX * 0.55);
+    // =========================================================================
+    // TRADINGVIEW LIGHTWEIGHT CANDLESTICK ENGINE (MULTI-TIMEFRAME)
+    // =========================================================================
+    async function createTradingViewCandleChart(containerId, symbol, interval = '1h', levels = null) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
 
-      let p = low + range * 0.2;
-      let svgElements = '';
+      if (activeCharts[containerId]) {
+        try { activeCharts[containerId].chart.remove(); } catch(e) {}
+        delete activeCharts[containerId];
+      }
+      container.innerHTML = '';
 
-      for (let i = 0; i < numCandles; i++) {
-        const isLast = (i === numCandles - 1);
-        let open = p;
-        let close = isLast ? currentPrice : (p + (Math.sin(i * 1.3) * range * 0.22) + (range * 0.04));
-        let cHigh = Math.max(open, close) + (range * 0.08);
-        let cLow = Math.min(open, close) - (range * 0.08);
+      const chart = LightweightCharts.createChart(container, {
+        width: container.clientWidth || 300,
+        height: container.clientHeight || 170,
+        layout: {
+          background: { color: '#FFFFFF' },
+          textColor: '#64748B',
+          fontSize: 10,
+          fontFamily: 'JetBrains Mono, monospace'
+        },
+        grid: {
+          vertLines: { color: '#F1F5F9' },
+          horzLines: { color: '#F1F5F9' }
+        },
+        timeScale: {
+          borderColor: '#E2E8F0',
+          timeVisible: true,
+          secondsVisible: false
+        },
+        rightPriceScale: {
+          borderColor: '#E2E8F0',
+          autoScale: true
+        },
+        crosshair: {
+          mode: LightweightCharts.CrosshairMode.Normal
+        }
+      });
 
-        if (cHigh > high) cHigh = high;
-        if (cLow < low) cLow = low;
+      const candleSeries = chart.addCandlestickSeries({
+        upColor: '#16A34A',
+        downColor: '#DC2626',
+        borderUpColor: '#16A34A',
+        borderDownColor: '#DC2626',
+        wickUpColor: '#16A34A',
+        wickDownColor: '#DC2626'
+      });
 
-        const isGreen = close >= open;
-        const color = isGreen ? '#16A34A' : '#DC2626';
-
-        const x = (i * stepX) + (stepX / 2);
-        const openY = height - 10 - ((open - low) / range) * (height - 20);
-        const closeY = height - 10 - ((close - low) / range) * (height - 20);
-        const highY = height - 10 - ((cHigh - low) / range) * (height - 20);
-        const lowY = height - 10 - ((cLow - low) / range) * (height - 20);
-
-        const bodyY = Math.min(openY, closeY);
-        const bodyH = Math.max(2.5, Math.abs(closeY - openY));
-
-        svgElements += `
-          <line x1="${x.toFixed(1)}" y1="${highY.toFixed(1)}" x2="${x.toFixed(1)}" y2="${lowY.toFixed(1)}" stroke="${color}" stroke-width="1.2"/>
-          <rect x="${(x - candleW/2).toFixed(1)}" y="${bodyY.toFixed(1)}" width="${candleW.toFixed(1)}" height="${bodyH.toFixed(1)}" fill="${color}" rx="0.5"/>
-        `;
-        p = close;
+      // Horizontal Trade Levels Overlay (Limit Entry, TP1, TP2, Stop Loss)
+      if (levels) {
+        if (levels.entry) {
+          candleSeries.createPriceLine({
+            price: levels.entry,
+            color: '#2563EB',
+            lineWidth: 1.5,
+            lineStyle: LightweightCharts.LineStyle.Dashed,
+            axisLabelVisible: true,
+            title: 'ENTRY'
+          });
+        }
+        if (levels.tp1) {
+          candleSeries.createPriceLine({
+            price: levels.tp1,
+            color: '#16A34A',
+            lineWidth: 1.5,
+            lineStyle: LightweightCharts.LineStyle.Dashed,
+            axisLabelVisible: true,
+            title: 'TP1'
+          });
+        }
+        if (levels.tp2) {
+          candleSeries.createPriceLine({
+            price: levels.tp2,
+            color: '#059669',
+            lineWidth: 1.5,
+            lineStyle: LightweightCharts.LineStyle.Dashed,
+            axisLabelVisible: true,
+            title: 'TP2'
+          });
+        }
+        if (levels.sl) {
+          candleSeries.createPriceLine({
+            price: levels.sl,
+            color: '#DC2626',
+            lineWidth: 1.5,
+            lineStyle: LightweightCharts.LineStyle.Dashed,
+            axisLabelVisible: true,
+            title: 'SL'
+          });
+        }
       }
 
-      return `<svg class="w-full h-full" viewBox="0 0 ${width} ${height}">${svgElements}</svg>`;
+      activeCharts[containerId] = {
+        chart: chart,
+        candleSeries: candleSeries,
+        symbol: symbol,
+        interval: interval,
+        container: container,
+        lastCandle: null
+      };
+
+      await loadChartCandleData(containerId, symbol, interval);
+
+      // Responsive Resize
+      window.addEventListener('resize', () => {
+        if (container && chart) {
+          chart.applyOptions({ width: container.clientWidth });
+        }
+      });
+    }
+
+    async function loadChartCandleData(containerId, symbol, interval) {
+      const chartObj = activeCharts[containerId];
+      if (!chartObj) return;
+
+      try {
+        const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=60`);
+        if (!res.ok) return;
+        const data = await res.json();
+
+        const formattedCandles = data.map(d => ({
+          time: Math.floor(d[0] / 1000), // UNIX seconds timestamp
+          open: parseFloat(d[1]),
+          high: parseFloat(d[2]),
+          low: parseFloat(d[3]),
+          close: parseFloat(d[4])
+        }));
+
+        chartObj.candleSeries.setData(formattedCandles);
+        chartObj.lastCandle = formattedCandles[formattedCandles.length - 1];
+        chartObj.chart.timeScale().fitContent();
+
+      } catch (e) {
+        console.warn('Failed to load klines for:', symbol, e);
+      }
+    }
+
+    function changeChartTimeframe(symbol, interval, containerId, btnElement = null) {
+      if (btnElement && btnElement.parentElement) {
+        btnElement.parentElement.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('active'));
+        btnElement.classList.add('active');
+      }
+      loadChartCandleData(containerId, symbol, interval);
     }
 
     // CENTRAL TICK HANDLER
@@ -771,16 +855,24 @@
         }
       }
 
-      // Syndicate Table Live Pricing
       const synEl = document.getElementById(`syn-price-${sym}`);
       if (synEl) {
         const oldVal = parseFloat(synEl.getAttribute('data-price') || '0');
         synEl.innerText = `$${formatNumber(newPrice)}`;
         synEl.setAttribute('data-price', newPrice);
-        if (oldVal > 0 && newPrice !== oldVal) {
-          triggerFlash(synEl, newPrice > oldVal);
-        }
+        if (oldVal > 0 && newPrice !== oldVal) triggerFlash(synEl, newPrice > oldVal);
       }
+
+      // Update current open candle real-time on active TradingView charts
+      Object.keys(activeCharts).forEach(cId => {
+        const cObj = activeCharts[cId];
+        if (cObj && cObj.symbol === sym && cObj.lastCandle) {
+          cObj.lastCandle.close = newPrice;
+          if (newPrice > cObj.lastCandle.high) cObj.lastCandle.high = newPrice;
+          if (newPrice < cObj.lastCandle.low) cObj.lastCandle.low = newPrice;
+          cObj.candleSeries.update(cObj.lastCandle);
+        }
+      });
     }
 
     // INSTITUTIONAL METRICS SYNC
@@ -796,11 +888,6 @@
         document.getElementById('keySupportVal').innerText = `$${formatNumber(low24h)}`;
         document.getElementById('keyResistanceVal').innerText = `$${formatNumber(high24h)}`;
         document.getElementById('simpleReadText').innerText = `Range $${formatNumber(low24h)} - $${formatNumber(high24h)}`;
-
-        const btcBox = document.getElementById('btcCandleBox');
-        if (btcBox) {
-          btcBox.innerHTML = generateCandlestickSvg(low24h, high24h, curPrice, 300, 75, 18);
-        }
 
         if (curPrice >= high24h * 0.98) {
           liveMatrixData[0].read = `Parabolic Breakout ($${formatNumber(curPrice)})`;
@@ -936,7 +1023,7 @@
       }, 1000);
     }
 
-    // 500+ MARKET SCANNER WITH INSTANT CANDLESTICK RENDERING
+    // 500+ MARKET SCANNER WITH TRADINGVIEW CHARTS
     async function triggerFullMarketScan() {
       const spinIcon = document.getElementById('scanSpinIcon');
       if (spinIcon) spinIcon.classList.add('animate-spin');
@@ -1015,7 +1102,7 @@
         const card = document.createElement('div');
         card.className = 'bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col justify-between';
 
-        const candlesSvg = generateCandlestickSvg(sig.low, sig.high, sig.price, 300, 75, 16);
+        const chartContainerId = `tv-chart-${sig.symbol}`;
 
         card.innerHTML = `
           <div>
@@ -1043,15 +1130,19 @@
               </div>
             </div>
 
-            <!-- INSTITUTIONAL CANDLESTICK BOX -->
-            <div class="bg-slate-950 border border-slate-800 rounded-xl p-2.5 mb-3">
-              <div class="flex justify-between items-center text-[10px] font-mono text-slate-400 mb-1">
-                <span>OHLC CANDLESTICK PROFILE</span>
-                <span class="text-emerald-400 font-bold">Floor: $${formatNumber(sig.low)} &bull; High: $${formatNumber(sig.high)}</span>
+            <!-- INTERACTIVE TRADINGVIEW CANDLESTICK CHART CONTAINER -->
+            <div class="border border-slate-200 rounded-xl p-2.5 mb-3 bg-slate-50/40">
+              <div class="flex justify-between items-center text-[10px] font-mono text-slate-400 mb-1.5">
+                <span class="font-bold text-slate-700">CANDLESTICK TIMEFRAME</span>
+                <div class="flex gap-1">
+                  <button onclick="changeChartTimeframe('${sig.symbol}', '5m', '${chartContainerId}', this)" class="tf-btn px-1.5 py-0.5 rounded bg-white border border-slate-200 hover:bg-slate-100 transition text-[9px]">5m</button>
+                  <button onclick="changeChartTimeframe('${sig.symbol}', '15m', '${chartContainerId}', this)" class="tf-btn px-1.5 py-0.5 rounded bg-white border border-slate-200 hover:bg-slate-100 transition text-[9px]">15m</button>
+                  <button onclick="changeChartTimeframe('${sig.symbol}', '1h', '${chartContainerId}', this)" class="tf-btn active px-1.5 py-0.5 rounded bg-white border border-slate-200 hover:bg-slate-100 transition text-[9px]">1h</button>
+                  <button onclick="changeChartTimeframe('${sig.symbol}', '4h', '${chartContainerId}', this)" class="tf-btn px-1.5 py-0.5 rounded bg-white border border-slate-200 hover:bg-slate-100 transition text-[9px]">4h</button>
+                  <button onclick="changeChartTimeframe('${sig.symbol}', '1d', '${chartContainerId}', this)" class="tf-btn px-1.5 py-0.5 rounded bg-white border border-slate-200 hover:bg-slate-100 transition text-[9px]">1d</button>
+                </div>
               </div>
-              <div class="h-20 w-full flex items-center justify-center">
-                ${candlesSvg}
-              </div>
+              <div class="h-36 w-full rounded-lg overflow-hidden bg-white border border-slate-100" id="${chartContainerId}"></div>
             </div>
 
             <!-- Parameters Grid -->
@@ -1084,10 +1175,18 @@
 
           <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-mono">
             <span>Macro Alignment: BTC Safe (Live)</span>
-            <span class="text-emerald-600 font-bold">CANDLES ACTIVE</span>
+            <span class="text-emerald-600 font-bold">INTERACTIVE CANDLES ACTIVE</span>
           </div>
         `;
         desk.appendChild(card);
+
+        // Mount TradingView Candlestick Chart with Entry/TP/SL Lines
+        createTradingViewCandleChart(chartContainerId, sig.symbol, '1h', {
+          entry: sig.entry,
+          tp1: sig.tp1,
+          tp2: sig.tp2,
+          sl: sig.sl
+        });
       });
     }
 
@@ -1101,7 +1200,7 @@
       const symbol = ticker + 'USDT';
       const desk = document.getElementById('searchAuditResultDesk');
       desk.classList.remove('hidden');
-      desk.innerHTML = `<div class="p-6 bg-white border border-slate-200 rounded-2xl text-center font-mono text-xs text-slate-500 animate-pulse">Auditing Binance live structure and generating candles for ${symbol}...</div>`;
+      desk.innerHTML = `<div class="p-6 bg-white border border-slate-200 rounded-2xl text-center font-mono text-xs text-slate-500 animate-pulse">Auditing Binance live structure and mounting TradingView engine for ${symbol}...</div>`;
 
       try {
         const res = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${symbol}`);
@@ -1142,7 +1241,7 @@
         const tp2 = (price * 1.096);
         const sl = (price * 0.962);
 
-        const customCandlesSvg = generateCandlestickSvg(low, high, price, 600, 110, 22);
+        const customChartContainerId = 'audit-tv-chart';
 
         desk.innerHTML = `
           <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs">
@@ -1169,15 +1268,19 @@
               </div>
             </div>
 
-            <!-- DEDICATED FULL-WIDTH CANDLESTICK BOX -->
-            <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 mb-5">
-              <div class="flex justify-between items-center text-xs font-mono text-slate-400 mb-2">
+            <!-- DEDICATED FULL-WIDTH TRADINGVIEW CANDLESTICK CHART -->
+            <div class="border border-slate-200 rounded-xl p-4 mb-5 bg-slate-50/40">
+              <div class="flex justify-between items-center text-xs font-mono text-slate-500 mb-2">
                 <span><strong>${ticker}</strong> Institutional Candlestick Profile</span>
-                <span class="text-emerald-400 font-bold">Low: $${formatNumber(low)} &bull; High: $${formatNumber(high)}</span>
+                <div class="flex gap-1">
+                  <button onclick="changeChartTimeframe('${symbol}', '5m', '${customChartContainerId}', this)" class="tf-btn px-2 py-0.5 rounded bg-white border border-slate-200 hover:bg-slate-100 transition text-[10px]">5m</button>
+                  <button onclick="changeChartTimeframe('${symbol}', '15m', '${customChartContainerId}', this)" class="tf-btn px-2 py-0.5 rounded bg-white border border-slate-200 hover:bg-slate-100 transition text-[10px]">15m</button>
+                  <button onclick="changeChartTimeframe('${symbol}', '1h', '${customChartContainerId}', this)" class="tf-btn active px-2 py-0.5 rounded bg-white border border-slate-200 hover:bg-slate-100 transition text-[10px]">1h</button>
+                  <button onclick="changeChartTimeframe('${symbol}', '4h', '${customChartContainerId}', this)" class="tf-btn px-2 py-0.5 rounded bg-white border border-slate-200 hover:bg-slate-100 transition text-[10px]">4h</button>
+                  <button onclick="changeChartTimeframe('${symbol}', '1d', '${customChartContainerId}', this)" class="tf-btn px-2 py-0.5 rounded bg-white border border-slate-200 hover:bg-slate-100 transition text-[10px]">1d</button>
+                </div>
               </div>
-              <div class="h-28 w-full flex items-center justify-center">
-                ${customCandlesSvg}
-              </div>
+              <div class="h-64 w-full bg-white rounded-lg border border-slate-200 overflow-hidden" id="${customChartContainerId}"></div>
             </div>
 
             <!-- Audit Checklist Matrix -->
@@ -1228,6 +1331,13 @@
         `;
         lucide.createIcons();
 
+        createTradingViewCandleChart(customChartContainerId, symbol, '1h', {
+          entry: entry,
+          tp1: tp1,
+          tp2: tp2,
+          sl: sl
+        });
+
       } catch (err) {
         desk.innerHTML = `
           <div class="p-6 bg-white border border-rose-200 rounded-2xl text-center font-mono text-xs text-rose-600">
@@ -1254,6 +1364,9 @@
 
       await syncRealInstitutionalMetrics();
       setInterval(syncRealInstitutionalMetrics, 60000);
+
+      // Mount BTC Main Dashboard TradingView Chart
+      createTradingViewCandleChart('btcCandleChart', 'BTCUSDT', '1h');
 
       await triggerFullMarketScan();
       setInterval(triggerFullMarketScan, 45000);
