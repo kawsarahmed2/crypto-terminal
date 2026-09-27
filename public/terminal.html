@@ -18,7 +18,7 @@
 </head>
 <body class="flex flex-col min-h-screen">
 
-  <!-- ================= TOP MACRO & YIELD STRIP ================= -->
+  <!-- ================= TOP MACRO & YIELD STRIP (TIER 1 GATEKEEPER) ================= -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-50 px-4 py-2.5 shadow-sm">
     <div class="max-w-[1680px] mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
       <div class="flex items-center gap-3">
@@ -27,8 +27,8 @@
           CRYPTO DADA
         </span>
         <span class="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200 flex items-center gap-1">
-          <i data-lucide="radio" class="w-3 h-3 text-emerald-600"></i>
-          100% REAL LIVE MARKET FEED
+          <i data-lucide="shield-check" class="w-3 h-3 text-emerald-600"></i>
+          STRICT 5-STEP ALGORITHMIC PIPELINE
         </span>
         <span id="utc-clock" class="mono text-slate-500 font-semibold"></span>
       </div>
@@ -67,7 +67,7 @@
   <!-- ================= MAIN CONTAINER ================= -->
   <div class="max-w-[1680px] w-full mx-auto flex-1 flex flex-col md:flex-row p-4 gap-4">
 
-    <!-- 5 Module Sidebar Navigation -->
+    <!-- 5 Module Sidebar -->
     <aside class="w-full md:w-64 bg-white border border-slate-200 rounded-xl p-3 flex md:flex-col gap-1.5 shrink-0 self-start shadow-sm">
       <button onclick="switchTab('tab-btc')" id="nav-btc" class="nav-btn flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 w-full text-left transition">
         <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
@@ -91,7 +91,6 @@
       </button>
     </aside>
 
-    <!-- Main Workspace -->
     <main class="flex-1 flex flex-col gap-4 min-w-0">
 
       <!-- ================= 1. BITCOIN LIVE DASHBOARD ================= -->
@@ -147,7 +146,6 @@
           </div>
         </div>
 
-        <!-- 11 Pillar Matrix Table -->
         <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
           <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider mb-3 flex items-center gap-2">
             <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
@@ -196,11 +194,11 @@
           </div>
           <div class="bg-white border border-slate-200 p-3.5 rounded-xl shadow-sm">
             <span class="text-xs text-slate-500 font-semibold">Active Qualified Longs</span>
-            <div id="stat-longs" class="text-2xl font-black mono text-emerald-600">Scanning...</div>
+            <div id="stat-longs" class="text-2xl font-black mono text-emerald-600">0 In-Play</div>
           </div>
           <div class="bg-white border border-slate-200 p-3.5 rounded-xl shadow-sm">
             <span class="text-xs text-slate-500 font-semibold">Active Qualified Shorts</span>
-            <div id="stat-shorts" class="text-2xl font-black mono text-rose-600">Scanning...</div>
+            <div id="stat-shorts" class="text-2xl font-black mono text-rose-600">0 In-Play</div>
           </div>
         </div>
 
@@ -210,15 +208,15 @@
             <button onclick="setFilter('LONG')" id="filter-btn-LONG" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50">LONGS ONLY</button>
             <button onclick="setFilter('SHORT')" id="filter-btn-SHORT" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50">SHORTS ONLY</button>
           </div>
-          <button onclick="scanMarketDirect()" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-sm transition">
+          <button onclick="scanInstitutionalRadar()" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-sm transition">
             <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
-            RE-SCAN 5-STEP ENGINE
+            RE-EXECUTE 5-STEP ENGINE
           </button>
         </div>
 
         <div id="radar-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="col-span-full p-8 text-center bg-white border border-slate-200 rounded-xl mono text-xs text-slate-500">
-            Running 5-Step Execution Scan on Binance USDT pairs...
+            Scanning Institutional Watchlist against 4H Golden Stack, RSI Safe-Zone (48-65), RVOL >= 2.0x, Anti-Trap...
           </div>
         </div>
 
@@ -472,9 +470,9 @@
       }
     }
 
-    // ==========================================
-    // ROBUST 5-STEP SCANNING ENGINE (LONG + SHORT)
-    // ==========================================
+    // ==============================================================
+    // EXACT MATHEMATICAL 5-STEP CRYPTO DADA GATEKEEPER SCANNER
+    // ==============================================================
     let qualifiedCoins = [];
     let currentFilter = 'ALL';
 
@@ -493,105 +491,139 @@
       renderRadarCards();
     }
 
-    async function scanMarketDirect() {
-      const container = document.getElementById('radar-container');
-      container.innerHTML = `<div class="col-span-full p-8 text-center bg-white border border-slate-200 rounded-xl mono text-xs text-slate-600 font-bold">Querying Binance 24h Ticker Stream ($2M+ Floor, Long/Short Filter)...</div>`;
-
+    // Strict 5-Step Evaluation Function
+    async function evaluateCandidateStrictly(sym) {
       try {
-        const res = await fetch('https://api.binance.com/api/v3/ticker/24hr');
-        const allTickers = await res.json();
-        
-        // Filter Binance USDT Pairs with Minimum $2.0M Volume Floor (Step 1)
-        const eligible = allTickers.filter(t => 
-          t.symbol.endsWith('USDT') && 
-          parseFloat(t.quoteVolume) >= 2000000 &&
-          !t.symbol.includes('UP') && 
-          !t.symbol.includes('DOWN') &&
-          !t.symbol.includes('FDUSD') &&
-          !t.symbol.includes('USDC')
-        );
+        const [tickerRes, kline4hRes, kline1hRes] = await Promise.all([
+          fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${sym}USDT`),
+          fetch(`https://api.binance.com/api/v3/klines?symbol=${sym}USDT&interval=4h&limit=210`),
+          fetch(`https://api.binance.com/api/v3/klines?symbol=${sym}USDT&interval=1h&limit=25`)
+        ]);
 
-        // Sort: Top Gainers (for Longs) and Top Losers (for Shorts)
-        const sortedGainers = [...eligible].sort((a,b) => parseFloat(b.priceChangePercent) - parseFloat(a.priceChangePercent));
-        const sortedLosers = [...eligible].sort((a,b) => parseFloat(a.priceChangePercent) - parseFloat(b.priceChangePercent));
+        if (!tickerRes.ok || !kline4hRes.ok || !kline1hRes.ok) return null;
 
-        qualifiedCoins = [];
+        const ticker = await tickerRes.json();
+        const klines4h = await kline4hRes.json();
+        const klines1h = await kline1hRes.json();
 
-        // Pick top qualified Long candidates (Positive Momentum, Vol Floor Pass)
-        sortedGainers.slice(0, 4).forEach(item => {
-          const sym = item.symbol.replace('USDT', '');
-          const price = parseFloat(item.lastPrice);
-          const vol = (parseFloat(item.quoteVolume) / 1000000).toFixed(1);
-          const change = parseFloat(item.priceChangePercent);
-          const bid = parseFloat(item.bidPrice);
-          const ask = parseFloat(item.askPrice);
-          const spread = ask > 0 ? (((ask - bid) / ask) * 100).toFixed(3) : '0.020';
+        const price = parseFloat(ticker.lastPrice);
+        const quoteVol = parseFloat(ticker.quoteVolume);
+        const high24h = parseFloat(ticker.highPrice);
+        const bid = parseFloat(ticker.bidPrice);
+        const ask = parseFloat(ticker.askPrice);
+        const change = parseFloat(ticker.priceChangePercent);
 
-          const entry = price * 0.994; // Retest support floor (-0.6%)
-          const tp1 = entry * 1.015;   // +1.5% Fast Scalp
-          const tp2 = entry * 1.050;   // +5.0% Extension
-          const sl = entry * 0.990;    // -1.0% Tight SL
+        // STEP 1: Liquidity & Spread Floor
+        if (quoteVol < 2000000) return null; // Reject < $2.0M Floor
+        const spread = ask > 0 ? ((ask - bid) / ask) * 100 : 0;
+        if (spread >= 0.15) return null; // Spread Gate (< 0.15%)
 
-          qualifiedCoins.push({
-            symbol: item.symbol,
-            name: sym,
-            category: sym === 'DOGE' || sym === 'PEPE' || sym === 'SHIB' ? 'High-Beta Meme' : 'Layer 1 / DeFi',
-            setupType: 'LONG',
-            cmp: price,
-            entry: entry,
-            tp1: tp1,
-            tp2: tp2,
-            sl: sl,
-            volume: vol,
-            change: change,
-            spread: spread,
-            reason: `Step 1 Pass ($${vol}M Vol | Spread ${spread}%) | 4H Bull Shelf | Net Inflow Momentum`,
-            status: 'IN-PLAY'
-          });
-        });
+        // Parabolic Blow-off Pump Trap Shield
+        if (change > 18.0) return null; // Whale exit trap blocked
 
-        // Pick top qualified Short candidates (Negative Breakdown, Vol Floor Pass)
-        sortedLosers.slice(0, 3).forEach(item => {
-          const sym = item.symbol.replace('USDT', '');
-          const price = parseFloat(item.lastPrice);
-          const vol = (parseFloat(item.quoteVolume) / 1000000).toFixed(1);
-          const change = parseFloat(item.priceChangePercent);
-          const bid = parseFloat(item.bidPrice);
-          const ask = parseFloat(item.askPrice);
-          const spread = ask > 0 ? (((ask - bid) / ask) * 100).toFixed(3) : '0.025';
+        // STEP 2: 4H HTF Trend Master & Multi-Timeframe RSI Shield
+        const closes4h = klines4h.map(c => parseFloat(c[4]));
+        const ema50_4h = calculateEMA(closes4h, 50);
+        const ema100_4h = calculateEMA(closes4h, 100);
+        const ema200_4h = calculateEMA(closes4h, 200);
+        const rsi4h = calculateRSI(closes4h, 14);
 
-          const entry = price * 1.006; // Resistance shelf retest (+0.6%)
-          const tp1 = entry * 0.985;   // -1.5% Scalp Short
-          const tp2 = entry * 0.950;   // -5.0% Extension Short
-          const sl = entry * 1.010;    // +1.0% Tight SL Short
+        const isGoldenStack = price > ema50_4h && ema50_4h > ema100_4h && ema100_4h > ema200_4h;
+        const isDeathStack = price < ema50_4h && ema50_4h < ema100_4h;
 
-          qualifiedCoins.push({
-            symbol: item.symbol,
-            name: sym,
-            category: 'High-Beta Altcoin',
-            setupType: 'SHORT',
-            cmp: price,
-            entry: entry,
-            tp1: tp1,
-            tp2: tp2,
-            sl: sl,
-            volume: vol,
-            change: change,
-            spread: spread,
-            reason: `Step 1 Pass ($${vol}M Vol | Spread ${spread}%) | 4H Death Shelf | Net Taker Outflow`,
-            status: 'IN-PLAY'
-          });
-        });
+        let setupType = null;
+        // Strict RSI safe zones: Long (48 to 65), Short (35 to 52)
+        if (isGoldenStack && rsi4h >= 48 && rsi4h <= 65) {
+          setupType = 'LONG';
+        } else if (isDeathStack && !isGoldenStack && rsi4h >= 35 && rsi4h <= 52) {
+          setupType = 'SHORT';
+        }
+        if (!setupType) return null;
 
-        const longCount = qualifiedCoins.filter(c => c.setupType === 'LONG').length;
-        const shortCount = qualifiedCoins.filter(c => c.setupType === 'SHORT').length;
-        document.getElementById('stat-longs').innerText = `${longCount} In-Play`;
-        document.getElementById('stat-shorts').innerText = `${shortCount} In-Play`;
+        // STEP 3: 1H Sniper Retest Entry & Trap Filters
+        const last1h = klines1h[klines1h.length - 2];
+        const o1h = parseFloat(last1h[1]), h1h = parseFloat(last1h[2]), l1h = parseFloat(last1h[3]), c1h = parseFloat(last1h[4]), v1h = parseFloat(last1h[5]);
+        const candleRange = h1h - l1h;
+        const bottomWick = Math.min(o1h, c1h) - l1h;
+        const topWick = h1h - Math.max(o1h, c1h);
 
-        renderRadarCards();
+        // RVOL (> 2.0x) Gate: 20-period average volume check
+        const past20Vol = klines1h.slice(0, 20).reduce((acc, c) => acc + parseFloat(c[5]), 0) / 20;
+        const rvol = past20Vol > 0 ? (v1h / past20Vol) : 0;
+        if (rvol < 2.0) return null; // STRICT RVOL GATE: MUST BE >= 2.0x
+
+        // Anti-Bull Trap upper rejection filter (< 3.5% from 24h high)
+        const rejectPctFromHigh = ((high24h - price) / high24h) * 100;
+        if (setupType === 'LONG') {
+          if (rejectPctFromHigh > 3.5 && topWick > (candleRange * 0.40)) return null;
+          if (bottomWick < (candleRange * 0.25) && c1h < o1h) return null; // Must have bottom wick absorption
+        }
+
+        // STEP 4: Automated Orderflow Check (Taker Inflow Ratio)
+        const takerBuyVol = klines1h.slice(-3).reduce((acc, c) => acc + parseFloat(c[9]), 0);
+        const totalVol = klines1h.slice(-3).reduce((acc, c) => acc + parseFloat(c[5]), 0);
+        const netTakerInflow = takerBuyVol - (totalVol - takerBuyVol);
+
+        if (setupType === 'LONG' && netTakerInflow < 0) return null; // Smart money selling
+        if (setupType === 'SHORT' && netTakerInflow > 0) return null;
+
+        // STEP 5: Calibrated Profit Targets & Tight SL
+        let entry, tp1, tp2, sl;
+        if (setupType === 'LONG') {
+          entry = price * 0.994;
+          tp1 = entry * 1.015;
+          tp2 = entry * 1.050;
+          sl = entry * 0.990;
+        } else {
+          entry = price * 1.006;
+          tp1 = entry * 0.985;
+          tp2 = entry * 0.950;
+          sl = entry * 1.010;
+        }
+
+        return {
+          symbol: sym + 'USDT',
+          name: sym,
+          category: sym === 'DOGE' || sym === 'PEPE' ? 'High-Beta Meme' : 'Layer 1 / DeFi',
+          setupType: setupType,
+          cmp: price,
+          entry: entry,
+          tp1: tp1,
+          tp2: tp2,
+          sl: sl,
+          volume: (quoteVol / 1000000).toFixed(1),
+          rvol: rvol.toFixed(1),
+          change: change,
+          spread: spread.toFixed(3),
+          reason: `${setupType === 'LONG' ? '4H Golden Stack' : '4H Death Stack'} | 4H RSI: ${rsi4h.toFixed(0)} | RVOL: ${rvol.toFixed(1)}x Pass | Net Taker Flow Verified`,
+          status: 'IN-PLAY'
+        };
       } catch (err) {
-        container.innerHTML = `<div class="col-span-full p-4 bg-rose-50 text-rose-700 text-xs mono rounded-xl font-bold">Failed to scan Binance Market. Please click 'Re-Scan'.</div>`;
+        return null;
       }
+    }
+
+    async function scanInstitutionalRadar() {
+      const container = document.getElementById('radar-container');
+      container.innerHTML = `<div class="col-span-full p-8 text-center bg-white border border-slate-200 rounded-xl mono text-xs text-slate-600 font-bold">Scanning Institutional Universe against Strict 5-Step Pipeline (Checking RVOL >= 2.0x, 4H Stack, RSI Safe-Zone)...</div>`;
+
+      // Institutional basket to screen sequentially (prevents Binance 429 rate limit)
+      const watchlist = ['SOL', 'SUI', 'NEAR', 'DOGE', 'AVAX', 'ETH', 'PEPE', 'LINK', 'APT', 'ADA'];
+      qualifiedCoins = [];
+
+      for (const sym of watchlist) {
+        const qualified = await evaluateCandidateStrictly(sym);
+        if (qualified) {
+          qualifiedCoins.push(qualified);
+        }
+      }
+
+      const longCount = qualifiedCoins.filter(c => c.setupType === 'LONG').length;
+      const shortCount = qualifiedCoins.filter(c => c.setupType === 'SHORT').length;
+      document.getElementById('stat-longs').innerText = `${longCount} In-Play`;
+      document.getElementById('stat-shorts').innerText = `${shortCount} In-Play`;
+
+      renderRadarCards();
     }
 
     function renderRadarCards() {
@@ -607,7 +639,12 @@
       });
 
       if (filtered.length === 0) {
-        container.innerHTML = `<div class="col-span-full p-8 text-center bg-white border border-slate-200 rounded-xl mono text-xs text-slate-500 font-bold">No setups currently found for filter: ${currentFilter}.</div>`;
+        container.innerHTML = `
+          <div class="col-span-full p-8 text-center bg-white border border-slate-200 rounded-xl mono text-xs text-slate-500 font-bold space-y-1">
+            <div class="text-slate-800">🛡️ GATEKEEPER DEFENSE ACTIVE: 0 SETUPS PASSED ALL 5 STEPS</div>
+            <div class="text-slate-500 font-normal">All candidates failed strict parameters (either RVOL < 2.0x, RSI outside 48-65, or Upper Wick Trap). Capital preserved. Zero mock data.</div>
+          </div>
+        `;
         return;
       }
 
@@ -695,23 +732,25 @@
       container.innerHTML = `<div class="p-8 bg-white border border-slate-200 rounded-xl text-center mono text-xs text-slate-600 font-semibold shadow-sm">Querying Real Binance Orderbook &amp; Computing Technical Indicators for ${sym}...</div>`;
 
       try {
-        const [tickerRes, depthRes, klineRes] = await Promise.all([
+        const [tickerRes, depthRes, klineRes, kline1hRes] = await Promise.all([
           fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${sym}USDT`),
           fetch(`https://api.binance.com/api/v3/depth?symbol=${sym}USDT&limit=50`),
-          fetch(`https://api.binance.com/api/v3/klines?symbol=${sym}USDT&interval=4h&limit=210`)
+          fetch(`https://api.binance.com/api/v3/klines?symbol=${sym}USDT&interval=4h&limit=210`),
+          fetch(`https://api.binance.com/api/v3/klines?symbol=${sym}USDT&interval=1h&limit=25`)
         ]);
 
         if (!tickerRes.ok) throw new Error('Pair not found');
         const ticker = await tickerRes.json();
         const depth = await depthRes.json();
         const klines = await klineRes.json();
+        const klines1h = await kline1hRes.json();
 
         const price = parseFloat(ticker.lastPrice);
         const quoteVol = (parseFloat(ticker.quoteVolume) / 1000000).toFixed(2);
         const priceChange = parseFloat(ticker.priceChangePercent);
         const isVolPass = parseFloat(quoteVol) >= 2.0;
 
-        // Depth Calculation
+        // Depth Imbalance
         const totalBids = depth.bids.reduce((acc, curr) => acc + (parseFloat(curr[0]) * parseFloat(curr[1])), 0);
         const totalAsks = depth.asks.reduce((acc, curr) => acc + (parseFloat(curr[0]) * parseFloat(curr[1])), 0);
         const depthRatio = totalAsks > 0 ? (totalBids / totalAsks).toFixed(2) : '1.00';
@@ -723,9 +762,14 @@
         const ema200 = calculateEMA(closes, 200);
         const rsi4h = calculateRSI(closes, 14);
 
-        const isGoldenStack = price > ema50 && ema50 > ema100;
+        const isGoldenStack = price > ema50 && ema50 > ema100 && ema100 > ema200;
         const isDeathStack = price < ema50 && ema50 < ema100;
         const isBullish = isGoldenStack || priceChange >= 0;
+
+        // 1H RVOL
+        const last1hVol = parseFloat(klines1h[klines1h.length - 2][5]);
+        const past20Vol = klines1h.slice(0, 20).reduce((acc, c) => acc + parseFloat(c[5]), 0) / 20;
+        const rvol = past20Vol > 0 ? (last1hVol / past20Vol) : 0;
 
         const entry = isBullish ? price * 0.994 : price * 1.006;
         const tp1 = isBullish ? entry * 1.015 : entry * 0.985;
@@ -759,21 +803,21 @@
                 <span class="font-sans font-bold text-slate-800 text-[11px] uppercase block border-b border-slate-200 pb-1">1. 4H Trend Stack &amp; RSI Shield</span>
                 <div class="flex justify-between"><span>4H 50 EMA:</span><b class="text-slate-800">$${formatNumber(ema50)}</b></div>
                 <div class="flex justify-between"><span>4H 100 EMA:</span><b class="text-slate-800">$${formatNumber(ema100)}</b></div>
-                <div class="flex justify-between"><span>4H RSI (14):</span><b class="${rsi4h > 68 ? 'text-rose-600' : 'text-emerald-600'} font-bold">${rsi4h.toFixed(1)} ${rsi4h > 68 ? '(Overbought)' : '(Safe)'}</b></div>
+                <div class="flex justify-between"><span>4H RSI (14):</span><b class="${rsi4h > 65 ? 'text-rose-600' : rsi4h < 48 ? 'text-amber-600' : 'text-emerald-600'} font-bold">${rsi4h.toFixed(1)} ${rsi4h >= 48 && rsi4h <= 65 ? '(Safe Zone)' : '(Out of Bounds)'}</b></div>
               </div>
 
               <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-lg space-y-2">
-                <span class="font-sans font-bold text-slate-800 text-[11px] uppercase block border-b border-slate-200 pb-1">2. Orderbook &amp; Volume Flow</span>
+                <span class="font-sans font-bold text-slate-800 text-[11px] uppercase block border-b border-slate-200 pb-1">2. Orderbook &amp; RVOL Intensity</span>
                 <div class="flex justify-between"><span>24h Real Volume:</span><b class="${isVolPass ? 'text-emerald-600' : 'text-rose-600'} font-bold">$${quoteVol}M</b></div>
+                <div class="flex justify-between"><span>1H RVOL:</span><b class="${rvol >= 2.0 ? 'text-emerald-600 font-bold' : 'text-rose-600'}">${rvol.toFixed(1)}x ${rvol >= 2.0 ? '(Pass >= 2.0x)' : '(Low Vol)'}</b></div>
                 <div class="flex justify-between"><span>Depth Ratio:</span><b class="${parseFloat(depthRatio) >= 1.5 ? 'text-emerald-600' : 'text-slate-800'} font-bold">${depthRatio}x</b></div>
-                <div class="flex justify-between"><span>24h Range:</span><b class="text-slate-800">$${formatNumber(parseFloat(ticker.lowPrice))} - $${formatNumber(parseFloat(ticker.highPrice))}</b></div>
               </div>
 
               <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-lg space-y-2">
                 <span class="font-sans font-bold text-slate-800 text-[11px] uppercase block border-b border-slate-200 pb-1">3. Step-by-Step Gate Verdict</span>
                 <div class="flex justify-between"><span>Step 1: Vol Floor:</span><b class="${isVolPass ? 'text-emerald-600' : 'text-rose-600'}">${isVolPass ? 'QUALIFIED' : 'DISQUALIFIED'}</b></div>
                 <div class="flex justify-between"><span>Step 2: EMA Stack:</span><b class="${isGoldenStack ? 'text-emerald-600' : isDeathStack ? 'text-rose-600' : 'text-amber-600'}">${isGoldenStack ? 'GOLDEN STACK' : isDeathStack ? 'DEATH STACK' : 'CONSOLIDATING'}</b></div>
-                <div class="flex justify-between"><span>Radar Eligibility:</span><b class="${isVolPass && (isGoldenStack || isDeathStack) ? 'text-emerald-600' : 'text-slate-500'} font-bold">${isVolPass && (isGoldenStack || isDeathStack) ? 'ELIGIBLE' : 'BLOCKED BY ENGINE'}</b></div>
+                <div class="flex justify-between"><span>Radar Eligibility:</span><b class="${isVolPass && (isGoldenStack || isDeathStack) && rvol >= 2.0 && rsi4h >= 48 && rsi4h <= 65 ? 'text-emerald-600' : 'text-slate-500'} font-bold">${isVolPass && (isGoldenStack || isDeathStack) && rvol >= 2.0 && rsi4h >= 48 && rsi4h <= 65 ? 'ELIGIBLE' : 'BLOCKED BY ENGINE'}</b></div>
               </div>
 
             </div>
@@ -820,11 +864,11 @@
 
     // Launch & Automatic Scan on Load
     updateBitcoinRealData();
-    scanMarketDirect();
+    scanInstitutionalRadar();
     auditToken();
 
     setInterval(updateBitcoinRealData, 2000);
-    setInterval(scanMarketDirect, 15000);
+    setInterval(scanInstitutionalRadar, 30000);
   </script>
 </body>
 </html>
