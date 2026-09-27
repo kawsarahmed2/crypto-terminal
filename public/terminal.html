@@ -6,70 +6,57 @@
   <title>CRYPTO DADA — Institutional Crypto Trading Terminal</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; color: #0F172A; }
     .mono { font-family: 'JetBrains Mono', monospace; }
-    .flash-green { animation: flashG 0.6s ease-out; }
-    .flash-red { animation: flashR 0.6s ease-out; }
-    @keyframes flashG { 0% { background-color: rgba(16, 185, 129, 0.25); } 100% { background-color: transparent; } }
-    @keyframes flashR { 0% { background-color: rgba(239, 68, 68, 0.25); } 100% { background-color: transparent; } }
-    /* Custom scrollbars for data tables */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #f1f5f9; }
-    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
-    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    .flash-green { animation: flashG 0.5s ease-out; }
+    .flash-red { animation: flashR 0.5s ease-out; }
+    @keyframes flashG { 0% { background-color: rgba(22, 163, 74, 0.25); } 100% { background-color: transparent; } }
+    @keyframes flashR { 0% { background-color: rgba(220, 38, 38, 0.25); } 100% { background-color: transparent; } }
   </style>
 </head>
-<body class="flex flex-col min-h-screen bg-slate-50 text-slate-900 antialiased">
+<body class="flex flex-col min-h-screen">
 
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-40 px-4 py-2.5 shadow-sm">
-    <div class="max-w-[1720px] mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
-      
-      <!-- Left: Brand, Status, and Clock -->
+  <!-- ================= TOP MACRO STRIP ================= -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 px-4 py-2.5 shadow-sm">
+    <div class="max-w-[1680px] mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
       <div class="flex items-center gap-3">
-        <div class="flex items-center gap-2">
-          <span class="relative flex h-2.5 w-2.5">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-          </span>
-          <span class="font-black text-sm tracking-tight text-slate-900">CRYPTO DADA</span>
-        </div>
+        <span class="font-black tracking-tight text-sm text-slate-900 flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          CRYPTO DADA
+        </span>
         <span class="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200 flex items-center gap-1">
           <i data-lucide="radio" class="w-3 h-3 text-emerald-600"></i>
           100% REAL LIVE MARKET FEED
         </span>
-        <span id="utc-clock" class="mono text-slate-500 font-semibold hidden sm:inline-block">Sun, 27 Sep 2026 06:15:00 UTC</span>
+        <span id="utc-clock" class="mono text-slate-500 font-semibold"></span>
       </div>
 
-      <!-- Right: Macro Yield Strip & Dual Treasury Printer Radar -->
       <div class="flex flex-wrap items-center gap-2 mono">
-        <div class="bg-slate-50 px-2.5 py-1 rounded border border-slate-200" title="US 10-Year Treasury Yield">
+        <div class="bg-slate-50 px-2.5 py-1 rounded border border-slate-200">
           <span class="text-slate-500">US10Y:</span> <span class="font-bold text-slate-800">4.730%</span>
         </div>
-        <div class="bg-slate-50 px-2.5 py-1 rounded border border-slate-200" title="US 5-Year Treasury Yield">
+        <div class="bg-slate-50 px-2.5 py-1 rounded border border-slate-200">
           <span class="text-slate-500">US05Y:</span> <span class="font-bold text-slate-800">4.210%</span>
         </div>
-        <div class="bg-emerald-50 px-2.5 py-1 rounded border border-emerald-200 text-emerald-800 font-bold" title="Un-inversion Expansion Spread">
+        <div class="bg-emerald-50 px-2.5 py-1 rounded border border-emerald-200 text-emerald-800 font-bold">
           SPREAD: +0.520%
         </div>
-        <div class="bg-slate-50 px-2.5 py-1 rounded border border-slate-200" title="US Dollar Index (&lt; 104 Ceiling Gate)">
+        <div class="bg-slate-50 px-2.5 py-1 rounded border border-slate-200">
           <span class="text-slate-500">DXY:</span> <span class="font-bold text-rose-600">103.82 (&lt;104 PASS)</span>
         </div>
-        <div class="bg-slate-50 px-2.5 py-1 rounded border border-slate-200" title="Bitcoin Market Dominance">
+        <div class="bg-slate-50 px-2.5 py-1 rounded border border-slate-200">
           <span class="text-slate-500">BTC.D:</span> <span class="font-bold text-slate-800">57.40%</span>
         </div>
-        <div class="bg-slate-50 px-2.5 py-1 rounded border border-slate-200" title="Stablecoin Dominance Outflow">
+        <div class="bg-slate-50 px-2.5 py-1 rounded border border-slate-200">
           <span class="text-slate-500">STABLE.C.D:</span> <span class="font-bold text-emerald-600">10.95% (FLOW IN)</span>
         </div>
-        <!-- Dual Treasury Stablecoin Printer Radar -->
-        <div class="bg-emerald-50 px-2.5 py-1 rounded border border-emerald-200 text-emerald-700 font-bold flex items-center gap-1" title="Tether Treasury Fresh Mint">
+        <div class="bg-emerald-50 px-2.5 py-1 rounded border border-emerald-200 text-emerald-700 font-bold flex items-center gap-1">
           <i data-lucide="printer" class="w-3.5 h-3.5"></i>
           <span>USDT MINT: +$1.0B</span>
         </div>
-        <div class="bg-blue-50 px-2.5 py-1 rounded border border-blue-200 text-blue-700 font-bold flex items-center gap-1" title="Circle Treasury Fresh Mint">
+        <div class="bg-blue-50 px-2.5 py-1 rounded border border-blue-200 text-blue-700 font-bold flex items-center gap-1">
           <i data-lucide="printer" class="w-3.5 h-3.5"></i>
           <span>USDC MINT: +$350M</span>
         </div>
@@ -77,9 +64,10 @@
     </div>
   </header>
 
-  <div class="max-w-[1720px] w-full mx-auto flex-1 flex flex-col md:flex-row p-4 gap-4">
+  <!-- ================= MAIN LAYOUT ================= -->
+  <div class="max-w-[1680px] w-full mx-auto flex-1 flex flex-col md:flex-row p-4 gap-4">
 
-    <!-- 5-Menu Dedicated Navigation Sidebar -->
+    <!-- Sidebar 5 Navigation Modules -->
     <aside class="w-full md:w-64 bg-white border border-slate-200 rounded-xl p-3 flex md:flex-col gap-1.5 shrink-0 self-start shadow-sm">
       <button onclick="switchTab('tab-btc')" id="nav-btc" class="nav-btn flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 w-full text-left transition">
         <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
@@ -101,24 +89,13 @@
         <i data-lucide="line-chart" class="w-4 h-4"></i>
         Tell That To The Bond Market
       </button>
-
-      <!-- System Pipeline Badge in Sidebar -->
-      <div class="mt-4 pt-3 border-t border-slate-100 hidden md:block">
-        <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200 text-[11px] space-y-1">
-          <span class="font-bold text-slate-700 block uppercase">Engine Pipeline:</span>
-          <div class="flex items-center gap-1.5 text-emerald-700 font-semibold"><i data-lucide="check" class="w-3 h-3"></i> Tier 1: Macro Gate</div>
-          <div class="flex items-center gap-1.5 text-emerald-700 font-semibold"><i data-lucide="check" class="w-3 h-3"></i> Tier 2: $2M+ &amp; 4H Trend</div>
-          <div class="flex items-center gap-1.5 text-emerald-700 font-semibold"><i data-lucide="check" class="w-3 h-3"></i> Tier 3: 1H RVOL Retest</div>
-        </div>
-      </div>
     </aside>
 
-    <!-- Main Dynamic Modules Workspace -->
     <main class="flex-1 flex flex-col gap-4 min-w-0">
 
+      <!-- ================= 1. BITCOIN LIVE DASHBOARD ================= -->
       <section id="tab-btc" class="tab-content flex flex-col gap-4">
         
-        <!-- Market Bias Read Banner -->
         <div class="bg-amber-50 border border-amber-200 p-3.5 rounded-xl flex flex-wrap items-center justify-between gap-2 shadow-sm">
           <div class="flex items-center gap-2">
             <span class="text-amber-700 font-black text-sm flex items-center gap-1.5">
@@ -127,44 +104,36 @@
             </span>
             <span class="text-slate-900 font-bold text-sm">NOT A CYCLE TOP YET / RECLAIMING THE FLOOR</span>
           </div>
-          <span class="text-xs mono text-amber-900 font-bold bg-amber-100/90 px-2.5 py-1 rounded">
+          <span class="text-xs mono text-amber-900 font-bold bg-amber-100/80 px-2.5 py-1 rounded">
             DATE: SEPTEMBER 27, 2026
           </span>
         </div>
 
-        <!-- BTC Overview Grid -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          
-          <!-- Live Real-Time Ticker -->
           <div class="bg-white border border-slate-200 p-4 rounded-xl flex flex-col justify-between shadow-sm">
             <div class="flex justify-between items-center mb-1">
               <span class="text-xs font-bold uppercase tracking-wider text-slate-500">BTC/USDT Real-time Tick</span>
-              <span id="btc-badge" class="px-2 py-0.5 rounded text-xs mono font-bold bg-slate-100 text-slate-600">POLLING...</span>
+              <span id="btc-badge" class="px-2 py-0.5 rounded text-xs mono font-bold bg-slate-100 text-slate-700">FETCHING...</span>
             </div>
             <div id="btc-price" class="text-3xl font-black mono text-slate-900 transition-colors">$--,---.--</div>
             <div class="text-xs text-slate-500 mt-2 flex justify-between mono">
-              <span>24h Low: <b id="btc-low" class="text-slate-800">--</b></span>
-              <span>24h High: <b id="btc-high" class="text-slate-800">--</b></span>
+              <span>24h L: <b id="btc-low" class="text-slate-800">--</b></span>
+              <span>24h H: <b id="btc-high" class="text-slate-800">--</b></span>
             </div>
           </div>
 
-          <!-- Real Calculated 4H EMA Stack -->
           <div class="bg-white border border-slate-200 p-4 rounded-xl flex flex-col justify-between shadow-sm">
-            <div class="flex justify-between items-center mb-1">
-              <span class="text-xs font-bold uppercase tracking-wider text-slate-500">4H Calculated EMA Shelf</span>
-              <span class="text-[11px] mono text-slate-400">210 Klines Source</span>
-            </div>
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">4H Real Calculated EMA Shelf</span>
             <div class="space-y-1 text-xs mono">
-              <div class="flex justify-between"><span>50 EMA:</span><b id="btc-ema50" class="text-slate-800">Calculating...</b></div>
-              <div class="flex justify-between"><span>100 EMA:</span><b id="btc-ema100" class="text-slate-800">Calculating...</b></div>
-              <div class="flex justify-between"><span>200 EMA:</span><b id="btc-ema200" class="text-slate-800">Calculating...</b></div>
+              <div class="flex justify-between"><span>50 EMA:</span><b id="btc-ema50" class="text-slate-800">Loading...</b></div>
+              <div class="flex justify-between"><span>100 EMA:</span><b id="btc-ema100" class="text-slate-800">Loading...</b></div>
+              <div class="flex justify-between"><span>200 EMA:</span><b id="btc-ema200" class="text-slate-800">Loading...</b></div>
             </div>
             <div id="btc-stack-badge" class="mt-2 text-xs font-bold text-slate-600 bg-slate-100 px-2 py-1 rounded flex items-center gap-1">
-              <i data-lucide="loader" class="w-3.5 h-3.5 animate-spin"></i> CALCULATING REAL 4H CANDLES...
+              <i data-lucide="loader" class="w-3.5 h-3.5 animate-spin"></i> CALCULATING FROM 4H CANDLES...
             </div>
           </div>
 
-          <!-- Cycle Phase Score Gauge -->
           <div class="bg-white border border-slate-200 p-4 rounded-xl flex flex-col justify-between shadow-sm">
             <span class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Market Cycle Score Gauge</span>
             <div class="flex items-center gap-3">
@@ -174,17 +143,10 @@
             <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden mt-3">
               <div class="bg-emerald-500 h-full w-[68%]"></div>
             </div>
-            <div class="flex justify-between text-[10px] mono text-slate-400 mt-1">
-              <span>Accumulation</span>
-              <span class="font-bold text-emerald-600">Markup</span>
-              <span>Distribution</span>
-              <span>Markdown</span>
-            </div>
           </div>
-
         </div>
 
-        <!-- Crypto Dada 11-Pillar Matrix Table -->
+        <!-- 11 Pillar Matrix Table -->
         <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
           <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider mb-3 flex items-center gap-2">
             <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
@@ -202,7 +164,7 @@
                 </tr>
               </thead>
               <tbody class="divide-y divide-slate-100 mono">
-                <tr><td class="p-2.5 font-bold">1</td><td class="p-2.5 font-sans font-semibold">Price Structure</td><td class="p-2.5 font-bold text-emerald-600" id="matrix-p1">Reclaiming 50/100/200 EMA Shelf</td><td class="p-2.5 text-slate-500">No Parabolic Blow-off Wick</td><td class="p-2.5" id="matrix-s1"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-[11px] font-bold">PASS / GOLDEN STACK</span></td></tr>
+                <tr><td class="p-2.5 font-bold">1</td><td class="p-2.5 font-sans font-semibold">Price Structure</td><td class="p-2.5 font-bold text-emerald-600" id="matrix-p1">Checking 4H EMA Stack...</td><td class="p-2.5 text-slate-500">No Parabolic Blow-off Wick</td><td class="p-2.5" id="matrix-s1"><span class="bg-slate-100 text-slate-700 px-2 py-0.5 rounded text-[11px] font-bold">VERIFYING</span></td></tr>
                 <tr><td class="p-2.5 font-bold">2</td><td class="p-2.5 font-sans font-semibold">Spot ETF Net Flows</td><td class="p-2.5 font-bold text-emerald-600">+$412M Daily Net (IBIT/FBTC)</td><td class="p-2.5 text-slate-500">&gt; $0 Baseline Inflow</td><td class="p-2.5"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-[11px] font-bold">ACCUMULATION</span></td></tr>
                 <tr><td class="p-2.5 font-bold">3</td><td class="p-2.5 font-sans font-semibold">Funding Rates</td><td class="p-2.5 font-bold text-slate-800">0.0108% Baseline</td><td class="p-2.5 text-slate-500">&lt; 0.0400% Overleveraged Shield</td><td class="p-2.5"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-[11px] font-bold">SAFE FLOOR</span></td></tr>
                 <tr><td class="p-2.5 font-bold">4</td><td class="p-2.5 font-sans font-semibold">Open Interest (OI)</td><td class="p-2.5 font-bold text-slate-800">$34.8B (Leverage Flushed)</td><td class="p-2.5 text-slate-500">Gradual Rise vs Blow-off</td><td class="p-2.5"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-[11px] font-bold">HEALTHY ABSORPTION</span></td></tr>
@@ -217,12 +179,11 @@
             </table>
           </div>
         </div>
-
       </section>
 
+      <!-- ================= 2. SIGNAL RADAR & DATE-BY-DATE LOG ================= -->
       <section id="tab-radar" class="tab-content hidden flex flex-col gap-4">
         
-        <!-- Radar Metric Top Cards -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div class="bg-white border border-slate-200 p-3.5 rounded-xl shadow-sm">
             <span class="text-xs text-slate-500 font-semibold">Verified All-Time Win-Rate</span>
@@ -234,31 +195,29 @@
           </div>
           <div class="bg-white border border-slate-200 p-3.5 rounded-xl shadow-sm">
             <span class="text-xs text-slate-500 font-semibold">Active Qualified Longs</span>
-            <div id="stat-longs" class="text-2xl font-black mono text-emerald-600">Scanning...</div>
+            <div id="stat-longs" class="text-2xl font-black mono text-emerald-600">0 In-Play</div>
           </div>
           <div class="bg-white border border-slate-200 p-3.5 rounded-xl shadow-sm">
             <span class="text-xs text-slate-500 font-semibold">Active Qualified Shorts</span>
-            <div id="stat-shorts" class="text-2xl font-black mono text-rose-600">Scanning...</div>
+            <div id="stat-shorts" class="text-2xl font-black mono text-rose-600">0 In-Play</div>
           </div>
         </div>
 
-        <!-- Filter Buttons & Scanner Trigger -->
         <div class="flex flex-wrap items-center justify-between gap-2">
           <div class="flex gap-2">
-            <button onclick="setFilter('ALL')" id="filter-btn-ALL" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-900 text-white">ALL ($2M+ VOL PASS)</button>
+            <button onclick="setFilter('ALL')" id="filter-btn-ALL" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-900 text-white">ALL 5-STEP QUALIFIED</button>
             <button onclick="setFilter('LONG')" id="filter-btn-LONG" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50">LONGS ONLY</button>
             <button onclick="setFilter('SHORT')" id="filter-btn-SHORT" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50">SHORTS ONLY</button>
           </div>
           <button onclick="scanBinanceMarket()" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-sm transition">
             <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
-            RE-SCAN 5-STEP ENGINE
+            EXECUTE 5-STEP ENGINE SCAN
           </button>
         </div>
 
-        <!-- Radar Cards Container -->
         <div id="radar-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="col-span-full p-8 text-center bg-white border border-slate-200 rounded-xl mono text-xs text-slate-500">
-            Running Step 1 to Step 5 Algorithmic Scan on Binance Spot pairs...
+            Click 'Execute 5-Step Engine Scan' to filter pairs against $2M+ volume, 4H EMA Stacks, RVOL >= 2.0x.
           </div>
         </div>
 
@@ -289,27 +248,24 @@
             </table>
           </div>
         </div>
-
       </section>
 
+      <!-- ================= 3. INSTANT COIN AUDITOR ================= -->
       <section id="tab-auditor" class="tab-content hidden flex flex-col gap-4">
-        
         <div class="bg-white border border-slate-200 p-4 rounded-xl flex gap-3 shadow-sm">
           <div class="relative flex-1">
             <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5"></i>
             <input type="text" id="auditor-input" placeholder="Search any token (e.g. SUI, DOGE, NEAR, PEPE, SOL, ORCA, BTC, AVAX, ETH)..." 
-              class="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-emerald-500 uppercase font-bold text-slate-900"
-              onkeydown="if(event.key==='Enter') auditToken()">
+              class="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-emerald-500 uppercase font-bold text-slate-900">
           </div>
           <button onclick="auditToken()" class="px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-sm font-bold shadow-sm transition">
             AUDIT 360°
           </button>
         </div>
-
         <div id="audit-result" class="flex flex-col gap-4"></div>
-
       </section>
 
+      <!-- ================= 4. SYNDICATE ROTATIONS ================= -->
       <section id="tab-syndicate" class="tab-content hidden flex flex-col gap-4">
         <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
           <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider mb-4 flex items-center gap-2">
@@ -317,14 +273,13 @@
             24h Institutional Sector Rotation Flow
           </h3>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            
             <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
               <div class="flex justify-between items-center">
                 <span class="text-xs font-bold text-slate-600">High-Beta Layer 1s</span>
                 <span class="text-xs mono font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">+14.2% Flow</span>
               </div>
               <p class="text-xs text-slate-600">SUI, NEAR, SOL leading 4H 200 EMA holding status. Institutional liquidity accumulator.</p>
-              <div class="text-[11px] mono text-slate-500 font-semibold pt-1 border-t border-slate-200">Leaders: SUI, NEAR, SOL (4H 200 EMA Held)</div>
+              <div class="text-[11px] mono text-slate-500 font-semibold pt-1 border-t border-slate-200">Leaders: SUI, NEAR, SOL</div>
             </div>
 
             <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
@@ -332,8 +287,8 @@
                 <span class="text-xs font-bold text-slate-600">High-Beta Memes</span>
                 <span class="text-xs mono font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">+9.8% Flow</span>
               </div>
-              <p class="text-xs text-slate-600">DOGE, PEPE orderbook taker accumulation. Heavy absorption of retail overhead sell walls.</p>
-              <div class="text-[11px] mono text-slate-500 font-semibold pt-1 border-t border-slate-200">Leaders: DOGE, PEPE, SHIB (4H 50 EMA Retest)</div>
+              <p class="text-xs text-slate-600">DOGE, PEPE orderbook taker accumulation. Heavy absorption of retail sell walls.</p>
+              <div class="text-[11px] mono text-slate-500 font-semibold pt-1 border-t border-slate-200">Leaders: DOGE, PEPE, SHIB</div>
             </div>
 
             <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
@@ -341,14 +296,14 @@
                 <span class="text-xs font-bold text-slate-600">DeFi &amp; RWAs</span>
                 <span class="text-xs mono font-bold text-slate-700 bg-slate-200 px-2 py-0.5 rounded">+2.1% Neutral</span>
               </div>
-              <p class="text-xs text-slate-600">Steady collateral lockup, lower volatility scalps, safe baseline institutional yield rotation.</p>
+              <p class="text-xs text-slate-600">Steady collateral lockup, lower volatility scalps, safe baseline yield rotation.</p>
               <div class="text-[11px] mono text-slate-500 font-semibold pt-1 border-t border-slate-200">Leaders: ONDO, AAVE, MKR</div>
             </div>
-
           </div>
         </div>
       </section>
 
+      <!-- ================= 5. TELL THAT TO THE BOND MARKET ================= -->
       <section id="tab-macro" class="tab-content hidden flex flex-col gap-4">
         <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
           <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider mb-4 flex items-center gap-2">
@@ -356,7 +311,6 @@
             Macro Yield &amp; Cross-Asset Liquidity Radar
           </h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mono text-xs">
-            
             <div class="p-4 border border-slate-200 rounded-xl space-y-3 bg-slate-50/50">
               <span class="font-sans font-black text-slate-800 text-xs uppercase block border-b border-slate-200 pb-1.5">Treasury Yields &amp; Curve Inversion</span>
               <div class="flex justify-between"><span>US 10-Year Bond Yield (US10Y):</span><b class="text-slate-900">4.730% (Easing)</b></div>
@@ -372,7 +326,6 @@
               <div class="flex justify-between"><span>Bitcoin Dominance (BTC.D):</span><b class="text-slate-900">57.40% (Consolidating)</b></div>
               <div class="flex justify-between"><span>BTC HTF Institutional VWAP:</span><b class="text-emerald-600 font-bold">$82,100 Floor Held</b></div>
             </div>
-
           </div>
         </div>
       </section>
@@ -380,6 +333,7 @@
     </main>
   </div>
 
+  <!-- Interactive Candlestick Modal -->
   <div id="chart-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
     <div class="bg-white border border-slate-200 rounded-xl max-w-4xl w-full h-[620px] flex flex-col overflow-hidden shadow-2xl">
       <div class="p-3.5 border-b border-slate-200 flex justify-between items-center bg-slate-50">
@@ -395,13 +349,11 @@
   <script>
     lucide.createIcons();
 
-    // UTC Live Clock
     setInterval(() => {
       const now = new Date();
       document.getElementById('utc-clock').innerText = now.toUTCString().replace('GMT', 'UTC');
     }, 1000);
 
-    // Tab Switcher
     function switchTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
       document.querySelectorAll('.nav-btn').forEach(btn => {
@@ -417,7 +369,6 @@
       lucide.createIcons();
     }
 
-    // Number formatter for crypto prices
     function formatNumber(num) {
       if (!num || isNaN(num)) return '--';
       if (num >= 100) return num.toFixed(2);
@@ -425,7 +376,6 @@
       return num.toPrecision(4);
     }
 
-    // Mathematical Exponential Moving Average (EMA) Calculation
     function calculateEMA(prices, period) {
       if (prices.length < period) return prices[prices.length - 1];
       const k = 2 / (period + 1);
@@ -436,7 +386,6 @@
       return ema;
     }
 
-    // Mathematical Relative Strength Index (RSI) Calculation
     function calculateRSI(closes, period = 14) {
       if (closes.length < period + 1) return 50;
       let gains = 0, losses = 0;
@@ -463,23 +412,7 @@
       return 100 - (100 / (1 + rs));
     }
 
-    // Sector Narrative Dictionary
-    const narrativeMap = {
-      'SUI': 'High-Beta Layer 1 (Move VM)',
-      'SOL': 'High-Beta Layer 1 (Solana)',
-      'NEAR': 'AI & High-Beta Layer 1',
-      'AVAX': 'High-Beta Layer 1 (Subnets)',
-      'ETH': 'Core Layer 1 (Smart Contracts)',
-      'BTC': 'Macro Monetary Reserve',
-      'DOGE': 'High-Beta Meme (PoW)',
-      'PEPE': 'High-Beta Meme (Community)',
-      'ORCA': 'Solana Ecosystem (DEX Liquidity)',
-      'LINK': 'Oracle Infrastructure & RWA',
-      'APT': 'Layer 1 (Move VM)',
-      'ONDO': 'Institutional Real World Assets (RWA)',
-      'AAVE': 'DeFi Lending Market'
-    };
-
+    // BITCOIN REAL 4H MONITOR
     let btcLastPrice = 0;
     async function updateBitcoinRealData() {
       try {
@@ -508,7 +441,6 @@
         document.getElementById('btc-low').innerText = '$' + parseFloat(ticker.lowPrice).toLocaleString();
         document.getElementById('btc-high').innerText = '$' + parseFloat(ticker.highPrice).toLocaleString();
 
-        // Real 4H Candlestick Calculation for EMAs
         const closePrices = klines.map(c => parseFloat(c[4]));
         const ema50 = calculateEMA(closePrices, 50);
         const ema100 = calculateEMA(closePrices, 100);
@@ -535,10 +467,13 @@
         }
         lucide.createIcons();
       } catch (e) {
-        console.error("BTC Data fetch error:", e);
+        console.error("BTC Data Error:", e);
       }
     }
 
+    // ==========================================
+    // RIGID 5-STEP ALGORITHM VERIFICATION ENGINE
+    // ==========================================
     let qualifiedCoins = [];
     let currentFilter = 'ALL';
 
@@ -557,7 +492,6 @@
       renderRadarCards();
     }
 
-    // Strict Mathematical 5-Step Function
     async function evaluateTokenAgainst5Steps(ticker) {
       const sym = ticker.symbol.replace('USDT', '');
       const price = parseFloat(ticker.lastPrice);
@@ -566,12 +500,12 @@
       const bid = parseFloat(ticker.bidPrice);
       const ask = parseFloat(ticker.askPrice);
 
-      // STEP 1: Base Liquidity & Volume Floor ($2M+) & Spread Gate (< 0.15%)
-      if (quoteVol < 2000000) return null; // Disqualify < $2.0M
+      // STEP 1: Liquidity & Spread Floor
+      if (quoteVol < 2000000) return null; // Reject < $2.0M Floor
       const spread = ask > 0 ? ((ask - bid) / ask) * 100 : 0;
-      if (spread >= 0.15) return null; // Disqualify wide spread
+      if (spread >= 0.15) return null; // Spread Gate (< 0.15%)
 
-      // Fetch 4H and 1H Candlesticks from Binance REST API
+      // Fetch 4H and 1H Candlesticks
       const [kline4hRes, kline1hRes] = await Promise.all([
         fetch(`https://api.binance.com/api/v3/klines?symbol=${ticker.symbol}&interval=4h&limit=210`),
         fetch(`https://api.binance.com/api/v3/klines?symbol=${ticker.symbol}&interval=1h&limit=25`)
@@ -581,66 +515,71 @@
       const klines4h = await kline4hRes.json();
       const klines1h = await kline1hRes.json();
 
-      // STEP 2: 4H Trend Master & RSI Divergence Shield
       const closes4h = klines4h.map(c => parseFloat(c[4]));
       const ema50_4h = calculateEMA(closes4h, 50);
       const ema100_4h = calculateEMA(closes4h, 100);
       const ema200_4h = calculateEMA(closes4h, 200);
       const rsi4h = calculateRSI(closes4h, 14);
 
+      // STEP 2: Macro Trend Stack & RSI Divergence Shield
       const isGoldenStack = price > ema50_4h && ema50_4h > ema100_4h && ema100_4h > ema200_4h;
       const isDeathStack = price < ema50_4h && ema50_4h < ema100_4h;
 
       let setupType = null;
-      if (isGoldenStack) {
-        // Safe 4H RSI zone for Long: 48 - 65
-        if (rsi4h >= 45 && rsi4h <= 68) setupType = 'LONG';
-      } else if (isDeathStack) {
-        // Safe 4H RSI zone for Short: <= 55
-        if (rsi4h <= 55 && rsi4h >= 30) setupType = 'SHORT';
+      if (isGoldenStack && rsi4h >= 48 && rsi4h <= 65) {
+        setupType = 'LONG';
+      } else if (isDeathStack && !isGoldenStack && rsi4h <= 55) {
+        setupType = 'SHORT';
       }
       if (!setupType) return null;
 
-      // STEP 3: 1H Retest, Rejection Candle & Relative Volume (RVOL)
-      const last1h = klines1h[klines1h.length - 2]; // Last closed 1H candle
+      // STEP 3: 1H Sniper Retest, Rejection Candle & RVOL (MUST BE >= 2.0x)
+      const last1h = klines1h[klines1h.length - 2];
       const o1h = parseFloat(last1h[1]), h1h = parseFloat(last1h[2]), l1h = parseFloat(last1h[3]), c1h = parseFloat(last1h[4]), v1h = parseFloat(last1h[5]);
       const candleRange = h1h - l1h;
       const bottomWick = Math.min(o1h, c1h) - l1h;
       const topWick = h1h - Math.max(o1h, c1h);
 
-      // RVOL: 20-period 1H volume average
       const past20Vol = klines1h.slice(0, 20).reduce((acc, c) => acc + parseFloat(c[5]), 0) / 20;
-      const rvol = past20Vol > 0 ? (v1h / past20Vol) : 1;
+      const rvol = past20Vol > 0 ? (v1h / past20Vol) : 0;
 
-      // Anti-Bull-Trap Rejection Wick Filter (< 3.5% reject from 24h high)
+      // HARD GATE: RVOL must be >= 2.0x
+      if (rvol < 2.0) return null;
+
+      // Anti-Bull Trap upper rejection filter (< 3.5%)
       const rejectPctFromHigh = ((high24h - price) / high24h) * 100;
       if (setupType === 'LONG') {
-        if (rejectPctFromHigh > 3.5 && topWick > (candleRange * 0.45)) return null; // Reject bull trap
-        if (bottomWick < (candleRange * 0.20) && c1h < o1h) return null; // Reject without absorption
+        if (rejectPctFromHigh > 3.5 && topWick > (candleRange * 0.45)) return null;
+        if (bottomWick < (candleRange * 0.25) && c1h < o1h) return null;
       }
 
-      // STEP 4: Automated Orderflow Check (Positive Momentum Flow)
-      const isPositiveFlow = parseFloat(ticker.priceChangePercent) >= -2.0;
-      if (!isPositiveFlow && setupType === 'LONG') return null;
+      // STEP 4: Automated Orderflow Check (Taker Inflow Ratio)
+      const takerBuyVol = klines1h.slice(-3).reduce((acc, c) => acc + parseFloat(c[9]), 0);
+      const totalVol = klines1h.slice(-3).reduce((acc, c) => acc + parseFloat(c[5]), 0);
+      const takerSellVol = totalVol - takerBuyVol;
+      const netTakerInflow = takerBuyVol - takerSellVol;
 
-      // STEP 5: Calibrated Profit Targets & Tight Risk
+      if (setupType === 'LONG' && netTakerInflow < 0) return null;
+      if (setupType === 'SHORT' && netTakerInflow > 0) return null;
+
+      // STEP 5: Calibrated Targets & Risk Parameters
       let entry, tp1, tp2, sl;
       if (setupType === 'LONG') {
-        entry = price * 0.994; // Limit Entry on Retest (-0.6%)
-        tp1 = entry * 1.015;   // TP1: +1.5% Scalp (De-risk 50% & SL to BE)
-        tp2 = entry * 1.050;   // TP2: +5.0% Extension (25% exit)
-        sl = entry * 0.990;    // Tight SL: -1.0%
+        entry = price * 0.994;
+        tp1 = entry * 1.015;
+        tp2 = entry * 1.050;
+        sl = entry * 0.990;
       } else {
-        entry = price * 1.006; // Resistance Retest (+0.6%)
-        tp1 = entry * 0.985;   // TP1 Short: -1.5%
-        tp2 = entry * 0.950;   // TP2 Short: -5.0%
-        sl = entry * 1.010;    // Tight SL Short: +1.0%
+        entry = price * 1.006;
+        tp1 = entry * 0.985;
+        tp2 = entry * 0.950;
+        sl = entry * 1.010;
       }
 
       return {
         symbol: ticker.symbol,
         name: sym,
-        category: narrativeMap[sym] || 'High-Beta Altcoin',
+        category: sym === 'DOGE' || sym === 'PEPE' ? 'High-Beta Meme' : 'High-Beta Layer 1',
         setupType: setupType,
         cmp: price,
         entry: entry,
@@ -649,30 +588,30 @@
         sl: sl,
         volume: (quoteVol / 1000000).toFixed(2),
         rvol: rvol.toFixed(1),
-        spread: spread.toFixed(3),
-        reason: `${setupType === 'LONG' ? '4H Golden Stack' : '4H Death Stack'} | 4H RSI ${rsi4h.toFixed(0)} | 1H RVOL ${rvol.toFixed(1)}x | Vol $${(quoteVol/1000000).toFixed(1)}M Pass`,
+        reason: `${setupType === 'LONG' ? '4H Golden Stack' : '4H Death Stack'} | 4H RSI: ${rsi4h.toFixed(0)} | RVOL: ${rvol.toFixed(1)}x Pass | Net Taker ${netTakerInflow > 0 ? '+' : '-'} Flow`,
         status: 'IN-PLAY'
       };
     }
 
     async function scanBinanceMarket() {
       const container = document.getElementById('radar-container');
-      container.innerHTML = `<div class="col-span-full p-8 text-center bg-white border border-slate-200 rounded-xl mono text-xs text-slate-600 font-bold">Scanning Binance Spot ($2M+ Vol Floor, 4H EMA Stacks, 1H RVOL > 2x)...</div>`;
+      container.innerHTML = `<div class="col-span-full p-8 text-center bg-white border border-slate-200 rounded-xl mono text-xs text-slate-600 font-bold">Scanning Binance Spot Pairs (Checking Vol >= $2.0M, 4H EMA Stack, 1H RVOL >= 2.0x, CVD)...</div>`;
 
       try {
         const res = await fetch('https://api.binance.com/api/v3/ticker/24hr');
         const allTickers = await res.json();
         
-        // Scan a diversified liquid universe
-        const watchlist = ['SUIUSDT', 'DOGEUSDT', 'NEARUSDT', 'SOLUSDT', 'PEPEUSDT', 'AVAXUSDT', 'ETHUSDT', 'LINKUSDT', 'APTUSDT', 'ORCAUSDT'];
+        // Scan active market universe
+        const scanPool = allTickers
+          .filter(t => t.symbol.endsWith('USDT') && parseFloat(t.quoteVolume) >= 2000000)
+          .sort((a, b) => parseFloat(b.quoteVolume) - parseFloat(a.quoteVolume))
+          .slice(0, 25);
+
         qualifiedCoins = [];
 
-        for (const symbol of watchlist) {
-          const item = allTickers.find(t => t.symbol === symbol);
-          if (item) {
-            const evaluated = await evaluateTokenAgainst5Steps(item);
-            if (evaluated) qualifiedCoins.push(evaluated);
-          }
+        for (const item of scanPool) {
+          const evaluated = await evaluateTokenAgainst5Steps(item);
+          if (evaluated) qualifiedCoins.push(evaluated);
         }
 
         const longCount = qualifiedCoins.filter(c => c.setupType === 'LONG').length;
@@ -682,7 +621,7 @@
 
         renderRadarCards();
       } catch (err) {
-        container.innerHTML = `<div class="col-span-full p-4 bg-rose-50 text-rose-700 text-xs mono rounded-xl font-bold">Scan Execution Error: Binance API Rate Limit or Network Lag. Click Re-Scan.</div>`;
+        container.innerHTML = `<div class="col-span-full p-4 bg-rose-50 text-rose-700 text-xs mono rounded-xl font-bold">Scan Execution Error. Binance API rate-limited or offline. Please retry.</div>`;
       }
     }
 
@@ -699,7 +638,7 @@
       });
 
       if (filtered.length === 0) {
-        container.innerHTML = `<div class="col-span-full p-8 text-center bg-white border border-slate-200 rounded-xl mono text-xs text-slate-500 font-bold">No setups currently pass the strict 5-Step algorithm (4H Golden Stack, 1H RVOL, Vol Floor). Gate Protected.</div>`;
+        container.innerHTML = `<div class="col-span-full p-8 text-center bg-white border border-slate-200 rounded-xl mono text-xs text-slate-500 font-bold">No setups currently pass all 5 steps (Strict RVOL >= 2.0x, 4H Stacks, Spread < 0.15%). Capital preserved.</div>`;
         return;
       }
 
@@ -767,6 +706,9 @@
       lucide.createIcons();
     }
 
+    // ==========================================
+    // 360° INSTANT COIN AUDITOR ENGINE
+    // ==========================================
     function quickAudit(name) {
       document.getElementById('auditor-input').value = name;
       switchTab('tab-auditor');
@@ -779,37 +721,44 @@
       container.innerHTML = `<div class="p-8 bg-white border border-slate-200 rounded-xl text-center mono text-xs text-slate-600 font-semibold shadow-sm">Querying Real Binance Candles, Orderbook &amp; Computing 5-Step Logic for ${sym}...</div>`;
 
       try {
-        const [tickerRes, depthRes, klineRes] = await Promise.all([
+        const [tickerRes, depthRes, klineRes, kline1hRes] = await Promise.all([
           fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${sym}USDT`),
           fetch(`https://api.binance.com/api/v3/depth?symbol=${sym}USDT&limit=50`),
-          fetch(`https://api.binance.com/api/v3/klines?symbol=${sym}USDT&interval=4h&limit=210`)
+          fetch(`https://api.binance.com/api/v3/klines?symbol=${sym}USDT&interval=4h&limit=210`),
+          fetch(`https://api.binance.com/api/v3/klines?symbol=${sym}USDT&interval=1h&limit=25`)
         ]);
 
         if (!tickerRes.ok) throw new Error('Pair not found');
         const ticker = await tickerRes.json();
         const depth = await depthRes.json();
         const klines = await klineRes.json();
+        const klines1h = await kline1hRes.json();
 
         const price = parseFloat(ticker.lastPrice);
         const quoteVol = (parseFloat(ticker.quoteVolume) / 1000000).toFixed(2);
         const priceChange = parseFloat(ticker.priceChangePercent);
         const isVolPass = parseFloat(quoteVol) >= 2.0;
 
-        // Depth Ratio: Top 50 Bids Volume / Top 50 Asks Volume
+        // Depth Imbalance
         const totalBids = depth.bids.reduce((acc, curr) => acc + (parseFloat(curr[0]) * parseFloat(curr[1])), 0);
         const totalAsks = depth.asks.reduce((acc, curr) => acc + (parseFloat(curr[0]) * parseFloat(curr[1])), 0);
         const depthRatio = totalAsks > 0 ? (totalBids / totalAsks).toFixed(2) : '1.00';
 
-        // 4H Technical Calculations
+        // 4H Technical EMAs
         const closes = klines.map(c => parseFloat(c[4]));
         const ema50 = calculateEMA(closes, 50);
         const ema100 = calculateEMA(closes, 100);
         const ema200 = calculateEMA(closes, 200);
         const rsi4h = calculateRSI(closes, 14);
 
-        const isGoldenStack = price > ema50 && ema50 > ema100 && ema100 > ema200;
+        const isGoldenStack = price > ema50 && ema50 > ema100;
         const isDeathStack = price < ema50 && ema50 < ema100;
         const isBullish = isGoldenStack || priceChange >= 0;
+
+        // 1H RVOL
+        const last1hVol = parseFloat(klines1h[klines1h.length - 2][5]);
+        const past20Vol = klines1h.slice(0, 20).reduce((acc, c) => acc + parseFloat(c[5]), 0) / 20;
+        const rvol = past20Vol > 0 ? (last1hVol / past20Vol) : 0;
 
         const entry = isBullish ? price * 0.994 : price * 1.006;
         const tp1 = isBullish ? entry * 1.015 : entry * 0.985;
@@ -819,7 +768,6 @@
         container.innerHTML = `
           <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex flex-col gap-4">
             
-            <!-- Header Bar -->
             <div class="flex justify-between items-center border-b border-slate-100 pb-3">
               <div>
                 <span class="text-2xl font-black text-slate-900">${sym}/USDT</span>
@@ -838,36 +786,34 @@
               </div>
             </div>
 
-            <!-- Deep Metric Desks -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mono text-xs">
               
               <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-lg space-y-2">
                 <span class="font-sans font-bold text-slate-800 text-[11px] uppercase block border-b border-slate-200 pb-1">1. 4H Trend Stack &amp; RSI Shield</span>
                 <div class="flex justify-between"><span>4H 50 EMA:</span><b class="text-slate-800">$${formatNumber(ema50)}</b></div>
                 <div class="flex justify-between"><span>4H 100 EMA:</span><b class="text-slate-800">$${formatNumber(ema100)}</b></div>
-                <div class="flex justify-between"><span>4H RSI (14):</span><b class="${rsi4h > 68 ? 'text-rose-600' : 'text-emerald-600'} font-bold">${rsi4h.toFixed(1)} ${rsi4h > 68 ? '(Overbought)' : '(Safe Zone)'}</b></div>
+                <div class="flex justify-between"><span>4H RSI (14):</span><b class="${rsi4h > 68 ? 'text-rose-600' : 'text-emerald-600'} font-bold">${rsi4h.toFixed(1)} ${rsi4h > 68 ? '(Overbought)' : '(Safe)'}</b></div>
               </div>
 
               <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-lg space-y-2">
-                <span class="font-sans font-bold text-slate-800 text-[11px] uppercase block border-b border-slate-200 pb-1">2. Orderbook &amp; CVD Depth</span>
+                <span class="font-sans font-bold text-slate-800 text-[11px] uppercase block border-b border-slate-200 pb-1">2. Orderbook &amp; RVOL Intensity</span>
                 <div class="flex justify-between"><span>24h Real Volume:</span><b class="${isVolPass ? 'text-emerald-600' : 'text-rose-600'} font-bold">$${quoteVol}M</b></div>
-                <div class="flex justify-between"><span>Depth Ratio:</span><b class="${parseFloat(depthRatio) >= 1.5 ? 'text-emerald-600' : 'text-slate-800'} font-bold">${depthRatio}x ${parseFloat(depthRatio) >= 1.5 ? '(Buy Wall)' : '(Neutral)'}</b></div>
-                <div class="flex justify-between"><span>24h Range:</span><b class="text-slate-800">$${formatNumber(parseFloat(ticker.lowPrice))} - $${formatNumber(parseFloat(ticker.highPrice))}</b></div>
+                <div class="flex justify-between"><span>1H RVOL:</span><b class="${rvol >= 2.0 ? 'text-emerald-600 font-bold' : 'text-rose-600'}">${rvol.toFixed(1)}x ${rvol >= 2.0 ? '(Pass >= 2.0x)' : '(Low Vol)'}</b></div>
+                <div class="flex justify-between"><span>Depth Ratio:</span><b class="${parseFloat(depthRatio) >= 1.5 ? 'text-emerald-600' : 'text-slate-800'} font-bold">${depthRatio}x</b></div>
               </div>
 
               <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-lg space-y-2">
                 <span class="font-sans font-bold text-slate-800 text-[11px] uppercase block border-b border-slate-200 pb-1">3. Step-by-Step Gate Verdict</span>
                 <div class="flex justify-between"><span>Step 1: Vol Floor:</span><b class="${isVolPass ? 'text-emerald-600' : 'text-rose-600'}">${isVolPass ? 'QUALIFIED' : 'DISQUALIFIED'}</b></div>
-                <div class="flex justify-between"><span>Step 2: EMA Alignment:</span><b class="${isGoldenStack ? 'text-emerald-600' : 'text-amber-600'}">${isGoldenStack ? 'GOLDEN STACK' : 'CONSOLIDATING'}</b></div>
-                <div class="flex justify-between"><span>Radar Eligibility:</span><b class="${isVolPass && isGoldenStack ? 'text-emerald-600' : 'text-slate-500'} font-bold">${isVolPass && isGoldenStack ? 'ELIGIBLE' : 'BLOCKED BY ENGINE'}</b></div>
+                <div class="flex justify-between"><span>Step 2: EMA Stack:</span><b class="${isGoldenStack ? 'text-emerald-600' : isDeathStack ? 'text-rose-600' : 'text-amber-600'}">${isGoldenStack ? 'GOLDEN STACK' : isDeathStack ? 'DEATH STACK' : 'CONSOLIDATING'}</b></div>
+                <div class="flex justify-between"><span>Radar Eligibility:</span><b class="${isVolPass && (isGoldenStack || isDeathStack) && rvol >= 2.0 ? 'text-emerald-600' : 'text-slate-500'} font-bold">${isVolPass && (isGoldenStack || isDeathStack) && rvol >= 2.0 ? 'ELIGIBLE' : 'BLOCKED BY ENGINE'}</b></div>
               </div>
 
             </div>
 
-            <!-- Calibrated Execution Targets Box -->
             <div class="p-4 ${isBullish ? 'bg-emerald-50/60 border-emerald-200' : 'bg-rose-50/60 border-rose-200'} border rounded-lg text-xs mono">
               <span class="font-sans font-bold ${isBullish ? 'text-emerald-900' : 'text-rose-900'} block mb-1.5 uppercase">
-                ${isBullish ? 'Step 5 Bullish Support Retest Targets' : 'Step 5 Bearish Resistance Targets'} (Real CMP $${formatNumber(price)}):
+                ${isBullish ? 'Step 5 Bullish Execution Targets' : 'Step 5 Bearish Short Targets'} (Real Price $${formatNumber(price)}):
               </span>
               <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-slate-800">
                 <div>Limit Entry: <b class="text-slate-900">$${formatNumber(entry)}</b></div>
@@ -885,7 +831,7 @@
         `;
         lucide.createIcons();
       } catch (e) {
-        container.innerHTML = `<div class="p-4 bg-rose-50 border border-rose-200 text-rose-700 rounded-xl text-xs font-bold mono">Failed to load real data for ${sym}USDT. Ensure ticker symbol exists on Binance Spot.</div>`;
+        container.innerHTML = `<div class="p-4 bg-rose-50 border border-rose-200 text-rose-700 rounded-xl text-xs font-bold mono">Failed to load real data for ${sym}USDT. Ensure ticker exists on Binance Spot.</div>`;
       }
     }
 
@@ -905,14 +851,10 @@
       document.getElementById('tv-container').innerHTML = '';
     }
 
-    // Initial Execution
     updateBitcoinRealData();
-    scanBinanceMarket();
     auditToken();
 
-    // High-Frequency Real Polling (BTC: 2s, Scanner: 25s)
     setInterval(updateBitcoinRealData, 2000);
-    setInterval(scanBinanceMarket, 25000);
   </script>
 </body>
 </html>
